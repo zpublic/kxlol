@@ -9,6 +9,9 @@
 !/Resources
 !/Resources/*
 !/doc
+!README.md
+!LICENSE
+!CMakeLists.txt
 
 ## win32
 !proj.win32/
