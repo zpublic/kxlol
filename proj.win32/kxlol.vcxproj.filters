@@ -10,6 +10,12 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Scene">
+      <UniqueIdentifier>{49c71fff-b981-419d-b350-abb83079ee9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\MainScene">
+      <UniqueIdentifier>{912ce761-df25-404b-bc98-9f7ec2376007}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -18,11 +24,14 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MainScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\WelcomeScene.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainScene.cpp">
+      <Filter>src\MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainBgLayer.cpp">
+      <Filter>src\MainScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -32,11 +41,14 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MainScene.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\WelcomeScene.h">
-      <Filter>src</Filter>
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>src\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainBgLayer.h">
+      <Filter>src\MainScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -65,6 +65,5 @@ bool WelcomeScene::init()
 
 void WelcomeScene::menuEntryCallback(Ref* pSender)
 {
-    auto scene = MainSecne::createScene();
-    Director::getInstance()->replaceScene(scene);
+    Director::getInstance()->replaceScene(MainSecne::create());
 }
