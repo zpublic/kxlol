@@ -34,6 +34,7 @@ proj.win32/Debug.win32
 *.suo
 *.user
 *.sln.docstates
+!proj.win32/kxlol.vcxproj.user
 
 # Build results
 [Dd]ebug/

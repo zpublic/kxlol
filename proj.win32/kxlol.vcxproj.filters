@@ -16,6 +16,9 @@
     <Filter Include="src\MainScene">
       <UniqueIdentifier>{912ce761-df25-404b-bc98-9f7ec2376007}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\MagiciteScene">
+      <UniqueIdentifier>{c3ef88aa-690c-4a61-8a6b-a79b8d0c82a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,6 +48,9 @@
     <ClCompile Include="..\Classes\MainOperateInfoPanel.cpp">
       <Filter>src\MainScene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteScene.cpp">
+      <Filter>src\MagiciteScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -73,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MainOperateInfoPanel.h">
       <Filter>src\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteScene.h">
+      <Filter>src\MagiciteScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
