@@ -51,6 +51,9 @@
     <ClCompile Include="..\Classes\MagiciteScene.cpp">
       <Filter>src\MagiciteScene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameLayer.cpp">
+      <Filter>src\MagiciteScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -81,6 +84,9 @@
       <Filter>src\MainScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteScene.h">
+      <Filter>src\MagiciteScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameLayer.h">
       <Filter>src\MagiciteScene</Filter>
     </ClInclude>
   </ItemGroup>

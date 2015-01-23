@@ -1,5 +1,6 @@
 #include "WelcomeScene.h"
 #include "MainScene.h"
+#include "MagiciteScene.h"
 
 USING_NS_CC;
 
