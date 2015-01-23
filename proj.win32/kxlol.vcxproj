@@ -140,6 +140,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\MainBasicInfoLayer.cpp" />
     <ClCompile Include="..\Classes\MainBgLayer.cpp" />
+    <ClCompile Include="..\Classes\MainOperateInfoPanel.cpp" />
+    <ClCompile Include="..\Classes\MainOperatePanel.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\MainTabBtnLayer.cpp" />
     <ClCompile Include="..\Classes\WelcomeScene.cpp" />
@@ -149,6 +151,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\MainBasicInfoLayer.h" />
     <ClInclude Include="..\Classes\MainBgLayer.h" />
+    <ClInclude Include="..\Classes\MainOperateInfoPanel.h" />
+    <ClInclude Include="..\Classes\MainOperatePanel.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\MainTabBtnLayer.h" />
     <ClInclude Include="..\Classes\WelcomeScene.h" />

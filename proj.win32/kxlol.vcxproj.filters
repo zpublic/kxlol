@@ -39,6 +39,12 @@
     <ClCompile Include="..\Classes\MainTabBtnLayer.cpp">
       <Filter>src\MainScene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MainOperatePanel.cpp">
+      <Filter>src\MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainOperateInfoPanel.cpp">
+      <Filter>src\MainScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -60,6 +66,12 @@
       <Filter>src\MainScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MainTabBtnLayer.h">
+      <Filter>src\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainOperatePanel.h">
+      <Filter>src\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainOperateInfoPanel.h">
       <Filter>src\MainScene</Filter>
     </ClInclude>
   </ItemGroup>
