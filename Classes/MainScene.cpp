@@ -1,19 +1,20 @@
 #include "MainScene.h"
 #include "MainBgLayer.h"
+#include "MainBasicInfoLayer.h"
+#include "MainTabBtnLayer.h"
 
 USING_NS_CC;
 
-// on "init" you need to initialize your instance
 bool MainSecne::init()
 {
-    //////////////////////////////
-    // 1. super init first
     if ( !Scene::init() )
     {
         return false;
     }
 
-    this->addChild(MainBgLayer::create());
+    this->addChild(MainBgLayer::create(), 0);
+    this->addChild(MainBasicInfoLayer::create(), 1);
+    this->addChild(MainTabBtnLayer::create(), 1);
 
     return true;
 }

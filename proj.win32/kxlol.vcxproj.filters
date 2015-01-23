@@ -33,6 +33,12 @@
     <ClCompile Include="..\Classes\MainBgLayer.cpp">
       <Filter>src\MainScene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MainBasicInfoLayer.cpp">
+      <Filter>src\MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainTabBtnLayer.cpp">
+      <Filter>src\MainScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -48,6 +54,12 @@
       <Filter>src\MainScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MainBgLayer.h">
+      <Filter>src\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainBasicInfoLayer.h">
+      <Filter>src\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainTabBtnLayer.h">
       <Filter>src\MainScene</Filter>
     </ClInclude>
   </ItemGroup>
