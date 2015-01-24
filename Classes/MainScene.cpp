@@ -16,9 +16,11 @@ bool MainSecne::init()
 
     this->addChild(MainBgLayer::create(), 0);
     this->addChild(MainBasicInfoLayer::create(), 1);
-    this->addChild(MainTabBtnLayer::create(), 2);
-    this->addChild(MainOperatePanel::create(), 3);
-    this->addChild(MainOperateInfoPanel::create(), 3);
+	auto pOpre = Node::create();
+	auto pOpreInfo = Node::create();
+	this->addChild(MainTabBtnLayer::create(pOpre, pOpreInfo), 2);
+	this->addChild(pOpre, 3);
+	this->addChild(pOpreInfo, 3);
 
     return true;
 }
