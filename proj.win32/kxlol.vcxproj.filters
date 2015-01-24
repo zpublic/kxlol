@@ -16,8 +16,17 @@
     <Filter Include="src\MainScene">
       <UniqueIdentifier>{912ce761-df25-404b-bc98-9f7ec2376007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\MagiciteScene">
+    <Filter Include="src\lab">
+      <UniqueIdentifier>{a7346067-e473-4f4b-8530-0a06efe1a290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lab\Magicite（2d横版动作类）">
       <UniqueIdentifier>{c3ef88aa-690c-4a61-8a6b-a79b8d0c82a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lab\Veritas（tilemap式RPG）">
+      <UniqueIdentifier>{fbf5b504-9e28-4a3e-8cdd-48435b3edd76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lab\Aequitas（音乐类）">
+      <UniqueIdentifier>{cea8e61d-40b6-48dd-8ab7-de1774010145}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,10 +58,16 @@
       <Filter>src\MainScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteScene.cpp">
-      <Filter>src\MagiciteScene</Filter>
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameLayer.cpp">
-      <Filter>src\MagiciteScene</Filter>
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AequitasScene.cpp">
+      <Filter>src\lab\Aequitas（音乐类）</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AequitasLayer.cpp">
+      <Filter>src\lab\Aequitas（音乐类）</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,10 +99,16 @@
       <Filter>src\MainScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteScene.h">
-      <Filter>src\MagiciteScene</Filter>
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameLayer.h">
-      <Filter>src\MagiciteScene</Filter>
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AequitasScene.h">
+      <Filter>src\lab\Aequitas（音乐类）</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AequitasLayer.h">
+      <Filter>src\lab\Aequitas（音乐类）</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

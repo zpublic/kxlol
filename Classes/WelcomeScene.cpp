@@ -1,6 +1,7 @@
 #include "WelcomeScene.h"
 #include "MainScene.h"
 #include "MagiciteScene.h"
+#include "AequitasScene.h"
 
 USING_NS_CC;
 
@@ -67,4 +68,6 @@ bool WelcomeScene::init()
 void WelcomeScene::menuEntryCallback(Ref* pSender)
 {
     Director::getInstance()->replaceScene(MainSecne::create());
+    //Director::getInstance()->replaceScene(MagiciteScene::create());
+    //Director::getInstance()->replaceScene(AequitasScene::create());
 }
