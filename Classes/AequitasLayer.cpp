@@ -16,10 +16,10 @@ bool AequitasLayer::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto sprite = Sprite::create("HelloWorld.png");
+    auto sprite = Sprite::create("keyboard.png");
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-    auto act = MoveTo::create(1.0f, Vec2(250, 200));
-    sprite->runAction(act);
+   /* auto act = MoveTo::create(1.0f, Vec2(250, 200));
+    sprite->runAction(act);*/
     this->addChild(sprite, 0);
 
     const char* p[12] =
@@ -54,30 +54,151 @@ void AequitasLayer::onKeyPressed( cocos2d::EventKeyboard::KeyCode keyCode, cocos
 {
     switch (keyCode)
     {
-    case cocos2d::EventKeyboard::KeyCode::KEY_0:
-        SimpleAudioEngine::getInstance()->playEffect("piano/35!.wav");
-        break;
+
     case cocos2d::EventKeyboard::KeyCode::KEY_1:
-        SimpleAudioEngine::getInstance()->playEffect("piano/41!.wav");
+        SimpleAudioEngine::getInstance()->playEffect("piano/51!.wav");
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_2:
-        SimpleAudioEngine::getInstance()->playEffect("piano/42!.wav");
+        SimpleAudioEngine::getInstance()->playEffect("piano/52!.wav");
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_3:
-        SimpleAudioEngine::getInstance()->playEffect("piano/43!.wav");
+        SimpleAudioEngine::getInstance()->playEffect("piano/53!.wav");
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_4:
-        SimpleAudioEngine::getInstance()->playEffect("piano/44!.wav");
+        SimpleAudioEngine::getInstance()->playEffect("piano/54!.wav");
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_5:
-        SimpleAudioEngine::getInstance()->playEffect("piano/45!.wav");
+        SimpleAudioEngine::getInstance()->playEffect("piano/55!.wav");
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_6:
-        SimpleAudioEngine::getInstance()->playEffect("piano/46!.wav");
+        SimpleAudioEngine::getInstance()->playEffect("piano/56!.wav");
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_7:
-        SimpleAudioEngine::getInstance()->playEffect("piano/47!.wav");
+        SimpleAudioEngine::getInstance()->playEffect("piano/57!.wav");
         break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_8:
+		SimpleAudioEngine::getInstance()->playEffect("piano/61!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_9:
+		SimpleAudioEngine::getInstance()->playEffect("piano/62!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_0:
+		SimpleAudioEngine::getInstance()->playEffect("piano/63!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_MINUS:
+		SimpleAudioEngine::getInstance()->playEffect("piano/64!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_EQUAL:
+		SimpleAudioEngine::getInstance()->playEffect("piano/65!.wav");
+		break;
+
+
+	case cocos2d::EventKeyboard::KeyCode::KEY_Q:
+		SimpleAudioEngine::getInstance()->playEffect("piano/41!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_W:
+		SimpleAudioEngine::getInstance()->playEffect("piano/42!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_E:
+		SimpleAudioEngine::getInstance()->playEffect("piano/43!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_R:
+		SimpleAudioEngine::getInstance()->playEffect("piano/44!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_T:
+		SimpleAudioEngine::getInstance()->playEffect("piano/45!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_Y:
+		SimpleAudioEngine::getInstance()->playEffect("piano/46!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_U:
+		SimpleAudioEngine::getInstance()->playEffect("piano/47!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_I:
+		SimpleAudioEngine::getInstance()->playEffect("piano/51!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_O:
+		SimpleAudioEngine::getInstance()->playEffect("piano/52!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_P:
+		SimpleAudioEngine::getInstance()->playEffect("piano/53!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_BRACKET:
+		SimpleAudioEngine::getInstance()->playEffect("piano/54!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_BRACKET:
+		SimpleAudioEngine::getInstance()->playEffect("piano/55!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_BACK_SLASH:
+		SimpleAudioEngine::getInstance()->playEffect("piano/56!.wav");
+		break;
+
+
+	case cocos2d::EventKeyboard::KeyCode::KEY_A:
+		SimpleAudioEngine::getInstance()->playEffect("piano/31!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_S:
+		SimpleAudioEngine::getInstance()->playEffect("piano/32!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_D:
+		SimpleAudioEngine::getInstance()->playEffect("piano/33!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_F:
+		SimpleAudioEngine::getInstance()->playEffect("piano/34!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_G:
+		SimpleAudioEngine::getInstance()->playEffect("piano/35!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_H:
+		SimpleAudioEngine::getInstance()->playEffect("piano/36!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_J:
+		SimpleAudioEngine::getInstance()->playEffect("piano/37!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_K:
+		SimpleAudioEngine::getInstance()->playEffect("piano/41!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_L:
+		SimpleAudioEngine::getInstance()->playEffect("piano/42!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_SEMICOLON :
+		SimpleAudioEngine::getInstance()->playEffect("piano/43!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_APOSTROPHE:
+		SimpleAudioEngine::getInstance()->playEffect("piano/44!.wav");
+		break;
+
+
+	case cocos2d::EventKeyboard::KeyCode::KEY_Z:
+		SimpleAudioEngine::getInstance()->playEffect("piano/21!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_X:
+		SimpleAudioEngine::getInstance()->playEffect("piano/22!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_C:
+		SimpleAudioEngine::getInstance()->playEffect("piano/23!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_V:
+		SimpleAudioEngine::getInstance()->playEffect("piano/24!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_B:
+		SimpleAudioEngine::getInstance()->playEffect("piano/25!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_N:
+		SimpleAudioEngine::getInstance()->playEffect("piano/26!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_M:
+		SimpleAudioEngine::getInstance()->playEffect("piano/27!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_COMMA:
+		SimpleAudioEngine::getInstance()->playEffect("piano/31!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_PERIOD:
+		SimpleAudioEngine::getInstance()->playEffect("piano/32!.wav");
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_SLASH:
+		SimpleAudioEngine::getInstance()->playEffect("piano/33!.wav");
+		break;
     default:
         break;
     }
