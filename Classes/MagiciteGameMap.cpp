@@ -14,9 +14,19 @@ MagiciteGameMap::~MagiciteGameMap()
 
 void MagiciteGameMap::MoveMap(int seed)
 {
-    if (_BackGround->getPositionX() + _BackGround->getContentSize().width >= _visibleSize.width)
+    if (seed < 0)
     {
-        _BackGround->setPositionX(_BackGround->getPositionX() - seed);
+        if (_BackGround->getPositionX() + seed <= 0)
+        {
+            _BackGround->setPositionX(_BackGround->getPositionX() - seed);
+        }
+    }
+    else
+    {
+        if (_BackGround->getPositionX() + _BackGround->getContentSize().width >= _visibleSize.width)
+        {
+            _BackGround->setPositionX(_BackGround->getPositionX() - seed);
+        }
     }
 }
 

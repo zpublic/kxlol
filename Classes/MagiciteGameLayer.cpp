@@ -19,8 +19,8 @@ bool MagiciteGameLayer::init()
 
     _player = Sprite::create("CloseSelected.png");
     _player->setPosition(Vec2(_visibleSize.width / 2 + _origin.x, _visibleSize.height / 2 + _origin.y));
-    _is_move = false;
-    _left_or_right = _direction::right;
+    _move_left = false;
+    _move_right = false;
     this->addChild(_player,1);
 
     return true;
@@ -30,53 +30,54 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
 {
     switch (keyCode)
     {
-    case cocos2d::EventKeyboard::KeyCode::KEY_D:
-        _left_or_right = _direction::right;
-        _is_move = true;
-        break;
     case cocos2d::EventKeyboard::KeyCode::KEY_A:
-        _left_or_right = _direction::left;
-        _is_move = true;
+        _move_left = true;
+        break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_D:
+        _move_right = true;
         break;
     default:
         break;
     }
 }
+
 void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
     switch (keyCode)
     {
-    case cocos2d::EventKeyboard::KeyCode::KEY_D:
-        _is_move = false;
-        break;
     case cocos2d::EventKeyboard::KeyCode::KEY_A:
-        _is_move = false;
+        _move_left = false;
+        break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_D:
+        _move_right = false;
         break;
     default:
         break;
     }
-    _is_move = false;
 }
 
 void MagiciteGameLayer::update(float timeDelta)
 {
-    if (_is_move)
+    if (_move_left && !_move_right)
     {
-        if (_left_or_right == _direction::right)
+        if (_player->getPositionX() > _visibleSize.width / 2 - _origin.x)
         {
-            if (_player->getPositionX() < _visibleSize.width / 2 + _origin.x)
-            {
-                _player->setPositionX(_player->getPositionX() + 3);
-            }
-            else
-            {
-                _background->MoveMap(3);
-            }
+            _player->setPositionX(_player->getPositionX() - 3);
         }
         else
         {
-            if (_player->getPositionX() > _origin.x)
-                _player->setPositionX(_player->getPositionX() - 3);
+            _background->MoveMap(-3);
+        }
+    }
+    else if (!_move_left && _move_right)
+    {
+        if (_player->getPositionX() < _visibleSize.width / 2 + _origin.x)
+        {
+            _player->setPositionX(_player->getPositionX() + 3);
+        }
+        else
+        {
+            _background->MoveMap(3);
         }
     }
 }

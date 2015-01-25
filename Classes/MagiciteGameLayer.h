@@ -24,10 +24,10 @@ private:
 
     cocos2d::Sprite*        _player;
     MagiciteGameMap*        _background;
-    bool                    _is_move;
     cocos2d::Size           _visibleSize;
     cocos2d::Vec2           _origin;
-    _direction              _left_or_right;
+    bool                    _move_left;
+    bool                    _move_right;
 };
 
 #endif // __MAGICITE_GAME_LAYER_H__
