@@ -16,18 +16,18 @@ public:
 	void update(float timeDelta);
 
 private:
-	cocos2d::Sprite *_player;
-	MagiciteGameMap *_background;
-	bool _is_move;
-	cocos2d::Size visibleSize;
-	cocos2d::Vec2 origin;
-	enum _direction : int
-	{
-		left = 0,
-		right = 1
-	};
-	_direction _left_or_right;
-	const int seed = 3;
+    enum _direction : int
+    {
+        left = 0,
+        right = 1
+    };
+
+    cocos2d::Sprite*        _player;
+    MagiciteGameMap*        _background;
+    bool                    _is_move;
+    cocos2d::Size           _visibleSize;
+    cocos2d::Vec2           _origin;
+    _direction              _left_or_right;
 };
 
 #endif // __MAGICITE_GAME_LAYER_H__

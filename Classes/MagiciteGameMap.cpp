@@ -7,30 +7,29 @@ MagiciteGameMap::MagiciteGameMap()
 
 }
 
-
 MagiciteGameMap::~MagiciteGameMap()
 {
 
 }
+
 void MagiciteGameMap::MoveMap(int seed)
 {
-	if (_BackGround->getPositionX() + _BackGround->getContentSize().width >= visibleSize.width)
-	{
-		_BackGround->setPositionX(_BackGround->getPositionX() - seed);
-
-	}
+    if (_BackGround->getPositionX() + _BackGround->getContentSize().width >= _visibleSize.width)
+    {
+        _BackGround->setPositionX(_BackGround->getPositionX() - seed);
+    }
 }
+
 bool MagiciteGameMap::init()
 {
-	if (!Layer::init())
-	{
-		return false;
-	}
-	visibleSize = Director::getInstance()->getVisibleSize();
+    if (!Layer::init())
+    {
+        return false;
+    }
 
-	_BackGround = cocos2d::Sprite::create("ground.png");
-	_BackGround->setAnchorPoint(Point::ZERO);
-
-	this->addChild(_BackGround);
-	return true;
+    _visibleSize = Director::getInstance()->getVisibleSize();
+    _BackGround = cocos2d::Sprite::create("ground.png");
+    _BackGround->setAnchorPoint(Point::ZERO);
+    this->addChild(_BackGround);
+    return true;
 }

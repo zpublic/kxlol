@@ -69,6 +69,9 @@
     <ClCompile Include="..\Classes\AequitasLayer.cpp">
       <Filter>src\lab\Aequitas（音乐类）</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameMap.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\AequitasLayer.h">
       <Filter>src\lab\Aequitas（音乐类）</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameMap.h">
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -6,19 +6,17 @@
 class MagiciteGameMap : public cocos2d::Layer
 {
 public:
-	MagiciteGameMap();
-	~MagiciteGameMap();
+    MagiciteGameMap();
+    ~MagiciteGameMap();
 
-	void MoveMap(int seed);
+    void MoveMap(int seed);
+    virtual bool init();
 
-	virtual bool init();
-
-	CREATE_FUNC(MagiciteGameMap);
+    CREATE_FUNC(MagiciteGameMap);
 
 private:
-
-	cocos2d::Size visibleSize;
-	cocos2d::Sprite *_BackGround;
+    cocos2d::Size           _visibleSize;
+    cocos2d::Sprite*        _BackGround;
 };
 
 #endif
