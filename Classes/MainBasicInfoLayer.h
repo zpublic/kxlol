@@ -8,8 +8,11 @@ class MainBasicInfoLayer : public cocos2d::Layer
 {
 private:
 	kxlol::component::slot slot;
+
+	float _totalTime;		//统计时间和，增加神力值
 public:
     virtual bool init();
+	virtual void update(float delta);
 
     CREATE_FUNC(MainBasicInfoLayer);
 };

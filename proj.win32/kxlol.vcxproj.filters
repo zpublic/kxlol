@@ -84,6 +84,9 @@
     <ClCompile Include="..\Classes\Component\slot.cpp">
       <Filter>src\Component</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\base\Player.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -132,6 +135,9 @@
       <Filter>src\Component</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\base\MsgCenter.h">
+      <Filter>src\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\base\Player.h">
       <Filter>src\base</Filter>
     </ClInclude>
   </ItemGroup>

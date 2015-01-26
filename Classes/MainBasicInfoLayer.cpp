@@ -1,4 +1,8 @@
 #include "MainBasicInfoLayer.h"
+#include <string>
+#include <sstream>
+#include <Player.h>
+#include <MsgCenter.h>
 
 USING_NS_CC;
 
@@ -8,6 +12,8 @@ bool MainBasicInfoLayer::init()
     {
         return false;
     }
+
+	_totalTime = 0.0;
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -26,7 +32,8 @@ bool MainBasicInfoLayer::init()
 			origin.y + visibleSize.height - 60));
 	sprNameBg->setAnchorPoint(Vec2(0, 0.5));
 	this->addChild(sprNameBg);
-    auto label = Label::createWithTTF("zapline", "fonts/Marker Felt.ttf", 24);
+	auto label = Label::createWithTTF(kxlol::Player::getInstance()->getName().c_str() ,
+			 "fonts/Marker Felt.ttf", 24);
     label->setPosition(
         Vec2(
         origin.x + 500,
@@ -48,7 +55,13 @@ bool MainBasicInfoLayer::init()
 			origin.y + visibleSize.height - 60));
 	sprGodPowerBg->setAnchorPoint(Vec2(0, 0.5));
 	this->addChild(sprGodPowerBg);
-    auto lblGodPower = Label::createWithTTF("1024", "fonts/Marker Felt.ttf", 24);
+	
+	std::stringstream sstreamGodPower;
+	std::string strGodPower;
+	sstreamGodPower << kxlol::Player::getInstance()->getGodPower();
+	sstreamGodPower >> strGodPower;
+
+    auto lblGodPower = Label::createWithTTF(strGodPower, "fonts/Marker Felt.ttf", 24);
     lblGodPower->setPosition(
         Vec2(
         origin.x + 770,
@@ -56,9 +69,29 @@ bool MainBasicInfoLayer::init()
 	lblGodPower->setAnchorPoint(Vec2(0, 0.5));
     this->addChild(lblGodPower, 1);
 
-	slot.addSlot("ADD_GODPOWER", [=](void*){
-		
+	slot.addSlot("UPDATE_GODPOWER", [lblGodPower](void*){
+		std::stringstream sstreamGodPower;
+		std::string strGodPower;
+		sstreamGodPower << kxlol::Player::getInstance()->getGodPower();
+		sstreamGodPower >> strGodPower;
+		lblGodPower->setString(strGodPower);
 	});
 
+	this->scheduleUpdate();
+
     return true;
+}
+
+void MainBasicInfoLayer::update(float delta)
+{
+	_totalTime += delta;
+	if(_totalTime >= 10.0f)
+	{
+		while(_totalTime >= 10.0f)
+		{
+			kxlol::Player::getInstance()->addGodPower(1);
+			_totalTime -= 10.0f;
+		}
+		kxlol::MsgCenter::getInstance()->SendMsg("UPDATE_GODPOWER", nullptr);
+	}
 }

@@ -1,5 +1,7 @@
 #include "MainOperatePanel.h"
 #include "ui\UIButton.h"
+#include <Player.h>
+#include <MsgCenter.h>
 
 USING_NS_CC;
 
@@ -65,7 +67,7 @@ void MainOperatePanel::TabBtnCallback(Ref* pSender)
 void MainOperatePanel::LinkVoidCallBack(Ref* pSender, ui::Widget::TouchEventType _event)
 {
 	Node* _outline = nullptr;
-	auto temp = dynamic_cast<Node*>(pSender);
+	auto temp = dynamic_cast<ui::Button*>(pSender);
 	if(nullptr != temp)
 	{
 		_outline = temp->getChildByTag(8);
@@ -73,9 +75,16 @@ void MainOperatePanel::LinkVoidCallBack(Ref* pSender, ui::Widget::TouchEventType
 	if(_event == ui::Widget::TouchEventType::BEGAN || _event == ui::Widget::TouchEventType::MOVED)
 	{
 		if(nullptr != temp)_outline->setVisible(true);
+		return;
 	}
-	else
+	else if(_event == ui::Widget::TouchEventType::ENDED)
 	{
-		if(nullptr != temp)_outline->setVisible(false);
+		temp->setEnabled(false);
+		this->scheduleOnce([temp](float){
+			temp->setEnabled(true);
+			kxlol::Player::getInstance()->addGodPower(1);
+			kxlol::MsgCenter::getInstance()->SendMsg("UPDATE_GODPOWER", nullptr);
+		}, 1.0, "1.0");
 	}
+	if(nullptr != temp)_outline->setVisible(false);
 }
