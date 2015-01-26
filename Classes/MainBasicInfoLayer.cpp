@@ -56,5 +56,9 @@ bool MainBasicInfoLayer::init()
 	lblGodPower->setAnchorPoint(Vec2(0, 0.5));
     this->addChild(lblGodPower, 1);
 
+	slot.addSlot("ADD_GODPOWER", [=](void*){
+		
+	});
+
     return true;
 }

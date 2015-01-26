@@ -28,6 +28,12 @@
     <Filter Include="src\lab\Aequitas（音乐类）">
       <UniqueIdentifier>{cea8e61d-40b6-48dd-8ab7-de1774010145}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Component">
+      <UniqueIdentifier>{91c0d9a6-9a82-4ea3-af2a-834d47ceaf96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\base">
+      <UniqueIdentifier>{4a371b1d-c249-443e-bbd5-322d5baaaaa9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,6 +78,12 @@
     <ClCompile Include="..\Classes\MagiciteGameMap.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\base\MsgCenter.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Component\slot.cpp">
+      <Filter>src\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -115,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameMap.h">
       <Filter>src\lab\Magicite（2d横版动作类）</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Component\slot.h">
+      <Filter>src\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\base\MsgCenter.h">
+      <Filter>src\base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
