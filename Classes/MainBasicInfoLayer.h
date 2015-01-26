@@ -12,7 +12,9 @@ private:
 	float _totalTime;		//统计时间和，增加神力值
 public:
     virtual bool init();
+	virtual void onEnter();
 	virtual void update(float delta);
+	virtual void onExit();
 
     CREATE_FUNC(MainBasicInfoLayer);
 };

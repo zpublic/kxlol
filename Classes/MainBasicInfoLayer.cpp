@@ -77,9 +77,14 @@ bool MainBasicInfoLayer::init()
 		lblGodPower->setString(strGodPower);
 	});
 
-	this->scheduleUpdate();
 
     return true;
+}
+
+void MainBasicInfoLayer::onEnter()
+{
+	Layer::onEnter();
+	this->scheduleUpdate();
 }
 
 void MainBasicInfoLayer::update(float delta)
@@ -94,4 +99,10 @@ void MainBasicInfoLayer::update(float delta)
 		}
 		kxlol::MsgCenter::getInstance()->SendMsg("UPDATE_GODPOWER", nullptr);
 	}
+}
+
+void MainBasicInfoLayer::onExit()
+{
+	this->unscheduleUpdate();
+	Layer::onExit();
 }
