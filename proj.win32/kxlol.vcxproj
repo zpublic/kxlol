@@ -140,6 +140,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AequitasLayer.cpp" />
     <ClCompile Include="..\Classes\AequitasScene.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\base\bag.cpp" />
     <ClCompile Include="..\Classes\base\MsgCenter.cpp" />
     <ClCompile Include="..\Classes\base\Player.cpp" />
     <ClCompile Include="..\Classes\Component\slot.cpp" />
@@ -159,6 +160,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\AequitasLayer.h" />
     <ClInclude Include="..\Classes\AequitasScene.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\base\bag.h" />
+    <ClInclude Include="..\Classes\base\ItemObject.h" />
     <ClInclude Include="..\Classes\base\MsgCenter.h" />
     <ClInclude Include="..\Classes\base\Player.h" />
     <ClInclude Include="..\Classes\Component\slot.h" />
