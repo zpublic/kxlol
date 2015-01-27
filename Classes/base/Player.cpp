@@ -8,6 +8,10 @@ namespace kxlol
 		, _name("zapline")
 	{}
 
+	Player::~Player()
+	{
+	}
+
 	Player* Player::getInstance()
 	{
 		if(nullptr == _instance)
