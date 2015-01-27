@@ -58,26 +58,47 @@ void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, c
 
 void MagiciteGameLayer::update(float timeDelta)
 {
+
     if (_move_left && !_move_right)
     {
-        if (_player->getPositionX() > _visibleSize.width / 2 - _origin.x)
+        if (_player->getPositionX() > _visibleSize.width / 3 + _origin.x)
         {
             _player->setPositionX(_player->getPositionX() - 3);
         }
         else
         {
-            _background->MoveMap(-3);
+            if (_background->is_left_open())
+            {
+                _background->MoveMap(-3);
+            }
+            else
+            {
+                if (_player->getPositionX() >= _origin.x + 3)
+                {
+                    _player->setPositionX(_player->getPositionX() - 3);
+                }
+            }
         }
     }
     else if (!_move_left && _move_right)
     {
-        if (_player->getPositionX() < _visibleSize.width / 2 + _origin.x)
+        if (_player->getPositionX() < _visibleSize.width / 3 * 2 + _origin.x)
         {
             _player->setPositionX(_player->getPositionX() + 3);
         }
         else
         {
-            _background->MoveMap(3);
+            if (_background->is_right_open())
+            {
+                _background->MoveMap(+3);
+            }
+            else
+            {
+                if (_player->getPositionX() <= _visibleSize.width + _origin.x - 3)
+                {
+                    _player->setPositionX(_player->getPositionX() + 3);
+                }
+            }
         }
     }
 }

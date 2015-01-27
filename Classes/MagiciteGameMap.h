@@ -10,6 +10,8 @@ public:
     ~MagiciteGameMap();
 
     void MoveMap(int seed);
+    bool is_left_open() const;
+    bool is_right_open() const;
     virtual bool init();
 
     CREATE_FUNC(MagiciteGameMap);
@@ -17,6 +19,8 @@ public:
 private:
     cocos2d::Size           _visibleSize;
     cocos2d::Sprite*        _BackGround;
+    bool                    _left_open;
+    bool                    _right_open;
 };
 
 #endif
