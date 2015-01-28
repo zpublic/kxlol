@@ -10,6 +10,7 @@ public:
     b2Body* getBody() const;
     void setBody(b2Body*);
 
+    CREATE_FUNC(MagiciteGamePhySprite);
     static MagiciteGamePhySprite* create(const char* filename);
 
 private:

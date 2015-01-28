@@ -93,6 +93,10 @@
     <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GLES-Render.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGamePhyLayer.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -153,6 +157,10 @@
       <Filter>src\base</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePhySprite.h">
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GLES-Render.h" />
+    <ClInclude Include="..\Classes\MagiciteGamePhyLayer.h">
       <Filter>src\lab\Magicite（2d横版动作类）</Filter>
     </ClInclude>
   </ItemGroup>
