@@ -16,6 +16,7 @@
 ## win32
 !proj.win32/
 proj.win32/Debug.win32
+proj.win32/Release.win32
 #!proj.win32/*.vcxproj
 #!proj.win32/*.vcxproj.filters
 #!proj.win32/main.cpp
