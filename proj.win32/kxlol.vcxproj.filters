@@ -90,6 +90,9 @@
     <ClCompile Include="..\Classes\base\bag.cpp">
       <Filter>src\base</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\base\ItemObject.h">
       <Filter>src\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePhySprite.h">
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

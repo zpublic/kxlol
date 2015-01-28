@@ -17,7 +17,7 @@ void MagiciteGameMap::MoveMap(int seed)
 {
     if (seed < 0)
     {
-        if (_BackGround->getPositionX() + seed <= 0)
+        if (_BackGround->getPositionX() - seed < 0)
         {
             _BackGround->setPositionX(_BackGround->getPositionX() - seed);
             if (_right_open == false)
