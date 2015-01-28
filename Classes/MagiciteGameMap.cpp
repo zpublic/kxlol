@@ -12,7 +12,7 @@ MagiciteGameMap::~MagiciteGameMap()
 
 }
 
-bool MagiciteGameMap::init()
+bool MagiciteGameMap::init(TMXTiledMap* map)
 {
     if (!Layer::init())
     {
@@ -20,7 +20,7 @@ bool MagiciteGameMap::init()
     }
     _visibleSize = Director::getInstance()->getVisibleSize();
 
-    _BackGround = cocos2d::Sprite::create("ground.png");
+    _BackGround = map;
     _BackGround->setAnchorPoint(Point::ZERO);
     this->addChild(_BackGround);
 
@@ -30,4 +30,20 @@ bool MagiciteGameMap::init()
 Size MagiciteGameMap::getBackSize() const
 {
     return _BackGround->getContentSize();
+}
+
+MagiciteGameMap* MagiciteGameMap::create(TMXTiledMap* map)
+{
+    auto ptr = new MagiciteGameMap();
+    if (ptr && ptr->init(map))
+    {
+        ptr->autorelease();
+        return ptr;
+    }
+    else
+    {
+        CC_SAFE_DELETE(ptr);
+        return nullptr;
+    }
+
 }

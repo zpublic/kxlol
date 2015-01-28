@@ -15,13 +15,14 @@ bool MagiciteGameLayer::init()
     _visibleSize = Director::getInstance()->getVisibleSize();
     _origin = Director::getInstance()->getVisibleOrigin();
 
-    _background = MagiciteGameMap::create();
+    TMXTiledMap* tiled = TMXTiledMap::create("test.tmx");
+    _background = MagiciteGameMap::create(tiled);
     this->addChild(_background, -1);
 
     _phyLayer = MagiciteGamePhyLayer::create(Size(_background->getBackSize().width, _visibleSize.height));
     this->addChild(_phyLayer);
 
-    _player = MagiciteGamePhySprite::create("img\\avatar\\1.png");
+    _player = MagiciteGamePlayer::create("img\\avatar\\1.png");
     _player->setPosition(Vec2(_visibleSize.width / 2 + _origin.x, _visibleSize.height / 2 + _origin.y));
     this->addChild(_player, 1);
     _phyLayer->addPhysicSprite(_player,false);
@@ -29,8 +30,7 @@ bool MagiciteGameLayer::init()
 
     _move_left = false;
     _move_right = false;
-
-    TMXTiledMap* tiled = TMXTiledMap::create("test.tmx");
+    
     TMXObjectGroup* ground = tiled->getObjectGroup("physics");
     ValueVector VV = ground->getObjects();
 
@@ -75,6 +75,9 @@ void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, c
 {
     switch (keyCode)
     {
+    case cocos2d::EventKeyboard::KeyCode::KEY_W:
+        _player->playerJump();
+        break;
     case cocos2d::EventKeyboard::KeyCode::KEY_A:
         _move_left = false;
         _player->getBody()->SetLinearVelocity(b2Vec2(0, _player->getBody()->GetLinearVelocity().y));
@@ -90,14 +93,13 @@ void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, c
 
 void MagiciteGameLayer::update(float timeDelta)
 {
-    b2Vec2 bodyVelocity = _player->getBody()->GetLinearVelocity();
     if (_move_left && !_move_right)
     {
-        _player->getBody()->SetLinearVelocity(b2Vec2(-3, bodyVelocity.y));
+        _player->playerMove(-3);
     }
     else if (!_move_left && _move_right)
     {
-        _player->getBody()->SetLinearVelocity(b2Vec2(3, bodyVelocity.y));
+        _player->playerMove(3);
     }
 }
 

@@ -9,14 +9,14 @@ public:
     MagiciteGameMap();
     ~MagiciteGameMap();
 
-    virtual bool init();
+    virtual bool init(cocos2d::TMXTiledMap* map);
     cocos2d::Size getBackSize() const;
 
-    CREATE_FUNC(MagiciteGameMap);
+    static MagiciteGameMap* create(cocos2d::TMXTiledMap *map);
 
 private:
     cocos2d::Size           _visibleSize;
-    cocos2d::Sprite*        _BackGround;
+    cocos2d::TMXTiledMap*   _BackGround;
 };
 
 #endif
