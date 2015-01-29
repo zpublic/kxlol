@@ -103,6 +103,12 @@
     <ClCompile Include="..\Classes\MagiciteGameContactListener.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameEnemy.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameLivine.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -173,6 +179,12 @@
       <Filter>src\lab\Magicite（2d横版动作类）</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameContactListener.h">
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameEnemy.h">
+      <Filter>src\lab\Magicite（2d横版动作类）</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameLivine.h">
       <Filter>src\lab\Magicite（2d横版动作类）</Filter>
     </ClInclude>
   </ItemGroup>

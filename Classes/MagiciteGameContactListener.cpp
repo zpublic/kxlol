@@ -18,9 +18,10 @@ void MagiciteGameContactListener::BeginContact(b2Contact* contact)
             Size playerSize = _player->getContentSize();
             Size nodeSize = node->getContentSize();
             if (playerPos.x + playerSize.width / 2 > nodePos.x - nodeSize.width / 2
-                && playerPos.x - playerSize.width / 2 < nodePos.x + nodeSize.width / 2)
+                && playerPos.x - playerSize.width / 2 < nodePos.x + nodeSize.width / 2
+                && playerPos.y > nodePos.y)
             {
-                _player->setPlayerState(MagiciteGamePlayer::PlayerState::Jump, false);
+                _player->setState(MagiciteGameLivine::State::S_Jump, false);
             }
         }
     }
@@ -41,7 +42,7 @@ void MagiciteGameContactListener::EndContact(b2Contact* contact)
 
 }
 
-MagiciteGameContactListener* MagiciteGameContactListener::create(MagiciteGamePlayer* player)
+MagiciteGameContactListener* MagiciteGameContactListener::create(MagiciteGameLivine* player)
 {
     auto ptr = new MagiciteGameContactListener();
     if (ptr && ptr->init(player))
@@ -55,7 +56,7 @@ MagiciteGameContactListener* MagiciteGameContactListener::create(MagiciteGamePla
     }
 }
 
-bool MagiciteGameContactListener::init(MagiciteGamePlayer* player)
+bool MagiciteGameContactListener::init(MagiciteGameLivine* player)
 {
     _player = player;
     return true;
