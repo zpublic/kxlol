@@ -45,5 +45,4 @@ MagiciteGameMap* MagiciteGameMap::create(TMXTiledMap* map)
         CC_SAFE_DELETE(ptr);
         return nullptr;
     }
-
 }

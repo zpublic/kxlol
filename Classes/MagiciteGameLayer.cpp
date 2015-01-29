@@ -18,14 +18,15 @@ bool MagiciteGameLayer::init()
     TMXTiledMap* tiled = TMXTiledMap::create("test.tmx");
     _background = MagiciteGameMap::create(tiled);
     this->addChild(_background, -1);
-
-    _phyLayer = MagiciteGamePhyLayer::create(Size(_background->getBackSize().width, _visibleSize.height));
-    this->addChild(_phyLayer);
-
+   
     _player = MagiciteGamePlayer::create("img\\avatar\\1.png");
     _player->setPosition(Vec2(_visibleSize.width / 2 + _origin.x, _visibleSize.height / 2 + _origin.y));
     this->addChild(_player, 1);
+    
+    _phyLayer = MagiciteGamePhyLayer::create(Size(_background->getBackSize().width, _visibleSize.height),_player);
     _phyLayer->addPhysicSprite(_player,false);
+    this->addChild(_phyLayer);
+
     this->runAction(Follow::create(_player, Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
 
     _move_left = false;
@@ -45,14 +46,13 @@ bool MagiciteGameLayer::init()
             float h = vm.at("height").asFloat();
             float y = vm.at("y").asFloat();
             auto node = MagiciteGamePhySprite::create();
-            node->setPosition(ccp(x, y));
+            node->setPosition(Vec2(x, y));
             node->setContentSize(Size(w, h));
             node->setAnchorPoint(Point::ZERO);
             _phyLayer->addPhysicSprite(node,true);
             this->addChild(node);
         }
     }
-
     return true;
 }
 
@@ -102,5 +102,4 @@ void MagiciteGameLayer::update(float timeDelta)
         _player->playerMove(3);
     }
 }
-
 

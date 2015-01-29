@@ -12,9 +12,10 @@ MagiciteGamePhyLayer::~MagiciteGamePhyLayer()
 {
     delete _world;
     delete _debugDraw;
+    delete _contactListener;
 }
 
-bool MagiciteGamePhyLayer::initPhysics(Size size)
+bool MagiciteGamePhyLayer::initPhysics(Size size, MagiciteGamePlayer* player)
 {
     if (!Layer::init())
     {
@@ -44,6 +45,9 @@ bool MagiciteGamePhyLayer::initPhysics(Size size)
     body->CreateFixture(&groundBox, 0);
     groundBox.Set(b2Vec2(boxSize.width / PTM_RATIO, boxSize.height / PTM_RATIO), b2Vec2(boxSize.width / PTM_RATIO, 0));
     body->CreateFixture(&groundBox, 0);
+
+    _contactListener = MagiciteGameContactListener::create(player);
+    _world->SetContactListener(_contactListener);
 
     _debugDraw = new GLESDebugDraw(PTM_RATIO);
     _world->SetDebugDraw(_debugDraw);
@@ -86,16 +90,16 @@ void MagiciteGamePhyLayer::update(float timeDelta)
         if (it->GetUserData() != nullptr)
         {
             Sprite* sprite = reinterpret_cast<Sprite*>(it->GetUserData());
-            sprite->setPosition(ccp(it->GetPosition().x * PTM_RATIO, it->GetPosition().y * PTM_RATIO));
+            sprite->setPosition(Vec2(it->GetPosition().x * PTM_RATIO, it->GetPosition().y * PTM_RATIO));
             sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(it->GetAngle()));
         }
     }
 }
 
-MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(cocos2d::Size size)
+MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(cocos2d::Size size, MagiciteGamePlayer* player)
 {
     auto ptr = new MagiciteGamePhyLayer();
-    if (ptr && ptr->initPhysics(size))
+    if (ptr && ptr->initPhysics(size, player))
     {
         ptr->autorelease();
         return ptr;
