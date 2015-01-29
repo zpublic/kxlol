@@ -84,6 +84,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -145,10 +146,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\base\Player.cpp" />
     <ClCompile Include="..\Classes\Component\slot.cpp" />
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameContactListener.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameLayer.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameMap.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePhyLayer.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGamePlayer.cpp" />
     <ClCompile Include="..\Classes\MagiciteScene.cpp" />
     <ClCompile Include="..\Classes\MainBasicInfoLayer.cpp" />
     <ClCompile Include="..\Classes\MainBgLayer.cpp" />
@@ -169,10 +172,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\base\Player.h" />
     <ClInclude Include="..\Classes\Component\slot.h" />
     <ClInclude Include="..\Classes\GLES-Render.h" />
+    <ClInclude Include="..\Classes\MagiciteGameContactListener.h" />
     <ClInclude Include="..\Classes\MagiciteGameLayer.h" />
     <ClInclude Include="..\Classes\MagiciteGameMap.h" />
     <ClInclude Include="..\Classes\MagiciteGamePhyLayer.h" />
     <ClInclude Include="..\Classes\MagiciteGamePhySprite.h" />
+    <ClInclude Include="..\Classes\MagiciteGamePlayer.h" />
     <ClInclude Include="..\Classes\MagiciteScene.h" />
     <ClInclude Include="..\Classes\MainBasicInfoLayer.h" />
     <ClInclude Include="..\Classes\MainBgLayer.h" />

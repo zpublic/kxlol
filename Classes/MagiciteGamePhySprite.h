@@ -10,10 +10,12 @@ public:
     b2Body* getBody() const;
     void setBody(b2Body*);
 
+    virtual bool initWithFile(const char* filename);
+
     CREATE_FUNC(MagiciteGamePhySprite);
     static MagiciteGamePhySprite* create(const char* filename);
 
-private:
+protected:
     b2Body*                 _body;
 };
 

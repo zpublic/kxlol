@@ -24,3 +24,12 @@ MagiciteGamePhySprite* MagiciteGamePhySprite::create(const char* filename)
         return nullptr;
     }
 }
+
+bool MagiciteGamePhySprite::initWithFile(const char* filename)
+{
+    if (!Sprite::initWithFile(filename))
+    {
+        return false;
+    }
+    return true;
+}
