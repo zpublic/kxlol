@@ -71,6 +71,7 @@ void MagiciteGamePhyLayer::addPhysicSprite(MagiciteGamePhySprite* ptr, bool is_s
     fixtureDef.shape = &dynamicBox;
     body->CreateFixture(&fixtureDef);
     ptr->setBody(body);
+    this->addChild(ptr);
 }
 
 void MagiciteGamePhyLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags)

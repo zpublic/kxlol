@@ -147,7 +147,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Component\slot.cpp" />
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameContactListener.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameEnemy.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameLayer.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameLivine.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameMap.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePhyLayer.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp" />
@@ -173,7 +175,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Component\slot.h" />
     <ClInclude Include="..\Classes\GLES-Render.h" />
     <ClInclude Include="..\Classes\MagiciteGameContactListener.h" />
+    <ClInclude Include="..\Classes\MagiciteGameEnemy.h" />
     <ClInclude Include="..\Classes\MagiciteGameLayer.h" />
+    <ClInclude Include="..\Classes\MagiciteGameLivine.h" />
     <ClInclude Include="..\Classes\MagiciteGameMap.h" />
     <ClInclude Include="..\Classes\MagiciteGamePhyLayer.h" />
     <ClInclude Include="..\Classes\MagiciteGamePhySprite.h" />

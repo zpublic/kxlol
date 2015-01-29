@@ -21,7 +21,6 @@ bool MagiciteGameLayer::init()
    
     _player = MagiciteGamePlayer::create("img\\avatar\\1.png");
     _player->setPosition(Vec2(_visibleSize.width / 2 + _origin.x, _visibleSize.height / 2 + _origin.y));
-    this->addChild(_player, 1);
     
     _phyLayer = MagiciteGamePhyLayer::create(Size(_background->getBackSize().width, _visibleSize.height),_player);
     _phyLayer->addPhysicSprite(_player,false);
@@ -31,7 +30,11 @@ bool MagiciteGameLayer::init()
 
     _move_left = false;
     _move_right = false;
-    
+
+    /*----------------------------------init finish---------------------------------------------------*/
+
+    createEnemy(Vec2(_visibleSize.width / 3 * 2, _visibleSize.height / 3));
+
     TMXObjectGroup* ground = tiled->getObjectGroup("physics");
     ValueVector VV = ground->getObjects();
 
@@ -50,7 +53,6 @@ bool MagiciteGameLayer::init()
             node->setContentSize(Size(w, h));
             node->setAnchorPoint(Point::ZERO);
             _phyLayer->addPhysicSprite(node,true);
-            this->addChild(node);
         }
     }
     return true;
@@ -76,7 +78,7 @@ void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, c
     switch (keyCode)
     {
     case cocos2d::EventKeyboard::KeyCode::KEY_W:
-        _player->playerJump();
+        _player->Jump();
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_A:
         _move_left = false;
@@ -95,11 +97,19 @@ void MagiciteGameLayer::update(float timeDelta)
 {
     if (_move_left && !_move_right)
     {
-        _player->playerMove(-3);
+        _player->Move(MagiciteGameLivine::Direction::left);
     }
     else if (!_move_left && _move_right)
     {
-        _player->playerMove(3);
+        _player->Move(MagiciteGameLivine::Direction::right);
     }
 }
 
+MagiciteGameEnemy* MagiciteGameLayer::createEnemy(cocos2d::Vec2 pos)
+{
+    auto enemy = MagiciteGameEnemy::create("CloseNormal.png");
+    enemy->setPosition(pos);
+    _phyLayer->addPhysicSprite(enemy,false);
+
+    return enemy;
+}
