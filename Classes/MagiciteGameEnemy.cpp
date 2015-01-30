@@ -4,7 +4,7 @@ USING_NS_CC;
 
 MagiciteGameEnemy::MagiciteGameEnemy()
 {
-
+    _LivingType = MagiciteGameLiving::T_Enemy;
 }
 
 MagiciteGameEnemy::~MagiciteGameEnemy()
@@ -14,7 +14,7 @@ MagiciteGameEnemy::~MagiciteGameEnemy()
 
 bool MagiciteGameEnemy::initWithFile(const char* filename)
 {
-    if (!MagiciteGameLivine::initWithFile(filename))
+    if (!MagiciteGameLiving::initWithFile(filename))
     {
         return false;
     }

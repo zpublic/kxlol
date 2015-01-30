@@ -3,8 +3,7 @@
 
 #include "cocos2d.h"
 #include "Box2D\Box2D.h"
-#include "MagiciteGamePhySprite.h"
-#include "MagiciteGameLivine.h"
+#include "MagiciteGameLiving.h"
 
 class MagiciteGameContactListener : public b2ContactListener
 {
@@ -14,11 +13,9 @@ private:
     virtual void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
     virtual void EndContact(b2Contact* contact);
 
-    MagiciteGameLivine*          _player;
-
 public:
-    static MagiciteGameContactListener* create(MagiciteGameLivine* player);
-    virtual bool init(MagiciteGameLivine* player);
+    static MagiciteGameContactListener* create();
+    virtual bool init();
 };
 
 #endif //__MAGICITE_GAME_CONTACT_LISTENER__

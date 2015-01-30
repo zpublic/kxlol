@@ -2,9 +2,9 @@
 #define __MAGICITE_GAME_PLAYER__
 
 #include "cocos2d.h"
-#include "MagiciteGameLivine.h"
+#include "MagiciteGameLiving.h"
 
-class MagiciteGamePlayer : public MagiciteGameLivine
+class MagiciteGamePlayer : public MagiciteGameLiving
 {
 public:
     MagiciteGamePlayer();

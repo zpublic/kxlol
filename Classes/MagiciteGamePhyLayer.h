@@ -16,13 +16,13 @@ public:
 
     static const int PTM_RATIO = 32;
 
-    bool initPhysics(cocos2d::Size, MagiciteGamePlayer* player);
+    bool initPhysics(cocos2d::Size);
     void addPhysicSprite(MagiciteGamePhySprite* ptr, bool is_static);
 
     virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags);
     void update(float timeDelta);
 
-    static MagiciteGamePhyLayer* create(cocos2d::Size size, MagiciteGamePlayer* player);
+    static MagiciteGamePhyLayer* create(cocos2d::Size size);
 
 private:
     MagiciteGameContactListener*        _contactListener;

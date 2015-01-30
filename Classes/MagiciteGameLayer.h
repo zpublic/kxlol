@@ -6,13 +6,13 @@
 #include "MagiciteGamePhyLayer.h"
 #include "MagiciteGamePlayer.h"
 #include "MagiciteGameEnemy.h"
+#include "MagiciteGameEnemyManager.h"
 #include "Box2D\Box2D.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
 {
 public:
     virtual bool init();
-    MagiciteGameEnemy* createEnemy(cocos2d::Vec2 pos);
 
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);

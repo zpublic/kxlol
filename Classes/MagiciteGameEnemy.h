@@ -3,9 +3,9 @@
 
 #include "cocos2d.h"
 #include "Box2D\Box2D.h"
-#include "MagiciteGameLivine.h"
+#include "MagiciteGameLiving.h"
 
-class MagiciteGameEnemy : public MagiciteGameLivine
+class MagiciteGameEnemy : public MagiciteGameLiving
 {
 public:
     MagiciteGameEnemy();

@@ -1,19 +1,19 @@
-#include "MagiciteGameLivine.h"
+#include "MagiciteGameLiving.h"
 
 USING_NS_CC;
 
-MagiciteGameLivine::MagiciteGameLivine()
-:_is_to_left(false), _jumpHeight(0), _speed(0)
+MagiciteGameLiving::MagiciteGameLiving()
+:_is_to_left(false), _jumpHeight(0), _speed(0), _LivingType(LivingType::T_Unknow)
+{
+    _SpriteType = MagiciteGamePhySprite::SpriteType::T_Living;
+}
+
+MagiciteGameLiving::~MagiciteGameLiving()
 {
 
 }
 
-MagiciteGameLivine::~MagiciteGameLivine()
-{
-
-}
-
-void MagiciteGameLivine::Move(Direction dire)
+void MagiciteGameLiving::Move(Direction dire)
 {
     if (dire == Direction::right)
     {
@@ -35,15 +35,15 @@ void MagiciteGameLivine::Move(Direction dire)
     _body->SetLinearVelocity(b2Vec2(_speed * dire, _body->GetLinearVelocity().y));
 }
 
-void MagiciteGameLivine::Stop()
+void MagiciteGameLiving::Stop()
 {
     setState(State::S_Move, false);
     _body->SetLinearVelocity(b2Vec2(0, _body->GetLinearVelocity().y));
 }
 
-MagiciteGameLivine* MagiciteGameLivine::create(const char* filename)
+MagiciteGameLiving* MagiciteGameLiving::create(const char* filename)
 {
-    auto ptr = new MagiciteGameLivine();
+    auto ptr = new MagiciteGameLiving();
     if (ptr && ptr->initWithFile(filename))
     {
         ptr->autorelease();
@@ -56,7 +56,7 @@ MagiciteGameLivine* MagiciteGameLivine::create(const char* filename)
     }
 }
 
-bool MagiciteGameLivine::initWithFile(const char* filename)
+bool MagiciteGameLiving::initWithFile(const char* filename)
 {
     if (!MagiciteGamePhySprite::initWithFile(filename))
     {
@@ -71,12 +71,12 @@ bool MagiciteGameLivine::initWithFile(const char* filename)
     return true;
 }
 
-void MagiciteGameLivine::setJumpHeight(int offset)
+void MagiciteGameLiving::setJumpHeight(int offset)
 {
     _jumpHeight = offset;
 }
 
-void MagiciteGameLivine::Jump()
+void MagiciteGameLiving::Jump()
 {
     if (!getState(State::S_Jump))
     {
@@ -85,27 +85,27 @@ void MagiciteGameLivine::Jump()
     }
 }
 
-void MagiciteGameLivine::setState(State state, bool x)
+void MagiciteGameLiving::setState(State state, bool x)
 {
     _state[state] = x;
 }
 
-bool MagiciteGameLivine::getState(State state)
+bool MagiciteGameLiving::getState(State state)
 {
     return _state[state];
 }
 
-void MagiciteGameLivine::setSpeed(int value)
+void MagiciteGameLiving::setSpeed(int value)
 {
     _speed = value;
 }
 
-void MagiciteGameLivine::useSkill(int skillId)
+void MagiciteGameLiving::useSkill(int skillId)
 {
 
 }
 
-void MagiciteGameLivine::useSkillEx()
+void MagiciteGameLiving::useSkillEx()
 {
 
 }
