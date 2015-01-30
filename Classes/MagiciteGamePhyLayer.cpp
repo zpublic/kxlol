@@ -15,7 +15,7 @@ MagiciteGamePhyLayer::~MagiciteGamePhyLayer()
     delete _contactListener;
 }
 
-bool MagiciteGamePhyLayer::initPhysics(Size size, MagiciteGamePlayer* player)
+bool MagiciteGamePhyLayer::initPhysics(Size size)
 {
     if (!Layer::init())
     {
@@ -46,7 +46,7 @@ bool MagiciteGamePhyLayer::initPhysics(Size size, MagiciteGamePlayer* player)
     groundBox.Set(b2Vec2(boxSize.width / PTM_RATIO, boxSize.height / PTM_RATIO), b2Vec2(boxSize.width / PTM_RATIO, 0));
     body->CreateFixture(&groundBox, 0);
 
-    _contactListener = MagiciteGameContactListener::create(player);
+    _contactListener = MagiciteGameContactListener::create();
     _world->SetContactListener(_contactListener);
 
     _debugDraw = new GLESDebugDraw(PTM_RATIO);
@@ -86,21 +86,36 @@ void MagiciteGamePhyLayer::update(float timeDelta)
     int velocityIterations = 8;
     int positionIterations = 1;
     _world->Step(0.03f, velocityIterations, positionIterations);
+    
+    std::vector<b2Body*> deadlist;
     for (auto it = _world->GetBodyList(); it; it = it->GetNext())
     {
         if (it->GetUserData() != nullptr)
         {
-            Sprite* sprite = reinterpret_cast<Sprite*>(it->GetUserData());
-            sprite->setPosition(Vec2(it->GetPosition().x * PTM_RATIO, it->GetPosition().y * PTM_RATIO));
-            sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(it->GetAngle()));
+            MagiciteGamePhySprite* sprite = reinterpret_cast<MagiciteGamePhySprite*>(it->GetUserData());
+            if (sprite->isDead())
+            {
+                deadlist.push_back(it);
+            }
+            else
+            {
+                sprite->setPosition(Vec2(it->GetPosition().x * PTM_RATIO, it->GetPosition().y * PTM_RATIO));
+                sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(it->GetAngle()));
+            }
         }
+    }
+    for (auto ptr : deadlist)
+    {
+        auto spriteDead = reinterpret_cast<MagiciteGamePhySprite*>(ptr->GetUserData());
+        _world->DestroyBody(ptr);
+        spriteDead->removeFromParentAndCleanup(true);
     }
 }
 
-MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(cocos2d::Size size, MagiciteGamePlayer* player)
+MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(cocos2d::Size size)
 {
     auto ptr = new MagiciteGamePhyLayer();
-    if (ptr && ptr->initPhysics(size, player))
+    if (ptr && ptr->initPhysics(size))
     {
         ptr->autorelease();
         return ptr;

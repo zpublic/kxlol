@@ -10,18 +10,69 @@ void MagiciteGameContactListener::BeginContact(b2Contact* contact)
     auto spriteB = reinterpret_cast<MagiciteGamePhySprite*>(bodyB->GetUserData());
     if (spriteA != nullptr && spriteB != nullptr)
     {
-        if (spriteA == _player || spriteB == _player)
+        if (spriteA->_SpriteType == MagiciteGamePhySprite::T_Living
+            || spriteB->_SpriteType == MagiciteGamePhySprite::T_Living)
         {
-            auto node = (spriteA != _player ? spriteA : spriteB);
-            Vec2 playerPos = _player->getPosition();
-            Vec2 nodePos = node->getPosition();
-            Size playerSize = _player->getContentSize();
-            Size nodeSize = node->getContentSize();
-            if (playerPos.x + playerSize.width / 2 > nodePos.x - nodeSize.width / 2
-                && playerPos.x - playerSize.width / 2 < nodePos.x + nodeSize.width / 2
-                && playerPos.y > nodePos.y)
+            if (spriteA->_SpriteType == spriteB->_SpriteType)
             {
-                _player->setState(MagiciteGameLivine::State::S_Jump, false);
+                MagiciteGameLiving* livingA = reinterpret_cast<MagiciteGameLiving*>(spriteA);
+                MagiciteGameLiving* livingB = reinterpret_cast<MagiciteGameLiving*>(spriteB);
+                MagiciteGameLiving* player = nullptr;
+                MagiciteGameLiving* enemy = nullptr;
+                if (livingA->_LivingType == MagiciteGameLiving::T_Player)
+                {
+                    player = livingA;
+                    enemy = livingB;
+                }
+                else
+                {
+                    player = livingB;
+                    enemy = livingA;
+                }
+
+                Vec2 playerPos = player->getPosition();
+                Vec2 enemyPos = enemy->getPosition();
+                Size playerSize = player->getContentSize();
+                Size enemySize = enemy->getContentSize();
+                if (playerPos.x + playerSize.width / 2 > enemyPos.x - enemySize.width / 2
+                    && playerPos.x - playerSize.width / 2 < enemyPos.x + enemySize.width / 2
+                    && playerPos.y > enemyPos.y + enemySize.height / 2)
+                {
+                    player->setState(MagiciteGameLiving::State::S_Jump, false);
+                    player->Jump();
+                    enemy->Dead();
+                }
+                else
+                {
+                    log("dead");
+                }
+            }
+            else
+            {
+                MagiciteGameLiving*         player = nullptr;
+                MagiciteGamePhySprite*      ground = nullptr;
+                if (spriteA->_SpriteType == MagiciteGamePhySprite::T_Living)
+                {
+                    player = reinterpret_cast<MagiciteGameLiving*>(spriteA);
+                    ground = spriteB;
+                }
+                else
+                {
+                    player = reinterpret_cast<MagiciteGameLiving*>(spriteB);
+                    ground = spriteA;
+                }
+
+                Vec2 playerPos = player->getPosition();
+                Vec2 groundPos = ground->getPosition();
+                Size playerSize = player->getContentSize();
+                Size groundSize = ground->getContentSize();
+
+                if (playerPos.x + playerSize.width / 2 > groundPos.x - groundSize.width / 2
+                    && playerPos.x - playerSize.width / 2 < groundPos.x + groundSize.width / 2
+                    && playerPos.y > groundPos.y)
+                {
+                    player->setState(MagiciteGameLiving::State::S_Jump, false);
+                }
             }
         }
     }
@@ -42,10 +93,10 @@ void MagiciteGameContactListener::EndContact(b2Contact* contact)
 
 }
 
-MagiciteGameContactListener* MagiciteGameContactListener::create(MagiciteGameLivine* player)
+MagiciteGameContactListener* MagiciteGameContactListener::create()
 {
     auto ptr = new MagiciteGameContactListener();
-    if (ptr && ptr->init(player))
+    if (ptr && ptr->init())
     {
         return ptr;
     }
@@ -56,8 +107,7 @@ MagiciteGameContactListener* MagiciteGameContactListener::create(MagiciteGameLiv
     }
 }
 
-bool MagiciteGameContactListener::init(MagiciteGameLivine* player)
+bool MagiciteGameContactListener::init()
 {
-    _player = player;
     return true;
 }

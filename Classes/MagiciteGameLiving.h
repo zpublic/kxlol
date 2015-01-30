@@ -5,11 +5,11 @@
 #include "MagiciteGamePhySprite.h"
 #include "map"
 
-class MagiciteGameLivine : public MagiciteGamePhySprite
+class MagiciteGameLiving : public MagiciteGamePhySprite
 {
 public:
-    MagiciteGameLivine();
-    ~MagiciteGameLivine();
+    MagiciteGameLiving();
+    ~MagiciteGameLiving();
 
     enum Direction : int
     {
@@ -19,9 +19,9 @@ public:
     static const int DEFAULT_SPEED = 3;
     static const int DEFAULT_JUMP_HEIGHT = 10;
 
-    void Move(Direction dire);
-    void Stop();
-    void Jump();
+    virtual void Move(Direction dire);
+    virtual void Stop();
+    virtual void Jump();
     void setJumpHeight(int offset);
     void setSpeed(int value);
 
@@ -37,7 +37,15 @@ public:
     bool getState(State state);
 
     virtual bool initWithFile(const char* filename);
-    static MagiciteGameLivine* create(const char* filename);
+    static MagiciteGameLiving* create(const char* filename);
+
+    enum LivingType : int
+    {
+        T_Unknow,
+        T_Player,
+        T_Enemy,
+    };
+    LivingType                      _LivingType;
 
 protected:
     std::map<State, bool>           _state;

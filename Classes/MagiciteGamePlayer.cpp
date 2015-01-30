@@ -4,7 +4,7 @@ USING_NS_CC;
 
 MagiciteGamePlayer::MagiciteGamePlayer()
 {
-
+    _LivingType = MagiciteGameLiving::T_Player;
 }
 
 MagiciteGamePlayer::~MagiciteGamePlayer()
@@ -29,7 +29,7 @@ MagiciteGamePlayer* MagiciteGamePlayer::create(const char* filename)
 
 bool MagiciteGamePlayer::initWithFile(const char* filename)
 {
-    if (!MagiciteGameLivine::initWithFile(filename))
+    if (!MagiciteGameLiving::initWithFile(filename))
     {
         return false;
     }
