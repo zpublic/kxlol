@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "MagiciteGameMap.h"
 #include "MagiciteGamePhyLayer.h"
-#include "MagiciteGamePlayer.h"
+#include "MagiciteGamePlayerManager.h"
 #include "MagiciteGameEnemy.h"
 #include "MagiciteGameEnemyManager.h"
 #include "Box2D\Box2D.h"
@@ -23,7 +23,6 @@ public:
 
 private:
     MagiciteGamePhyLayer*   _phyLayer;
-    MagiciteGamePlayer*     _player;
     MagiciteGameMap*        _background;
     cocos2d::Size           _visibleSize;
     cocos2d::Vec2           _origin;

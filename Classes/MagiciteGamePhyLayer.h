@@ -5,7 +5,6 @@
 #include "Box2D\Box2D.h"
 #include "GLES-Render.h"
 #include "MagiciteGamePhySprite.h"
-#include "MagiciteGamePlayer.h"
 #include "MagiciteGameContactListener.h"
 
 class MagiciteGamePhyLayer : public cocos2d::Layer
