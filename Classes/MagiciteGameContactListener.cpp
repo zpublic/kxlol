@@ -17,17 +17,17 @@ void MagiciteGameContactListener::BeginContact(b2Contact* contact)
             {
                 MagiciteGameLiving* livingA = reinterpret_cast<MagiciteGameLiving*>(spriteA);
                 MagiciteGameLiving* livingB = reinterpret_cast<MagiciteGameLiving*>(spriteB);
-                MagiciteGameLiving* player = nullptr;
-                MagiciteGameLiving* enemy = nullptr;
+                MagiciteGamePlayer* player = nullptr;
+                MagiciteGameEnemy* enemy = nullptr;
                 if (livingA->_LivingType == MagiciteGameLiving::T_Player)
                 {
-                    player = livingA;
-                    enemy = livingB;
+                    player = reinterpret_cast<MagiciteGamePlayer*>(livingA);
+                    enemy = reinterpret_cast<MagiciteGameEnemy*>(livingB);
                 }
                 else
                 {
-                    player = livingB;
-                    enemy = livingA;
+                    player = reinterpret_cast<MagiciteGamePlayer*>(livingB);
+                    enemy = reinterpret_cast<MagiciteGameEnemy*>(livingA);
                 }
 
                 Vec2 playerPos = player->getPosition();
@@ -40,7 +40,7 @@ void MagiciteGameContactListener::BeginContact(b2Contact* contact)
                 {
                     player->setState(MagiciteGameLiving::State::S_Jump, false);
                     player->Jump();
-                    enemy->Dead();
+                    MagiciteGameEnemyManager::getInstance()->destroyEnemy(enemy);
                 }
                 else
                 {

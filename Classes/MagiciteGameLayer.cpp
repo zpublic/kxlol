@@ -23,21 +23,21 @@ bool MagiciteGameLayer::init()
     _background = MagiciteGameMap::create(tiled);
     this->addChild(_background, -1);
    
-    _player = MagiciteGamePlayer::create("img\\avatar\\1.png");
-    _player->setPosition(Vec2(_visibleSize.width / 2 + _origin.x, _visibleSize.height / 2 + _origin.y));
+    auto player = MagiciteGamePlayerManager::getInstance()->getPlayer();
+    player->setPosition(Vec2(_visibleSize.width / 2 + _origin.x, _visibleSize.height / 2 + _origin.y));
     
     _phyLayer = MagiciteGamePhyLayer::create(Size(_background->getBackSize().width, _visibleSize.height));
-    _phyLayer->addPhysicSprite(_player,false);
+    _phyLayer->addPhysicSprite(player, false);
     this->addChild(_phyLayer);
 
-    this->runAction(Follow::create(_player, Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
+    this->runAction(Follow::create(player, Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
 
     _move_left = false;
     _move_right = false;
 
     /*----------------------------------init finish---------------------------------------------------*/
 
-    auto enemy = MagiciteGameEnemyManager::getInstance()->createEnemy(Vec2(_visibleSize.width / 3 * 2, _visibleSize.height / 3));
+    auto enemy = MagiciteGameEnemyManager::getInstance()->createEnemy(Vec2(_visibleSize.width / 3, _visibleSize.height / 3), _visibleSize.width / 3 * 2 + 100 );
     _phyLayer->addPhysicSprite(enemy,false);
     
     TMXObjectGroup* ground = tiled->getObjectGroup("physics");
@@ -68,7 +68,7 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     switch (keyCode)
     {
     case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
-        _player->Jump();
+        MagiciteGamePlayerManager::getInstance()->getPlayer()->Jump();
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
         _move_left = true;
@@ -83,15 +83,16 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
 
 void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
+    auto player = MagiciteGamePlayerManager::getInstance()->getPlayer();
     switch (keyCode)
     {
     case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
         _move_left = false;
-        _player->getBody()->SetLinearVelocity(b2Vec2(0, _player->getBody()->GetLinearVelocity().y));
+        player->getBody()->SetLinearVelocity(b2Vec2(0, player->getBody()->GetLinearVelocity().y));
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
         _move_right = false;
-        _player->getBody()->SetLinearVelocity(b2Vec2(0, _player->getBody()->GetLinearVelocity().y));
+        player->getBody()->SetLinearVelocity(b2Vec2(0, player->getBody()->GetLinearVelocity().y));
         break;
     default:
         break;
@@ -102,10 +103,11 @@ void MagiciteGameLayer::update(float timeDelta)
 {
     if (_move_left && !_move_right)
     {
-        _player->Move(MagiciteGameLiving::Direction::left);
+        MagiciteGamePlayerManager::getInstance()->getPlayer()->Move(MagiciteGameLiving::Direction::left);
     }
     else if (!_move_left && _move_right)
     {
-        _player->Move(MagiciteGameLiving::Direction::right);
+        MagiciteGamePlayerManager::getInstance()->getPlayer()->Move(MagiciteGameLiving::Direction::right);
     }
+    MagiciteGameEnemyManager::getInstance()->updateEnemyPosition();
 }

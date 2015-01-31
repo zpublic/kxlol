@@ -18,7 +18,6 @@ bool MagiciteGameEnemy::initWithFile(const char* filename)
     {
         return false;
     }
-    this->schedule(schedule_selector(MagiciteGameEnemy::update));
     return true;
 }
 
@@ -35,4 +34,10 @@ MagiciteGameEnemy* MagiciteGameEnemy::create(const char* filename)
         CC_SAFE_DELETE(ptr);
         return nullptr;
     }
+}
+
+void MagiciteGameEnemy::setMoveTo(float new_x_pos)
+{
+    _start_x_pos = getPositionX();
+    _end_x_pos = new_x_pos;
 }

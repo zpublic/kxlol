@@ -4,6 +4,9 @@
 #include "cocos2d.h"
 #include "Box2D\Box2D.h"
 #include "MagiciteGameLiving.h"
+#include "MagiciteGameEnemyManager.h"
+#include "MagiciteGamePlayer.h"
+#include "MagiciteGameEnemy.h"
 
 class MagiciteGameContactListener : public b2ContactListener
 {
