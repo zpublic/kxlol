@@ -5,6 +5,8 @@ USING_NS_CC;
 MagiciteGameEnemy::MagiciteGameEnemy()
 {
     _LivingType = MagiciteGameLiving::T_Enemy;
+    _Move_To_Dire = MagiciteGameLiving::Direction::unknow;
+    _is_pass = false;
 }
 
 MagiciteGameEnemy::~MagiciteGameEnemy()
@@ -36,8 +38,17 @@ MagiciteGameEnemy* MagiciteGameEnemy::create(const char* filename)
     }
 }
 
-void MagiciteGameEnemy::setMoveTo(float new_x_pos)
+void MagiciteGameEnemy::setMoveDire(MagiciteGameLiving::Direction move_to)
 {
-    _start_x_pos = getPositionX();
-    _end_x_pos = new_x_pos;
+    _Move_To_Dire = move_to;
+}
+
+MagiciteGameLiving::Direction MagiciteGameEnemy::getMoveDire()
+{
+    return _Move_To_Dire;
+}
+
+bool MagiciteGameEnemy::getPass()
+{
+    return _is_pass;
 }

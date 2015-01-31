@@ -13,6 +13,7 @@ public:
 
     enum Direction : int
     {
+        unknow = 0,
         left = -1,
         right = 1,
     };

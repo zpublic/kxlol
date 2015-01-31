@@ -46,7 +46,7 @@ bool MagiciteGamePhyLayer::initPhysics(Size size)
     groundBox.Set(b2Vec2(boxSize.width / PTM_RATIO, boxSize.height / PTM_RATIO), b2Vec2(boxSize.width / PTM_RATIO, 0));
     body->CreateFixture(&groundBox, 0);
 
-    _contactListener = MagiciteGameContactListener::create();
+    _contactListener = MagiciteGameContactListener::create([](){cocos2d::log("gameover");});
     _world->SetContactListener(_contactListener);
 
     _debugDraw = new GLESDebugDraw(PTM_RATIO);

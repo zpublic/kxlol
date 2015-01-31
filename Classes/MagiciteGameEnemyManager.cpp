@@ -4,12 +4,10 @@ MagiciteGameEnemyManager* MagiciteGameEnemyManager::_instance = nullptr;
 
 USING_NS_CC;
 
-
 MagiciteGameEnemyManager::MagiciteGameEnemyManager()
 {
 
 }
-
 
 MagiciteGameEnemyManager::~MagiciteGameEnemyManager()
 {
@@ -50,50 +48,26 @@ void MagiciteGameEnemyManager::updateEnemyPosition()
 {
     for (auto enemyPtr : _enemys)
     {
-        if (enemyPtr->getPositionX() != enemyPtr->_end_x_pos)
+        if (enemyPtr->_Move_To_Dire == MagiciteGameLiving::Direction::right)
         {
-            if (enemyPtr->getPositionX() < enemyPtr->_end_x_pos)
-            {
-                if (enemyPtr->getPositionX() < enemyPtr->_end_x_pos - enemyPtr->_speed)
-                {
-                    enemyPtr->Move(MagiciteGameLiving::Direction::right);
-                }
-                else
-                {
-                    enemyPtr->Move(MagiciteGameLiving::Direction::right);
-                    b2Vec2 pos = b2Vec2(enemyPtr->_end_x_pos / PTM_RATIO, enemyPtr->getPositionY() / PTM_RATIO);
-                    float angle = -1 * CC_RADIANS_TO_DEGREES(enemyPtr->getBody()->GetAngle());
-                    enemyPtr->getBody()->SetTransform(pos, angle);
-                    enemyPtr->Stop();
-                }
-            }
-            else
-            {
-                if (enemyPtr->_end_x_pos < enemyPtr->getPositionX() - enemyPtr->_speed)
-                {
-                    enemyPtr->Move(MagiciteGameLiving::Direction::left);
-                }
-                else
-                {
-                    enemyPtr->Move(MagiciteGameLiving::Direction::left);
-                    b2Vec2 pos = b2Vec2(enemyPtr->_end_x_pos / PTM_RATIO, enemyPtr->getPositionY() / PTM_RATIO);
-                    float angle = -1 * CC_RADIANS_TO_DEGREES(enemyPtr->getBody()->GetAngle());
-                    enemyPtr->getBody()->SetTransform(pos, angle);
-                    enemyPtr->Stop();
-                }
-            }
+            enemyPtr->Move(MagiciteGameLiving::Direction::right);
+        }
+        else if (enemyPtr->_Move_To_Dire == MagiciteGameLiving::Direction::left)
+        {
+            enemyPtr->Move(MagiciteGameLiving::Direction::left);
         }
     }
-    
 }
 
-MagiciteGameEnemy* MagiciteGameEnemyManager::createEnemy(cocos2d::Vec2 pos, float move_to)
+MagiciteGameEnemy* MagiciteGameEnemyManager::createEnemy(Vec2 pos, bool is_move_to_right)
 {
     auto enemy = MagiciteGameEnemy::create("CloseNormal.png");
     if (enemy != nullptr)
     {
         enemy->setPosition(pos);
-        enemy->setMoveTo(move_to);
+        enemy->setMoveDire(is_move_to_right ? 
+            MagiciteGameLiving::Direction::right: 
+            MagiciteGameLiving::Direction::left);
         _enemys.push_back(enemy);
         return enemy;
     }

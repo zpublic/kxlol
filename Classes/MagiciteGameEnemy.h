@@ -14,14 +14,16 @@ public:
     MagiciteGameEnemy();
     ~MagiciteGameEnemy();
 
-    void setMoveTo(float new_x_pos);
+    Direction getMoveDire();
+    void setMoveDire(Direction move_to);
+    bool getPass();
 
     virtual bool initWithFile(const char* filename);
     static MagiciteGameEnemy* create(const char* filename);
 
 private:
-    float                       _start_x_pos;
-    float                       _end_x_pos;
+    Direction                           _Move_To_Dire;
+    bool                                _is_pass;
 };
 
 #endif //__MAGICITE_GAME_ENEMY__

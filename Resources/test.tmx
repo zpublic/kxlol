@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="10" tilewidth="32" tileheight="32" nextobjectid="15">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="10" tilewidth="32" tileheight="32" nextobjectid="16">
  <tileset firstgid="1" name="g" tilewidth="32" tileheight="32">
   <image source="ground.png" width="1280" height="320"/>
  </tileset>
  <layer name="ground" width="40" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC83SZ3cIBhQG4MQH2qpRq6pGUZsQWyQ2ERIzMWLG3iSRYdTeI9KB1mrt1mo59mxLa3VQHTjH6LLpsEfL4+A/uOc+H95v95z7BgQ831OK0pShLOUIojwVCKYilahMFapSjerUIISahBJGLWpTh7rUoz4NaEgjwmlMBE1oSiRRNKM5LWhJK1oTTQxtaEs72hNLBzrSic50oStxdKM7PehJL3rTh770oz8DGMggBjOEeBJIZChJJJNCKsMYzghG8hajGM0YxjKO8UxgIpOYzBSmMo3pzGAmacwinbd5h3d5j9nMYS7v8wHzmM8CFrKID/mIxSxhKctYzgpW8jGfsIrVrGEt6/iUz1jPBjKwkU1sZgtb2cZ2drCTXexmD5/zBV+yl318xdfs5wAHOcRhvuFbvuN7jnCUHzjGj/zEz/zCcU5w8ul9j53iNGc4y6/8xu/8wZ+c4zwXuMglLnOFq1zjL/7mH/7lOje4yS1uc4e73OM+D/iP/3lIQKAlQ+CTXjyTUc7EC7zIS2TmZbKQlWxk5xVykJNc5CYPr5KX18jH6+SnAAUpxBsUpghFeZNiFKcEJSlF6cAnvXgmSC5PBYKpSCUqU4WqVKM6NQihJqGEUYva1KEu9ahPAxrSiHAaE0ETmhJJFM1oTgta0orWRBNDG9rSjvbE0oGOdKIzXehKHN3oTg960ove9KEv/ejPAAYyiMEMIZ4EEhlKEsmkkMowhjOCkY//zChGM4axjGM8E5jIJCYzhalMYzozmEkas0jnEUVCJSdABgAA
+   H4sIAAAAAAAAC83SRW9VQRgG4LYLXNa4u7S4e3Gngru7OxSnFEpxWOOuwXWNuya4rXGX56bnJjcNP4CT8yxm8s07k28mKur/+BrSiMZZ5itQkUpUpgpViSWOalSnBjWpRW3qUJd61KdBlj2a0JRmNKcF8bSkFa2Dun70Z0iwPlIoqyvdSCCRJJLpTg960ove9KFvROYABjKIwcEeQxnGcEYwklGMZgxjGcf4oC58lvRgfaRQ1kxmMZs5zCWFecxnAQtZxGKWsJRUlpHGclYEe6wkg1WsZg1rWcd6NrCRTUFduG+NgvWRQlmb2cJWtrGdHexkF7vZw172sZ8DHOQQhzlCDEc5xnFOcJJTnOYMZznHeS4EZwv3Ldz3g1lc5BKXucJVrnGdG9zkFre5w13ucZ8HPORRcL6QxzzhKc94zgte8orXvOHtP3qVEeRGesd7PvCRT3zmC1/5xnd+8JNf/OYPUdF+YqIz30VYNuPs5CAnuchNHvKSj/zRme8kUmqQG6mAuoIUojBFKEoxilOCkpSiNGUoSznKU4GK0ZnvIqyqcSxxVKM6NahJLWpTh7rUoz4NaBjkRmpGc1oQT0ta0Zo2tKUd7elARzrRmS50pRsJJJJEMt3pQU960Zs+9KUf/RnAQAYxmCEMZRjDGcFIRjGaMYxlHOOZwEQmMZkpTGUa05nBTGYxmzmheyaFecxnAQtZxGKWhO6VVJaRxnJWkM5KMljFav4C0w89P0AGAAA=
   </data>
  </layer>
  <objectgroup name="physics">
   <object id="11" type="cube" x="1" y="129" width="575" height="186"/>
   <object id="12" type="cube" x="252" y="29" width="291" height="20"/>
   <object id="14" type="cube" x="579" y="224" width="699" height="94"/>
+  <object id="15" type="cube" x="1153" y="130" width="125" height="92"/>
  </objectgroup>
 </map>
