@@ -14,7 +14,7 @@ MagiciteGamePlayer::~MagiciteGamePlayer()
 
 MagiciteGamePlayer* MagiciteGamePlayer::create(const char* filename)
 {
-    auto ptr = new MagiciteGamePlayer();
+    auto ptr = new(std::nothrow) MagiciteGamePlayer();
     if (ptr && ptr->initWithFile(filename))
     {
         ptr->autorelease();

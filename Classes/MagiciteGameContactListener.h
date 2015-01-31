@@ -17,10 +17,10 @@ private:
     virtual void EndContact(b2Contact* contact);
 
     std::function<void(void)>                   _failed;
-
+    MagiciteGameEnemyManager*                   _manager;
 public:
-    static MagiciteGameContactListener* create(const std::function<void(void)> &failed);
-    virtual bool init(const std::function<void(void)> &failed);
+    static MagiciteGameContactListener* create(MagiciteGameEnemyManager* manager, const std::function<void(void)> &failed);
+    virtual bool init(MagiciteGameEnemyManager* manager,const std::function<void(void)> &failed);
 };
 
 #endif //__MAGICITE_GAME_CONTACT_LISTENER__

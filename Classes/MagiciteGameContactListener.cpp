@@ -56,7 +56,7 @@ void MagiciteGameContactListener::BeginContact(b2Contact* contact)
                     {
                         player->setState(MagiciteGameLiving::State::S_Jump, false);
                         player->Jump();
-                        MagiciteGameEnemyManager::getInstance()->destroyEnemy(enemy);
+                        _manager->destroyEnemy(enemy);
                     }
                     else
                     {
@@ -136,10 +136,10 @@ void MagiciteGameContactListener::EndContact(b2Contact* contact)
 
 }
 
-MagiciteGameContactListener* MagiciteGameContactListener::create(const std::function<void(void)> &failed)
+MagiciteGameContactListener* MagiciteGameContactListener::create(MagiciteGameEnemyManager* manager, const std::function<void(void)> &failed)
 {
     auto ptr = new MagiciteGameContactListener();
-    if (ptr && ptr->init(failed))
+    if (ptr && ptr->init(manager, failed))
     {
         return ptr;
     }
@@ -150,8 +150,9 @@ MagiciteGameContactListener* MagiciteGameContactListener::create(const std::func
     }
 }
 
-bool MagiciteGameContactListener::init(const std::function<void(void)> &failed)
+bool MagiciteGameContactListener::init(MagiciteGameEnemyManager* manager, const std::function<void(void)> &failed)
 {
     _failed = failed;
+    _manager = manager;
     return true;
 }

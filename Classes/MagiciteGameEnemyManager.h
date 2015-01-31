@@ -8,7 +8,8 @@ class MagiciteGameEnemyManager
 {
 
 public:
-    static MagiciteGameEnemyManager* getInstance();
+    MagiciteGameEnemyManager();
+    ~MagiciteGameEnemyManager();
 
     static const int PTM_RATIO = 32;
 
@@ -19,10 +20,7 @@ public:
     void updateEnemyPosition();
 
 private:
-    static MagiciteGameEnemyManager*            _instance;
     std::vector<MagiciteGameEnemy*>             _enemys;
-    MagiciteGameEnemyManager();
-    ~MagiciteGameEnemyManager();
 };
 
 #endif //__MAGICITE_GAME_ENEMY_MANAGER__
