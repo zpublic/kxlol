@@ -15,12 +15,13 @@ MagiciteGamePhyLayer::~MagiciteGamePhyLayer()
     CC_SAFE_DELETE(_contactListener);
 }
 
-bool MagiciteGamePhyLayer::initPhysics(MagiciteGameEnemyManager* manager, Size size)
+bool MagiciteGamePhyLayer::initPhysics(MagiciteGameEnemyManager* manager, Size size, const std::function<void(void)> &overFunc)
 {
     if (!Layer::init())
     {
         return false;
     }
+
     _visibleSize = Director::getInstance()->getVisibleSize();
     this->schedule(schedule_selector(MagiciteGamePhyLayer::update));
 
@@ -46,7 +47,7 @@ bool MagiciteGamePhyLayer::initPhysics(MagiciteGameEnemyManager* manager, Size s
     groundBox.Set(b2Vec2(boxSize.width / PTM_RATIO, boxSize.height / PTM_RATIO), b2Vec2(boxSize.width / PTM_RATIO, 0));
     body->CreateFixture(&groundBox, 0);
 
-    _contactListener = MagiciteGameContactListener::create(manager,[](){cocos2d::log("gameover"); });
+    _contactListener = MagiciteGameContactListener::create(manager, overFunc);
     _world->SetContactListener(_contactListener);
 
     _debugDraw = new GLESDebugDraw(PTM_RATIO);
@@ -112,10 +113,10 @@ void MagiciteGamePhyLayer::update(float timeDelta)
     }
 }
 
-MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(MagiciteGameEnemyManager* manager, Size size)
+MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(MagiciteGameEnemyManager* manager, Size size, const std::function<void(void)> &overFunc)
 {
     auto ptr = new MagiciteGamePhyLayer();
-    if (ptr && ptr->initPhysics(manager, size))
+    if (ptr && ptr->initPhysics(manager, size,overFunc))
     {
         ptr->autorelease();
         return ptr;

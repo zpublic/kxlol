@@ -17,13 +17,13 @@ public:
 
     static const int PTM_RATIO = 32;
 
-    bool initPhysics(MagiciteGameEnemyManager* manager, cocos2d::Size);
+    bool initPhysics(MagiciteGameEnemyManager* manager, cocos2d::Size, const std::function<void(void)> &overFunc);
     void addPhysicSprite(MagiciteGamePhySprite* ptr, bool is_static);
 
     virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags);
     void update(float timeDelta);
 
-    static MagiciteGamePhyLayer* create(MagiciteGameEnemyManager* manager, cocos2d::Size size);
+    static MagiciteGamePhyLayer* create(MagiciteGameEnemyManager* manager, cocos2d::Size size, const std::function<void(void)> &overFunc);
 
 private:
     MagiciteGameContactListener*        _contactListener;

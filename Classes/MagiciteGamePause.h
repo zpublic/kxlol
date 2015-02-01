@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "MagiciteScene.h"
-#include "MagiciteGameLayer.h"
 #include "WelcomeScene.h"
 
 class MagiciteGamePause : public cocos2d::Layer

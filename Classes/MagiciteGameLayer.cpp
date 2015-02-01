@@ -36,7 +36,11 @@ bool MagiciteGameLayer::init()
     _player = MagiciteGamePlayer::create("img\\avatar\\1.png");
     _player->setPosition(Vec2(_visibleSize.width / 2 + _origin.x, _visibleSize.height / 2 + _origin.y));
     
-    _phyLayer = MagiciteGamePhyLayer::create(&_enemyManager, Size(_background->getBackSize().width, _visibleSize.height));
+    _phyLayer = MagiciteGamePhyLayer::create(
+        &_enemyManager, 
+        Size(_background->getBackSize().width, _visibleSize.height), 
+        [&](){MagiciteGameOver::Over(this);});
+
     _phyLayer->addPhysicSprite(_player, false);
     this->addChild(_phyLayer);
 
