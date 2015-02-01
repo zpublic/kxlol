@@ -1,6 +1,8 @@
 #ifndef __MAGICITE_GAME_PHY_LAYER__
 #define __MAGICITE_GAME_PHY_LAYER__
 
+class MagiciteGameEnemyManager;
+
 #include "cocos2d.h"
 #include "Box2D\Box2D.h"
 #include "GLES-Render.h"
@@ -15,13 +17,21 @@ public:
 
     static const int PTM_RATIO = 32;
 
-    bool initPhysics(cocos2d::Size);
+    bool initPhysics(
+        MagiciteGameEnemyManager* manager, 
+        cocos2d::Size, 
+        const std::function<void(void)> &overFunc, 
+        const std::function<void(void)> &winFunc);
     void addPhysicSprite(MagiciteGamePhySprite* ptr, bool is_static);
 
     virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags);
     void update(float timeDelta);
 
-    static MagiciteGamePhyLayer* create(cocos2d::Size size);
+    static MagiciteGamePhyLayer* create(
+        MagiciteGameEnemyManager* manager, 
+        cocos2d::Size size, 
+        const std::function<void(void)> &overFunc, 
+        const std::function<void(void)> &winFunc);
 
 private:
     MagiciteGameContactListener*        _contactListener;

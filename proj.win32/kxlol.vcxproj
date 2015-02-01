@@ -152,10 +152,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteGameLayer.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameLiving.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameMap.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameOver.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGamePause.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePhyLayer.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePlayer.cpp" />
-    <ClCompile Include="..\Classes\MagiciteGamePlayerManager.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameWin.cpp" />
     <ClCompile Include="..\Classes\MagiciteScene.cpp" />
     <ClCompile Include="..\Classes\MainBasicInfoLayer.cpp" />
     <ClCompile Include="..\Classes\MainBgLayer.cpp" />
@@ -182,10 +184,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGameLayer.h" />
     <ClInclude Include="..\Classes\MagiciteGameLiving.h" />
     <ClInclude Include="..\Classes\MagiciteGameMap.h" />
+    <ClInclude Include="..\Classes\MagiciteGameOver.h" />
+    <ClInclude Include="..\Classes\MagiciteGamePause.h" />
     <ClInclude Include="..\Classes\MagiciteGamePhyLayer.h" />
     <ClInclude Include="..\Classes\MagiciteGamePhySprite.h" />
     <ClInclude Include="..\Classes\MagiciteGamePlayer.h" />
-    <ClInclude Include="..\Classes\MagiciteGamePlayerManager.h" />
+    <ClInclude Include="..\Classes\MagiciteGameWin.h" />
     <ClInclude Include="..\Classes\MagiciteScene.h" />
     <ClInclude Include="..\Classes\MainBasicInfoLayer.h" />
     <ClInclude Include="..\Classes\MainBgLayer.h" />

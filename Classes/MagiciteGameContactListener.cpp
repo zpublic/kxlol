@@ -10,6 +10,20 @@ void MagiciteGameContactListener::BeginContact(b2Contact* contact)
     auto spriteB = reinterpret_cast<MagiciteGamePhySprite*>(bodyB->GetUserData());
     if (spriteA != nullptr && spriteB != nullptr)
     {
+        if ((spriteA->_SpriteType == MagiciteGamePhySprite::T_End
+                || spriteB->_SpriteType == MagiciteGamePhySprite::T_End)
+            && (spriteA->_SpriteType == MagiciteGamePhySprite::T_Living 
+                || spriteB->_SpriteType == MagiciteGamePhySprite::T_End))
+        {
+            MagiciteGameLiving* livingA = reinterpret_cast<MagiciteGameLiving*>(spriteA);
+            MagiciteGameLiving* livingB = reinterpret_cast<MagiciteGameLiving*>(spriteB);
+            if (livingA->_LivingType == MagiciteGameLiving::T_Player
+                || livingB->_LivingType == MagiciteGameLiving::T_Player)
+            {
+                _win();
+            }
+        }
+
         if (spriteA->_SpriteType == MagiciteGamePhySprite::T_Living
             || spriteB->_SpriteType == MagiciteGamePhySprite::T_Living)
         {
@@ -56,7 +70,7 @@ void MagiciteGameContactListener::BeginContact(b2Contact* contact)
                     {
                         player->setState(MagiciteGameLiving::State::S_Jump, false);
                         player->Jump();
-                        MagiciteGameEnemyManager::getInstance()->destroyEnemy(enemy);
+                        _manager->destroyEnemy(enemy);
                     }
                     else
                     {
@@ -136,10 +150,13 @@ void MagiciteGameContactListener::EndContact(b2Contact* contact)
 
 }
 
-MagiciteGameContactListener* MagiciteGameContactListener::create(const std::function<void(void)> &failed)
+MagiciteGameContactListener* MagiciteGameContactListener::create(
+    MagiciteGameEnemyManager* manager, 
+    const std::function<void(void)> &failed, 
+    const std::function<void(void)> &win)
 {
     auto ptr = new MagiciteGameContactListener();
-    if (ptr && ptr->init(failed))
+    if (ptr && ptr->init(manager, failed, win))
     {
         return ptr;
     }
@@ -150,8 +167,13 @@ MagiciteGameContactListener* MagiciteGameContactListener::create(const std::func
     }
 }
 
-bool MagiciteGameContactListener::init(const std::function<void(void)> &failed)
+bool MagiciteGameContactListener::init(
+    MagiciteGameEnemyManager* manager, 
+    const std::function<void(void)> &failed, 
+    const std::function<void(void)> &win)
 {
     _failed = failed;
+    _win = win;
+    _manager = manager;
     return true;
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="10" tilewidth="32" tileheight="32" nextobjectid="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="10" tilewidth="32" tileheight="32" nextobjectid="23">
  <tileset firstgid="1" name="g" tilewidth="32" tileheight="32">
   <image source="ground.png" width="1280" height="320"/>
  </tileset>
  <layer name="ground" width="40" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC83SRW9VQRgG4LYLXNa4u7S4e3Gngru7OxSnFEpxWOOuwXWNuya4rXGX56bnJjcNP4CT8yxm8s07k28mKur/+BrSiMZZ5itQkUpUpgpViSWOalSnBjWpRW3qUJd61KdBlj2a0JRmNKcF8bSkFa2Dun70Z0iwPlIoqyvdSCCRJJLpTg960ove9KFvROYABjKIwcEeQxnGcEYwklGMZgxjGcf4oC58lvRgfaRQ1kxmMZs5zCWFecxnAQtZxGKWsJRUlpHGclYEe6wkg1WsZg1rWcd6NrCRTUFduG+NgvWRQlmb2cJWtrGdHexkF7vZw172sZ8DHOQQhzlCDEc5xnFOcJJTnOYMZznHeS4EZwv3Ldz3g1lc5BKXucJVrnGdG9zkFre5w13ucZ8HPORRcL6QxzzhKc94zgte8orXvOHtP3qVEeRGesd7PvCRT3zmC1/5xnd+8JNf/OYPUdF+YqIz30VYNuPs5CAnuchNHvKSj/zRme8kUmqQG6mAuoIUojBFKEoxilOCkpSiNGUoSznKU4GK0ZnvIqyqcSxxVKM6NahJLWpTh7rUoz4NaBjkRmpGc1oQT0ta0Zo2tKUd7elARzrRmS50pRsJJJJEMt3pQU960Zs+9KUf/RnAQAYxmCEMZRjDGcFIRjGaMYxlHOOZwEQmMZkpTGUa05nBTGYxmzmheyaFecxnAQtZxGKWhO6VVJaRxnJWkM5KMljFav4C0w89P0AGAAA=
+   H4sIAAAAAAAAC83S1W5UURQA0Bke0C/A3YoU95LgLsWhgrS4O22hhhQv8gW4a3C+AHdN8C/AXdak9yYTXoZHTrJykpu7JfvsSOT/ON1IYRvb2cFOmpJEM5rTgpYk04rWtKEt7WhPBzrSic50oWtcje5MTWAa08lkItlB/AUuconLpDKCkYxiNGMYyzjGM4E00smIyzmJyUwhK6gR1t6SwFZKg55iNgfxL3nFa96QQy55rGQV+RRQSBHFrGYNa1lHCevZwEY2BTXC2omUBnc4t5QgvmI0EqlEZaqwy7fd7GEv+9jPAQ5yiMMc4SjHOM4JTnKK05TjDGc59w/OB72FcwvnfuIvV7jKNa5zg5vc4jZ3uMs97vOAhzziMU94GvQX84zn/+BF0FsonPujv7zlHe/5wEc+8ZkvfOUb3/nBT37xm4j5RykXLduLUPloYhWiZXsSryTIG6+q/6pRnRrUpBa1qUNd6lGfBjSkEY1pQlOSomV7EWoZTSyZTnSmC13pFuSN14Oe9KI3fehLP/ozgIEMYjBDGMowhpPKCEYyitGMYSzjGM8E0kgng0wmMonJTCGLbKYyjenMYCazmM0c5jKP+SxgIYtYzBKWsozlrCCHXPJYGXtn8imgkCKKWc0a1sbelRLWs4GNbGIzW9hKKdv4A9uXreVABgAA
   </data>
  </layer>
  <objectgroup name="physics">
@@ -13,5 +13,9 @@
   <object id="12" type="cube" x="252" y="29" width="291" height="20"/>
   <object id="14" type="cube" x="579" y="224" width="699" height="94"/>
   <object id="15" type="cube" x="1153" y="130" width="125" height="92"/>
+ </objectgroup>
+ <objectgroup name="game">
+  <object id="17" name="player" x="31" y="34" width="32" height="30"/>
+  <object id="18" name="finish" x="1217" y="79" width="29" height="45"/>
  </objectgroup>
 </map>

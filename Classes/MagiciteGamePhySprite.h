@@ -25,6 +25,7 @@ public:
     {
         T_Living,
         T_Ground,
+        T_End,
     };
     SpriteType              _SpriteType;
 
