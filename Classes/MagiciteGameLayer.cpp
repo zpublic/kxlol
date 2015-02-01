@@ -35,11 +35,11 @@ bool MagiciteGameLayer::init()
     this->addChild(_background, -1);
 
     _player = MagiciteGamePlayer::create("img\\avatar\\1.png");
-    ValueMap playerMap = game->objectNamed("player");
+    ValueMap playerMap = game->getObject("player");
     Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
     _player->setPosition(playerPos);
     
-    ValueMap endMap = game->objectNamed("finish");
+    ValueMap endMap = game->getObject("finish");
     Size endSize = Size(endMap.at("width").asFloat(), endMap.at("height").asFloat());
     Vec2 endPos = Vec2(endMap.at("x").asFloat() + endSize.width / 2, endMap.at("y").asFloat() + endSize.height / 2);
     auto endCube = MagiciteGamePhySprite::create();
