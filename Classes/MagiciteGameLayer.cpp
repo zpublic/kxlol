@@ -32,7 +32,7 @@ bool MagiciteGameLayer::init()
     TMXTiledMap* tiled = TMXTiledMap::create("test.tmx");
     _background = MagiciteGameMap::create(tiled);
     TMXObjectGroup* game = tiled->getObjectGroup("game");
-    this->addChild(_background, -1);
+    this->addChild(_background);
 
     _player = MagiciteGamePlayer::create("img\\avatar\\1.png");
     ValueMap playerMap = game->getObject("player");
@@ -55,7 +55,7 @@ bool MagiciteGameLayer::init()
     _phyLayer->addPhysicSprite(_player, false);
     _phyLayer->addPhysicSprite(endCube, true);
 
-    this->addChild(_phyLayer);
+    this->addChild(_phyLayer,1);
 
     this->runAction(Follow::create(_player, Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
 
