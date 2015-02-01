@@ -15,7 +15,11 @@ MagiciteGamePhyLayer::~MagiciteGamePhyLayer()
     CC_SAFE_DELETE(_contactListener);
 }
 
-bool MagiciteGamePhyLayer::initPhysics(MagiciteGameEnemyManager* manager, Size size, const std::function<void(void)> &overFunc)
+bool MagiciteGamePhyLayer::initPhysics(
+    MagiciteGameEnemyManager* manager, 
+    Size size, 
+    const std::function<void(void)> &overFunc, 
+    const std::function<void(void)> &winFunc)
 {
     if (!Layer::init())
     {
@@ -47,7 +51,7 @@ bool MagiciteGamePhyLayer::initPhysics(MagiciteGameEnemyManager* manager, Size s
     groundBox.Set(b2Vec2(boxSize.width / PTM_RATIO, boxSize.height / PTM_RATIO), b2Vec2(boxSize.width / PTM_RATIO, 0));
     body->CreateFixture(&groundBox, 0);
 
-    _contactListener = MagiciteGameContactListener::create(manager, overFunc);
+    _contactListener = MagiciteGameContactListener::create(manager, overFunc, winFunc);
     _world->SetContactListener(_contactListener);
 
     _debugDraw = new GLESDebugDraw(PTM_RATIO);
@@ -63,7 +67,9 @@ void MagiciteGamePhyLayer::addPhysicSprite(MagiciteGamePhySprite* ptr, bool is_s
 {
     b2BodyDef bodyDef;
     bodyDef.type = is_static ? b2_staticBody :b2_dynamicBody;
-    bodyDef.position.Set((ptr->getPositionX() + ptr->getContentSize().width / 2) / PTM_RATIO, (ptr->getPositionY() + ptr->getContentSize().height / 2) / PTM_RATIO);
+    bodyDef.position.Set(
+        (ptr->getPositionX() + ptr->getContentSize().width / 2) / PTM_RATIO, 
+        (ptr->getPositionY() + ptr->getContentSize().height / 2) / PTM_RATIO);
     bodyDef.userData = ptr;
     b2Body* body = _world->CreateBody(&bodyDef);
     b2PolygonShape dynamicBox;
@@ -113,10 +119,14 @@ void MagiciteGamePhyLayer::update(float timeDelta)
     }
 }
 
-MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(MagiciteGameEnemyManager* manager, Size size, const std::function<void(void)> &overFunc)
+MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(
+    MagiciteGameEnemyManager* manager, 
+    Size size, 
+    const std::function<void(void)> &overFunc, 
+    const std::function<void(void)> &winFunc)
 {
     auto ptr = new MagiciteGamePhyLayer();
-    if (ptr && ptr->initPhysics(manager, size,overFunc))
+    if (ptr && ptr->initPhysics(manager, size, overFunc, winFunc))
     {
         ptr->autorelease();
         return ptr;

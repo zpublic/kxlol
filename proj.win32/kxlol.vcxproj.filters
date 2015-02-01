@@ -130,6 +130,9 @@
     <ClCompile Include="..\Classes\MagiciteGameOver.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameWin.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -215,6 +218,9 @@
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameOver.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameWin.h">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
     </ClInclude>
   </ItemGroup>

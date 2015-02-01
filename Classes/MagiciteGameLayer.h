@@ -8,6 +8,7 @@
 #include "MagiciteGameEnemyManager.h"
 #include "MagiciteGamePause.h"
 #include "MagiciteGameOver.h"
+#include "MagiciteGameWin.h"
 #include "Box2D\Box2D.h"
 
 class MagiciteGameLayer : public cocos2d::Layer

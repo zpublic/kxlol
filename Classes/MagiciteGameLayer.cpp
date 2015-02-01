@@ -31,17 +31,30 @@ bool MagiciteGameLayer::init()
 
     TMXTiledMap* tiled = TMXTiledMap::create("test.tmx");
     _background = MagiciteGameMap::create(tiled);
+    TMXObjectGroup* game = tiled->getObjectGroup("game");
     this->addChild(_background, -1);
 
     _player = MagiciteGamePlayer::create("img\\avatar\\1.png");
-    _player->setPosition(Vec2(_visibleSize.width / 2 + _origin.x, _visibleSize.height / 2 + _origin.y));
+    ValueMap playerMap = game->objectNamed("player");
+    Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
+    _player->setPosition(playerPos);
     
-    _phyLayer = MagiciteGamePhyLayer::create(
-        &_enemyManager, 
-        Size(_background->getBackSize().width, _visibleSize.height), 
-        [&](){MagiciteGameOver::Over(this);});
+    ValueMap endMap = game->objectNamed("finish");
+    Size endSize = Size(endMap.at("width").asFloat(), endMap.at("height").asFloat());
+    Vec2 endPos = Vec2(endMap.at("x").asFloat() + endSize.width / 2, endMap.at("y").asFloat() + endSize.height / 2);
+    auto endCube = MagiciteGamePhySprite::create();
+    endCube->_SpriteType = MagiciteGamePhySprite::T_End;
+    endCube->setContentSize(endSize);
+    endCube->setPosition(endPos);
 
+    _phyLayer = MagiciteGamePhyLayer::create(
+        &_enemyManager,
+        Size(_background->getBackSize().width, _visibleSize.height),
+        [&](){MagiciteGameOver::Over(this); },
+        [&](){MagiciteGameWin::Win(this); });
     _phyLayer->addPhysicSprite(_player, false);
+    _phyLayer->addPhysicSprite(endCube, true);
+
     this->addChild(_phyLayer);
 
     this->runAction(Follow::create(_player, Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
