@@ -102,6 +102,10 @@ void MagiciteGameSelectLevel::initTouchDispath()
         {
             movePage(dist);
         }
+        else
+        {
+            _scroll->setContentOffsetInDuration(Vec2(_curPage * -size.width, 0), 0.3f);
+        }
     };
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
