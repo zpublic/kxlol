@@ -30,6 +30,7 @@ bool WelcomeScene::init()
         return false;
     }
     
+	/*
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto closeItem = MenuItemImage::create(
@@ -75,9 +76,14 @@ bool WelcomeScene::init()
     auto label = Label::createWithTTF("Welcome", "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
                             origin.y + visibleSize.height - label->getContentSize().height));
-    this->addChild(label, 1);
+    this->addChild(label, 1);*/
     
     return true;
+}
+
+void WelcomeScene::onEnter()
+{
+	Director::getInstance()->replaceScene(MagiciteGameSelectLevel::createScene());
 }
 
 
