@@ -2,6 +2,7 @@
 #include "MainScene.h"
 #include "MagiciteScene.h"
 #include "AequitasScene.h"
+#include "MagiciteBeginMenu.h"
 
 USING_NS_CC;
 
@@ -30,14 +31,14 @@ bool WelcomeScene::init()
         return false;
     }
     
-	/*
+    /*
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     auto closeItem = MenuItemImage::create(
                                            "CloseNormal.png",
                                            "CloseSelected.png",
                                            CC_CALLBACK_1(WelcomeScene::menuEntryCallback, this));
-	closeItem->setPosition(
+    closeItem->setPosition(
         Vec2(
         origin.x + visibleSize.width - closeItem->getContentSize().width/2 - 200,
         origin.y + closeItem->getContentSize().height/2
@@ -83,7 +84,7 @@ bool WelcomeScene::init()
 
 void WelcomeScene::onEnter()
 {
-	Director::getInstance()->replaceScene(MagiciteGameSelectLevel::createScene());
+    Director::getInstance()->replaceScene(MagiciteBeginMenu::createScene());
 }
 
 
