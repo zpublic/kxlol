@@ -29,12 +29,12 @@ bool MagiciteGameLayer::init()
     _visibleSize = Director::getInstance()->getVisibleSize();
     _origin = Director::getInstance()->getVisibleOrigin();
 
-    TMXTiledMap* tiled = TMXTiledMap::create("test.tmx");
+    TMXTiledMap* tiled = TMXTiledMap::create("img\\Magicite\\map\\test.tmx");
     _background = MagiciteGameMap::create(tiled);
     TMXObjectGroup* game = tiled->getObjectGroup("game");
     this->addChild(_background);
 
-    _player = MagiciteGamePlayer::create("img\\avatar\\1.png");
+    _player = MagiciteGamePlayer::create("img\\Magicite\\player\\player_stop.png");
     ValueMap playerMap = game->getObject("player");
     Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
     _player->setPosition(playerPos);
@@ -122,11 +122,11 @@ void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, c
     {
     case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
         _move_left = false;
-        _player->getBody()->SetLinearVelocity(b2Vec2(0, _player->getBody()->GetLinearVelocity().y));
+        _player->Stop();
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
         _move_right = false;
-        _player->getBody()->SetLinearVelocity(b2Vec2(0, _player->getBody()->GetLinearVelocity().y));
+        _player->Stop();
         break;
     default:
         break;

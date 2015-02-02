@@ -33,12 +33,14 @@ void MagiciteGameLiving::Move(Direction dire)
     }
     setState(State::S_Move, true);
     _body->SetLinearVelocity(b2Vec2(_speed * dire, _body->GetLinearVelocity().y));
+    this->startAnimation();
 }
 
 void MagiciteGameLiving::Stop()
 {
     setState(State::S_Move, false);
     _body->SetLinearVelocity(b2Vec2(0, _body->GetLinearVelocity().y));
+    this->stopAnimation();
 }
 
 MagiciteGameLiving* MagiciteGameLiving::create(const char* filename)
@@ -67,7 +69,7 @@ bool MagiciteGameLiving::initWithFile(const char* filename)
     setSpeed(DEFAULT_SPEED);
     setState(State::S_Move, false);
     setState(State::S_Jump, false);
-
+    setState(State::S_ANIMATE, false);
     return true;
 }
 
@@ -108,4 +110,25 @@ void MagiciteGameLiving::useSkill(int skillId)
 void MagiciteGameLiving::useSkillEx()
 {
 
+}
+
+void MagiciteGameLiving::initAnimation()
+{
+
+}
+
+void MagiciteGameLiving::startAnimation()
+{
+    if (!getState(State::S_ANIMATE))
+    {
+
+    }
+}
+
+void MagiciteGameLiving::stopAnimation()
+{
+    if (!getState(State::S_ANIMATE))
+    {
+
+    }
 }

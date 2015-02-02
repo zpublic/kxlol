@@ -29,10 +29,19 @@ public:
     virtual void useSkill(int skillId);
     virtual void useSkillEx();
 
+    enum ActionTag : int
+    {
+        Animate,
+    };
+    virtual void initAnimation();
+    virtual void startAnimation();
+    virtual void stopAnimation();
+
     enum State : int
     {
         S_Move,
         S_Jump,
+        S_ANIMATE,
     };
     void setState(State state, bool x);
     bool getState(State state);
