@@ -39,6 +39,14 @@ bool MagiciteGameSelectLevel::init()
     this->addChild(_scroll);
     _curPage = 0;
 
+    auto switchToLeft = MenuItemFont::create("pior", [&](Ref*){ movePage(1); });
+    switchToLeft->setPosition( switchToLeft->getContentSize().width / 2, visibleSize.height / 2);
+    auto switchToRight = MenuItemFont::create("next", [&](Ref*){ movePage(-1); });
+    switchToRight->setPosition(visibleSize.width - switchToRight->getContentSize().width / 2, visibleSize.height / 2);
+    auto menuSwitch = Menu::create(switchToLeft, switchToRight, nullptr);
+    menuSwitch->setPosition(Point::ZERO);
+    this->addChild(menuSwitch);
+
     return true;
 }
 
