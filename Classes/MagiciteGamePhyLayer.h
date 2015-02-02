@@ -1,6 +1,8 @@
 #ifndef __MAGICITE_GAME_PHY_LAYER__
 #define __MAGICITE_GAME_PHY_LAYER__
 
+#define MAGICITE_DEBUG_OFF
+
 class MagiciteGameEnemyManager;
 
 #include "cocos2d.h"

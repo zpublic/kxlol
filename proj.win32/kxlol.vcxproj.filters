@@ -133,6 +133,9 @@
     <ClCompile Include="..\Classes\MagiciteGameWin.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameSelectLevel.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -221,6 +224,9 @@
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameWin.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameSelectLevel.h">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #define __WELCOME_SCENE_H__
 
 #include "cocos2d.h"
+#include "MagiciteGameSelectLevel.h"
 
 class WelcomeScene : public cocos2d::Layer
 {

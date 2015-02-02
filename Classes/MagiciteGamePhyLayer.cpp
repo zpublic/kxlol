@@ -53,11 +53,14 @@ bool MagiciteGamePhyLayer::initPhysics(
 
     _contactListener = MagiciteGameContactListener::create(manager, overFunc, winFunc);
     _world->SetContactListener(_contactListener);
-
     _debugDraw = new GLESDebugDraw(PTM_RATIO);
     _world->SetDebugDraw(_debugDraw);
     uint32 flags = 0;
+
+#ifdef MAGICITE_DEBUG_ON
     flags += b2Draw::e_shapeBit;
+#endif
+
     _debugDraw->SetFlags(flags);
 
     return true;
@@ -75,6 +78,7 @@ void MagiciteGamePhyLayer::addPhysicSprite(MagiciteGamePhySprite* ptr, bool is_s
     b2PolygonShape dynamicBox;
     dynamicBox.SetAsBox(ptr->getContentSize().width / 2 / PTM_RATIO, ptr->getContentSize().height / 2 / PTM_RATIO);
     b2FixtureDef fixtureDef;
+    fixtureDef.friction = 0.0f;
     fixtureDef.shape = &dynamicBox;
     body->CreateFixture(&fixtureDef);
     ptr->setBody(body);

@@ -88,7 +88,7 @@ void WelcomeScene::menuEntryCallback(Ref* pSender)
 
 void WelcomeScene::menuEntryCallback2(Ref* pSender)
 {
-    Director::getInstance()->replaceScene(MagiciteScene::create());
+    Director::getInstance()->replaceScene(MagiciteGameSelectLevel::createScene());
 }
 
 void WelcomeScene::menuEntryCallback3(Ref* pSender)

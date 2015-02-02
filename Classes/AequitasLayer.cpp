@@ -11,7 +11,10 @@ bool AequitasLayer::init()
         return false;
     }
 
-    this->setKeyboardEnabled(true);
+    auto listener = EventListenerKeyboard::create();
+    listener->onKeyPressed = CC_CALLBACK_2(AequitasLayer::onKeyPressed, this);
+    listener->onKeyReleased = CC_CALLBACK_2(AequitasLayer::onKeyReleased, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
