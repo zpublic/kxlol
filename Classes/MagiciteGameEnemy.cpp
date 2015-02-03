@@ -20,6 +20,7 @@ bool MagiciteGameEnemy::initWithFile(const char* filename)
     {
         return false;
     }
+    initAnimation();
     return true;
 }
 
@@ -51,4 +52,25 @@ MagiciteGameLiving::Direction MagiciteGameEnemy::getMoveDire()
 bool MagiciteGameEnemy::getPass()
 {
     return _is_pass;
+}
+
+void MagiciteGameEnemy::initAnimation()
+{
+
+}
+
+void MagiciteGameEnemy::startAnimation()
+{
+    if (!getState(State::S_ANIMATE))
+    {
+        setState(State::S_ANIMATE, true);
+    }
+}
+
+void MagiciteGameEnemy::stopAnimation()
+{
+    if (getState(State::S_ANIMATE))
+    {
+        setState(State::S_ANIMATE, false);
+    }
 }

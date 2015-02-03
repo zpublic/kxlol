@@ -16,9 +16,6 @@ public:
     virtual void initAnimation();
     virtual void startAnimation();
     virtual void stopAnimation();
-
-private:
-    cocos2d::Animate*                       _playerAnimation;
 };
 
 #endif //__MAGICITE_GAME_PLAYER__
