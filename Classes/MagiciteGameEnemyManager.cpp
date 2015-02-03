@@ -4,7 +4,7 @@ USING_NS_CC;
 
 MagiciteGameEnemyManager::MagiciteGameEnemyManager()
 {
-
+    
 }
 
 MagiciteGameEnemyManager::~MagiciteGameEnemyManager()
@@ -12,14 +12,19 @@ MagiciteGameEnemyManager::~MagiciteGameEnemyManager()
 
 }
 
-MagiciteGameEnemy* MagiciteGameEnemyManager::createEnemy(Vec2 pos)
+MagiciteGameEnemy* MagiciteGameEnemyManager::createEnemy(EnemyType type, Vec2 pos)
 {
-    auto enemy = MagiciteGameEnemy::create("img\\Magicite\\enemy\\chicken_stop.png");
-    if (enemy != nullptr)
+    MagiciteGameEnemy* enemy = nullptr;
+    switch (type)
     {
+    case MagiciteGameEnemyManager::Chicken_Type:
+        enemy = MagiciteGameEnemyChicken::create();
         enemy->setPosition(pos);
         _enemys.push_back(enemy);
         return enemy;
+        break;
+    default:
+        break;
     }
     return nullptr;
 }
@@ -48,17 +53,14 @@ void MagiciteGameEnemyManager::updateEnemyPosition()
     }
 }
 
-MagiciteGameEnemy* MagiciteGameEnemyManager::createEnemy(Vec2 pos, bool is_move_to_right)
+MagiciteGameEnemy* MagiciteGameEnemyManager::createEnemy(EnemyType type, Vec2 pos, bool is_move_to_right)
 {
-    auto enemy = MagiciteGameEnemy::create("img\\Magicite\\enemy\\chicken_stop.png");
+    auto enemy = createEnemy(type, pos);
     if (enemy != nullptr)
     {
-        enemy->setPosition(pos);
-        enemy->setMoveDire(is_move_to_right ? 
-            MagiciteGameLiving::Direction::right: 
+        enemy->setMoveDire(is_move_to_right ?
+            MagiciteGameLiving::Direction::right :
             MagiciteGameLiving::Direction::left);
-        _enemys.push_back(enemy);
-        return enemy;
     }
-    return nullptr;
+    return enemy;
 }

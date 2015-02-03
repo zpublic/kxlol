@@ -64,9 +64,9 @@ bool MagiciteGameLayer::init()
     /*----------------------------------init finish---------------------------------------------------*/
 
     auto enemyA = _enemyManager.createEnemy(
-        Vec2(_visibleSize.width / 3, _visibleSize.height / 3), true);
+        MagiciteGameEnemyManager::Chicken_Type, Vec2(_visibleSize.width / 3, _visibleSize.height / 3), true);
     auto enemyB = _enemyManager.createEnemy(
-        Vec2(_visibleSize.width / 3 * 2, _visibleSize.height / 3), false);
+        MagiciteGameEnemyManager::Chicken_Type, Vec2(_visibleSize.width / 3 * 2, _visibleSize.height / 3), false);
     _phyLayer->addPhysicSprite(enemyA, false);
     _phyLayer->addPhysicSprite(enemyB, false);
     

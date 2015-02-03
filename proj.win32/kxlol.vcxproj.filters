@@ -46,6 +46,9 @@
     <Filter Include="src\lab\Magicite（2d横版动作类）\scene">
       <UniqueIdentifier>{6725e6a5-ae68-48ea-9ec8-3643c9c87ae2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\lab\Magicite（2d横版动作类）\living\enemy">
+      <UniqueIdentifier>{324c4c72-9748-484d-a596-ca31de6d68b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -100,12 +103,6 @@
     <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameEnemy.cpp">
-      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameEnemyManager.cpp">
-      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameLiving.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
     </ClCompile>
@@ -138,6 +135,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteBeginMenu.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameEnemy.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameEnemyManager.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameEnemyChicken.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,12 +202,6 @@
     <ClInclude Include="..\Classes\MagiciteGamePhySprite.h">
       <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameEnemy.h">
-      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameEnemyManager.h">
-      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameLiving.h">
       <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
     </ClInclude>
@@ -234,6 +234,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteBeginMenu.h">
       <Filter>src\lab\Magicite（2d横版动作类）\layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameEnemy.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameEnemyManager.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameEnemyChicken.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
