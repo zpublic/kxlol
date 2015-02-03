@@ -33,6 +33,44 @@ bool MagiciteGamePlayer::initWithFile(const char* filename)
     {
         return false;
     }
+    initAnimation();
     return true;
 }
 
+void MagiciteGamePlayer::initAnimation()
+{
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("img\\Magicite\\player\\player.plist", "img\\Magicite\\player\\player.png");
+}
+
+void MagiciteGamePlayer::startAnimation()
+{
+    if (!getState(State::S_ANIMATE))
+    {
+        auto walkFileName = "player_walk.png";
+        auto stopFileName = "player_stop.png";
+        Animation* animation = Animation::create();
+        SpriteFrame* walkFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(stopFileName);
+        animation->addSpriteFrame(walkFrame);
+        SpriteFrame* stopFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(walkFileName);
+        animation->addSpriteFrame(stopFrame);
+        animation->setDelayPerUnit(0.2f);
+        animation->setRestoreOriginalFrame(true);
+
+        _playerAnimation = Animate::create(animation);
+        auto action = RepeatForever::create(_playerAnimation);
+        action->setTag(ActionTag::Animate);
+        this->runAction(action);
+        setState(State::S_ANIMATE, true);
+    }
+}
+
+
+void MagiciteGamePlayer::stopAnimation()
+{
+    if (getState(State::S_ANIMATE))
+    {
+        this->stopAllActionsByTag(ActionTag::Animate);
+        setState(State::S_ANIMATE, false);
+    }
+
+}

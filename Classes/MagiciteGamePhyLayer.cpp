@@ -15,11 +15,7 @@ MagiciteGamePhyLayer::~MagiciteGamePhyLayer()
     CC_SAFE_DELETE(_contactListener);
 }
 
-bool MagiciteGamePhyLayer::initPhysics(
-    MagiciteGameEnemyManager* manager, 
-    Size size, 
-    const std::function<void(void)> &overFunc, 
-    const std::function<void(void)> &winFunc)
+bool MagiciteGamePhyLayer::initPhysics(Size size, const std::function<void(b2Contact*)> &contactFunc)
 {
     if (!Layer::init())
     {
@@ -51,7 +47,8 @@ bool MagiciteGamePhyLayer::initPhysics(
     groundBox.Set(b2Vec2(boxSize.width / PTM_RATIO, boxSize.height / PTM_RATIO), b2Vec2(boxSize.width / PTM_RATIO, 0));
     body->CreateFixture(&groundBox, 0);
 
-    _contactListener = MagiciteGameContactListener::create(manager, overFunc, winFunc);
+
+    _contactListener = MagiciteGameContactListener::create(contactFunc);
     _world->SetContactListener(_contactListener);
     _debugDraw = new GLESDebugDraw(PTM_RATIO);
     _world->SetDebugDraw(_debugDraw);
@@ -123,14 +120,10 @@ void MagiciteGamePhyLayer::update(float timeDelta)
     }
 }
 
-MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(
-    MagiciteGameEnemyManager* manager, 
-    Size size, 
-    const std::function<void(void)> &overFunc, 
-    const std::function<void(void)> &winFunc)
+MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(Size size, const std::function<void(b2Contact*)> &contactFunc)
 {
     auto ptr = new MagiciteGamePhyLayer();
-    if (ptr && ptr->initPhysics(manager, size, overFunc, winFunc))
+    if (ptr && ptr->initPhysics(size,contactFunc))
     {
         ptr->autorelease();
         return ptr;

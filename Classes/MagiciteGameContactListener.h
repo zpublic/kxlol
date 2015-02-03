@@ -3,10 +3,6 @@
 
 #include "cocos2d.h"
 #include "Box2D\Box2D.h"
-#include "MagiciteGameLiving.h"
-#include "MagiciteGameEnemyManager.h"
-#include "MagiciteGamePlayer.h"
-#include "MagiciteGameEnemy.h"
 
 class MagiciteGameContactListener : public b2ContactListener
 {
@@ -16,18 +12,11 @@ private:
     virtual void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
     virtual void EndContact(b2Contact* contact);
 
-    std::function<void(void)>                   _failed;
-    std::function<void(void)>                   _win;
-    MagiciteGameEnemyManager*                   _manager;
+    std::function<void(b2Contact* contact)>     _onBeginContact;
 public:
-    static MagiciteGameContactListener* create(
-        MagiciteGameEnemyManager* manager, 
-        const std::function<void(void)> &failed, 
-        const std::function<void(void)> &win);
-    virtual bool init(
-        MagiciteGameEnemyManager* manager, 
-        const std::function<void(void)> &failed, 
-        const std::function<void(void)> &win);
+    static MagiciteGameContactListener* create(const std::function<void(b2Contact* contact)> &f);
+    
+    virtual bool init(const std::function<void(b2Contact* contact)> &f);
 };
 
 #endif //__MAGICITE_GAME_CONTACT_LISTENER__

@@ -5,6 +5,8 @@
 #include "MagiciteGameMap.h"
 #include "MagiciteGamePhyLayer.h"
 #include "MagiciteGameEnemy.h"
+#include "MagiciteGamePlayer.h"
+#include "MagiciteGameLiving.h"
 #include "MagiciteGameEnemyManager.h"
 #include "MagiciteGamePause.h"
 #include "MagiciteGameOver.h"
@@ -21,6 +23,7 @@ public:
 
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
+    void onOnBeginContact(b2Contact* contact);
 
     CREATE_FUNC(MagiciteGameLayer);
 

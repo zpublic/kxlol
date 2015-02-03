@@ -13,6 +13,12 @@ public:
     virtual bool initWithFile(const char* filename);
     static MagiciteGamePlayer* create(const char* filename);
 
+    virtual void initAnimation();
+    virtual void startAnimation();
+    virtual void stopAnimation();
+
+private:
+    cocos2d::Animate*                       _playerAnimation;
 };
 
 #endif //__MAGICITE_GAME_PLAYER__
