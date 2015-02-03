@@ -126,6 +126,7 @@ void MagiciteGameSelectLevel::movePage(int distance)
 
     if (_curPage + seed >= 0 && _curPage + seed < pageNum)
     {
+        _scroll->getContainer()->stopAllActions();
         _curPage = _curPage +  (distance < 0 ? 1 :-1);
         _scroll->setContentOffsetInDuration(Vec2(_curPage * -size.width, 0), 0.5f);
     }
