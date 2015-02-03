@@ -13,9 +13,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{15,14},{89,78}}</string>
+                <string>{{1,1},{89,78}}</string>
                 <key>sourceSize</key>
-                <string>{119,106}</string>
+                <string>{91,80}</string>
             </dict>
             <key>chicken_walk.png</key>
             <dict>
@@ -26,9 +26,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{15,14},{89,78}}</string>
+                <string>{{1,1},{89,78}}</string>
                 <key>sourceSize</key>
-                <string>{119,106}</string>
+                <string>{91,80}</string>
             </dict>
         </dict>
         <key>metadata</key>
@@ -40,7 +40,7 @@
             <key>size</key>
             <string>{128,256}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:56d78af64362959c3d88f7a0d5a717e1$</string>
+            <string>$TexturePacker:SmartUpdate:18bc3db857ec6b42c230cdd8f6a5760b$</string>
             <key>textureFileName</key>
             <string>chicken.png</string>
         </dict>
