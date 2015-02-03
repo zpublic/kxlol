@@ -56,8 +56,8 @@ void MagiciteGamePlayer::startAnimation()
         animation->setDelayPerUnit(0.2f);
         animation->setRestoreOriginalFrame(true);
 
-        _playerAnimation = Animate::create(animation);
-        auto action = RepeatForever::create(_playerAnimation);
+        auto playerAnimation = Animate::create(animation);
+        auto action = RepeatForever::create(playerAnimation);
         action->setTag(ActionTag::Animate);
         this->runAction(action);
         setState(State::S_ANIMATE, true);
@@ -72,5 +72,4 @@ void MagiciteGamePlayer::stopAnimation()
         this->stopAllActionsByTag(ActionTag::Animate);
         setState(State::S_ANIMATE, false);
     }
-
 }

@@ -21,6 +21,10 @@ public:
     virtual bool initWithFile(const char* filename);
     static MagiciteGameEnemy* create(const char* filename);
 
+    virtual void initAnimation();
+    virtual void startAnimation();
+    virtual void stopAnimation();
+
 private:
     Direction                           _Move_To_Dire;
     bool                                _is_pass;

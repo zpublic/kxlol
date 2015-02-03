@@ -14,7 +14,7 @@ MagiciteGameEnemyManager::~MagiciteGameEnemyManager()
 
 MagiciteGameEnemy* MagiciteGameEnemyManager::createEnemy(Vec2 pos)
 {
-    auto enemy = MagiciteGameEnemy::create("CloseNormal.png");
+    auto enemy = MagiciteGameEnemy::create("img\\Magicite\\enemy\\chicken_stop.png");
     if (enemy != nullptr)
     {
         enemy->setPosition(pos);
@@ -50,7 +50,7 @@ void MagiciteGameEnemyManager::updateEnemyPosition()
 
 MagiciteGameEnemy* MagiciteGameEnemyManager::createEnemy(Vec2 pos, bool is_move_to_right)
 {
-    auto enemy = MagiciteGameEnemy::create("CloseNormal.png");
+    auto enemy = MagiciteGameEnemy::create("img\\Magicite\\enemy\\chicken_stop.png");
     if (enemy != nullptr)
     {
         enemy->setPosition(pos);
