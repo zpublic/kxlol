@@ -16,6 +16,8 @@ public:
     void menuEntryCallback(cocos2d::Ref* pSender);
     void menuEntryCallback2(cocos2d::Ref* pSender);
     void menuEntryCallback3(cocos2d::Ref* pSender);
+
+	virtual void onEnter();
     
     // implement the "static create()" method manually
     CREATE_FUNC(WelcomeScene);

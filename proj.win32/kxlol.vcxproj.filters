@@ -136,6 +136,9 @@
     <ClCompile Include="..\Classes\MagiciteGameSelectLevel.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteBeginMenu.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -228,6 +231,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameSelectLevel.h">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteBeginMenu.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
