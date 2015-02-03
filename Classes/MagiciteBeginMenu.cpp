@@ -5,7 +5,7 @@
 
 bool MagiciteBeginMenu::init()
 {
-    if(!Layer::init())
+    if(!Scene::init())
         return false;
 
     auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -55,14 +55,4 @@ bool MagiciteBeginMenu::init()
     logo->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::create(actions)));
 
     return true;
-}
-
-cocos2d::Scene* MagiciteBeginMenu::createScene()
-{
-    auto scene = cocos2d::Scene::create();
-    auto layer = MagiciteBeginMenu::create();
-    scene->addChild(layer);
-    layer->setAnchorPoint(cocos2d::Vec2(0, 0));
-
-    return scene;
 }
