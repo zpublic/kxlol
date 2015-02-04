@@ -61,7 +61,10 @@ Layer* MagiciteGameSelectLevel::getContainerLayer()
         MenuItemImage* item = MenuItemImage::create(
             "CloseNormal.png", 
             "CloseSelected.png",
-            [i](Ref*){Director::getInstance()->replaceScene(MagiciteScene::create(i));});
+            [i](Ref*){
+            MagiciteScene::setLevel(i);
+            Director::getInstance()->replaceScene(MagiciteScene::create());
+        });
         item->setPosition(Vec2(((size.width / pageItem) * i + size.width / pageItem / 2), size.height / 2));
         menu->addChild(item);
     

@@ -8,11 +8,15 @@
 class MagiciteScene : public cocos2d::Scene
 {
 public:
-    virtual bool init(int level);
+    virtual bool init();
     
-    static int LevelNumber;
+    static void setLevel(int level);
+    static int getLevel();
 
-    static MagiciteScene* create(int level);
+    static MagiciteScene* create();
+
+private:
+    static int LevelNumber;
 };
 
 #endif // __MAGICITE_SCENE_H__
