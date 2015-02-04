@@ -21,10 +21,15 @@ bool MagiciteGameSelectLevel::init()
         return false;
     }
 
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+
+    auto background = Sprite::create("img\\Magicite\\background\\background_main.png");
+    background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    this->addChild(background);
+
     auto layer = Layer::create();
     this->addChild(layer);
 
-    auto visibleSize = Director::getInstance()->getVisibleSize();
     initTouchDispath();
 
     _scroll = ScrollView::create(visibleSize, this->getContainerLayer());
