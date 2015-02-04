@@ -5,7 +5,7 @@
 #include "cocos-ext.h"
 #include "MagiciteScene.h"
 
-class MagiciteGameSelectLevel : public cocos2d::Layer
+class MagiciteGameSelectLevel : public cocos2d::Scene
 {
 public:
     MagiciteGameSelectLevel();
@@ -15,7 +15,6 @@ public:
     static const int pageNum = 5;
     static const int pageItem = itemNum / pageNum;
 
-    static cocos2d::Scene* createScene();
     CREATE_FUNC(MagiciteGameSelectLevel);
     
     virtual bool init();

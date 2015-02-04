@@ -23,7 +23,7 @@ bool MagiciteBeginMenu::init()
 
     bmFont =  cocos2d::Label::createWithBMFont("fonts/BeginMenu.fnt", "Select Pass", cocos2d::TextHAlignment::RIGHT);
     menuItem = cocos2d::MenuItemLabel::create(bmFont, [&](Ref*){
-        cocos2d::Director::getInstance()->replaceScene(MagiciteGameSelectLevel::createScene());
+        cocos2d::Director::getInstance()->replaceScene(MagiciteGameSelectLevel::create());
     });
     menuItem->setAnchorPoint(cocos2d::Vec2(1, 0.5));
     menuItem->setPosition(origin.x + visibleSize.width - 40, origin.y + 100);

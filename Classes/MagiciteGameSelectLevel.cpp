@@ -14,20 +14,15 @@ MagiciteGameSelectLevel::~MagiciteGameSelectLevel()
 
 }
 
-Scene* MagiciteGameSelectLevel::createScene()
-{
-    auto scene = Scene::create();
-    auto layer = MagiciteGameSelectLevel::create();
-    scene->addChild(layer);
-    return scene;
-}
-
 bool MagiciteGameSelectLevel::init()
 {
-    if (!Layer::init())
+    if (!Scene::init())
     {
         return false;
     }
+
+    auto layer = Layer::create();
+    this->addChild(layer);
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     initTouchDispath();
@@ -36,7 +31,7 @@ bool MagiciteGameSelectLevel::init()
     _scroll->setPosition(Point::ZERO);
     _scroll->setContentOffset(Point::ZERO);
     _scroll->setTouchEnabled(false);
-    this->addChild(_scroll);
+    layer->addChild(_scroll);
     _curPage = 0;
 
     auto switchToLeft = MenuItemFont::create("pior", [&](Ref*){ movePage(1); });
@@ -45,7 +40,7 @@ bool MagiciteGameSelectLevel::init()
     switchToRight->setPosition(visibleSize.width - switchToRight->getContentSize().width / 2, visibleSize.height / 2);
     auto menuSwitch = Menu::create(switchToLeft, switchToRight, nullptr);
     menuSwitch->setPosition(Point::ZERO);
-    this->addChild(menuSwitch);
+    layer->addChild(menuSwitch);
 
     return true;
 }
