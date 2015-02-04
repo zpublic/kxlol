@@ -10,8 +10,8 @@ public:
     MagiciteGamePitfallClamp();
     ~MagiciteGamePitfallClamp();
 
-    virtual bool init(bool is_turn_on);
-    static MagiciteGamePitfallClamp* create(bool is_turn_on);
+    virtual bool init();
+    static MagiciteGamePitfallClamp* create();
 
 };
 

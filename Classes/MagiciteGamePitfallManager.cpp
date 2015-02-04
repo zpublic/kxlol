@@ -12,25 +12,19 @@ MagiciteGamePitfallManager::~MagiciteGamePitfallManager()
 
 }
 
-MagiciteGamePitfall* MagiciteGamePitfallManager::createPitfall(PitfallType type, Vec2 pos)
-{
-    MagiciteGamePitfall* pitfall = createPitfall(type, pos, true);
-    if (pitfall != nullptr)
-    {
-        return pitfall;
-    }
-    return nullptr;
-}
-
-MagiciteGamePitfall* MagiciteGamePitfallManager::createPitfall(PitfallType type, Vec2 pos, bool is_turn_on)
+MagiciteGamePitfall* MagiciteGamePitfallManager::createPitfall(
+    PitfallType type, 
+    Vec2 pos, 
+    MagiciteGamePhyLayer* phylayer, 
+    bool is_turn_on /* = true */)
 {
     MagiciteGamePitfall* pitfall = nullptr;
     switch (type)
     {
     case MagiciteGamePitfallManager::Clamp_Type:
-        pitfall = MagiciteGamePitfallClamp::create(is_turn_on);
-        pitfall->setPosition(pos);
-        _pitfalls.push_back(pitfall);
+        pitfall = create_and_push(type, pos);
+        phylayer->addPhysicSprite(pitfall,true);
+        pitfall->setPitFallState(is_turn_on);
         return pitfall;
         break;
     default:
@@ -50,4 +44,13 @@ void MagiciteGamePitfallManager::destoryPitfall(MagiciteGamePitfall* pitfall)
             pitfall->Dead();
         }
     }
+}
+
+MagiciteGamePitfall* MagiciteGamePitfallManager::create_and_push(PitfallType type, cocos2d::Vec2 pos)
+{
+    auto pitfall = MagiciteGamePitfallClamp::create();
+    pitfall->setPosition(pos);
+    _pitfalls.push_back(pitfall);
+
+    return pitfall;
 }

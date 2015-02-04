@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "MagiciteGamePitfallClamp.h"
+#include "MagiciteGamePhyLayer.h"
 
 class MagiciteGamePitfallManager
 {
@@ -15,10 +16,16 @@ public:
         Unknow_Type,
         Clamp_Type,
     };
-    MagiciteGamePitfall* createPitfall(PitfallType type, cocos2d::Vec2 pos);
-    MagiciteGamePitfall* createPitfall(PitfallType type, cocos2d::Vec2 pos, bool is_turn_on);
+    MagiciteGamePitfall* createPitfall(
+        PitfallType type, 
+        cocos2d::Vec2 pos, 
+        MagiciteGamePhyLayer* phylayer, 
+        bool is_turn_on = true);
+
     void destoryPitfall(MagiciteGamePitfall* pitfall);
 
+protected:
+    MagiciteGamePitfall* create_and_push(PitfallType type, cocos2d::Vec2 pos);
 private:
     std::vector<MagiciteGamePitfall*>                   _pitfalls;
 };

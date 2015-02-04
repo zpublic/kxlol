@@ -46,18 +46,13 @@ bool MagiciteGameLayer::init()
     endCube->_SpriteType = MagiciteGamePhySprite::T_End;
     endCube->setContentSize(endSize);
     endCube->setPosition(endPos);
-
-    auto pit = _pitfallManager.createPitfall(
-        MagiciteGamePitfallManager::Clamp_Type, 
-        Vec2(_visibleSize.width / 2, _visibleSize.height / 2));
-
+    
     _phyLayer = MagiciteGamePhyLayer::create(
         Size(_background->getBackSize().width, _visibleSize.height),
         [&](b2Contact* contact){MagiciteGameLayer::onOnBeginContact(contact); });
     _phyLayer->addPhysicSprite(_player, false);
     _player->setPosition(Vec2(_player->getBody()->GetPosition().x, _player->getBody()->GetPosition().y));
     _phyLayer->addPhysicSprite(endCube, true);
-    _phyLayer->addPhysicSprite(pit, true);
 
     this->addChild(_phyLayer,1);
 
@@ -75,6 +70,12 @@ bool MagiciteGameLayer::init()
     _phyLayer->addPhysicSprite(enemyA, false);
     _phyLayer->addPhysicSprite(enemyB, false);
     
+    auto pit = _pitfallManager.createPitfall(
+        MagiciteGamePitfallManager::Clamp_Type,
+        Vec2(_visibleSize.width / 2, _visibleSize.height / 2),
+        _phyLayer,
+        false);
+
     TMXObjectGroup* ground = tiled->getObjectGroup("physics");
     ValueVector VV = ground->getObjects();
 

@@ -13,9 +13,9 @@ public:
     MagiciteGamePitfall();
     ~MagiciteGamePitfall();
 
-    virtual bool initWithFile(const char* filename, bool is_turn_on);
+    virtual bool initWithFile(const char* filename);
 
-    static MagiciteGamePitfall* create(const char* filename, bool is_turn_on);
+    static MagiciteGamePitfall* create(const char* filename);
 
     bool getPitFallState();
     void setPitFallState(bool is_turn_on);

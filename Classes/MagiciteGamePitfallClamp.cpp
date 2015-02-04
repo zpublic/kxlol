@@ -12,19 +12,19 @@ MagiciteGamePitfallClamp::~MagiciteGamePitfallClamp()
 
 }
 
-bool MagiciteGamePitfallClamp::init(bool is_turn_on)
+bool MagiciteGamePitfallClamp::init()
 {
-    if (!MagiciteGamePitfall::initWithFile("CloseSelected.png", is_turn_on))
+    if (!MagiciteGamePitfall::initWithFile("CloseSelected.png"))
     {
         return false;
     }
     return true;
 }
 
-MagiciteGamePitfallClamp* MagiciteGamePitfallClamp::create(bool is_turn_on)
+MagiciteGamePitfallClamp* MagiciteGamePitfallClamp::create()
 {
     auto ptr = new MagiciteGamePitfallClamp();
-    if (ptr && ptr->init(is_turn_on))
+    if (ptr && ptr->init())
     {
         ptr->autorelease();
         return ptr;
