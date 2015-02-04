@@ -59,7 +59,13 @@ bool MagiciteBeginMenu::init()
 
 cocos2d::Scene* MagiciteBeginMenu::createScene()
 {
+    auto size = cocos2d::Director::getInstance()->getVisibleSize();
     auto scene = cocos2d::Scene::create();
+
+    auto background = cocos2d::Sprite::create("img\\Magicite\\background\\background_main.png");
+    background->setPosition(size.width / 2, size.height / 2);
+    scene->addChild(background);
+
     auto layer = MagiciteBeginMenu::create();
     scene->addChild(layer);
     layer->setAnchorPoint(cocos2d::Vec2(0, 0));
