@@ -33,8 +33,12 @@ void MagiciteGameEnemyManager::destroyEnemy(MagiciteGameEnemy* ptr)
 {
     if (ptr != nullptr)
     {
-        _enemys.erase(std::find(_enemys.begin(), _enemys.end(), ptr));
-        ptr->Dead();
+        auto enemyIter = std::find(_enemys.begin(), _enemys.end(), ptr);
+        if (enemyIter != _enemys.end())
+        {
+            _enemys.erase(enemyIter);
+            ptr->Dead();
+        }
     }
 }
 

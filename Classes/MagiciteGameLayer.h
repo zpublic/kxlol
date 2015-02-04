@@ -11,6 +11,8 @@
 #include "MagiciteGamePause.h"
 #include "MagiciteGameOver.h"
 #include "MagiciteGameWin.h"
+#include "MagiciteGameFunc.h"
+#include "MagiciteGamePitfallManager.h"
 #include "Box2D\Box2D.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
@@ -31,6 +33,7 @@ public:
 
 private:
     MagiciteGameEnemyManager            _enemyManager;
+    MagiciteGamePitfallManager          _pitfallManager;
     MagiciteGamePlayer*                 _player;
     MagiciteGamePhyLayer*               _phyLayer;
     MagiciteGameMap*                    _background;
