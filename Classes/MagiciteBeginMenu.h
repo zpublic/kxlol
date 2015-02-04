@@ -3,12 +3,10 @@
 
 #include <cocos2d.h>
 
-class MagiciteBeginMenu : public cocos2d::Layer
+class MagiciteBeginMenu : public cocos2d::Scene
 {
 public:
     virtual bool init();
-
-    static cocos2d::Scene* createScene();
 
     CREATE_FUNC(MagiciteBeginMenu);
 };
