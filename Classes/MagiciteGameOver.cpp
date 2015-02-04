@@ -15,17 +15,20 @@ MagiciteGameOver::~MagiciteGameOver()
 
 bool MagiciteGameOver::init()
 {
-    if (!Layer::init())
+    if (!Scene::init())
     {
         return false;
     }
+
+    auto layer = Layer::create();
+    this->addChild(layer);
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto origin = Director::getInstance()->getVisibleOrigin();
 
     auto resetItem = MenuItemFont::create("reset", [&](Ref*){
         Director::getInstance()->popScene();
-        Director::getInstance()->replaceScene(MagiciteScene::create());
+        Director::getInstance()->replaceScene(MagiciteScene::create(MagiciteScene::LevelNumber));
     });
     resetItem->setPosition(visibleSize.width / 2, visibleSize.height - resetItem->getContentSize().height * 2);
 
@@ -37,26 +40,31 @@ bool MagiciteGameOver::init()
 
     auto menu = Menu::create(resetItem, mainItem, nullptr);
     menu->setPosition(Point::ZERO);
-    this->addChild(menu, 1000);
+    layer->addChild(menu, 1000);
 
     return true;
 }
 
-Scene* MagiciteGameOver::createScene(RenderTexture *tex)
+MagiciteGameOver* MagiciteGameOver::create(RenderTexture *tex)
 {
-    auto scene = Scene::create();
-    auto layer = MagiciteGameOver::create();
-    scene->addChild(layer);
+    auto scene = new MagiciteGameOver();
+    if (scene && scene->init())
+    {
+        scene->autorelease();
 
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    auto background = Sprite::createWithTexture(tex->getSprite()->getTexture());
-
-    background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-    background->setFlippedY(true);
-    background->setColor(Color3B::GRAY);
-    scene->addChild(background);
-
-    return scene;
+        auto visibleSize = Director::getInstance()->getVisibleSize();
+        auto background = Sprite::createWithTexture(tex->getSprite()->getTexture());
+        background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+        background->setFlippedY(true);
+        background->setColor(Color3B::GRAY);
+        scene->addChild(background);
+        return scene;
+    }
+    else
+    {
+        CC_SAFE_DELETE(scene);
+        return nullptr;
+    }
 }
 
 void MagiciteGameOver::Over(Layer* ptr)
@@ -68,5 +76,5 @@ void MagiciteGameOver::Over(Layer* ptr)
     ptr->getParent()->visit();
     renderTexture->end();
 
-    Director::getInstance()->pushScene(createScene(renderTexture));
+    Director::getInstance()->pushScene(create(renderTexture));
 }

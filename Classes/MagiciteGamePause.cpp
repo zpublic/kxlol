@@ -15,10 +15,13 @@ MagiciteGamePause::~MagiciteGamePause()
 
 bool MagiciteGamePause::init()
 {
-    if (!Layer::init())
+    if (!Scene::init())
     {
         return false;
     }
+    auto layer = Layer::create();
+    this->addChild(layer);
+
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto origin = Director::getInstance()->getVisibleOrigin();
 
@@ -29,7 +32,7 @@ bool MagiciteGamePause::init()
 
     auto resetItem = MenuItemFont::create("reset", [&](Ref*){
         Director::getInstance()->popScene();
-        Director::getInstance()->replaceScene(MagiciteScene::create());
+        Director::getInstance()->replaceScene(MagiciteScene::create(MagiciteScene::LevelNumber));
     });
     resetItem->setPosition(visibleSize.width / 2, visibleSize.height - resetItem->getContentSize().height * 2);
 
@@ -37,29 +40,35 @@ bool MagiciteGamePause::init()
         Director::getInstance()->popScene();
         Director::getInstance()->replaceScene(WelcomeScene::createScene());
     });
-    mainItem->setPosition(visibleSize.width / 2, visibleSize.height - mainItem->getContentSize().height* 3);
+    mainItem->setPosition(visibleSize.width / 2, visibleSize.height - mainItem->getContentSize().height * 3);
 
     auto menu = Menu::create(continueItem, resetItem, mainItem, nullptr);
     menu->setPosition(Point::ZERO);
-    this->addChild(menu,1000);
+    layer->addChild(menu, 1000);
 
     return true;
 }
 
-Scene* MagiciteGamePause::createScene(RenderTexture *tex)
+MagiciteGamePause* MagiciteGamePause::create(RenderTexture *tex)
 {
-    auto scene = Scene::create();
-    auto layer = MagiciteGamePause::create();
-    scene->addChild(layer);
+    auto scene = new MagiciteGamePause();
+    if (scene && scene->init())
+    {
+        scene->autorelease();
 
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    auto background = Sprite::createWithTexture(tex->getSprite()->getTexture());
-    background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-    background->setFlippedY(true);
-    background->setColor(Color3B::GRAY);
-    scene->addChild(background);
-
-    return scene;
+        auto visibleSize = Director::getInstance()->getVisibleSize();
+        auto background = Sprite::createWithTexture(tex->getSprite()->getTexture());
+        background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+        background->setFlippedY(true);
+        background->setColor(Color3B::GRAY);
+        scene->addChild(background);
+        return scene;
+    }
+    else
+    {
+        CC_SAFE_DELETE(scene);
+        return nullptr;
+    }
 }
 
 void MagiciteGamePause::Pause(Layer* ptr)
@@ -71,5 +80,5 @@ void MagiciteGamePause::Pause(Layer* ptr)
     ptr->getParent()->visit();
     renderTexture->end();
 
-    Director::getInstance()->pushScene(createScene(renderTexture));
+    Director::getInstance()->pushScene(create(renderTexture));
 }

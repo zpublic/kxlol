@@ -5,17 +5,15 @@
 #include "MagiciteScene.h"
 #include "WelcomeScene.h"
 
-class MagiciteGamePause : public cocos2d::Layer
+class MagiciteGamePause : public cocos2d::Scene
 {
 public:
     MagiciteGamePause();
     ~MagiciteGamePause();
 
     virtual bool init();
-    static cocos2d::Scene* createScene(cocos2d::RenderTexture *tex);
+    static MagiciteGamePause* create(cocos2d::RenderTexture *tex);
     static void Pause(cocos2d::Layer* ptr);
-
-    CREATE_FUNC(MagiciteGamePause);
 };
 
 #endif //__MAGICITE_GAME_PAUSE__

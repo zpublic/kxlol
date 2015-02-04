@@ -61,7 +61,7 @@ Layer* MagiciteGameSelectLevel::getContainerLayer()
         MenuItemImage* item = MenuItemImage::create(
             "CloseNormal.png", 
             "CloseSelected.png",
-            [i](Ref*){Director::getInstance()->replaceScene(MagiciteScene::create());});
+            [i](Ref*){Director::getInstance()->replaceScene(MagiciteScene::create(i));});
         item->setPosition(Vec2(((size.width / pageItem) * i + size.width / pageItem / 2), size.height / 2));
         menu->addChild(item);
     
@@ -126,6 +126,7 @@ void MagiciteGameSelectLevel::movePage(int distance)
 
     if (_curPage + seed >= 0 && _curPage + seed < pageNum)
     {
+        _scroll->getContainer()->stopAllActions();
         _curPage = _curPage +  (distance < 0 ? 1 :-1);
         _scroll->setContentOffsetInDuration(Vec2(_curPage * -size.width, 0), 0.5f);
     }

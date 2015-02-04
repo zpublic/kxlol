@@ -5,17 +5,15 @@
 #include "MagiciteScene.h"
 #include "WelcomeScene.h"
 
-class MagiciteGameOver : public cocos2d::Layer
+class MagiciteGameOver : public cocos2d::Scene
 {
 public:
     MagiciteGameOver();
     ~MagiciteGameOver();
 
     virtual bool init();
-    static cocos2d::Scene* createScene(cocos2d::RenderTexture *tex);
+    static MagiciteGameOver* create(cocos2d::RenderTexture *tex);
     static void Over(cocos2d::Layer* ptr);
-
-    CREATE_FUNC(MagiciteGameOver);
 };
 
 #endif //__MAGICITE_GAME_OVER__
