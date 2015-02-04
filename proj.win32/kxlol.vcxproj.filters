@@ -49,6 +49,9 @@
     <Filter Include="src\lab\Magicite（2d横版动作类）\living\enemy">
       <UniqueIdentifier>{324c4c72-9748-484d-a596-ca31de6d68b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\lab\Magicite（2d横版动作类）\other">
+      <UniqueIdentifier>{cf0d2b65-224f-4837-8b20-8cda6fe7bf4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -144,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteBeginMenu.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameFunc.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -243,6 +249,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteBeginMenu.h">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameFunc.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\other</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

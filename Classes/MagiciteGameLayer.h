@@ -11,6 +11,7 @@
 #include "MagiciteGamePause.h"
 #include "MagiciteGameOver.h"
 #include "MagiciteGameWin.h"
+#include "MagiciteGameFunc.h"
 #include "Box2D\Box2D.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
