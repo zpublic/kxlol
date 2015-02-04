@@ -3,7 +3,7 @@ int MagiciteScene::LevelNumber = 0;
 
 USING_NS_CC;
 
-bool MagiciteScene::init(int level)
+bool MagiciteScene::init()
 {
     if ( !Scene::init() )
     {
@@ -12,7 +12,6 @@ bool MagiciteScene::init(int level)
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    LevelNumber = level;
 
 	auto dic = Dictionary::createWithContentsOfFile("text/story.plist");
 	auto str = dynamic_cast<String*>(dic->objectForKey("story_1"));
@@ -36,10 +35,10 @@ bool MagiciteScene::init(int level)
     return true;    
 }
 
-MagiciteScene* MagiciteScene::create(int level)
+MagiciteScene* MagiciteScene::create()
 {
     auto ptr = new MagiciteScene();
-    if (ptr && ptr->init(level))
+    if (ptr && ptr->init())
     {
         ptr->autorelease();
         return ptr;
@@ -49,4 +48,14 @@ MagiciteScene* MagiciteScene::create(int level)
         CC_SAFE_DELETE(ptr);
         return nullptr;
     }
+}
+
+void MagiciteScene::setLevel(int level)
+{
+    LevelNumber = level;
+}
+
+int MagiciteScene::getLevel()
+{
+    return LevelNumber;
 }

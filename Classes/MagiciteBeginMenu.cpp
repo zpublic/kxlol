@@ -13,7 +13,7 @@ bool MagiciteBeginMenu::init()
 
     auto bmFont =  cocos2d::Label::createWithBMFont("fonts/BeginMenu.fnt", "Begin!", cocos2d::TextHAlignment::RIGHT);
     auto menuItem = cocos2d::MenuItemLabel::create(bmFont, [&](Ref*){
-        cocos2d::Director::getInstance()->replaceScene(MagiciteScene::create(MagiciteScene::LevelNumber));
+        cocos2d::Director::getInstance()->replaceScene(MagiciteScene::create());
     });
     menuItem->setAnchorPoint(cocos2d::Vec2(1, 0.5));
     menuItem->setPosition(origin.x + visibleSize.width - 40, origin.y + 150);
@@ -23,7 +23,7 @@ bool MagiciteBeginMenu::init()
 
     bmFont =  cocos2d::Label::createWithBMFont("fonts/BeginMenu.fnt", "Select Pass", cocos2d::TextHAlignment::RIGHT);
     menuItem = cocos2d::MenuItemLabel::create(bmFont, [&](Ref*){
-        cocos2d::Director::getInstance()->replaceScene(MagiciteGameSelectLevel::createScene());
+        cocos2d::Director::getInstance()->replaceScene(MagiciteGameSelectLevel::create());
     });
     menuItem->setAnchorPoint(cocos2d::Vec2(1, 0.5));
     menuItem->setPosition(origin.x + visibleSize.width - 40, origin.y + 100);
@@ -59,7 +59,13 @@ bool MagiciteBeginMenu::init()
 
 cocos2d::Scene* MagiciteBeginMenu::createScene()
 {
+    auto size = cocos2d::Director::getInstance()->getVisibleSize();
     auto scene = cocos2d::Scene::create();
+
+    auto background = cocos2d::Sprite::create("img\\Magicite\\background\\background_main.png");
+    background->setPosition(size.width / 2, size.height / 2);
+    scene->addChild(background);
+
     auto layer = MagiciteBeginMenu::create();
     scene->addChild(layer);
     layer->setAnchorPoint(cocos2d::Vec2(0, 0));

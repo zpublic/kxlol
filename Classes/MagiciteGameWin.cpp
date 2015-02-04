@@ -26,7 +26,8 @@ bool MagiciteGameWin::init()
 
     auto nextItem = MenuItemFont::create("next", [&](Ref*){
         Director::getInstance()->popScene();
-        Director::getInstance()->replaceScene(MagiciteScene::create(++(MagiciteScene::LevelNumber)));
+        MagiciteScene::setLevel(MagiciteScene::getLevel() + 1);
+        Director::getInstance()->replaceScene(MagiciteScene::create());
     });
     nextItem->setPosition(visibleSize.width / 2, visibleSize.height - nextItem->getContentSize().height * 2);
 

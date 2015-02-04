@@ -32,7 +32,7 @@ bool MagiciteGamePause::init()
 
     auto resetItem = MenuItemFont::create("reset", [&](Ref*){
         Director::getInstance()->popScene();
-        Director::getInstance()->replaceScene(MagiciteScene::create(MagiciteScene::LevelNumber));
+        Director::getInstance()->replaceScene(MagiciteScene::create());
     });
     resetItem->setPosition(visibleSize.width / 2, visibleSize.height - resetItem->getContentSize().height * 2);
 

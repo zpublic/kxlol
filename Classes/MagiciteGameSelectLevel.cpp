@@ -14,29 +14,29 @@ MagiciteGameSelectLevel::~MagiciteGameSelectLevel()
 
 }
 
-Scene* MagiciteGameSelectLevel::createScene()
-{
-    auto scene = Scene::create();
-    auto layer = MagiciteGameSelectLevel::create();
-    scene->addChild(layer);
-    return scene;
-}
-
 bool MagiciteGameSelectLevel::init()
 {
-    if (!Layer::init())
+    if (!Scene::init())
     {
         return false;
     }
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
+
+    auto background = Sprite::create("img\\Magicite\\background\\background_main.png");
+    background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    this->addChild(background);
+
+    auto layer = Layer::create();
+    this->addChild(layer);
+
     initTouchDispath();
 
     _scroll = ScrollView::create(visibleSize, this->getContainerLayer());
     _scroll->setPosition(Point::ZERO);
     _scroll->setContentOffset(Point::ZERO);
     _scroll->setTouchEnabled(false);
-    this->addChild(_scroll);
+    layer->addChild(_scroll);
     _curPage = 0;
 
     auto switchToLeft = MenuItemFont::create("pior", [&](Ref*){ movePage(1); });
@@ -45,7 +45,7 @@ bool MagiciteGameSelectLevel::init()
     switchToRight->setPosition(visibleSize.width - switchToRight->getContentSize().width / 2, visibleSize.height / 2);
     auto menuSwitch = Menu::create(switchToLeft, switchToRight, nullptr);
     menuSwitch->setPosition(Point::ZERO);
-    this->addChild(menuSwitch);
+    layer->addChild(menuSwitch);
 
     return true;
 }
@@ -61,7 +61,10 @@ Layer* MagiciteGameSelectLevel::getContainerLayer()
         MenuItemImage* item = MenuItemImage::create(
             "CloseNormal.png", 
             "CloseSelected.png",
-            [i](Ref*){Director::getInstance()->replaceScene(MagiciteScene::create(i));});
+            [i](Ref*){
+            MagiciteScene::setLevel(i);
+            Director::getInstance()->replaceScene(MagiciteScene::create());
+        });
         item->setPosition(Vec2(((size.width / pageItem) * i + size.width / pageItem / 2), size.height / 2));
         menu->addChild(item);
     
