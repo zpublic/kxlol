@@ -146,6 +146,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\base\Player.cpp" />
     <ClCompile Include="..\Classes\Component\slot.cpp" />
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
+    <ClCompile Include="..\Classes\MagiciteBeginMenu.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameContactListener.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameEnemy.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameEnemyChicken.cpp" />
@@ -160,7 +161,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteGamePlayer.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameSelectLevel.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameWin.cpp" />
-    <ClCompile Include="..\Classes\MagiciteBeginMenu.cpp" />
     <ClCompile Include="..\Classes\MagiciteScene.cpp" />
     <ClCompile Include="..\Classes\MainBasicInfoLayer.cpp" />
     <ClCompile Include="..\Classes\MainBgLayer.cpp" />

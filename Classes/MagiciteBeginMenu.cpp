@@ -5,11 +5,15 @@
 
 bool MagiciteBeginMenu::init()
 {
-    if(!Layer::init())
+    if(!Scene::init())
         return false;
 
     auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
     auto origin = cocos2d::Director::getInstance()->getVisibleOrigin();
+
+    auto background = cocos2d::Sprite::create("img\\Magicite\\background\\background_main.png");
+    background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    this->addChild(background);
 
     auto bmFont =  cocos2d::Label::createWithBMFont("fonts/BeginMenu.fnt", "Begin!", cocos2d::TextHAlignment::RIGHT);
     auto menuItem = cocos2d::MenuItemLabel::create(bmFont, [&](Ref*){
@@ -57,18 +61,3 @@ bool MagiciteBeginMenu::init()
     return true;
 }
 
-cocos2d::Scene* MagiciteBeginMenu::createScene()
-{
-    auto size = cocos2d::Director::getInstance()->getVisibleSize();
-    auto scene = cocos2d::Scene::create();
-
-    auto background = cocos2d::Sprite::create("img\\Magicite\\background\\background_main.png");
-    background->setPosition(size.width / 2, size.height / 2);
-    scene->addChild(background);
-
-    auto layer = MagiciteBeginMenu::create();
-    scene->addChild(layer);
-    layer->setAnchorPoint(cocos2d::Vec2(0, 0));
-
-    return scene;
-}
