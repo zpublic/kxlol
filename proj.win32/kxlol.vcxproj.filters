@@ -52,6 +52,9 @@
     <Filter Include="src\lab\Magicite（2d横版动作类）\other">
       <UniqueIdentifier>{cf0d2b65-224f-4837-8b20-8cda6fe7bf4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\lab\Magicite（2d横版动作类）\pitfall">
+      <UniqueIdentifier>{8b551af3-85dc-407a-9e52-160c223c4433}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -150,6 +153,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameFunc.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePitfall.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePitfallClamp.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePitfallManager.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +264,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameFunc.h">
       <Filter>src\lab\Magicite（2d横版动作类）\other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePitfall.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePitfallClamp.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePitfallManager.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

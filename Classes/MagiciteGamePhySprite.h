@@ -26,6 +26,7 @@ public:
         T_Living,
         T_Ground,
         T_End,
+        T_Pitfall,
     };
     SpriteType              _SpriteType;
 

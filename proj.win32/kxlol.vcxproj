@@ -159,6 +159,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteGamePause.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePhyLayer.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGamePitfall.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGamePitfallClamp.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGamePitfallManager.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePlayer.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameSelectLevel.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameWin.cpp" />
@@ -195,6 +198,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGamePause.h" />
     <ClInclude Include="..\Classes\MagiciteGamePhyLayer.h" />
     <ClInclude Include="..\Classes\MagiciteGamePhySprite.h" />
+    <ClInclude Include="..\Classes\MagiciteGamePitfall.h" />
+    <ClInclude Include="..\Classes\MagiciteGamePitfallClamp.h" />
+    <ClInclude Include="..\Classes\MagiciteGamePitfallManager.h" />
     <ClInclude Include="..\Classes\MagiciteGamePlayer.h" />
     <ClInclude Include="..\Classes\MagiciteGameSelectLevel.h" />
     <ClInclude Include="..\Classes\MagiciteGameWin.h" />
