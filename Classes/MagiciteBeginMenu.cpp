@@ -51,11 +51,11 @@ bool MagiciteBeginMenu::init()
     logo->setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - 40);
     this->addChild(logo);
     cocos2d::Vector<cocos2d::FiniteTimeAction*> actions;
-    actions.pushBack(cocos2d::ScaleTo::create(0.2, 3.5));
-    actions.pushBack(cocos2d::ScaleTo::create(0.1, 3.0));
-    actions.pushBack(cocos2d::ScaleTo::create(0.2, 3.5));
-    actions.pushBack(cocos2d::ScaleTo::create(0.1, 3.0));
-    actions.pushBack(cocos2d::DelayTime::create(0.5));
+    actions.pushBack(cocos2d::ScaleTo::create(0.2f, 3.5f));
+    actions.pushBack(cocos2d::ScaleTo::create(0.1f, 3.0f));
+    actions.pushBack(cocos2d::ScaleTo::create(0.2f, 3.5f));
+    actions.pushBack(cocos2d::ScaleTo::create(0.1f, 3.0f));
+    actions.pushBack(cocos2d::DelayTime::create(0.5f));
     logo->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::create(actions)));
 
     return true;
