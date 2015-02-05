@@ -109,6 +109,7 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
         MagiciteGamePause::Pause(this);
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
+    case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
         _player->Jump();
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
