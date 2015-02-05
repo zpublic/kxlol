@@ -5,6 +5,7 @@
 #include "MagiciteGameEnemy.h"
 #include "MagiciteGamePlayer.h"
 #include "MagiciteGameLiving.h"
+#include "MagiciteGamePitfall.h"
 
 namespace MagiciteGameFunc
 {
@@ -22,7 +23,7 @@ namespace MagiciteGameFunc
     MagiciteGamePlayer* trivialPlayer(MagiciteGameLiving* livingA, MagiciteGameLiving* livingB);
     MagiciteGameEnemy* trivialEnemy(MagiciteGameLiving* livingA, MagiciteGameLiving* livingB);
     MagiciteGameLiving* trivialLiving(MagiciteGamePhySprite* spriteA, MagiciteGamePhySprite* spriteB);
-    MagiciteGamePhySprite* trivialGround(MagiciteGamePhySprite* spriteA, MagiciteGamePhySprite* spriteB);
+    MagiciteGamePhySprite* trivialSprite(MagiciteGamePhySprite* spriteA, MagiciteGamePhySprite* spriteB);
 };
 
 #endif 

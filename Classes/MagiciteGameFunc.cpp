@@ -104,7 +104,7 @@ MagiciteGameLiving* MagiciteGameFunc::trivialLiving(MagiciteGamePhySprite* sprit
     return reinterpret_cast<MagiciteGameLiving*>(spriteB);
 }
 
-MagiciteGamePhySprite* MagiciteGameFunc::trivialGround(MagiciteGamePhySprite* spriteA, MagiciteGamePhySprite* spriteB)
+MagiciteGamePhySprite* MagiciteGameFunc::trivialSprite(MagiciteGamePhySprite* spriteA, MagiciteGamePhySprite* spriteB)
 {
     if (spriteA->_SpriteType == MagiciteGamePhySprite::T_Ground)
     {
