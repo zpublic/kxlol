@@ -70,10 +70,19 @@ bool MagiciteGameLayer::init()
     _phyLayer->addPhysicSprite(enemyA, false);
     _phyLayer->addPhysicSprite(enemyB, false);
     
-    auto pit = _pitfallManager.createPitfall(
-        MagiciteGamePitfallManager::Clamp_Type,
-        Vec2(_visibleSize.width / 2, _visibleSize.height / 2),
-        _phyLayer);
+    ValueVector pitVec = game->getObjects();
+    for (auto it = pitVec.begin(); it != pitVec.end(); ++it)
+    {
+        Value obj = *it;
+        ValueMap vm = obj.asValueMap();
+        if (vm.at("type").asString() == "pitfall")
+        {
+            auto pit = _pitfallManager.createPitfall(
+                MagiciteGamePitfallManager::Clamp_Type,
+                Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()),
+                _phyLayer);
+        }
+    }
 
     TMXObjectGroup* ground = tiled->getObjectGroup("physics");
     ValueVector VV = ground->getObjects();
