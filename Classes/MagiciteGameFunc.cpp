@@ -152,13 +152,3 @@ bool MagiciteGameFunc::is_enemy_above_ground(MagiciteGameEnemy* enemy, MagiciteG
     }
     return false;
 }
-
-bool MagiciteGameFunc::is_player_and_pitfall(MagiciteGameLiving* living, MagiciteGamePhySprite* sprite)
-{
-    if (living->_LivingType == MagiciteGameLiving::T_Player
-        && sprite->_SpriteType == MagiciteGamePhySprite::T_Pitfall)
-    {
-        return true;
-    }
-    return false;
-}

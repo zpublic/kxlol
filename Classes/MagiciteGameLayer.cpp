@@ -213,18 +213,24 @@ void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
             {
                 MagiciteGameLiving*         living = MagiciteGameFunc::trivialLiving(spriteA, spriteB);
                 MagiciteGamePhySprite*      sprite = MagiciteGameFunc::trivialSprite(spriteA, spriteB);
-
-                if (living->_LivingType == MagiciteGameLiving::T_Player)
+                if (sprite->_SpriteType == MagiciteGamePhySprite::T_Pitfall)
                 {
-                    if (MagiciteGameFunc::is_player_and_pitfall(living, sprite))
+                    MagiciteGamePitfall* pitfall = reinterpret_cast<MagiciteGamePitfall*>(sprite);
+                    if (pitfall->getPitFallState() == true)
                     {
-                        MagiciteGamePitfall* pitfall = reinterpret_cast<MagiciteGamePitfall*>(sprite);
-                        if (pitfall->getPitFallState() == true)
+                        if (living->_LivingType == MagiciteGameLiving::T_Player)
                         {
                             MagiciteGameOver::Over(this);
                         }
+                        else if (living->_LivingType == MagiciteGameLiving::T_Enemy)
+                        {
+                            _enemyManager.destroyEnemy(reinterpret_cast<MagiciteGameEnemy*>(living));
+                        }
                     }
-                    else if (MagiciteGameFunc::is_living_above_ground(living, sprite))
+                }
+                if (living->_LivingType == MagiciteGameLiving::T_Player)
+                {
+                    if (MagiciteGameFunc::is_living_above_ground(living, sprite))
                     {
                         living->setState(MagiciteGameLiving::State::S_Jump, false);
                     }

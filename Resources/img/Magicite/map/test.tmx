@@ -17,6 +17,6 @@
  <objectgroup name="game">
   <object id="17" name="player" x="31" y="34" width="32" height="30"/>
   <object id="18" name="finish" x="1217" y="79" width="29" height="45"/>
-  <object id="24" type="pitfall" x="832" y="192" width="32" height="32"/>
+  <object id="24" type="pitfall" x="577" y="191" width="32" height="32"/>
  </objectgroup>
 </map>
