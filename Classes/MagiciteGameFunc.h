@@ -5,6 +5,7 @@
 #include "MagiciteGameEnemy.h"
 #include "MagiciteGamePlayer.h"
 #include "MagiciteGameLiving.h"
+#include "MagiciteGamePitfall.h"
 
 namespace MagiciteGameFunc
 {
@@ -18,11 +19,12 @@ namespace MagiciteGameFunc
     bool is_living_above_ground(MagiciteGameLiving* living, MagiciteGamePhySprite* ground);
     bool is_enemy_on_ground(MagiciteGameEnemy* enemy, MagiciteGamePhySprite* ground);
     bool is_enemy_above_ground(MagiciteGameEnemy* enemy, MagiciteGamePhySprite* ground);
+    bool is_player_and_pitfall(MagiciteGameLiving* living, MagiciteGamePhySprite* sprite);
 
     MagiciteGamePlayer* trivialPlayer(MagiciteGameLiving* livingA, MagiciteGameLiving* livingB);
     MagiciteGameEnemy* trivialEnemy(MagiciteGameLiving* livingA, MagiciteGameLiving* livingB);
     MagiciteGameLiving* trivialLiving(MagiciteGamePhySprite* spriteA, MagiciteGamePhySprite* spriteB);
-    MagiciteGamePhySprite* trivialGround(MagiciteGamePhySprite* spriteA, MagiciteGamePhySprite* spriteB);
+    MagiciteGamePhySprite* trivialSprite(MagiciteGamePhySprite* spriteA, MagiciteGamePhySprite* spriteB);
 };
 
 #endif 

@@ -104,7 +104,7 @@ MagiciteGameLiving* MagiciteGameFunc::trivialLiving(MagiciteGamePhySprite* sprit
     return reinterpret_cast<MagiciteGameLiving*>(spriteB);
 }
 
-MagiciteGamePhySprite* MagiciteGameFunc::trivialGround(MagiciteGamePhySprite* spriteA, MagiciteGamePhySprite* spriteB)
+MagiciteGamePhySprite* MagiciteGameFunc::trivialSprite(MagiciteGamePhySprite* spriteA, MagiciteGamePhySprite* spriteB)
 {
     if (spriteA->_SpriteType == MagiciteGamePhySprite::T_Ground)
     {
@@ -147,6 +147,16 @@ bool MagiciteGameFunc::is_enemy_on_ground(MagiciteGameEnemy* enemy, MagiciteGame
 bool MagiciteGameFunc::is_enemy_above_ground(MagiciteGameEnemy* enemy, MagiciteGamePhySprite* ground)
 {
     if (enemy->getPositionY()> ground->getPositionY() + ground->getContentSize().height / 2)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool MagiciteGameFunc::is_player_and_pitfall(MagiciteGameLiving* living, MagiciteGamePhySprite* sprite)
+{
+    if (living->_LivingType == MagiciteGameLiving::T_Player
+        && sprite->_SpriteType == MagiciteGamePhySprite::T_Pitfall)
     {
         return true;
     }

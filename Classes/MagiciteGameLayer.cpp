@@ -73,8 +73,7 @@ bool MagiciteGameLayer::init()
     auto pit = _pitfallManager.createPitfall(
         MagiciteGamePitfallManager::Clamp_Type,
         Vec2(_visibleSize.width / 2, _visibleSize.height / 2),
-        _phyLayer,
-        false);
+        _phyLayer);
 
     TMXObjectGroup* ground = tiled->getObjectGroup("physics");
     ValueVector VV = ground->getObjects();
@@ -165,7 +164,6 @@ void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
         {
             MagiciteGameWin::Win(this);
         }
-
         if (MagiciteGameFunc::is_has_living(spriteA, spriteB))
         {
             if (MagiciteGameFunc::is_sprite_type_same(spriteA, spriteB))
@@ -205,11 +203,19 @@ void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
             else
             {
                 MagiciteGameLiving*         living = MagiciteGameFunc::trivialLiving(spriteA, spriteB);
-                MagiciteGamePhySprite*      ground = MagiciteGameFunc::trivialGround(spriteA, spriteB);
+                MagiciteGamePhySprite*      sprite = MagiciteGameFunc::trivialSprite(spriteA, spriteB);
 
                 if (living->_LivingType == MagiciteGameLiving::T_Player)
                 {
-                    if (MagiciteGameFunc::is_living_above_ground(living, ground))
+                    if (MagiciteGameFunc::is_player_and_pitfall(living, sprite))
+                    {
+                        MagiciteGamePitfall* pitfall = reinterpret_cast<MagiciteGamePitfall*>(sprite);
+                        if (pitfall->getPitFallState() == true)
+                        {
+                            MagiciteGameOver::Over(this);
+                        }
+                    }
+                    else if (MagiciteGameFunc::is_living_above_ground(living, sprite))
                     {
                         living->setState(MagiciteGameLiving::State::S_Jump, false);
                     }
@@ -218,9 +224,9 @@ void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
                 {
                     MagiciteGameEnemy* enemy = reinterpret_cast<MagiciteGameEnemy*>(living);
 
-                    if (MagiciteGameFunc::is_enemy_on_ground(enemy, ground))
+                    if (MagiciteGameFunc::is_enemy_on_ground(enemy, sprite))
                     {
-                        if (MagiciteGameFunc::is_enemy_above_ground(enemy, ground))
+                        if (MagiciteGameFunc::is_enemy_above_ground(enemy, sprite))
                         {
                             enemy->setState(MagiciteGameLiving::State::S_Jump, false);
                         }
