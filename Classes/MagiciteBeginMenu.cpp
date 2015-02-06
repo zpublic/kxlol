@@ -1,6 +1,7 @@
 #include "MagiciteBeginMenu.h"
 #include "MagiciteScene.h"
 #include "MagiciteGameSelectLevel.h"
+#include "AequitasScene.h"
 
 
 bool MagiciteBeginMenu::init()
@@ -17,7 +18,7 @@ bool MagiciteBeginMenu::init()
 
     auto bmFont =  cocos2d::Label::createWithBMFont("fonts/BeginMenu.fnt", "Begin!", cocos2d::TextHAlignment::RIGHT);
     auto menuItem = cocos2d::MenuItemLabel::create(bmFont, [&](Ref*){
-        cocos2d::Director::getInstance()->replaceScene(MagiciteScene::create());
+        cocos2d::Director::getInstance()->replaceScene(AequitasScene::create());
     });
     menuItem->setAnchorPoint(cocos2d::Vec2(1, 0.5));
     menuItem->setPosition(origin.x + visibleSize.width - 40, origin.y + 150);

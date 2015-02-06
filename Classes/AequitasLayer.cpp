@@ -50,11 +50,16 @@ bool AequitasLayer::init()
         }
     }
 
+    key_map_.LoadKeyMap();
+
     return true;
 }
 
 void AequitasLayer::onKeyPressed( cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event )
 {
+    key_map_.OnKey((int)keyCode);
+    return;
+
     switch (keyCode)
     {
 

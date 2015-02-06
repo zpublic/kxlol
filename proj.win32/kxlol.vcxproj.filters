@@ -172,6 +172,9 @@
     <ClCompile Include="..\Classes\MagiciteGamePitfallManager.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AequitasKeyMap.cpp">
+      <Filter>src\lab\Aequitas（音乐类）</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -291,6 +294,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePitfallManager.h">
       <Filter>src\lab\Magicite（2d横版动作类）\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AequitasKeyMap.h">
+      <Filter>src\lab\Aequitas（音乐类）</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
