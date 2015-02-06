@@ -4,12 +4,14 @@ USING_NS_CC;
 
 MagiciteGameLayer::MagiciteGameLayer()
 {
-
+    _enemyManager = new MagiciteGameEnemyManager();
+    _pitfallManager = new MagiciteGamePitfallManager();
 }
 
 MagiciteGameLayer::~MagiciteGameLayer()
 {
-
+    delete _enemyManager;
+    delete _pitfallManager;
 }
 
 bool MagiciteGameLayer::init()
@@ -33,43 +35,43 @@ bool MagiciteGameLayer::init()
     _background = MagiciteGameMap::create(tiled);
     TMXObjectGroup* game = tiled->getObjectGroup("game");
     this->addChild(_background);
-
-    _player = MagiciteGamePlayer::create("img\\Magicite\\player\\player_stop.png");
-    ValueMap playerMap = game->getObject("player");
-    Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
-    _player->setPosition(playerPos);
     
     ValueMap endMap = game->getObject("finish");
     Size endSize = Size(endMap.at("width").asFloat(), endMap.at("height").asFloat());
     Vec2 endPos = Vec2(endMap.at("x").asFloat() + endSize.width / 2, endMap.at("y").asFloat() + endSize.height / 2);
-    auto endCube = MagiciteGamePhySprite::create();
-    endCube->_SpriteType = MagiciteGamePhySprite::T_End;
+    auto endCube = MagiciteGameObject::create(MagiciteGameObject::Type::T_End);
     endCube->setContentSize(endSize);
     endCube->setPosition(endPos);
     
     _phyLayer = MagiciteGamePhyLayer::create(
         Size(_background->getBackSize().width, _visibleSize.height),
         [&](b2Contact* contact){MagiciteGameLayer::onOnBeginContact(contact); });
-    _phyLayer->addPhysicSprite(_player, false);
-    _player->setPosition(Vec2(_player->getBody()->GetPosition().x, _player->getBody()->GetPosition().y));
-    _phyLayer->addPhysicSprite(endCube, true);
-
+    _phyLayer->createPhyBody(endCube, true);
+    _phyLayer->addChild(endCube);
     this->addChild(_phyLayer,1);
 
-    this->runAction(Follow::create(_player, Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
+    _player = MagiciteGamePlayer::create(MagiciteGamePlayer::Human_Type);
+    this->runAction(Follow::create(_player->getSprite(), Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
+    ValueMap playerMap = game->getObject("player");
+    Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
+    _player->setPosition(playerPos);
+    _phyLayer->createPhyBody(_player->getSprite(), false, Category::DEFAULT_LIVING, Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_GROUND);
+    _phyLayer->addChild(_player->getSprite());
 
     _move_left = false;
     _move_right = false;
 
     /*----------------------------------init finish---------------------------------------------------*/
 
-    auto enemyA = _enemyManager.createEnemy(
-        MagiciteGameEnemyManager::Chicken_Type, Vec2(_visibleSize.width / 3, _visibleSize.height / 3), true);
-    auto enemyB = _enemyManager.createEnemy(
-        MagiciteGameEnemyManager::Chicken_Type, Vec2(_visibleSize.width / 3 * 2, _visibleSize.height / 3), false);
-    _phyLayer->addPhysicSprite(enemyA, false);
-    _phyLayer->addPhysicSprite(enemyB, false);
-    
+    auto enemyA = _enemyManager->createEnemy(MagiciteGameEnemyManager::Chicken);
+    enemyA->setPosition(Vec2(_visibleSize.width / 2, _visibleSize.height / 2));
+    _phyLayer->createPhyBody(enemyA, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING);
+    _phyLayer->addChild(enemyA);
+    auto enemyB = _enemyManager->createEnemy(MagiciteGameEnemyManager::Chicken);
+    enemyB->setPosition(Vec2(_visibleSize.width / 2 + 150, _visibleSize.height / 2));
+    _phyLayer->createPhyBody(enemyB, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING);
+    _phyLayer->addChild(enemyB);
+
     ValueVector pitVec = game->getObjects();
     for (auto it = pitVec.begin(); it != pitVec.end(); ++it)
     {
@@ -77,10 +79,10 @@ bool MagiciteGameLayer::init()
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "pitfall")
         {
-            auto pit = _pitfallManager.createPitfall(
-                MagiciteGamePitfallManager::Clamp_Type,
-                Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()),
-                _phyLayer);
+            auto pit = _pitfallManager->createPitfall(MagiciteGamePitfallManager::Spine_Type);
+            pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
+            _phyLayer->createPhyBody(pit, true, Category::DEFAULT_PITFALL, Category::DEFAULT_GROUND | Category::DEFAULT_LIVING);
+            _phyLayer->addChild(pit);
         }
     }
 
@@ -97,12 +99,12 @@ bool MagiciteGameLayer::init()
             float w = vm.at("width").asFloat();
             float h = vm.at("height").asFloat();
             float y = vm.at("y").asFloat();
-            auto node = MagiciteGamePhySprite::create();
-            node->_SpriteType = MagiciteGamePhySprite::T_Ground;
+            auto node = MagiciteGameObject::create();
             node->setPosition(Vec2(x, y));
             node->setContentSize(Size(w, h));
             node->setAnchorPoint(Point::ZERO);
-            _phyLayer->addPhysicSprite(node,true);
+            _phyLayer->createPhyBody(node,true);
+            _phyLayer->addChild(node);
         }
     }
 
@@ -152,106 +154,35 @@ void MagiciteGameLayer::update(float timeDelta)
 {
     if (_move_left && !_move_right)
     {
-        _player->Move(MagiciteGameLiving::Direction::left);
+        _player->Move(MagiciteGamePlayer::Direction::left);
     }
     else if (!_move_left && _move_right)
     {
-        _player->Move(MagiciteGameLiving::Direction::right);
+        _player->Move(MagiciteGamePlayer::Direction::right);
     }
-    _enemyManager.updateEnemyPosition();
+    _enemyManager->updateEnemyPos();
+    _pitfallManager->updatePitfallAvtive();
 }
 
 void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
 {
     b2Body* bodyA = contact->GetFixtureA()->GetBody();
     b2Body* bodyB = contact->GetFixtureB()->GetBody();
-    auto spriteA = reinterpret_cast<MagiciteGamePhySprite*>(bodyA->GetUserData());
-    auto spriteB = reinterpret_cast<MagiciteGamePhySprite*>(bodyB->GetUserData());
+    auto objectA = reinterpret_cast<MagiciteGameObject*>(bodyA->GetUserData());
+    auto objectB = reinterpret_cast<MagiciteGameObject*>(bodyB->GetUserData());
 
-    if (spriteA != nullptr && spriteB != nullptr)
+    if (objectA != nullptr && objectB != nullptr)
     {
-        if (MagiciteGameFunc::is_player_to_end(spriteA, spriteB))
+        
+        if (dynamic_cast<MagiciteGameObject*>(_player->getSprite()) == objectA || dynamic_cast<MagiciteGameObject*>(_player->getSprite()) == objectB)
         {
-            MagiciteGameWin::Win(this);
-        }
-        if (MagiciteGameFunc::is_has_living(spriteA, spriteB))
-        {
-            if (MagiciteGameFunc::is_sprite_type_same(spriteA, spriteB))
+            if (dynamic_cast<MagiciteGameObject*>(_player->getSprite()) == objectA)
             {
-                MagiciteGameLiving* livingA = reinterpret_cast<MagiciteGameLiving*>(spriteA);
-                MagiciteGameLiving* livingB = reinterpret_cast<MagiciteGameLiving*>(spriteB);
-                if (MagiciteGameFunc::is_living_type_same(livingA, livingB))
-                {
-                    MagiciteGameEnemy* enemyA = reinterpret_cast<MagiciteGameEnemy*>(livingA);
-                    MagiciteGameEnemy* enemyB = reinterpret_cast<MagiciteGameEnemy*>(livingB);
-                    if (!enemyA->getPass())
-                    {
-                        MagiciteGameFunc::changeEnemyDirection(enemyA);
-                        MagiciteGameFunc::changeEnemyDirection(enemyB);
-                    }
-                }
-                else
-                {
-                    if (MagiciteGameFunc::is_player_and_enemy(livingA, livingB))
-                    {
-                        MagiciteGamePlayer* player = MagiciteGameFunc::trivialPlayer(livingA, livingB);
-                        MagiciteGameEnemy* enemy = MagiciteGameFunc::trivialEnemy(livingA, livingB);
-                        
-                        if (MagiciteGameFunc::is_player_above_enemy(player, enemy))
-                        {
-                            player->setState(MagiciteGameLiving::State::S_Jump, false);
-                            player->Jump();
-                            _enemyManager.destroyEnemy(enemy);
-                        }
-                        else
-                        {
-                            MagiciteGameOver::Over(this);
-                        }
-                    }
-                }
+                reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA)->JumpOver();
             }
             else
             {
-                MagiciteGameLiving*         living = MagiciteGameFunc::trivialLiving(spriteA, spriteB);
-                MagiciteGamePhySprite*      sprite = MagiciteGameFunc::trivialSprite(spriteA, spriteB);
-                if (sprite->_SpriteType == MagiciteGamePhySprite::T_Pitfall)
-                {
-                    MagiciteGamePitfall* pitfall = reinterpret_cast<MagiciteGamePitfall*>(sprite);
-                    if (pitfall->getPitFallState() == true)
-                    {
-                        if (living->_LivingType == MagiciteGameLiving::T_Player)
-                        {
-                            MagiciteGameOver::Over(this);
-                        }
-                        else if (living->_LivingType == MagiciteGameLiving::T_Enemy)
-                        {
-                            _enemyManager.destroyEnemy(reinterpret_cast<MagiciteGameEnemy*>(living));
-                        }
-                    }
-                }
-                if (living->_LivingType == MagiciteGameLiving::T_Player)
-                {
-                    if (MagiciteGameFunc::is_living_above_ground(living, sprite))
-                    {
-                        living->setState(MagiciteGameLiving::State::S_Jump, false);
-                    }
-                }
-                else
-                {
-                    MagiciteGameEnemy* enemy = reinterpret_cast<MagiciteGameEnemy*>(living);
-
-                    if (MagiciteGameFunc::is_enemy_on_ground(enemy, sprite))
-                    {
-                        if (MagiciteGameFunc::is_enemy_above_ground(enemy, sprite))
-                        {
-                            enemy->setState(MagiciteGameLiving::State::S_Jump, false);
-                        }
-                    }
-                    else
-                    {
-                        MagiciteGameFunc::changeEnemyDirection(enemy);
-                    }
-                }
+                reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectB)->JumpOver();
             }
         }
     }

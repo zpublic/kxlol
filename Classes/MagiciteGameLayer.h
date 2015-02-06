@@ -4,22 +4,20 @@
 #include "cocos2d.h"
 #include "MagiciteGameMap.h"
 #include "MagiciteGamePhyLayer.h"
-#include "MagiciteGameEnemy.h"
-#include "MagiciteGamePlayer.h"
-#include "MagiciteGameLiving.h"
-#include "MagiciteGameEnemyManager.h"
 #include "MagiciteGamePause.h"
 #include "MagiciteGameOver.h"
 #include "MagiciteGameWin.h"
-#include "MagiciteGameFunc.h"
+#include "MagiciteGamePlayer.h"
+#include "MagiciteGameEnemyManager.h"
 #include "MagiciteGamePitfallManager.h"
-#include "Box2D\Box2D.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
 {
 public:
     MagiciteGameLayer();
     ~MagiciteGameLayer();
+
+    typedef MagiciteGameObject::_entityCategory   Category;
 
     virtual bool init();
 
@@ -32,8 +30,8 @@ public:
 	void update(float timeDelta);
 
 private:
-    MagiciteGameEnemyManager            _enemyManager;
-    MagiciteGamePitfallManager          _pitfallManager;
+    MagiciteGameEnemyManager*           _enemyManager;
+    MagiciteGamePitfallManager*         _pitfallManager;
     MagiciteGamePlayer*                 _player;
     MagiciteGamePhyLayer*               _phyLayer;
     MagiciteGameMap*                    _background;

@@ -3,73 +3,130 @@
 USING_NS_CC;
 
 MagiciteGamePlayer::MagiciteGamePlayer()
-{
-    _LivingType = MagiciteGameLiving::T_Player;
-}
-
-MagiciteGamePlayer::~MagiciteGamePlayer()
+:_player(nullptr)
 {
 
 }
 
-MagiciteGamePlayer* MagiciteGamePlayer::create(const char* filename)
+MagiciteGamePlayer* MagiciteGamePlayer::create(PlayerType type)
 {
-    auto ptr = new(std::nothrow) MagiciteGamePlayer();
-    if (ptr && ptr->initWithFile(filename))
+    auto ptr = new MagiciteGamePlayer();
+    if (ptr && ptr->init(type))
     {
-        ptr->autorelease();
         return ptr;
     }
     else
     {
-        CC_SAFE_DELETE(ptr);
         return nullptr;
     }
 }
 
-bool MagiciteGamePlayer::initWithFile(const char* filename)
+MagiciteGameMoveAbleLiving* MagiciteGamePlayer::getSprite()
 {
-    if (!MagiciteGameLiving::initWithFile(filename))
-    {
-        return false;
-    }
-    initAnimation();
-    return true;
+    return _player;
 }
 
-void MagiciteGamePlayer::initAnimation()
+bool MagiciteGamePlayer::init(PlayerType type)
 {
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("img\\Magicite\\player\\player.plist", "img\\Magicite\\player\\player.png");
+    switch (type)
+    {
+    case MagiciteGamePlayer::Chicken_Type:
+        _player = MagiciteGameChicken::create();
+            break;
+    case MagiciteGamePlayer::Human_Type:
+        _player = MagiciteGameHuman::create();
+        break;
+    default:
+        break;
+    }
+    return (_player != nullptr);
 }
 
-void MagiciteGamePlayer::startAnimation()
+void MagiciteGamePlayer::useSkill(int skillId)
 {
-    if (!getState(State::S_ANIMATE))
-    {
-        auto walkFileName = "player_walk.png";
-        auto stopFileName = "player_stop.png";
-        Animation* animation = Animation::create();
-        SpriteFrame* walkFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(stopFileName);
-        animation->addSpriteFrame(walkFrame);
-        SpriteFrame* stopFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(walkFileName);
-        animation->addSpriteFrame(stopFrame);
-        animation->setDelayPerUnit(0.2f);
-        animation->setRestoreOriginalFrame(true);
-
-        auto playerAnimation = Animate::create(animation);
-        auto action = RepeatForever::create(playerAnimation);
-        action->setTag(ActionTag::Animate);
-        this->runAction(action);
-        setState(State::S_ANIMATE, true);
-    }
+    _player->useSkill(skillId);
 }
 
-
-void MagiciteGamePlayer::stopAnimation()
+void MagiciteGamePlayer::useSkillEx()
 {
-    if (getState(State::S_ANIMATE))
-    {
-        this->stopAllActionsByTag(ActionTag::Animate);
-        setState(State::S_ANIMATE, false);
-    }
+    _player->useSkillEx();
+}
+
+void MagiciteGamePlayer::Move(MagiciteGameMoveAbleLiving::Direction dire)
+{
+    _player->Move(dire);
+}
+
+void MagiciteGamePlayer::Stop()
+{
+    _player->Stop();
+}
+
+void MagiciteGamePlayer::Jump()
+{
+    _player->Jump();
+}
+void MagiciteGamePlayer::JumpOver()
+{
+    _player->JumpOver();
+}
+
+void MagiciteGamePlayer::startAnimation(MagiciteGameMoveAbleLiving::AnimationTag tag)
+{
+    _player->startAnimation(tag);
+}
+
+void MagiciteGamePlayer::stopAnimation(MagiciteGameMoveAbleLiving::AnimationTag tag)
+{
+    _player->startAnimation(tag);
+}
+
+void MagiciteGamePlayer::setJumpHeight(int offset)
+{
+    _player->setJumpHeight(offset);
+}
+
+int MagiciteGamePlayer::getJumpHeight() const
+{
+    return _player->getJumpHeight();
+}
+
+void MagiciteGamePlayer::setSpeed(int value)
+{
+    _player->setSpeed(value);
+}
+
+int MagiciteGamePlayer::getSpeed() const
+{
+    return _player->getSpeed();
+}
+
+void MagiciteGamePlayer::setState(MagiciteGameMoveAbleLiving::State state, bool x)
+{
+    _player->setState(state, x);
+}
+
+bool MagiciteGamePlayer::getState(MagiciteGameMoveAbleLiving::State state) const
+{
+    return _player->getState(state);
+}
+
+void MagiciteGamePlayer::setPosition(Vec2 pos)
+{
+    _player->setPosition(pos);
+}
+
+Vec2 MagiciteGamePlayer::getPosition() const
+{
+    return _player->getPosition();
+}
+
+Size MagiciteGamePlayer::getContentSize() const
+{
+    return _player->getContentSize();
+}
+
+void MagiciteGamePlayer::setContentSize(Size size)
+{
+    _player->setContentSize(size);
 }

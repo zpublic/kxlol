@@ -1,27 +1,43 @@
 #include "MagiciteGameEnemyManager.h"
 
-USING_NS_CC;
 
 MagiciteGameEnemyManager::MagiciteGameEnemyManager()
 {
-    
-}
-
-MagiciteGameEnemyManager::~MagiciteGameEnemyManager()
-{
 
 }
 
-MagiciteGameEnemy* MagiciteGameEnemyManager::createEnemy(EnemyType type, Vec2 pos)
+MagiciteGameLiving* MagiciteGameEnemyManager::createEnemy(LivingType type, bool is_to_left/* = false*/)
 {
-    MagiciteGameEnemy* enemy = nullptr;
+    MagiciteGameLiving* ptr = nullptr;
     switch (type)
     {
-    case MagiciteGameEnemyManager::Chicken_Type:
-        enemy = MagiciteGameEnemyChicken::create();
-        enemy->setPosition(pos);
-        _enemys.push_back(enemy);
-        return enemy;
+    case MagiciteGameEnemyManager::Piranha:
+        ptr = MagiciteGamePiranha::create();
+        if (ptr != nullptr)
+        {
+            _static_enemys.push_back(ptr);
+            return ptr;
+        }
+        break;
+    case MagiciteGameEnemyManager::Human:
+        ptr = MagiciteGameHuman::create();
+        if (ptr != nullptr)
+        {
+            _dynamic_enemys.push_back(ptr);
+            auto human = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
+            human->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
+            return ptr;
+        }
+        break;
+    case MagiciteGameEnemyManager::Chicken:
+        ptr = MagiciteGameChicken::create();
+        if (ptr != nullptr)
+        {
+            _dynamic_enemys.push_back(ptr);
+            auto chicken = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
+            chicken->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
+            return ptr;
+        }
         break;
     default:
         break;
@@ -29,42 +45,40 @@ MagiciteGameEnemy* MagiciteGameEnemyManager::createEnemy(EnemyType type, Vec2 po
     return nullptr;
 }
 
-void MagiciteGameEnemyManager::destroyEnemy(MagiciteGameEnemy* ptr)
+void MagiciteGameEnemyManager::destroyEnemy(MagiciteGameLiving* living)
 {
-    if (ptr != nullptr)
+    if (living->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
     {
-        auto enemyIter = std::find(_enemys.begin(), _enemys.end(), ptr);
-        if (enemyIter != _enemys.end())
+        auto iter = std::find(_static_enemys.begin(), _static_enemys.end(), living);
+        if (iter != _static_enemys.end())
         {
-            _enemys.erase(enemyIter);
-            ptr->Dead();
+            _static_enemys.erase(iter);
+            (*iter)->Dead();
+        }
+    }
+    else
+    {
+        auto iter = std::find(_dynamic_enemys.begin(), _dynamic_enemys.end(), living);
+        if (iter != _dynamic_enemys.end())
+        {
+            _dynamic_enemys.erase(iter);
+            (*iter)->Dead();
         }
     }
 }
 
-void MagiciteGameEnemyManager::updateEnemyPosition()
+void MagiciteGameEnemyManager::updateEnemyPos()
 {
-    for (auto enemyPtr : _enemys)
+    for (auto Ptr : _dynamic_enemys)
     {
-        if (enemyPtr->_Move_To_Dire == MagiciteGameLiving::Direction::right)
+        auto enemyPtr = reinterpret_cast<MagiciteGameMoveAbleLiving*>(Ptr);
+        if (enemyPtr->getDire() == MagiciteGameMoveAbleLiving::Direction::left)
         {
-            enemyPtr->Move(MagiciteGameLiving::Direction::right);
+            enemyPtr->Move(MagiciteGameMoveAble::left);
         }
-        else if (enemyPtr->_Move_To_Dire == MagiciteGameLiving::Direction::left)
+        else
         {
-            enemyPtr->Move(MagiciteGameLiving::Direction::left);
+            enemyPtr->Move(MagiciteGameMoveAble::right);
         }
     }
-}
-
-MagiciteGameEnemy* MagiciteGameEnemyManager::createEnemy(EnemyType type, Vec2 pos, bool is_move_to_right)
-{
-    auto enemy = createEnemy(type, pos);
-    if (enemy != nullptr)
-    {
-        enemy->setMoveDire(is_move_to_right ?
-            MagiciteGameLiving::Direction::right :
-            MagiciteGameLiving::Direction::left);
-    }
-    return enemy;
 }

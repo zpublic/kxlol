@@ -1,7 +1,7 @@
 #include "MagiciteGamePhySprite.h"
 
 MagiciteGamePhySprite::MagiciteGamePhySprite()
-:_body(nullptr), _SpriteType(SpriteType::T_Ground), _is_dead(false)
+:_body(nullptr), _is_dead(false)
 {
 
 }
@@ -45,7 +45,16 @@ bool MagiciteGamePhySprite::initWithFile(const char* filename)
     return true;
 }
 
-bool MagiciteGamePhySprite::isDead()
+bool MagiciteGamePhySprite::init()
+{
+    if (!Sprite::init())
+    {
+        return false;
+    }
+    return true;
+}
+
+bool MagiciteGamePhySprite::isDead() const
 {
     return _is_dead;
 }

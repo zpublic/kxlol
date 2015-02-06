@@ -1,6 +1,5 @@
 #include "MagiciteGamePitfallManager.h"
 
-USING_NS_CC;
 
 MagiciteGamePitfallManager::MagiciteGamePitfallManager()
 {
@@ -12,45 +11,47 @@ MagiciteGamePitfallManager::~MagiciteGamePitfallManager()
 
 }
 
-MagiciteGamePitfall* MagiciteGamePitfallManager::createPitfall(
-    PitfallType type, 
-    Vec2 pos, 
-    MagiciteGamePhyLayer* phylayer, 
-    bool is_turn_on /* = true */)
+MagiciteGamePitfall* MagiciteGamePitfallManager::createPitfall(Pitfall_Type type, bool is_active /*= true*/)
 {
-    MagiciteGamePitfall* pitfall = nullptr;
+    MagiciteGamePitfall* ptr = nullptr;
     switch (type)
     {
-    case MagiciteGamePitfallManager::Clamp_Type:
-        pitfall = create_and_push(type, pos);
-        phylayer->addPhysicSprite(pitfall,true);
-        pitfall->setPitFallState(is_turn_on);
-        return pitfall;
-        break;
+    case Spine_Type:
+        ptr = MagiciteGameSpinePitfall::create();
+        if (ptr != nullptr)
+        {
+            _pitfalls.push_back(ptr);
+            ptr->setPitFallAvtive(is_active);
+        }
+        return ptr;
     default:
         break;
     }
     return nullptr;
 }
 
-void MagiciteGamePitfallManager::destoryPitfall(MagiciteGamePitfall* pitfall)
+void MagiciteGamePitfallManager::destroyPitfall(MagiciteGamePitfall* ptr)
 {
-    if (pitfall != nullptr)
+    auto iter = std::find(_pitfalls.begin(), _pitfalls.end(), ptr);
+    if (iter != _pitfalls.end())
     {
-        auto pitIter = std::find(_pitfalls.begin(), _pitfalls.end(), pitfall);
-        if (pitIter != _pitfalls.end())
-        {
-            _pitfalls.erase(pitIter);
-            pitfall->Dead();
-        }
+        (*iter)->Dead();
+        _pitfalls.erase(iter);
     }
 }
 
-MagiciteGamePitfall* MagiciteGamePitfallManager::create_and_push(PitfallType type, cocos2d::Vec2 pos)
+void MagiciteGamePitfallManager::updatePitfallAvtive()
 {
-    auto pitfall = MagiciteGamePitfallClamp::create();
-    pitfall->setPosition(pos);
-    _pitfalls.push_back(pitfall);
-
-    return pitfall;
+    for (auto iter : _pitfalls )
+    {
+        if (iter->getChangeFlag())
+        {
+            auto bodyptr = iter->getBody();
+            if (bodyptr != nullptr)
+            {
+                bodyptr->SetActive(iter->getPitFallAvtive());
+            }
+            iter->setChangeFlag(false);
+        }
+    }
 }

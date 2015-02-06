@@ -63,7 +63,11 @@ bool MagiciteGamePhyLayer::initPhysics(Size size, const std::function<void(b2Con
     return true;
 }
 
-void MagiciteGamePhyLayer::addPhysicSprite(MagiciteGamePhySprite* ptr, bool is_static)
+void MagiciteGamePhyLayer::createPhyBody(
+    MagiciteGameObject* ptr, 
+    bool is_static,
+    uint16 Category /*= MagiciteGameObject::DEFAULT_GROUND*/,
+    uint16 mask /*= MagiciteGameObject::DEFAULT_ALL*/)
 {
     b2BodyDef bodyDef;
     bodyDef.type = is_static ? b2_staticBody :b2_dynamicBody;
@@ -75,11 +79,12 @@ void MagiciteGamePhyLayer::addPhysicSprite(MagiciteGamePhySprite* ptr, bool is_s
     b2PolygonShape dynamicBox;
     dynamicBox.SetAsBox(ptr->getContentSize().width / 2 / PTM_RATIO, ptr->getContentSize().height / 2 / PTM_RATIO);
     b2FixtureDef fixtureDef;
+    fixtureDef.filter.categoryBits = Category;
+    fixtureDef.filter.maskBits = mask;
     fixtureDef.friction = 0.0f;
     fixtureDef.shape = &dynamicBox;
     body->CreateFixture(&fixtureDef);
     ptr->setBody(body);
-    this->addChild(ptr);
 }
 
 void MagiciteGamePhyLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags)

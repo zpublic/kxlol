@@ -3,12 +3,10 @@
 
 #define MAGICITE_DEBUG_OFF
 
-class MagiciteGameEnemyManager;
-
 #include "cocos2d.h"
 #include "Box2D\Box2D.h"
 #include "GLES-Render.h"
-#include "MagiciteGamePhySprite.h"
+#include "MagiciteGameObject.h"
 #include "MagiciteGameContactListener.h"
 
 class MagiciteGamePhyLayer : public cocos2d::Layer
@@ -20,7 +18,11 @@ public:
     static const int PTM_RATIO = 32;
 
     bool initPhysics(cocos2d::Size size, const std::function<void(b2Contact*)> &contactFunc);
-    void addPhysicSprite(MagiciteGamePhySprite* ptr, bool is_static);
+    void createPhyBody(
+        MagiciteGameObject* ptr, 
+        bool is_static, 
+        uint16 Category = MagiciteGameObject::DEFAULT_GROUND, 
+        uint16 mask = MagiciteGameObject::DEFAULT_ALL);
 
     virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags);
     void update(float timeDelta);

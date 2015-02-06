@@ -1,9 +1,9 @@
-#ifndef __MAGICITE_GAME_PITFALL_MANAGER__
-#define __MAGICITE_GAME_PITFALL_MANAGER__
+#ifndef __MAGICITE__GAME_PITFALL_MANAGER__
+#define __MAGICITE__GAME_PITFALL_MANAGER__
 
-#include "cocos2d.h"
-#include "MagiciteGamePitfallClamp.h"
-#include "MagiciteGamePhyLayer.h"
+#include "vector"
+#include "MagiciteGameSpinePitfall.h"
+
 
 class MagiciteGamePitfallManager
 {
@@ -11,23 +11,17 @@ public:
     MagiciteGamePitfallManager();
     ~MagiciteGamePitfallManager();
 
-    enum PitfallType : int
+    enum Pitfall_Type : int
     {
-        Unknow_Type,
-        Clamp_Type,
+        Spine_Type,
     };
-    MagiciteGamePitfall* createPitfall(
-        PitfallType type, 
-        cocos2d::Vec2 pos, 
-        MagiciteGamePhyLayer* phylayer, 
-        bool is_turn_on = true);
 
-    void destoryPitfall(MagiciteGamePitfall* pitfall);
+    MagiciteGamePitfall* createPitfall(Pitfall_Type type, bool is_active = true);
+    void destroyPitfall(MagiciteGamePitfall* ptr);
 
-protected:
-    MagiciteGamePitfall* create_and_push(PitfallType type, cocos2d::Vec2 pos);
+    void updatePitfallAvtive();
 private:
-    std::vector<MagiciteGamePitfall*>                   _pitfalls;
+    std::vector<MagiciteGamePitfall*>               _pitfalls;
 };
 
-#endif //__MAGICITE_GAME_PITFALL_MANAGER__
+#endif //__MAGICITE__GAME_PITFALL_MANAGER__

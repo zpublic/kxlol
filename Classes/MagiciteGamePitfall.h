@@ -2,26 +2,28 @@
 #define __MAGICITE_GAME_PITFALL__
 
 #include "cocos2d.h"
-#include "MagiciteGamePhySprite.h"
+#include "MagiciteGameObject.h"
 
-class MagiciteGamePitfallManager;
-
-class MagiciteGamePitfall : public MagiciteGamePhySprite
+class MagiciteGamePitfall : public MagiciteGameObject
 {
-    friend class MagiciteGamePitfallManager;
 public:
     MagiciteGamePitfall();
-    ~MagiciteGamePitfall();
 
+    virtual bool init();
     virtual bool initWithFile(const char* filename);
 
+    CREATE_FUNC(MagiciteGamePitfall);
     static MagiciteGamePitfall* create(const char* filename);
 
-    bool getPitFallState();
-    void setPitFallState(bool is_turn_on);
+    bool getPitFallAvtive() const;
+    void setPitFallAvtive(bool is_active);
 
-private:
-    bool                            _is_pitfall_on;
+    bool getChangeFlag() const;
+    void setChangeFlag(bool flag);
+
+protected:
+    bool                                _is_active;
+    bool                                _change_flag;
 };
 
 #endif //__MAGICITE_GAME_PITFALL__
