@@ -1,33 +1,31 @@
 #ifndef __MAGICITE_GAME_ENEMY_MANAGER__
 #define __MAGICITE_GAME_ENEMY_MANAGER__
 
-#include "MagiciteGameEnemy.h"
-#include "MagiciteGameEnemyChicken.h"
 #include "vector"
+#include "MagiciteGameLiving.h"
+#include "MagiciteGameHuman.h"
+#include "MagiciteGameChicken.h"
+#include "MagiciteGamePiranha.h"
 
 class MagiciteGameEnemyManager
 {
-
 public:
     MagiciteGameEnemyManager();
-    ~MagiciteGameEnemyManager();
-
-    static const int PTM_RATIO = 32;
-
-    enum EnemyType : int
+    
+    enum LivingType
     {
-        Unknow_Type,
-        Chicken_Type,
+        Piranha,
+        Human,
+        Chicken,
     };
+    MagiciteGameLiving* createEnemy(LivingType type, bool is_to_left = false);
+    void destroyEnemy(MagiciteGameLiving* living);
 
-    MagiciteGameEnemy* createEnemy(EnemyType type, cocos2d::Vec2 pos);
-    MagiciteGameEnemy* createEnemy(EnemyType type, cocos2d::Vec2 pos, bool is_move_to_right);
-    void destroyEnemy(MagiciteGameEnemy* ptr);
-
-    void updateEnemyPosition();
+    void updateEnemyPos();
 
 private:
-    std::vector<MagiciteGameEnemy*>             _enemys;
+    std::vector<MagiciteGameLiving*> _dynamic_enemys;
+    std::vector<MagiciteGameLiving*> _static_enemys;
 };
 
 #endif //__MAGICITE_GAME_ENEMY_MANAGER__

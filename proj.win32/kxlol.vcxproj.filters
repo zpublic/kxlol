@@ -37,23 +37,23 @@
     <Filter Include="src\lab\Magicite（2d横版动作类）\physics">
       <UniqueIdentifier>{c3d03512-2baf-4275-8360-8544c3eb4a32}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\lab\Magicite（2d横版动作类）\living">
-      <UniqueIdentifier>{e16e2728-3f1c-4e82-bbd0-d12ca4def867}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\lab\Magicite（2d横版动作类）\layer">
       <UniqueIdentifier>{163eaff7-2841-44c7-add7-3b12bd60cead}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\lab\Magicite（2d横版动作类）\scene">
       <UniqueIdentifier>{6725e6a5-ae68-48ea-9ec8-3643c9c87ae2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\lab\Magicite（2d横版动作类）\living\enemy">
-      <UniqueIdentifier>{324c4c72-9748-484d-a596-ca31de6d68b4}</UniqueIdentifier>
+    <Filter Include="src\lab\Magicite（2d横版动作类）\living">
+      <UniqueIdentifier>{4af60782-846f-4c6d-b953-5a298b440ea0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\lab\Magicite（2d横版动作类）\other">
-      <UniqueIdentifier>{cf0d2b65-224f-4837-8b20-8cda6fe7bf4d}</UniqueIdentifier>
+    <Filter Include="src\lab\Magicite（2d横版动作类）\Object">
+      <UniqueIdentifier>{58d50446-47d9-490c-b1d1-d818f3e68f4e}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\lab\Magicite（2d横版动作类）\pitfall">
-      <UniqueIdentifier>{8b551af3-85dc-407a-9e52-160c223c4433}</UniqueIdentifier>
+      <UniqueIdentifier>{55fab57d-a6fc-44c4-9ef8-3ac6e29a6ea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\lab\Magicite（2d横版动作类）\Manager">
+      <UniqueIdentifier>{84644294-323e-40c6-af0b-d96074115c8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -106,15 +106,6 @@
     <ClCompile Include="..\Classes\MagiciteGameContactListener.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp">
-      <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameLiving.cpp">
-      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGamePlayer.cpp">
-      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameLayer.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\layer</Filter>
     </ClCompile>
@@ -139,29 +130,47 @@
     <ClCompile Include="..\Classes\MagiciteGameSelectLevel.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameEnemy.cpp">
-      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameEnemyManager.cpp">
-      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameEnemyChicken.cpp">
-      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MagiciteBeginMenu.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameFunc.cpp">
-      <Filter>src\lab\Magicite（2d横版动作类）\other</Filter>
+    <ClCompile Include="..\Classes\MagiciteGameChicken.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameHuman.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameLiving.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameMoveAbleLiving.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameObject.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameMoveAble.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePlayer.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePiranha.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePitfall.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGamePitfallClamp.cpp">
+    <ClCompile Include="..\Classes\MagiciteGameSpinePitfall.cpp">
       <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameEnemyManager.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\Manager</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePitfallManager.cpp">
-      <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
+      <Filter>src\lab\Magicite（2d横版动作类）\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,15 +226,6 @@
     <ClInclude Include="..\Classes\MagiciteGameContactListener.h">
       <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGamePhySprite.h">
-      <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameLiving.h">
-      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGamePlayer.h">
-      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameLayer.h">
       <Filter>src\lab\Magicite（2d横版动作类）\layer</Filter>
     </ClInclude>
@@ -250,29 +250,47 @@
     <ClInclude Include="..\Classes\MagiciteGameSelectLevel.h">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameEnemy.h">
-      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameEnemyManager.h">
-      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameEnemyChicken.h">
-      <Filter>src\lab\Magicite（2d横版动作类）\living\enemy</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteBeginMenu.h">
       <Filter>src\lab\Magicite（2d横版动作类）\scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameFunc.h">
-      <Filter>src\lab\Magicite（2d横版动作类）\other</Filter>
+    <ClInclude Include="..\Classes\MagiciteGameChicken.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameHuman.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameLiving.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameMoveAbleLiving.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameObject.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameMoveAble.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePlayer.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePhySprite.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePiranha.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\living</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePitfall.h">
       <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGamePitfallClamp.h">
+    <ClInclude Include="..\Classes\MagiciteGameSpinePitfall.h">
       <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameEnemyManager.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\Manager</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePitfallManager.h">
-      <Filter>src\lab\Magicite（2d横版动作类）\pitfall</Filter>
+      <Filter>src\lab\Magicite（2d横版动作类）\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

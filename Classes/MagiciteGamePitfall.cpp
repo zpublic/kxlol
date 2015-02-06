@@ -3,23 +3,26 @@
 USING_NS_CC;
 
 MagiciteGamePitfall::MagiciteGamePitfall()
-:_is_pitfall_on(true)
+:_is_active(true), _change_flag(false)
 {
-    _SpriteType = MagiciteGamePhySprite::T_Pitfall;
+
 }
 
-MagiciteGamePitfall::~MagiciteGamePitfall()
+bool MagiciteGamePitfall::init()
 {
-
+    if (!MagiciteGameObject::init())
+    {
+        return false;
+    }
+    return true;
 }
 
 bool MagiciteGamePitfall::initWithFile(const char* filename)
 {
-    if (!MagiciteGamePhySprite::initWithFile(filename))
+    if (!MagiciteGameObject::initWithFile(filename))
     {
         return false;
     }
-
     return true;
 }
 
@@ -38,16 +41,26 @@ MagiciteGamePitfall* MagiciteGamePitfall::create(const char* filename)
     }
 }
 
-bool MagiciteGamePitfall::getPitFallState()
+bool MagiciteGamePitfall::getPitFallAvtive() const
 {
-    return _is_pitfall_on;
+    return _is_active;
 }
 
-void MagiciteGamePitfall::setPitFallState(bool is_turn_on)
+void MagiciteGamePitfall::setPitFallAvtive(bool is_active)
 {
-    _is_pitfall_on = is_turn_on;
-    if (getBody() != nullptr)
+    if (is_active != _is_active)
     {
-        getBody()->SetActive(is_turn_on);
+        _is_active = is_active;
+        _change_flag = true;
     }
+}
+
+bool MagiciteGamePitfall::getChangeFlag() const
+{
+    return _change_flag;
+}
+
+void MagiciteGamePitfall::setChangeFlag(bool flag)
+{
+    _change_flag = flag;
 }
