@@ -7,7 +7,7 @@
 #include "Box2D\Box2D.h"
 #include "GLES-Render.h"
 #include "MagiciteGameObject.h"
-#include "MagiciteGameContactListener.h"
+#include "MagiciteGamePhyWorld.h"
 
 class MagiciteGamePhyLayer : public cocos2d::Layer
 {
@@ -30,10 +30,8 @@ public:
     static MagiciteGamePhyLayer* create(cocos2d::Size size, const std::function<void(b2Contact*)> &contactFunc);
 
 private:
-    MagiciteGameContactListener*        _contactListener;
     cocos2d::Size                       _visibleSize;
-    b2World*                            _world;
-    b2Body*                             _body;
+    MagiciteGamePhyWorld*               _world;
     GLESDebugDraw*                      _debugDraw;
 };
 
