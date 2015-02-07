@@ -63,14 +63,19 @@ bool MagiciteGameLayer::init()
 
     /*----------------------------------init finish---------------------------------------------------*/
 
-    auto enemyA = _enemyManager->createEnemy(MagiciteGameEnemyManager::Chicken);
-    enemyA->setPosition(Vec2(_visibleSize.width / 2, _visibleSize.height / 2));
-    _phyLayer->createPhyBody(enemyA, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING);
-    _phyLayer->addChild(enemyA);
-    auto enemyB = _enemyManager->createEnemy(MagiciteGameEnemyManager::Chicken);
-    enemyB->setPosition(Vec2(_visibleSize.width / 2 + 150, _visibleSize.height / 2));
-    _phyLayer->createPhyBody(enemyB, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING);
-    _phyLayer->addChild(enemyB);
+    ValueVector enemyVec = game->getObjects();
+    for (auto it = enemyVec.begin(); it != enemyVec.end(); ++it)
+    {
+        Value obj = *it;
+        ValueMap vm = obj.asValueMap();
+        if (vm.at("type").asString() == "enemy")
+        {
+            auto enemy = _enemyManager->createEnemy(MagiciteGameEnemyManager::Chicken);
+            enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
+            _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING);
+            _phyLayer->addChild(enemy);
+        }
+    }
 
     ValueVector pitVec = game->getObjects();
     for (auto it = pitVec.begin(); it != pitVec.end(); ++it)
