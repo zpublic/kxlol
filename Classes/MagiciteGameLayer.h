@@ -10,6 +10,7 @@
 #include "MagiciteGamePlayer.h"
 #include "MagiciteGameEnemyManager.h"
 #include "MagiciteGamePitfallManager.h"
+#include "MagiciteGameContact.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
 {

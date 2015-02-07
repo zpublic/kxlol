@@ -175,6 +175,12 @@
     <ClCompile Include="..\Classes\AequitasKeyMap.cpp">
       <Filter>src\lab\Aequitas（音乐类）</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameContact.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePhyWorld.cpp">
+      <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -297,6 +303,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\AequitasKeyMap.h">
       <Filter>src\lab\Aequitas（音乐类）</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameContact.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePhyWorld.h">
+      <Filter>src\lab\Magicite（2d横版动作类）\physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

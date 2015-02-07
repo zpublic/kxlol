@@ -12,7 +12,6 @@ MagiciteGamePhyLayer::~MagiciteGamePhyLayer()
 {
     CC_SAFE_DELETE(_world);
     CC_SAFE_DELETE(_debugDraw);
-    CC_SAFE_DELETE(_contactListener);
 }
 
 bool MagiciteGamePhyLayer::initPhysics(Size size, const std::function<void(b2Contact*)> &contactFunc)
@@ -27,29 +26,8 @@ bool MagiciteGamePhyLayer::initPhysics(Size size, const std::function<void(b2Con
 
     b2Vec2 gravity;
     gravity.Set(0.0f, -10.0f);
-    _world = new b2World(gravity);
-    _world->SetAllowSleeping(true);
-    _world->SetContinuousPhysics(true);
-
-    b2BodyDef groundBodyDef;
-    groundBodyDef.position.Set(0, 0);
-    b2Body* body = _world->CreateBody(&groundBodyDef);
-    _body = body;
-    Size boxSize = Size(size.width, _visibleSize.height);
-
-    b2EdgeShape groundBox;
-    groundBox.Set(b2Vec2(0, 0), b2Vec2(boxSize.width / PTM_RATIO, 0));
-    body->CreateFixture(&groundBox, 0);
-    groundBox.Set(b2Vec2(0, boxSize.height / PTM_RATIO), b2Vec2(boxSize.width / PTM_RATIO, boxSize.height / PTM_RATIO));
-    body->CreateFixture(&groundBox, 0);
-    groundBox.Set(b2Vec2(0, boxSize.height / PTM_RATIO), b2Vec2(0, 0));
-    body->CreateFixture(&groundBox, 0);
-    groundBox.Set(b2Vec2(boxSize.width / PTM_RATIO, boxSize.height / PTM_RATIO), b2Vec2(boxSize.width / PTM_RATIO, 0));
-    body->CreateFixture(&groundBox, 0);
-
-
-    _contactListener = MagiciteGameContactListener::create(contactFunc);
-    _world->SetContactListener(_contactListener);
+    _world = MagiciteGamePhyWorld::create(gravity, size, contactFunc);
+    
     _debugDraw = new GLESDebugDraw(PTM_RATIO);
     _world->SetDebugDraw(_debugDraw);
     uint32 flags = 0;
@@ -69,22 +47,7 @@ void MagiciteGamePhyLayer::createPhyBody(
     uint16 Category /*= MagiciteGameObject::DEFAULT_GROUND*/,
     uint16 mask /*= MagiciteGameObject::DEFAULT_ALL*/)
 {
-    b2BodyDef bodyDef;
-    bodyDef.type = is_static ? b2_staticBody :b2_dynamicBody;
-    bodyDef.position.Set(
-        (ptr->getPositionX() + ptr->getContentSize().width / 2) / PTM_RATIO, 
-        (ptr->getPositionY() + ptr->getContentSize().height / 2) / PTM_RATIO);
-    bodyDef.userData = ptr;
-    b2Body* body = _world->CreateBody(&bodyDef);
-    b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(ptr->getContentSize().width / 2 / PTM_RATIO, ptr->getContentSize().height / 2 / PTM_RATIO);
-    b2FixtureDef fixtureDef;
-    fixtureDef.filter.categoryBits = Category;
-    fixtureDef.filter.maskBits = mask;
-    fixtureDef.friction = 0.0f;
-    fixtureDef.shape = &dynamicBox;
-    body->CreateFixture(&fixtureDef);
-    ptr->setBody(body);
+    _world->createPhyBody(ptr, is_static, Category, mask);
 }
 
 void MagiciteGamePhyLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags)
@@ -96,33 +59,7 @@ void MagiciteGamePhyLayer::draw(Renderer *renderer, const Mat4 &transform, uint3
 
 void MagiciteGamePhyLayer::update(float timeDelta)
 {
-    int velocityIterations = 8;
-    int positionIterations = 1;
-    _world->Step(0.03f, velocityIterations, positionIterations);
-    
-    std::vector<b2Body*> deadlist;
-    for (auto it = _world->GetBodyList(); it; it = it->GetNext())
-    {
-        if (it->GetUserData() != nullptr)
-        {
-            MagiciteGamePhySprite* sprite = reinterpret_cast<MagiciteGamePhySprite*>(it->GetUserData());
-            if (sprite->isDead())
-            {
-                deadlist.push_back(it);
-            }
-            else
-            {
-                sprite->setPosition(Vec2(it->GetPosition().x * PTM_RATIO, it->GetPosition().y * PTM_RATIO));
-                sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(it->GetAngle()));
-            }
-        }
-    }
-    for (auto ptr : deadlist)
-    {
-        auto spriteDead = reinterpret_cast<MagiciteGamePhySprite*>(ptr->GetUserData());
-        _world->DestroyBody(ptr);
-        spriteDead->removeFromParentAndCleanup(true);
-    }
+    _world->updateBody();
 }
 
 MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(Size size, const std::function<void(b2Contact*)> &contactFunc)

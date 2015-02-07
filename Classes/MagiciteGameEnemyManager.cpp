@@ -47,13 +47,13 @@ MagiciteGameLiving* MagiciteGameEnemyManager::createEnemy(LivingType type, bool 
 
 void MagiciteGameEnemyManager::destroyEnemy(MagiciteGameLiving* living)
 {
-    if (living->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
+    if (living->LivingMoveType != MagiciteGameLiving::MoveAbleLiving)
     {
         auto iter = std::find(_static_enemys.begin(), _static_enemys.end(), living);
         if (iter != _static_enemys.end())
         {
-            _static_enemys.erase(iter);
             (*iter)->Dead();
+            _static_enemys.erase(iter);
         }
     }
     else
@@ -61,8 +61,8 @@ void MagiciteGameEnemyManager::destroyEnemy(MagiciteGameLiving* living)
         auto iter = std::find(_dynamic_enemys.begin(), _dynamic_enemys.end(), living);
         if (iter != _dynamic_enemys.end())
         {
-            _dynamic_enemys.erase(iter);
             (*iter)->Dead();
+            _dynamic_enemys.erase(iter);
         }
     }
 }

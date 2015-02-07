@@ -21,6 +21,7 @@ public:
         DEFAULT_LIVING   = 0x0002,
         DEFAULT_ENEMY    = 0x0004,
         DEFAULT_PITFALL  = 0x0008,
+        DEFAULT_END      = 0x000F,
         DEFAULT_ALL      = 0xFFFF,
     };
 
