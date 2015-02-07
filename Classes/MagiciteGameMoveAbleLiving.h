@@ -29,6 +29,7 @@ public:
     virtual bool init();
     virtual bool initWithFile(const char* filename);
 
+    bool                                _is_contraled;
 protected:
     virtual cocos2d::RepeatForever* createAnimateJump() = 0;
     virtual cocos2d::RepeatForever* createAnimateMove() = 0;

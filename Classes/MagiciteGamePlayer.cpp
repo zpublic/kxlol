@@ -39,7 +39,13 @@ bool MagiciteGamePlayer::init(PlayerType type)
     default:
         break;
     }
-    return (_player != nullptr);
+
+    if (_player == nullptr)
+    {
+        return false;
+    }
+    _player->_is_contraled = true;
+    return true;
 }
 
 void MagiciteGamePlayer::useSkill(int skillId)

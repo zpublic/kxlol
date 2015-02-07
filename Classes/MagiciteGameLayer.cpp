@@ -173,17 +173,10 @@ void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
 
     if (objectA != nullptr && objectB != nullptr)
     {
-        
-        if (dynamic_cast<MagiciteGameObject*>(_player->getSprite()) == objectA || dynamic_cast<MagiciteGameObject*>(_player->getSprite()) == objectB)
+        bool flag = MagiciteGameContact::try_moveable_contact_with_grond(objectA, objectB);
+        if (!flag)
         {
-            if (dynamic_cast<MagiciteGameObject*>(_player->getSprite()) == objectA)
-            {
-                reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA)->JumpOver();
-            }
-            else
-            {
-                reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectB)->JumpOver();
-            }
+            flag = MagiciteGameContact::try_enemy_contact_with_living(objectA, objectB);
         }
     }
 }

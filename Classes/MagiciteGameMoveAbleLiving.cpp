@@ -3,7 +3,7 @@
 USING_NS_CC;
 
 MagiciteGameMoveAbleLiving::MagiciteGameMoveAbleLiving(MoveLivingType type /*= Unknow*/)
-:MagiciteGameLiving(MoveAbleType::MoveAbleLiving), MoveAbleLivingType(type)
+:MagiciteGameLiving(MoveAbleType::MoveAbleLiving), MoveAbleLivingType(type), _is_contraled(false)
 {
 
 }
