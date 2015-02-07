@@ -2,17 +2,22 @@
 
 USING_NS_CC;
 
-bool MagiciteGameContact::try_moveable_contact_with_grond(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+bool MagiciteGameContact::try_moveable_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
     MagiciteGameObject* ground                  = trivialGround(objectA, objectB);
+    MagiciteGameObject* object                  = nullptr;
     MagiciteGameLiving* living                  = nullptr;
     MagiciteGameMoveAbleLiving* moveableLiving  = nullptr;
+
     if (ground == nullptr) return false;
+    object = (ground == objectA ? objectB : objectA);
 
-    living = reinterpret_cast<MagiciteGameLiving*>(ground == objectA ? objectB : objectA);
+    if (object->ObjType != MagiciteGameObject::T_Living) return false;
+    living = reinterpret_cast<MagiciteGameLiving*>(object);
+
     if (living->LivingMoveType != MagiciteGameLiving::MoveAbleLiving) return false;
-
     moveableLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
+
     if (is_moveable_on_ground(moveableLiving, ground))
     {
         if (is_moveable_above_ground(moveableLiving, ground))
@@ -74,38 +79,6 @@ bool MagiciteGameContact::is_moveable_above_ground(MagiciteGameMoveAbleLiving* m
     return false;
 }
 
-bool MagiciteGameContact::try_enemy_contact_with_living(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
-{
-    MagiciteGameLiving* enemy = trivialEnemy(objectA, objectB);
-    MagiciteGameLiving* living = nullptr;
-    if (enemy == nullptr) return false;
-
-    living = reinterpret_cast<MagiciteGameLiving*>(enemy == objectA ? objectB : objectA);
-    if (living->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
-    {
-        auto moveableLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
-        if (moveableLiving->_is_contraled)
-        {
-            log("failed");
-            return true;
-        }
-        else
-        {
-            change_moveable_direction(reinterpret_cast<MagiciteGameMoveAbleLiving*>(living));
-            try_to_change_living_direction(enemy);
-        }
-    }
-    else
-    {
-        if (enemy->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
-        {
-            change_moveable_direction(reinterpret_cast<MagiciteGameMoveAbleLiving*>(enemy));
-        }
-        return true;
-    }
-    return false;
-}
-
 MagiciteGameLiving* MagiciteGameContact::trivialEnemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
     if (objectA->ObjType == MagiciteGameObject::T_Living)
@@ -155,4 +128,104 @@ void MagiciteGameContact::try_to_change_living_direction(MagiciteGameLiving* liv
     {
         change_moveable_direction(reinterpret_cast<MagiciteGameMoveAbleLiving*>(living));
     }
+}
+
+MagiciteGameMoveAbleLiving* MagiciteGameContact::trivialPlayer(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    if (objectA->ObjType == MagiciteGameObject::T_Living
+        && reinterpret_cast<MagiciteGameLiving*>(objectA)->MoveAbleLiving == MagiciteGameLiving::MoveAbleType::MoveAbleLiving
+        &&reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA)->_is_contraled == true)
+    {
+        return reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    }
+    if (objectB->ObjType == MagiciteGameObject::Type::T_Living
+        && reinterpret_cast<MagiciteGameLiving*>(objectB)->MoveAbleLiving == MagiciteGameLiving::MoveAbleType::MoveAbleLiving
+        &&reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectB)->_is_contraled == true)
+    {
+        return reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectB);
+    }
+    return nullptr;
+}
+
+bool MagiciteGameContact::try_player_to_end(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    MagiciteGameMoveAbleLiving* player = trivialPlayer(objectA, objectB);
+    MagiciteGameObject* p_end = nullptr;
+    MagiciteGameObject* object = nullptr;
+
+    if (player == nullptr) return false;
+    p_end = (player == objectA ? objectB : objectA);
+
+    if (p_end->ObjType != MagiciteGameObject::T_End) return false;
+    return true;
+}
+
+bool MagiciteGameContact::try_player_to_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    MagiciteGameMoveAbleLiving* player = trivialPlayer(objectA, objectB);
+    MagiciteGamePitfall* pitfall = nullptr;
+    MagiciteGameObject* object = nullptr;
+
+    if (player == nullptr) return false;
+    object = (player == objectA ? objectB : objectA);
+
+    if (object->ObjType != MagiciteGameObject::T_Pitfall) return false;
+    pitfall = reinterpret_cast<MagiciteGamePitfall*>(object);
+
+    if (pitfall->getPitFallAvtive())
+    {
+        return true;
+    }
+    return false;
+}
+
+bool MagiciteGameContact::calc_player_and_enemy(MagiciteGameMoveAbleLiving* player, MagiciteGameLiving* enemy)
+{
+    Vec2 playerPos = player->getPosition();
+    Vec2 enemyPos = enemy->getPosition();
+    Size playergSize = player->getContentSize();
+    Size enemySize = enemy->getContentSize();
+
+    if (playerPos.x + playergSize.width / 2 > enemyPos.x - enemySize.width / 2
+        && playerPos.x - playergSize.width / 2 < enemyPos.x + enemySize.width / 2)
+    {
+        if (playerPos.y - playergSize.height / 2 + -1 *(player->getBody()->GetLinearVelocity().y)+ 1
+            >= enemyPos.y + enemySize.height / 2)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool MagiciteGameContact::is_all_living(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    if (objectA->ObjType == objectB->ObjType && objectA->ObjType == MagiciteGameObject::T_Living)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool MagiciteGameContact::try_player_contact_with_enemy(MagiciteGameMoveAbleLiving* player, MagiciteGameLiving* enemy)
+{
+    if (enemy == nullptr || player == nullptr) return nullptr;
+
+    return  calc_player_and_enemy(player, enemy);
+}
+
+void MagiciteGameContact::try_enemy_contact_with_enemy(MagiciteGameLiving* enemyA, MagiciteGameLiving* enemyB)
+{
+    try_to_change_living_direction(enemyA);
+    try_to_change_living_direction(enemyB);
+}
+
+bool MagiciteGameContact::is_have_player(MagiciteGameLiving* livingA, MagiciteGameLiving* livingB)
+{
+    if (reinterpret_cast<MagiciteGameMoveAbleLiving*>(livingA)->_is_contraled
+        || reinterpret_cast<MagiciteGameMoveAbleLiving*>(livingB)->_is_contraled)
+    {
+        return true;
+    }
+    return false;
 }
