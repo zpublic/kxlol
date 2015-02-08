@@ -30,11 +30,15 @@ bool MagiciteGameMoveAbleLiving::initWithFile(const char* filename)
 
 void MagiciteGameMoveAbleLiving::Move(Direction dire)
 {
-    if (dire == Direction::right)
+    if (_is_dire_changed)
+    {
+        this->setFlippedX(_is_to_left);
+        _is_dire_changed = false;
+    }
+    else if (dire == Direction::right)
     {
         if (_is_to_left)
         {
-            _is_to_left = !_is_to_left;
             this->setFlippedX(_is_to_left);
         }
     }
@@ -42,7 +46,6 @@ void MagiciteGameMoveAbleLiving::Move(Direction dire)
     {
         if (!_is_to_left)
         {
-            _is_to_left = !_is_to_left;
             this->setFlippedX(_is_to_left);
         }
     }

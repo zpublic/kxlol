@@ -55,6 +55,7 @@ protected:
     void tryToStopAnimate();
 protected:
     std::map<State, bool>           _state;
+    bool                            _is_dire_changed;
     bool                            _is_to_left;
     int                             _jumpHeight;
     int                             _speed;
