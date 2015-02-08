@@ -22,6 +22,7 @@ public:
         DEFAULT_ENEMY    = 0x0004,
         DEFAULT_PITFALL  = 0x0008,
         DEFAULT_END      = 0x000F,
+        DEFAULT_FRIEND   = 0x0010,
         DEFAULT_ALL      = 0xFFFF,
     };
 

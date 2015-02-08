@@ -31,6 +31,9 @@ namespace MagiciteGameContact
     MagiciteGameMoveAbleLiving* trivialPlayer(MagiciteGameObject* objectA, MagiciteGameObject* objectB);
     /*从objectA与objectB中提取Type为T_Living且｛MoveAbleType为MoveAbleLiving 且_is_contraled为true（有玩家控制）的
         提取失败返回nullptr*/
+    MagiciteGameMoveAbleLiving* trivialFriend(MagiciteGameObject* objectA, MagiciteGameObject* objectB);
+
+    MagiciteGamePitfall* trivialPitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB);
 
     bool calc_player_and_enemy(MagiciteGameMoveAbleLiving* objectA, MagiciteGameLiving* objectB);
     /*计算player在enemy的上方 如果是则返回true */
@@ -56,6 +59,12 @@ namespace MagiciteGameContact
 
     bool try_player_to_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB);
     /*判断player遇到陷阱*/
+
+    bool try_friend_to_enemy(MagiciteGameLiving* livingA, MagiciteGameLiving* livingB);
+    /*判断friend和enemy的碰撞*/
+
+    bool try_friend_to_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB);
+
 }
 
 #endif //__MAGICITE_GAME_CONTACT__

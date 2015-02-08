@@ -94,7 +94,7 @@ MagiciteGameLiving* MagiciteGameContact::trivialEnemy(MagiciteGameObject* object
         else
         {
             auto moveableLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
-            if (moveableLiving->_is_contraled == false)
+            if (moveableLiving->_is_contraled == false && moveableLiving->_is_friend == false)
             {
                 return moveableLiving;
             }
@@ -113,7 +113,7 @@ MagiciteGameLiving* MagiciteGameContact::trivialEnemy(MagiciteGameObject* object
         else
         {
             auto moveableLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
-            if (moveableLiving->_is_contraled == false)
+            if (moveableLiving->_is_contraled == false && moveableLiving->_is_friend == false)
             {
                 return moveableLiving;
             }
@@ -228,4 +228,60 @@ bool MagiciteGameContact::is_have_player(MagiciteGameLiving* livingA, MagiciteGa
         return true;
     }
     return false;
+}
+
+bool MagiciteGameContact::try_friend_to_enemy(MagiciteGameLiving* livingA, MagiciteGameLiving* livingB)
+{
+    auto friend_living = trivialFriend(livingA, livingB);
+    auto enemy = trivialEnemy(livingA, livingB);
+    if (friend_living == nullptr || enemy == nullptr) return false;
+
+    return true;
+}
+
+MagiciteGameMoveAbleLiving* MagiciteGameContact::trivialFriend(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    if (objectA->ObjType == MagiciteGameObject::T_Living)
+    {
+        auto living = reinterpret_cast<MagiciteGameLiving*>(objectA);
+        if (living->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
+        {
+            auto moveLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
+            if (moveLiving->_is_friend)
+            {
+                return moveLiving;
+            }
+        }
+    }
+    if (objectB->ObjType == MagiciteGameObject::T_Living)
+    {
+        auto living = reinterpret_cast<MagiciteGameLiving*>(objectB);
+        if (living->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
+        {
+            auto moveLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
+            if (moveLiving->_is_friend)
+            {
+                return moveLiving;
+            }
+        }
+    }
+    return nullptr;
+}
+
+bool MagiciteGameContact::try_friend_to_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    auto friend_living = trivialFriend(objectA, objectB);
+    auto pitfall = trivialPitfall(objectA, objectB);
+    if (friend_living == nullptr || pitfall == nullptr) return false;
+
+    return true;
+}
+
+MagiciteGamePitfall* MagiciteGameContact::trivialPitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    if (objectA->ObjType == MagiciteGameObject::T_Pitfall) 
+        return reinterpret_cast<MagiciteGamePitfall*>(objectA);
+    if (objectB->ObjType == MagiciteGameObject::T_Pitfall) 
+        return reinterpret_cast<MagiciteGamePitfall*>(objectB);;
+    return nullptr;
 }

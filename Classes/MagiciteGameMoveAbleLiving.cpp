@@ -3,7 +3,7 @@
 USING_NS_CC;
 
 MagiciteGameMoveAbleLiving::MagiciteGameMoveAbleLiving(MoveLivingType type /*= Unknow*/)
-:MagiciteGameLiving(MoveAbleType::MoveAbleLiving), MoveAbleLivingType(type), _is_contraled(false)
+:MagiciteGameLiving(MoveAbleType::MoveAbleLiving), MoveAbleLivingType(type), _is_contraled(false), _is_friend(false)
 {
 
 }
@@ -40,6 +40,7 @@ void MagiciteGameMoveAbleLiving::Move(Direction dire)
         if (_is_to_left)
         {
             this->setFlippedX(_is_to_left);
+            _is_to_left = !_is_to_left;
         }
     }
     else
@@ -47,6 +48,7 @@ void MagiciteGameMoveAbleLiving::Move(Direction dire)
         if (!_is_to_left)
         {
             this->setFlippedX(_is_to_left);
+            _is_to_left = !_is_to_left;
         }
     }
     setBodyXSpeed(_speed * dire);

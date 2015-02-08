@@ -43,6 +43,9 @@ public:
     void setState(MagiciteGameMoveAbleLiving::State state, bool x);
     bool getState(MagiciteGameMoveAbleLiving::State state) const;
 
+    MagiciteGameMoveAbleLiving::Direction getDire() const;
+    void setDire(MagiciteGameMoveAbleLiving::Direction dire);
+
     void setPosition(cocos2d::Vec2 pos);
     cocos2d::Vec2 getPosition() const;
 

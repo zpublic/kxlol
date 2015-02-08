@@ -136,3 +136,13 @@ void MagiciteGamePlayer::setContentSize(Size size)
 {
     _player->setContentSize(size);
 }
+
+MagiciteGameMoveAbleLiving::Direction MagiciteGamePlayer::getDire() const
+{
+    return _player->getDire();
+}
+
+void MagiciteGamePlayer::setDire(MagiciteGameMoveAbleLiving::Direction dire)
+{
+    _player->setDire(dire);
+}

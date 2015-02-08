@@ -11,8 +11,8 @@ public:
 
     enum :int
     {
-        human_hp = 10,
-        human_mp = 10,
+        human_hp = 1,
+        human_mp = 1,
     };
 
     virtual void useSkill(int skillId);

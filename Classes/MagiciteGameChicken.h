@@ -11,8 +11,8 @@ public:
 
     enum : int
     {
-        chicken_hp = 2,
-        chicken_mp = 0,
+        chicken_hp = 1,
+        chicken_mp = 1,
     };
 
     virtual void useSkill(int skillId);

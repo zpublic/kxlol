@@ -10,6 +10,7 @@
 #include "MagiciteGamePlayer.h"
 #include "MagiciteGameEnemyManager.h"
 #include "MagiciteGamePitfallManager.h"
+#include "MagiciteGameFriendManager.h"
 #include "MagiciteGameContact.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
@@ -33,6 +34,7 @@ public:
 private:
     MagiciteGameEnemyManager*           _enemyManager;
     MagiciteGamePitfallManager*         _pitfallManager;
+    MagiciteGameFriendManager*          _friendManager;
     MagiciteGamePlayer*                 _player;
     MagiciteGamePhyLayer*               _phyLayer;
     MagiciteGameMap*                    _background;
