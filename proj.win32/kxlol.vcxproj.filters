@@ -34,12 +34,6 @@
     <Filter Include="Magicite">
       <UniqueIdentifier>{c3ef88aa-690c-4a61-8a6b-a79b8d0c82a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Magicite\Object">
-      <UniqueIdentifier>{58d50446-47d9-490c-b1d1-d818f3e68f4e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Magicite\Manager">
-      <UniqueIdentifier>{84644294-323e-40c6-af0b-d96074115c8e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Magicite\Layer">
       <UniqueIdentifier>{163eaff7-2841-44c7-add7-3b12bd60cead}</UniqueIdentifier>
     </Filter>
@@ -49,11 +43,29 @@
     <Filter Include="Magicite\Scene">
       <UniqueIdentifier>{6725e6a5-ae68-48ea-9ec8-3643c9c87ae2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Magicite\Object\Living">
+    <Filter Include="Magicite\GameLogic">
+      <UniqueIdentifier>{e13bb620-d645-4863-8c1b-8cc7de16b762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Magicite\GameLogic\Effect">
+      <UniqueIdentifier>{c7bc1e0e-3652-4070-ae07-57f15329dfb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Magicite\GameLogic\Effect\Create">
+      <UniqueIdentifier>{619f5c2f-54a2-49b0-b953-4f8a85714c68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Magicite\GameLogic\Effect\Value">
+      <UniqueIdentifier>{17d561c4-cc81-4809-a88a-b7f93c541f0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Magicite\GameLogic\Object">
+      <UniqueIdentifier>{58d50446-47d9-490c-b1d1-d818f3e68f4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Magicite\GameLogic\Object\Living">
       <UniqueIdentifier>{4af60782-846f-4c6d-b953-5a298b440ea0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Magicite\Object\Pitfall">
+    <Filter Include="Magicite\GameLogic\Object\Pitfall">
       <UniqueIdentifier>{55fab57d-a6fc-44c4-9ef8-3ac6e29a6ea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Magicite\GameLogic\Manager">
+      <UniqueIdentifier>{84644294-323e-40c6-af0b-d96074115c8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -134,43 +146,43 @@
       <Filter>Magicite\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameChicken.cpp">
-      <Filter>Magicite\Object\Living</Filter>
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameHuman.cpp">
-      <Filter>Magicite\Object\Living</Filter>
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameLiving.cpp">
-      <Filter>Magicite\Object\Living</Filter>
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameMoveAbleLiving.cpp">
-      <Filter>Magicite\Object\Living</Filter>
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameObject.cpp">
-      <Filter>Magicite\Object</Filter>
+      <Filter>Magicite\GameLogic\Object</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameMoveAble.cpp">
-      <Filter>Magicite\Object</Filter>
+      <Filter>Magicite\GameLogic\Object</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePlayer.cpp">
-      <Filter>Magicite\Object</Filter>
+      <Filter>Magicite\GameLogic\Object</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp">
       <Filter>Magicite\Physics</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePiranha.cpp">
-      <Filter>Magicite\Object\Living</Filter>
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePitfall.cpp">
-      <Filter>Magicite\Object\Pitfall</Filter>
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameSpinePitfall.cpp">
-      <Filter>Magicite\Object\Pitfall</Filter>
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameEnemyManager.cpp">
-      <Filter>Magicite\Manager</Filter>
+      <Filter>Magicite\GameLogic\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePitfallManager.cpp">
-      <Filter>Magicite\Manager</Filter>
+      <Filter>Magicite\GameLogic\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AequitasKeyMap.cpp">
       <Filter>src\lab\Aequitas（音乐类）</Filter>
@@ -263,43 +275,43 @@
       <Filter>Magicite\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameChicken.h">
-      <Filter>Magicite\Object\Living</Filter>
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameHuman.h">
-      <Filter>Magicite\Object\Living</Filter>
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameLiving.h">
-      <Filter>Magicite\Object\Living</Filter>
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameMoveAbleLiving.h">
-      <Filter>Magicite\Object\Living</Filter>
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameObject.h">
-      <Filter>Magicite\Object</Filter>
+      <Filter>Magicite\GameLogic\Object</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameMoveAble.h">
-      <Filter>Magicite\Object</Filter>
+      <Filter>Magicite\GameLogic\Object</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePlayer.h">
-      <Filter>Magicite\Object</Filter>
+      <Filter>Magicite\GameLogic\Object</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePhySprite.h">
       <Filter>Magicite\Physics</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePiranha.h">
-      <Filter>Magicite\Object\Living</Filter>
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePitfall.h">
-      <Filter>Magicite\Object\Pitfall</Filter>
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameSpinePitfall.h">
-      <Filter>Magicite\Object\Pitfall</Filter>
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameEnemyManager.h">
-      <Filter>Magicite\Manager</Filter>
+      <Filter>Magicite\GameLogic\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePitfallManager.h">
-      <Filter>Magicite\Manager</Filter>
+      <Filter>Magicite\GameLogic\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AequitasKeyMap.h">
       <Filter>src\lab\Aequitas（音乐类）</Filter>
@@ -309,6 +321,24 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePhyWorld.h">
       <Filter>Magicite\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffect.h">
+      <Filter>Magicite\GameLogic\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectCreatePitfall.h">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectBuffer.h">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectValueChange.h">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectShoot.h">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectPositive.h">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
