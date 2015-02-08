@@ -192,6 +192,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\base\Player.h" />
     <ClInclude Include="..\Classes\Component\slot.h" />
     <ClInclude Include="..\Classes\GLES-Render.h" />
+    <ClInclude Include="..\Classes\MagiciteEffect.h" />
+    <ClInclude Include="..\Classes\MagiciteEffectBuffer.h" />
+    <ClInclude Include="..\Classes\MagiciteEffectCreatePitfall.h" />
+    <ClInclude Include="..\Classes\MagiciteEffectPositive.h" />
+    <ClInclude Include="..\Classes\MagiciteEffectShoot.h" />
+    <ClInclude Include="..\Classes\MagiciteEffectValueChange.h" />
     <ClInclude Include="..\Classes\MagiciteGameChicken.h" />
     <ClInclude Include="..\Classes\MagiciteGameContact.h" />
     <ClInclude Include="..\Classes\MagiciteGameEnemyManager.h" />
