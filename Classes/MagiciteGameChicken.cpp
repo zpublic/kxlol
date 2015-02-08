@@ -5,7 +5,8 @@ USING_NS_CC;
 MagiciteGameChicken::MagiciteGameChicken()
 :MagiciteGameMoveAbleLiving(Chicken_Type)
 {
-
+    _health_point = chicken_hp;
+    _mana_point = chicken_mp;
 }
 
 void MagiciteGameChicken::useSkill(int skillId)

@@ -9,6 +9,12 @@ class MagiciteGameHuman :public MagiciteGameMoveAbleLiving
 public:
     MagiciteGameHuman();
 
+    enum :int
+    {
+        human_hp = 10,
+        human_mp = 10,
+    };
+
     virtual void useSkill(int skillId);
     virtual void useSkillEx();
 

@@ -50,7 +50,7 @@ bool MagiciteGameLayer::init()
     _phyLayer->createPhyBody(endCube, true, Category::DEFAULT_END, Category::DEFAULT_LIVING);
     _phyLayer->addChild(endCube);
 
-    _player = MagiciteGamePlayer::create(MagiciteGamePlayer::Human_Type);
+    _player = MagiciteGamePlayer::create(MagiciteGamePlayer::Chicken_Type);
     this->runAction(Follow::create(_player->getSprite(), Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
     ValueMap playerMap = game->getObject("player");
     Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
@@ -70,7 +70,7 @@ bool MagiciteGameLayer::init()
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "enemy")
         {
-            auto enemy = _enemyManager->createEnemy(MagiciteGameEnemyManager::Chicken);
+            auto enemy = _enemyManager->createEnemy(MagiciteGameEnemyManager::Human);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING);
             _phyLayer->addChild(enemy);
@@ -185,7 +185,12 @@ void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
         flag = MagiciteGameContact::try_player_to_pitfall(objectA, objectB);
         if (flag)
         {
-            MagiciteGameOver::Over(this);
+            auto player = MagiciteGameContact::trivialPlayer(objectA, objectB);
+            player->attact();
+            if (player->getHP() <= 0)
+            {
+                MagiciteGameOver::Over(this);
+            }
         }
         if (MagiciteGameContact::is_all_living(objectA, objectB))
         {
@@ -197,13 +202,21 @@ void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
                 MagiciteGameMoveAbleLiving* player = MagiciteGameContact::trivialPlayer(objectA, objectB);
                 if (MagiciteGameContact::try_player_contact_with_enemy(player, enemy))
                 {
-                    _enemyManager->destroyEnemy(enemy);
+                    enemy->attact();
+                    if (enemy->getHP() <= 0)
+                    {
+                        _enemyManager->destroyEnemy(enemy);
+                    }
                     player->JumpOver();
                     player->Jump();
                 }
                 else
                 {
-                    MagiciteGameOver::Over(this);
+                    player->attact();
+                    if (player->getHP() <= 0)
+                    {
+                        MagiciteGameOver::Over(this);
+                    }
                 }
             }
             else
