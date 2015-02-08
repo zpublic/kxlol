@@ -9,6 +9,12 @@ class MagiciteGameChicken : public MagiciteGameMoveAbleLiving
 public:
     MagiciteGameChicken();
 
+    enum : int
+    {
+        chicken_hp = 1,
+        chicken_mp = 1,
+    };
+
     virtual void useSkill(int skillId);
     virtual void useSkillEx();
 

@@ -8,6 +8,7 @@ MagiciteGameMoveAble::MagiciteGameMoveAble()
     _speed = DEFAULT_SPEED;
     _jumpHeight = DEFAULT_JUMP_HEIGHT;
     _is_to_left = false;
+    _is_dire_changed = false;
 }
 
 void MagiciteGameMoveAble::setJumpHeight(int offset)
@@ -55,5 +56,9 @@ MagiciteGameMoveAble::Direction MagiciteGameMoveAble::getDire() const
 
 void MagiciteGameMoveAble::setDire(Direction dire)
 {
-    _is_to_left = (dire == Direction::left ? true : false);
+    if ((dire == Direction::left ? true : false) != _is_to_left)
+    {
+        _is_dire_changed = true;
+        _is_to_left = !_is_to_left;
+    }
 }

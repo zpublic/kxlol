@@ -28,6 +28,18 @@ public:
 
     virtual bool init();
     virtual bool initWithFile(const char* filename);
+
+    void setHP(int hp);
+    int getHP() const;
+
+    void setMP(int mp);
+    int getMP() const;
+
+    void attact(int damage = 1);
+
+protected:
+    int                                 _health_point;
+    int                                 _mana_point;
 };
 
 #endif //__MAGICITE_GAME_LIVING__

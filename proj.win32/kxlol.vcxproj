@@ -150,6 +150,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteGameChicken.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameContact.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameEnemyManager.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameFriendManager.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameHuman.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameMoveAbleLiving.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameObject.cpp" />
@@ -201,6 +202,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGameChicken.h" />
     <ClInclude Include="..\Classes\MagiciteGameContact.h" />
     <ClInclude Include="..\Classes\MagiciteGameEnemyManager.h" />
+    <ClInclude Include="..\Classes\MagiciteGameFriendManager.h" />
     <ClInclude Include="..\Classes\MagiciteGameHuman.h" />
     <ClInclude Include="..\Classes\MagiciteGameMoveAbleLiving.h" />
     <ClInclude Include="..\Classes\MagiciteGameObject.h" />

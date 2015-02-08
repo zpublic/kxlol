@@ -5,7 +5,8 @@ USING_NS_CC;
 MagiciteGameHuman::MagiciteGameHuman()
 :MagiciteGameMoveAbleLiving(Human_Type)
 {
-
+    _health_point = human_hp;
+    _mana_point = human_mp;
 }
 
 void MagiciteGameHuman::useSkill(int skillId)

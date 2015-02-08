@@ -3,7 +3,7 @@
 USING_NS_CC;
 
 MagiciteGameMoveAbleLiving::MagiciteGameMoveAbleLiving(MoveLivingType type /*= Unknow*/)
-:MagiciteGameLiving(MoveAbleType::MoveAbleLiving), MoveAbleLivingType(type), _is_contraled(false)
+:MagiciteGameLiving(MoveAbleType::MoveAbleLiving), MoveAbleLivingType(type), _is_contraled(false), _is_friend(false)
 {
 
 }
@@ -30,20 +30,25 @@ bool MagiciteGameMoveAbleLiving::initWithFile(const char* filename)
 
 void MagiciteGameMoveAbleLiving::Move(Direction dire)
 {
-    if (dire == Direction::right)
+    if (_is_dire_changed)
+    {
+        this->setFlippedX(_is_to_left);
+        _is_dire_changed = false;
+    }
+    else if (dire == Direction::right)
     {
         if (_is_to_left)
         {
-            _is_to_left = !_is_to_left;
             this->setFlippedX(_is_to_left);
+            _is_to_left = !_is_to_left;
         }
     }
     else
     {
         if (!_is_to_left)
         {
-            _is_to_left = !_is_to_left;
             this->setFlippedX(_is_to_left);
+            _is_to_left = !_is_to_left;
         }
     }
     setBodyXSpeed(_speed * dire);
