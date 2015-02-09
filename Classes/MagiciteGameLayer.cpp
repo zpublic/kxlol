@@ -115,6 +115,35 @@ bool MagiciteGameLayer::init()
         }
     }
 
+    MagiciteGameContact::try_living_contact_with_ground = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_living_contact_with_ground(objA, objB);
+    };
+    MagiciteGameContact::try_player_contact_with_enemy = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_player_contact_with_enemy(objA, objB);
+    };
+    MagiciteGameContact::try_player_contact_with_pitfall = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_player_contact_with_pitfall(objA, objB);
+    };
+    MagiciteGameContact::try_friend_contact_with_pitfall = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_friend_contact_with_pitfall(objA, objB);
+    };
+    MagiciteGameContact::try_friend_contact_with_enemy = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_friend_contact_with_enemy(objA, objB);
+    };
+    MagiciteGameContact::try_enemy_contact_with_enemy = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_enemy_contact_with_enemy(objA, objB);
+    };
+    MagiciteGameContact::try_player_contact_with_end = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_player_contact_with_end(objA, objB);
+    };
+    MagiciteGameContact::resiger_contact();
     return true;
 }
 
@@ -192,7 +221,13 @@ void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
     b2Body* bodyB = contact->GetFixtureB()->GetBody();
     auto objectA = reinterpret_cast<MagiciteGameObject*>(bodyA->GetUserData());
     auto objectB = reinterpret_cast<MagiciteGameObject*>(bodyB->GetUserData());
-    if (objectA != nullptr && objectB != nullptr)
+    if (objectA == nullptr || objectB == nullptr) return;
+    auto objectTypeA = MagiciteGameContact::trivial_contact_type(objectA);
+    auto objectTypeB = MagiciteGameContact::trivial_contact_type(objectB);
+    if (MagiciteGameContact::is_in_types(objectTypeA) == false || MagiciteGameContact::is_in_types(objectTypeB) == false) return;
+
+    MagiciteGameContact::on_contact[objectTypeA][objectTypeB](objectA, objectB);
+    /*if (objectA != nullptr && objectB != nullptr)
     {
         bool flag = MagiciteGameContact::try_player_to_end(objectA, objectB);
         if (flag)
@@ -284,5 +319,121 @@ void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
                 }
             }
         }
+    }*/
+}
+
+void MagiciteGameLayer::try_living_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    MagiciteGameMoveAbleLiving* living = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    MagiciteGameObject* ground = objectB;
+    if (MagiciteGameContact::is_moveable_on_ground(living, ground))
+    {
+        if (MagiciteGameContact::is_moveable_above_ground(living, ground))
+        {
+            living->JumpOver();
+        }
     }
+    else
+    {
+        if (!living->_is_contraled)
+        {
+            MagiciteGameContact::change_moveable_direction(living);
+        }
+    }
+}
+
+void MagiciteGameLayer::try_player_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    MagiciteGameMoveAbleLiving* player = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    MagiciteGameLiving* enemy = reinterpret_cast<MagiciteGameLiving*>(objectB);
+
+    Vec2 playerPos = player->getPosition();
+    Vec2 enemyPos = enemy->getPosition();
+    Size playergSize = player->getContentSize();
+    Size enemySize = enemy->getContentSize();
+
+    if (playerPos.x + playergSize.width / 2 > enemyPos.x - enemySize.width / 2
+        && playerPos.x - playergSize.width / 2 < enemyPos.x + enemySize.width / 2)
+    {
+        if (playerPos.y - playergSize.height / 2 + -1 * (player->getBody()->GetLinearVelocity().y) + 1
+            >= enemyPos.y + enemySize.height / 2)
+        {
+            enemy->attact();
+            if (enemy->getHP() <= 0)
+            {
+                _enemyManager->destroyEnemy(enemy);
+            }
+            player->JumpOver();
+            player->Jump();
+        }
+        else
+        {
+            player->attact();
+            if (player->getHP() <= 0)
+            {
+                MagiciteGameOver::Over(this);
+            }
+        }
+    }
+}
+
+void MagiciteGameLayer::try_player_contact_with_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    MagiciteGameMoveAbleLiving* player = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    MagiciteGamePitfall* pitfall = reinterpret_cast<MagiciteGamePitfall*>(objectB);
+    if (pitfall->getPitFallAvtive())
+    {
+        player->attact();
+        if (player->getHP() <= 0)
+        {
+            MagiciteGameOver::Over(this);
+        }
+    }
+}
+
+void MagiciteGameLayer::try_friend_contact_with_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    MagiciteGameMoveAbleLiving* living = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    MagiciteGamePitfall* pitfall = reinterpret_cast<MagiciteGamePitfall*>(objectB);
+    if (pitfall->getPitFallAvtive())
+    {
+        living->attact();
+        if (living->getHP() <= 0)
+        {
+            _friendManager->destroyFriend(living);
+        }
+        _pitfallManager->destroyPitfall(pitfall);
+    }
+}
+
+void MagiciteGameLayer::try_friend_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    MagiciteGameMoveAbleLiving* living = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    MagiciteGameMoveAbleLiving* enemy = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectB);
+    
+    MagiciteGameContact::change_moveable_direction(living);
+    living->attact();
+    if (living->getHP() <= 0)
+    {
+        _friendManager->destroyFriend(living);
+    }
+    MagiciteGameContact::change_moveable_direction(enemy);
+    enemy->attact();
+    if (enemy->getHP() <= 0)
+    {
+        _enemyManager->destroyEnemy(enemy);
+    }
+}
+
+void MagiciteGameLayer::try_enemy_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    auto livingA = reinterpret_cast<MagiciteGameLiving*>(objectA);
+    auto livingB = reinterpret_cast<MagiciteGameLiving*>(objectB);
+    MagiciteGameContact::try_to_change_living_direction(livingA);
+    MagiciteGameContact::try_to_change_living_direction(livingB);
+}
+
+void MagiciteGameLayer::try_player_contact_with_end(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    MagiciteGameWin::Win(this);
 }

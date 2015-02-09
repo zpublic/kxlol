@@ -1,46 +1,16 @@
 #include "MagiciteGameContact.h"
 
+std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_living_contact_with_ground = MagiciteGameContact::holders;
+std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_player_contact_with_enemy = MagiciteGameContact::holders;
+std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_player_contact_with_pitfall = MagiciteGameContact::holders;
+std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_friend_contact_with_pitfall = MagiciteGameContact::holders;
+std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_friend_contact_with_enemy = MagiciteGameContact::holders;
+std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_player_contact_with_end = MagiciteGameContact::holders;
+std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_enemy_contact_with_enemy = MagiciteGameContact::holders;
+
+std::map<MagiciteGameContact::Contact_type, std::map<MagiciteGameContact::Contact_type, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>> MagiciteGameContact::on_contact;
+
 USING_NS_CC;
-
-bool MagiciteGameContact::try_moveable_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
-{
-    MagiciteGameObject* ground                  = trivialGround(objectA, objectB);
-    MagiciteGameObject* object                  = nullptr;
-    MagiciteGameLiving* living                  = nullptr;
-    MagiciteGameMoveAbleLiving* moveableLiving  = nullptr;
-
-    if (ground == nullptr) return false;
-    object = (ground == objectA ? objectB : objectA);
-
-    if (object->ObjType != MagiciteGameObject::T_Living) return false;
-    living = reinterpret_cast<MagiciteGameLiving*>(object);
-
-    if (living->LivingMoveType != MagiciteGameLiving::MoveAbleLiving) return false;
-    moveableLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
-
-    if (is_moveable_on_ground(moveableLiving, ground))
-    {
-        if (is_moveable_above_ground(moveableLiving, ground))
-        {
-            moveableLiving->JumpOver();
-        }
-    }
-    else
-    {
-        if (!moveableLiving->_is_contraled)
-        {
-            change_moveable_direction(moveableLiving);
-        }
-    }
-    return true;
-}
-
-MagiciteGameObject* MagiciteGameContact::trivialGround(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
-{
-    if (objectA->ObjType == MagiciteGameObject::Type::T_Ground) return objectA;
-    if (objectB->ObjType == MagiciteGameObject::Type::T_Ground) return objectB;
-    return nullptr;
-}
 
 void MagiciteGameContact::change_moveable_direction(MagiciteGameMoveAbleLiving* moveObj)
 {
@@ -79,49 +49,6 @@ bool MagiciteGameContact::is_moveable_above_ground(MagiciteGameMoveAbleLiving* m
     return false;
 }
 
-MagiciteGameLiving* MagiciteGameContact::trivialEnemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
-{
-    if (objectA->ObjType == MagiciteGameObject::T_Living)
-    {
-        auto living = reinterpret_cast<MagiciteGameLiving*>(objectA);
-        if (living->LivingMoveType == MagiciteGameLiving::NormalLiving)
-        {
-            if (living->NormalLivingType == MagiciteGameLiving::Piranha)
-            {
-                return living;
-            }
-        }
-        else
-        {
-            auto moveableLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
-            if (moveableLiving->_is_contraled == false && moveableLiving->_is_friend == false)
-            {
-                return moveableLiving;
-            }
-        }
-    }
-    if (objectB->ObjType == MagiciteGameObject::T_Living)
-    {
-        auto living = reinterpret_cast<MagiciteGameLiving*>(objectB);
-        if (living->LivingMoveType == MagiciteGameLiving::NormalLiving)
-        {
-            if (living->NormalLivingType == MagiciteGameLiving::Piranha)
-            {
-                return living;
-            }
-        }
-        else
-        {
-            auto moveableLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
-            if (moveableLiving->_is_contraled == false && moveableLiving->_is_friend == false)
-            {
-                return moveableLiving;
-            }
-        }
-    }
-    return nullptr;
-}
-
 void MagiciteGameContact::try_to_change_living_direction(MagiciteGameLiving* living)
 {
     if (living->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
@@ -130,158 +57,114 @@ void MagiciteGameContact::try_to_change_living_direction(MagiciteGameLiving* liv
     }
 }
 
-MagiciteGameMoveAbleLiving* MagiciteGameContact::trivialPlayer(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::resiger_contact()
 {
-    if (objectA->ObjType == MagiciteGameObject::T_Living
-        && reinterpret_cast<MagiciteGameLiving*>(objectA)->MoveAbleLiving == MagiciteGameLiving::MoveAbleType::MoveAbleLiving
-        &&reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA)->_is_contraled == true)
+    on_contact[Contact_type::enemy_type][Contact_type::ground_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::friend_type][Contact_type::ground_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::player_type][Contact_type::ground_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::enemy_type][Contact_type::ground_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+
+    on_contact[Contact_type::enemy_type][Contact_type::player_type] = std::bind(_try_player_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::pitfall_type][Contact_type::player_type] = std::bind(_try_player_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::ground_type][Contact_type::player_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::end_type][Contact_type::player_type] = std::bind(_try_player_contact_with_end, std::placeholders::_2, std::placeholders::_1);
+
+    on_contact[Contact_type::enemy_type][Contact_type::friend_type] = std::bind(_try_friend_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::pitfall_type][Contact_type::friend_type] = std::bind(_try_friend_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::ground_type][Contact_type::friend_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+
+    on_contact[Contact_type::friend_type][Contact_type::pitfall_type] = std::bind(_try_friend_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::player_type][Contact_type::pitfall_type] = std::bind(_try_player_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
+
+    on_contact[Contact_type::friend_type][Contact_type::enemy_type] = std::bind(_try_friend_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::player_type][Contact_type::enemy_type] = std::bind(_try_player_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::ground_type][Contact_type::enemy_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::enemy_type][Contact_type::enemy_type] = std::bind(_try_enemy_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+
+    on_contact[Contact_type::player_type][Contact_type::end_type] = std::bind(_try_player_contact_with_end, std::placeholders::_1, std::placeholders::_2);
+}
+
+void MagiciteGameContact::_try_living_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    try_living_contact_with_ground(objectA, objectB);
+}
+
+void MagiciteGameContact::_try_player_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    try_player_contact_with_enemy(objectA, objectB);
+}
+
+void MagiciteGameContact::_try_player_contact_with_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    try_player_contact_with_pitfall(objectA, objectB);
+}
+
+void MagiciteGameContact::_try_friend_contact_with_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    try_friend_contact_with_pitfall(objectA, objectB);
+}
+
+void MagiciteGameContact::_try_friend_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    try_friend_contact_with_enemy(objectA, objectB);
+}
+
+void MagiciteGameContact::_try_enemy_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    try_enemy_contact_with_enemy(objectA, objectB);
+}
+
+void MagiciteGameContact::_try_player_contact_with_end(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    try_player_contact_with_end(objectA, objectB);
+}
+
+void MagiciteGameContact::holders(MagiciteGameObject*, MagiciteGameObject*)
+{
+
+}
+
+MagiciteGameContact::Contact_type MagiciteGameContact::trivial_contact_type(MagiciteGameObject* object)
+{
+    if (object->ObjType == MagiciteGameObject::T_Pitfall) return Contact_type::pitfall_type;
+    if (object->ObjType == MagiciteGameObject::T_Ground) return Contact_type::ground_type;
+    if (object->ObjType == MagiciteGameObject::T_End) return Contact_type::end_type;
+    if (object->ObjType == MagiciteGameObject::T_Living)
     {
-        return reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
-    }
-    if (objectB->ObjType == MagiciteGameObject::Type::T_Living
-        && reinterpret_cast<MagiciteGameLiving*>(objectB)->MoveAbleLiving == MagiciteGameLiving::MoveAbleType::MoveAbleLiving
-        &&reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectB)->_is_contraled == true)
-    {
-        return reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectB);
-    }
-    return nullptr;
-}
-
-bool MagiciteGameContact::try_player_to_end(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
-{
-    MagiciteGameMoveAbleLiving* player = trivialPlayer(objectA, objectB);
-    MagiciteGameObject* p_end = nullptr;
-    MagiciteGameObject* object = nullptr;
-
-    if (player == nullptr) return false;
-    p_end = (player == objectA ? objectB : objectA);
-
-    if (p_end->ObjType != MagiciteGameObject::T_End) return false;
-    return true;
-}
-
-bool MagiciteGameContact::try_player_to_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
-{
-    MagiciteGameMoveAbleLiving* player = trivialPlayer(objectA, objectB);
-    MagiciteGamePitfall* pitfall = nullptr;
-    MagiciteGameObject* object = nullptr;
-
-    if (player == nullptr) return false;
-    object = (player == objectA ? objectB : objectA);
-
-    if (object->ObjType != MagiciteGameObject::T_Pitfall) return false;
-    pitfall = reinterpret_cast<MagiciteGamePitfall*>(object);
-
-    if (pitfall->getPitFallAvtive())
-    {
-        return true;
-    }
-    return false;
-}
-
-bool MagiciteGameContact::calc_player_and_enemy(MagiciteGameMoveAbleLiving* player, MagiciteGameLiving* enemy)
-{
-    Vec2 playerPos = player->getPosition();
-    Vec2 enemyPos = enemy->getPosition();
-    Size playergSize = player->getContentSize();
-    Size enemySize = enemy->getContentSize();
-
-    if (playerPos.x + playergSize.width / 2 > enemyPos.x - enemySize.width / 2
-        && playerPos.x - playergSize.width / 2 < enemyPos.x + enemySize.width / 2)
-    {
-        if (playerPos.y - playergSize.height / 2 + -1 *(player->getBody()->GetLinearVelocity().y)+ 1
-            >= enemyPos.y + enemySize.height / 2)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool MagiciteGameContact::is_all_living(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
-{
-    if (objectA->ObjType == objectB->ObjType && objectA->ObjType == MagiciteGameObject::T_Living)
-    {
-        return true;
-    }
-    return false;
-}
-
-bool MagiciteGameContact::try_player_contact_with_enemy(MagiciteGameMoveAbleLiving* player, MagiciteGameLiving* enemy)
-{
-    if (enemy == nullptr || player == nullptr) return nullptr;
-
-    return  calc_player_and_enemy(player, enemy);
-}
-
-void MagiciteGameContact::try_enemy_contact_with_enemy(MagiciteGameLiving* enemyA, MagiciteGameLiving* enemyB)
-{
-    try_to_change_living_direction(enemyA);
-    try_to_change_living_direction(enemyB);
-}
-
-bool MagiciteGameContact::is_have_player(MagiciteGameLiving* livingA, MagiciteGameLiving* livingB)
-{
-    if (reinterpret_cast<MagiciteGameMoveAbleLiving*>(livingA)->_is_contraled
-        || reinterpret_cast<MagiciteGameMoveAbleLiving*>(livingB)->_is_contraled)
-    {
-        return true;
-    }
-    return false;
-}
-
-bool MagiciteGameContact::try_friend_to_enemy(MagiciteGameLiving* livingA, MagiciteGameLiving* livingB)
-{
-    auto friend_living = trivialFriend(livingA, livingB);
-    auto enemy = trivialEnemy(livingA, livingB);
-    if (friend_living == nullptr || enemy == nullptr) return false;
-
-    return true;
-}
-
-MagiciteGameMoveAbleLiving* MagiciteGameContact::trivialFriend(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
-{
-    if (objectA->ObjType == MagiciteGameObject::T_Living)
-    {
-        auto living = reinterpret_cast<MagiciteGameLiving*>(objectA);
+        auto living = reinterpret_cast<MagiciteGameLiving*>(object);
         if (living->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
         {
-            auto moveLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
-            if (moveLiving->_is_friend)
+            auto moveable = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
+            if (moveable->_is_contraled)
             {
-                return moveLiving;
+                return Contact_type::player_type;
+            }
+            else
+            {
+                if (moveable->_is_friend)
+                {
+                    return Contact_type::friend_type;
+                }
+                else
+                {
+                    return Contact_type::enemy_type;
+                }
             }
         }
-    }
-    if (objectB->ObjType == MagiciteGameObject::T_Living)
-    {
-        auto living = reinterpret_cast<MagiciteGameLiving*>(objectB);
-        if (living->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
+        else
         {
-            auto moveLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
-            if (moveLiving->_is_friend)
-            {
-                return moveLiving;
-            }
+            return Contact_type::enemy_type;
         }
     }
-    return nullptr;
+    return Contact_type::unknow_type;
 }
 
-bool MagiciteGameContact::try_friend_to_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+bool MagiciteGameContact::is_in_types(MagiciteGameContact::Contact_type type)
 {
-    auto friend_living = trivialFriend(objectA, objectB);
-    auto pitfall = trivialPitfall(objectA, objectB);
-    if (friend_living == nullptr || pitfall == nullptr) return false;
-
-    return true;
-}
-
-MagiciteGamePitfall* MagiciteGameContact::trivialPitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
-{
-    if (objectA->ObjType == MagiciteGameObject::T_Pitfall) 
-        return reinterpret_cast<MagiciteGamePitfall*>(objectA);
-    if (objectB->ObjType == MagiciteGameObject::T_Pitfall) 
-        return reinterpret_cast<MagiciteGamePitfall*>(objectB);;
-    return nullptr;
+    if (type == Contact_type::end_type || type == Contact_type::enemy_type || type == Contact_type::friend_type
+        || type == Contact_type::ground_type || type == Contact_type::pitfall_type || type == Contact_type::player_type)
+    {
+        return true;
+    }
+    return false;
 }
