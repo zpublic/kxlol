@@ -14,6 +14,7 @@ public:
         Human_Type,
         Chicken_Type,
         Slime_Type,
+        Sheep_Type,
     }MoveAbleLivingType;
 
     MagiciteGameMoveAbleLiving(MoveLivingType type = Unknow);

@@ -69,7 +69,7 @@ bool MagiciteGameLayer::init()
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "enemy")
         {
-            auto enemy = _enemyManager->createEnemy(MagiciteGameEnemyManager::Human);
+            auto enemy = _enemyManager->createEnemy(MagiciteGameEnemyManager::Sheep);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND);
             _phyLayer->addChild(enemy);

@@ -7,6 +7,7 @@
 #include "MagiciteGameChicken.h"
 #include "MagiciteGamePiranha.h"
 #include "MagiciteGameSlime.h"
+#include "MagiciteGameSheep.h"
 
 class MagiciteGameEnemyManager
 {
@@ -19,6 +20,7 @@ public:
         Human,
         Chicken,
         Slime,
+        Sheep,
     };
     MagiciteGameLiving* createEnemy(LivingType type, bool is_to_left = false);
     void destroyEnemy(MagiciteGameLiving* living);
