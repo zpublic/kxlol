@@ -119,21 +119,21 @@ bool MagiciteGameLayer::init()
 
 void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    MagiciteGameMoveAbleLiving* friend_chicken = nullptr;
+    MagiciteGameMoveAbleLiving* friends = nullptr;
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
-        friend_chicken = _friendManager->createFriend(
-            MagiciteGameFriendManager::Chicken, 
+        friends = _friendManager->createFriend(
+            MagiciteGameFriendManager::Slime, 
             (_player->getDire() == MagiciteGameMoveAbleLiving::Direction::left ? true : false));
-        friend_chicken->setPosition(Vec2(_player->getPosition().x , _player->getPosition().y));
+        friends->setPosition(Vec2(_player->getPosition().x, _player->getPosition().y));
 
         _phyLayer->createPhyBody(
-            friend_chicken,
+            friends,
             false,
             Category::DEFAULT_FRIEND,
             Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL);
-        _phyLayer->addChild(friend_chicken);
+        _phyLayer->addChild(friends);
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE :
         MagiciteGamePause::Pause(this);
@@ -141,12 +141,12 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     default:
         break;
     }
-    MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
+    MagiciteGameControlAble::dispatchKeyPress(keyCode, event, static_cast<MagiciteGameControlAble*>(_player));
 }
 
 void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    MagiciteGameControlAble::dispatchKeyRelease(keyCode, event, _player);
+    MagiciteGameControlAble::dispatchKeyRelease(keyCode, event, static_cast<MagiciteGameControlAble*>(_player));
 }
 
 void MagiciteGameLayer::update(float timeDelta)

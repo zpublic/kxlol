@@ -1,49 +1,49 @@
-#include "MagiciteGameHuman.h"
+#include "MagiciteGameSlime.h"
 
 USING_NS_CC;
 
-MagiciteGameHuman::MagiciteGameHuman()
-:MagiciteGameMoveAbleLiving(Human_Type)
+MagiciteGameSlime::MagiciteGameSlime()
+:MagiciteGameMoveAbleLiving(Slime_Type)
 {
-    _health_point = human_hp;
-    _mana_point = human_mp;
+    _health_point = slime_hp;
+    _mana_point = slime_mp;
 }
 
-void MagiciteGameHuman::useSkill(int skillId)
-{
-
-}
-
-void MagiciteGameHuman::useSkillEx()
+void MagiciteGameSlime::useSkill(int skillId)
 {
 
 }
 
-void MagiciteGameHuman::initAnimation()
+void MagiciteGameSlime::useSkillEx()
 {
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("img\\Magicite\\player\\player.plist", "img\\Magicite\\player\\player.png");
+
 }
 
-bool MagiciteGameHuman::init()
+void MagiciteGameSlime::initAnimation()
 {
-    if (!MagiciteGameMoveAbleLiving::initWithFile("img\\Magicite\\player\\player_stop.png"))
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("img\\Magicite\\slime\\slime.plist", "img\\Magicite\\slime\\slime.png");
+}
+
+bool MagiciteGameSlime::init()
+{
+    if (!MagiciteGameMoveAbleLiving::initWithFile("img\\Magicite\\slime\\slime_stop.png"))
     {
         return false;
     }
     return true;
 }
 
-RepeatForever* MagiciteGameHuman::createAnimateJump()
+RepeatForever* MagiciteGameSlime::createAnimateJump()
 {
     auto act = createAnimateMove();
     act->setTag(AnimationTag::Jump_Tag);
     return act;
 }
 
-RepeatForever* MagiciteGameHuman::createAnimateMove()
+RepeatForever* MagiciteGameSlime::createAnimateMove()
 {
-    const char* walkFileName = "player_walk.png";
-    const char* stopFileName = "player_stop.png";
+    const char* walkFileName = "slime_walk.png";
+    const char* stopFileName = "slime_stop.png";
 
     Animation* animation = Animation::create();
     SpriteFrame* walkFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(walkFileName);
