@@ -60,9 +60,6 @@ bool MagiciteGameLayer::init()
     _phyLayer->createPhyBody(_player->getSprite(), false, Category::DEFAULT_LIVING, Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_GROUND | Category::DEFAULT_END);
     _phyLayer->addChild(_player->getSprite());
 
-    _move_left = false;
-    _move_right = false;
-
     /*----------------------------------init finish---------------------------------------------------*/
 
     ValueVector enemyVec = game->getObjects();
@@ -115,35 +112,8 @@ bool MagiciteGameLayer::init()
         }
     }
 
-    MagiciteGameContact::try_living_contact_with_ground = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
-    {
-        MagiciteGameLayer::try_living_contact_with_ground(objA, objB);
-    };
-    MagiciteGameContact::try_player_contact_with_enemy = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
-    {
-        MagiciteGameLayer::try_player_contact_with_enemy(objA, objB);
-    };
-    MagiciteGameContact::try_player_contact_with_pitfall = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
-    {
-        MagiciteGameLayer::try_player_contact_with_pitfall(objA, objB);
-    };
-    MagiciteGameContact::try_friend_contact_with_pitfall = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
-    {
-        MagiciteGameLayer::try_friend_contact_with_pitfall(objA, objB);
-    };
-    MagiciteGameContact::try_friend_contact_with_enemy = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
-    {
-        MagiciteGameLayer::try_friend_contact_with_enemy(objA, objB);
-    };
-    MagiciteGameContact::try_enemy_contact_with_enemy = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
-    {
-        MagiciteGameLayer::try_enemy_contact_with_enemy(objA, objB);
-    };
-    MagiciteGameContact::try_player_contact_with_end = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
-    {
-        MagiciteGameLayer::try_player_contact_with_end(objA, objB);
-    };
-    MagiciteGameContact::resiger_contact();
+    init_contact();
+
     return true;
 }
 
@@ -168,51 +138,23 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE :
         MagiciteGamePause::Pause(this);
         break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
-    case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
-        _player->Jump();
-        break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-        _move_left = true;
-        break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-        _move_right = true;
-        break;
     default:
         break;
     }
+    MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
 }
 
 void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    switch (keyCode)
-    {
-    case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-        _move_left = false;
-        _player->Stop();
-        break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-        _move_right = false;
-        _player->Stop();
-        break;
-    default:
-        break;
-    }
+    MagiciteGameControlAble::dispatchKeyRelease(keyCode, event, _player);
 }
 
 void MagiciteGameLayer::update(float timeDelta)
 {
-    if (_move_left && !_move_right)
-    {
-        _player->Move(MagiciteGamePlayer::Direction::left);
-    }
-    else if (!_move_left && _move_right)
-    {
-        _player->Move(MagiciteGamePlayer::Direction::right);
-    }
     _enemyManager->updateEnemyPos();
     _pitfallManager->updatePitfallAvtive();
     _friendManager->updateFriendPos();
+    MagiciteGameControlAble::dispatchUpdate(timeDelta, _player);
 }
 
 void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
@@ -344,4 +286,37 @@ void MagiciteGameLayer::try_enemy_contact_with_enemy(MagiciteGameObject* objectA
 void MagiciteGameLayer::try_player_contact_with_end(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
     MagiciteGameWin::Win(this);
+}
+
+void MagiciteGameLayer::init_contact()
+{
+    MagiciteGameContact::try_living_contact_with_ground = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_living_contact_with_ground(objA, objB);
+    };
+    MagiciteGameContact::try_player_contact_with_enemy = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_player_contact_with_enemy(objA, objB);
+    };
+    MagiciteGameContact::try_player_contact_with_pitfall = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_player_contact_with_pitfall(objA, objB);
+    };
+    MagiciteGameContact::try_friend_contact_with_pitfall = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_friend_contact_with_pitfall(objA, objB);
+    };
+    MagiciteGameContact::try_friend_contact_with_enemy = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_friend_contact_with_enemy(objA, objB);
+    };
+    MagiciteGameContact::try_enemy_contact_with_enemy = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_enemy_contact_with_enemy(objA, objB);
+    };
+    MagiciteGameContact::try_player_contact_with_end = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_player_contact_with_end(objA, objB);
+    };
+    MagiciteGameContact::resiger_contact();
 }

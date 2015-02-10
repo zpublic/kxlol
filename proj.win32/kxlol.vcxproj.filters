@@ -196,6 +196,9 @@
     <ClCompile Include="..\Classes\MagiciteGameFriendManager.cpp">
       <Filter>Magicite\GameLogic\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameControlAble.cpp">
+      <Filter>Magicite\GameLogic\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -345,6 +348,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameFriendManager.h">
       <Filter>Magicite\GameLogic\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameControlAble.h">
+      <Filter>Magicite\GameLogic\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

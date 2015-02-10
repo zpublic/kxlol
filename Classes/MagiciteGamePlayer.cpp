@@ -3,7 +3,7 @@
 USING_NS_CC;
 
 MagiciteGamePlayer::MagiciteGamePlayer()
-:_player(nullptr)
+:_player(nullptr), _move_left(false), _move_right(false)
 {
 
 }
@@ -145,4 +145,52 @@ MagiciteGameMoveAbleLiving::Direction MagiciteGamePlayer::getDire() const
 void MagiciteGamePlayer::setDire(MagiciteGameMoveAbleLiving::Direction dire)
 {
     _player->setDire(dire);
+}
+
+void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
+{
+    switch (keyCode)
+    {
+    case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
+    case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+        _player->Jump();
+        break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+        _move_left = true;
+        break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+        _move_right = true;
+        break;
+    default:
+        break;
+    }
+}
+
+void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
+{
+    switch (keyCode)
+    {
+    case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+        _move_left = false;
+        _player->Stop();
+        break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+        _move_right = false;
+        _player->Stop();
+        break;
+    default:
+        break;
+    }
+}
+
+void MagiciteGamePlayer::update(float timeDetal)
+{
+    if (_move_left && !_move_right)
+    {
+        _player->Move(MagiciteGamePlayer::Direction::left);
+    }
+    else if (!_move_left && _move_right)
+    {
+        _player->Move(MagiciteGamePlayer::Direction::right);
+    }
 }

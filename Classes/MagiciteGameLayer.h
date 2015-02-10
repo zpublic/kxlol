@@ -12,6 +12,7 @@
 #include "MagiciteGamePitfallManager.h"
 #include "MagiciteGameFriendManager.h"
 #include "MagiciteGameContact.h"
+#include "MagiciteGameControlAble.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
 {
@@ -39,6 +40,10 @@ public:
     void try_enemy_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_with_end(MagiciteGameObject*, MagiciteGameObject*);
 
+    void init_contact();
+
+    //void create_pitfall_with_tiled();
+
 private:
     MagiciteGameEnemyManager*           _enemyManager;
     MagiciteGamePitfallManager*         _pitfallManager;
@@ -48,8 +53,7 @@ private:
     MagiciteGameMap*                    _background;
     cocos2d::Size                       _visibleSize;
     cocos2d::Vec2                       _origin;
-    bool                                _move_left;
-    bool                                _move_right;
+
 };
 
 #endif // __MAGICITE_GAME_LAYER_H__
