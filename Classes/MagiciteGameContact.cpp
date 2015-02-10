@@ -7,6 +7,8 @@ std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContac
 std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_friend_contact_with_enemy = MagiciteGameContact::holders;
 std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_player_contact_with_end = MagiciteGameContact::holders;
 std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_enemy_contact_with_enemy = MagiciteGameContact::holders;
+std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_ammo_contact_with_enemy = MagiciteGameContact::holders;
+std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_ammo_contact_with_ground = MagiciteGameContact::holders;
 
 std::map<MagiciteGameContact::Contact_type, std::map<MagiciteGameContact::Contact_type, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>> MagiciteGameContact::on_contact;
 
@@ -63,6 +65,8 @@ void MagiciteGameContact::resiger_contact()
     on_contact[Contact_type::friend_type][Contact_type::ground_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
     on_contact[Contact_type::player_type][Contact_type::ground_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
     on_contact[Contact_type::enemy_type][Contact_type::ground_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::ammo_type][Contact_type::ground_type] = std::bind(_try_ammo_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+
 
     on_contact[Contact_type::enemy_type][Contact_type::player_type] = std::bind(_try_player_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
     on_contact[Contact_type::pitfall_type][Contact_type::player_type] = std::bind(_try_player_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
@@ -80,8 +84,12 @@ void MagiciteGameContact::resiger_contact()
     on_contact[Contact_type::player_type][Contact_type::enemy_type] = std::bind(_try_player_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
     on_contact[Contact_type::ground_type][Contact_type::enemy_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
     on_contact[Contact_type::enemy_type][Contact_type::enemy_type] = std::bind(_try_enemy_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::ammo_type][Contact_type::enemy_type] = std::bind(_try_ammo_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
 
     on_contact[Contact_type::player_type][Contact_type::end_type] = std::bind(_try_player_contact_with_end, std::placeholders::_1, std::placeholders::_2);
+
+    on_contact[Contact_type::enemy_type][Contact_type::ammo_type] = std::bind(_try_ammo_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::ground_type][Contact_type::ammo_type] = std::bind(_try_ammo_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
 }
 
 void MagiciteGameContact::_try_living_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
@@ -119,6 +127,16 @@ void MagiciteGameContact::_try_player_contact_with_end(MagiciteGameObject* objec
     try_player_contact_with_end(objectA, objectB);
 }
 
+void MagiciteGameContact::_try_ammo_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    try_ammo_contact_with_enemy(objectA, objectB);
+}
+
+void MagiciteGameContact::_try_ammo_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    try_ammo_contact_with_ground(objectA, objectB);
+}
+
 void MagiciteGameContact::holders(MagiciteGameObject*, MagiciteGameObject*)
 {
 
@@ -126,6 +144,8 @@ void MagiciteGameContact::holders(MagiciteGameObject*, MagiciteGameObject*)
 
 MagiciteGameContact::Contact_type MagiciteGameContact::trivial_contact_type(MagiciteGameObject* object)
 {
+    if (object == nullptr) return unknow_type;
+    if (object->ObjType == MagiciteGameObject::T_Ammo) return Contact_type::ammo_type;
     if (object->ObjType == MagiciteGameObject::T_Pitfall) return Contact_type::pitfall_type;
     if (object->ObjType == MagiciteGameObject::T_Ground) return Contact_type::ground_type;
     if (object->ObjType == MagiciteGameObject::T_End) return Contact_type::end_type;
@@ -161,10 +181,16 @@ MagiciteGameContact::Contact_type MagiciteGameContact::trivial_contact_type(Magi
 
 bool MagiciteGameContact::is_in_types(MagiciteGameContact::Contact_type type)
 {
-    if (type == Contact_type::end_type || type == Contact_type::enemy_type || type == Contact_type::friend_type
-        || type == Contact_type::ground_type || type == Contact_type::pitfall_type || type == Contact_type::player_type)
+    if (type == Contact_type::end_type 
+        || type == Contact_type::enemy_type 
+        || type == Contact_type::friend_type
+        || type == Contact_type::ground_type 
+        || type == Contact_type::pitfall_type 
+        || type == Contact_type::player_type
+        || type == Contact_type::ammo_type)
     {
         return true;
     }
     return false;
 }
+

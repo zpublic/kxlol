@@ -13,6 +13,7 @@ public:
         T_Ground,
         T_Pitfall,
         T_End,
+        T_Ammo,
     }ObjType;
 
     enum _entityCategory : uint16
@@ -21,8 +22,9 @@ public:
         DEFAULT_LIVING   = 0x0002,
         DEFAULT_ENEMY    = 0x0004,
         DEFAULT_PITFALL  = 0x0008,
-        DEFAULT_END      = 0x000F,
-        DEFAULT_FRIEND   = 0x0010,
+        DEFAULT_END      = 0x0010,
+        DEFAULT_FRIEND   = 0x0020,
+        DEFAULT_AMMO     = 0x0040,
         DEFAULT_ALL      = 0xFFFF,
     };
 

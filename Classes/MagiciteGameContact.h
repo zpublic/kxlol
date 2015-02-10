@@ -18,6 +18,7 @@ namespace MagiciteGameContact
         ground_type,
         pitfall_type,
         end_type,
+        ammo_type,
         unknow_type,
     };
 
@@ -45,6 +46,8 @@ namespace MagiciteGameContact
     extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_friend_contact_with_enemy;
     extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_enemy_contact_with_enemy;
     extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_player_contact_with_end;
+    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_ammo_contact_with_enemy;
+    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_ammo_contact_with_ground;
 
     void holders(MagiciteGameObject*, MagiciteGameObject*);
 
@@ -55,6 +58,8 @@ namespace MagiciteGameContact
     void _try_friend_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
     void _try_enemy_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
     void _try_player_contact_with_end(MagiciteGameObject*, MagiciteGameObject*);
+    void _try_ammo_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
+    void _try_ammo_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
 
     void resiger_contact();
 

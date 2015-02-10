@@ -13,6 +13,7 @@
 #include "MagiciteGameFriendManager.h"
 #include "MagiciteGameContact.h"
 #include "MagiciteGameControlAble.h"
+#include "MagiciteGameFireball.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
 {
@@ -39,6 +40,8 @@ public:
     void try_friend_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
     void try_enemy_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_with_end(MagiciteGameObject*, MagiciteGameObject*);
+    void try_ammo_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
+    void try_ammo_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
 
     void init_contact();
 
