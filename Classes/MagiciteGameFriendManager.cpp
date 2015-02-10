@@ -44,6 +44,17 @@ MagiciteGameMoveAbleLiving* MagiciteGameFriendManager::createFriend(Friend_Type 
             return ptr;
         }
         break;
+    case MagiciteGameFriendManager::Sheep:
+        ptr = MagiciteGameSheep::create();
+        if (ptr != nullptr)
+        {
+            ptr->_is_friend = true;
+            _friends.push_back(ptr);
+            auto slime = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
+            slime->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
+            return ptr;
+        }
+        break;
     default:
         break;
     }

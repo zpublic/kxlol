@@ -6,6 +6,7 @@
 #include "MagiciteGameHuman.h"
 #include "MagiciteGameChicken.h"
 #include "MagiciteGameSlime.h"
+#include "MagiciteGameSheep.h"
 
 class MagiciteGameFriendManager
 {
@@ -17,6 +18,7 @@ public:
         Human,
         Chicken,
         Slime,
+        Sheep,
     };
 
     MagiciteGameMoveAbleLiving* createFriend(Friend_Type type, bool is_to_left = false);
