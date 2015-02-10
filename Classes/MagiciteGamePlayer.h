@@ -4,8 +4,9 @@
 #include "cocos2d.h"
 #include "MagiciteGameChicken.h"
 #include "MagiciteGameHuman.h"
+#include "MagiciteGameControlAble.h"
 
-class MagiciteGamePlayer
+class MagiciteGamePlayer : public MagiciteGameControlAble
 {
 public:
     MagiciteGamePlayer();
@@ -52,8 +53,14 @@ public:
     cocos2d::Size getContentSize() const;
     void setContentSize(cocos2d::Size size);
 
+    virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
+    virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
+    virtual void update(float timeDetal);
+
 protected:
     MagiciteGameMoveAbleLiving*             _player;
+    bool                                    _move_left;
+    bool                                    _move_right;
 };
 
 #endif //__MAGICITE_GAME_PLAYER__

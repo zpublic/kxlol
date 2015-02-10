@@ -60,9 +60,6 @@ bool MagiciteGameLayer::init()
     _phyLayer->createPhyBody(_player->getSprite(), false, Category::DEFAULT_LIVING, Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_GROUND | Category::DEFAULT_END);
     _phyLayer->addChild(_player->getSprite());
 
-    _move_left = false;
-    _move_right = false;
-
     /*----------------------------------init finish---------------------------------------------------*/
 
     ValueVector enemyVec = game->getObjects();
@@ -168,51 +165,23 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE :
         MagiciteGamePause::Pause(this);
         break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
-    case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
-        _player->Jump();
-        break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-        _move_left = true;
-        break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-        _move_right = true;
-        break;
     default:
         break;
     }
+    MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
 }
 
 void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    switch (keyCode)
-    {
-    case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-        _move_left = false;
-        _player->Stop();
-        break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-        _move_right = false;
-        _player->Stop();
-        break;
-    default:
-        break;
-    }
+    MagiciteGameControlAble::dispatchKeyRelease(keyCode, event, _player);
 }
 
 void MagiciteGameLayer::update(float timeDelta)
 {
-    if (_move_left && !_move_right)
-    {
-        _player->Move(MagiciteGamePlayer::Direction::left);
-    }
-    else if (!_move_left && _move_right)
-    {
-        _player->Move(MagiciteGamePlayer::Direction::right);
-    }
     _enemyManager->updateEnemyPos();
     _pitfallManager->updatePitfallAvtive();
     _friendManager->updateFriendPos();
+    MagiciteGameControlAble::dispatchUpdate(timeDelta, _player);
 }
 
 void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
@@ -345,3 +314,4 @@ void MagiciteGameLayer::try_player_contact_with_end(MagiciteGameObject* objectA,
 {
     MagiciteGameWin::Win(this);
 }
+

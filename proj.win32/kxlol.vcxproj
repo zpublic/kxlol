@@ -149,6 +149,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameChicken.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameContact.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameControlAble.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameEnemyManager.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameFriendManager.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameHuman.cpp" />
@@ -201,6 +202,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteEffectValueChange.h" />
     <ClInclude Include="..\Classes\MagiciteGameChicken.h" />
     <ClInclude Include="..\Classes\MagiciteGameContact.h" />
+    <ClInclude Include="..\Classes\MagiciteGameControlAble.h" />
     <ClInclude Include="..\Classes\MagiciteGameEnemyManager.h" />
     <ClInclude Include="..\Classes\MagiciteGameFriendManager.h" />
     <ClInclude Include="..\Classes\MagiciteGameHuman.h" />

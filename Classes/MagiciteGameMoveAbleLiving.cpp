@@ -92,7 +92,6 @@ void MagiciteGameMoveAbleLiving::JumpOver()
         this->stopAnimation(AnimationTag::Jump_Tag);
         if (getState(State::S_Move))
         {
-            setState(State::S_Move, false);
             this->startAnimation(MagiciteGameMoveAble::Move_Tag);
         }
     }

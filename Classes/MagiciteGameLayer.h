@@ -12,6 +12,7 @@
 #include "MagiciteGamePitfallManager.h"
 #include "MagiciteGameFriendManager.h"
 #include "MagiciteGameContact.h"
+#include "MagiciteGameControlAble.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
 {
@@ -48,8 +49,7 @@ private:
     MagiciteGameMap*                    _background;
     cocos2d::Size                       _visibleSize;
     cocos2d::Vec2                       _origin;
-    bool                                _move_left;
-    bool                                _move_right;
+
 };
 
 #endif // __MAGICITE_GAME_LAYER_H__
