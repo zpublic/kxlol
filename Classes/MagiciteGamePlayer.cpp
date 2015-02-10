@@ -58,9 +58,16 @@ void MagiciteGamePlayer::useSkillEx()
     _player->useSkillEx();
 }
 
-void MagiciteGamePlayer::Move(MagiciteGameMoveAbleLiving::Direction dire)
+void MagiciteGamePlayer::Move()
 {
-    _player->Move(dire);
+    if (_move_left && !_move_right)
+    {
+        _player->Move(MagiciteGamePlayer::Direction::left);
+    }
+    else if (!_move_left && _move_right)
+    {
+        _player->Move(MagiciteGamePlayer::Direction::right);
+    }
 }
 
 void MagiciteGamePlayer::Stop()
@@ -180,17 +187,5 @@ void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* ev
         break;
     default:
         break;
-    }
-}
-
-void MagiciteGamePlayer::update(float timeDetal)
-{
-    if (_move_left && !_move_right)
-    {
-        _player->Move(MagiciteGamePlayer::Direction::left);
-    }
-    else if (!_move_left && _move_right)
-    {
-        _player->Move(MagiciteGamePlayer::Direction::right);
     }
 }

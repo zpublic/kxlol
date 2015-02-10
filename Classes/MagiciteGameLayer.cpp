@@ -154,7 +154,7 @@ void MagiciteGameLayer::update(float timeDelta)
     _enemyManager->updateEnemyPos();
     _pitfallManager->updatePitfallAvtive();
     _friendManager->updateFriendPos();
-    MagiciteGameControlAble::dispatchUpdate(timeDelta, _player);
+    _player->Move();
 }
 
 void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)

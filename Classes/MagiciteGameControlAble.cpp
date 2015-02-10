@@ -11,8 +11,3 @@ void MagiciteGameControlAble::dispatchKeyRelease(EventKeyboard::KeyCode keyCode,
 {
     controlable->onKeyReleased(keyCode, event);
 }
-
-void MagiciteGameControlAble::dispatchUpdate(float timeDetal, MagiciteGameControlAble* conrtolable)
-{
-    conrtolable->update(timeDetal);
-}

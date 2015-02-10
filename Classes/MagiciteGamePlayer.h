@@ -27,7 +27,7 @@ public:
     void useSkill(int skillId);
     void useSkillEx();
 
-    void Move(MagiciteGameMoveAbleLiving::Direction dire);
+    void Move();
     void Stop();
     void Jump();
     void JumpOver();
@@ -55,7 +55,6 @@ public:
 
     virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
-    virtual void update(float timeDetal);
 
 protected:
     MagiciteGameMoveAbleLiving*             _player;
