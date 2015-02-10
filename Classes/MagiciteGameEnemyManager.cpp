@@ -39,6 +39,16 @@ MagiciteGameLiving* MagiciteGameEnemyManager::createEnemy(LivingType type, bool 
             return ptr;
         }
         break;
+    case MagiciteGameEnemyManager::Slime:
+        ptr = MagiciteGameSlime::create();
+        if (ptr != nullptr)
+        {
+            _dynamic_enemys.push_back(ptr);
+            auto slime = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
+            slime->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
+            return ptr;
+        }
+        break;
     default:
         break;
     }

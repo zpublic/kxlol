@@ -5,6 +5,7 @@
 #include "vector"
 #include "MagiciteGameHuman.h"
 #include "MagiciteGameChicken.h"
+#include "MagiciteGameSlime.h"
 
 class MagiciteGameFriendManager
 {
@@ -15,6 +16,7 @@ public:
     {
         Human,
         Chicken,
+        Slime,
     };
 
     MagiciteGameMoveAbleLiving* createFriend(Friend_Type type, bool is_to_left = false);

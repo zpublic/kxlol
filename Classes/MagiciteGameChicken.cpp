@@ -46,9 +46,9 @@ RepeatForever* MagiciteGameChicken::createAnimateMove()
     const char* stopFileName = "chicken_stop.png";
 
     Animation* animation = Animation::create();
-    SpriteFrame* walkFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(stopFileName);
+    SpriteFrame* walkFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(walkFileName);
     animation->addSpriteFrame(walkFrame);
-    SpriteFrame* stopFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(walkFileName);
+    SpriteFrame* stopFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(stopFileName);
     animation->addSpriteFrame(stopFrame);
     animation->setDelayPerUnit(0.2f);
     animation->setRestoreOriginalFrame(true);
