@@ -40,6 +40,10 @@ public:
     void try_enemy_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_with_end(MagiciteGameObject*, MagiciteGameObject*);
 
+    void init_contact();
+
+    //void create_pitfall_with_tiled();
+
 private:
     MagiciteGameEnemyManager*           _enemyManager;
     MagiciteGamePitfallManager*         _pitfallManager;
