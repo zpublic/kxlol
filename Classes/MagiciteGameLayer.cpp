@@ -357,6 +357,14 @@ void MagiciteGameLayer::init_contact()
     {
         MagiciteGameLayer::try_ammo_contact_with_ground(objA, objB);
     };
+    MagiciteGameContact::try_ammo_contact_with_edge = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_ammo_contact_with_edge(objA, objB);
+    };
     MagiciteGameContact::resiger_contact();
 }
 
+void MagiciteGameLayer::try_ammo_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    objectA->Dead();
+}

@@ -42,6 +42,7 @@ public:
     void try_player_contact_with_end(MagiciteGameObject*, MagiciteGameObject*);
     void try_ammo_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
     void try_ammo_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
+    void try_ammo_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
 
     void init_contact();
 
