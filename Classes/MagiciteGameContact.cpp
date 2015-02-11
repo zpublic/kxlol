@@ -10,6 +10,7 @@ std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContac
 std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_ammo_contact_with_enemy = MagiciteGameContact::holders;
 std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_ammo_contact_with_ground = MagiciteGameContact::holders;
 std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_ammo_contact_with_edge = MagiciteGameContact::holders;
+std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_living_contact_with_edge = MagiciteGameContact::holders;
 
 std::map<MagiciteGameContact::Contact_type, std::map<MagiciteGameContact::Contact_type, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>> MagiciteGameContact::on_contact;
 
@@ -73,10 +74,12 @@ void MagiciteGameContact::resiger_contact()
     on_contact[Contact_type::pitfall_type][Contact_type::player_type] = std::bind(_try_player_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
     on_contact[Contact_type::ground_type][Contact_type::player_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
     on_contact[Contact_type::end_type][Contact_type::player_type] = std::bind(_try_player_contact_with_end, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::edge_type][Contact_type::player_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
 
     on_contact[Contact_type::enemy_type][Contact_type::friend_type] = std::bind(_try_friend_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
     on_contact[Contact_type::pitfall_type][Contact_type::friend_type] = std::bind(_try_friend_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
     on_contact[Contact_type::ground_type][Contact_type::friend_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::edge_type][Contact_type::friend_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
 
     on_contact[Contact_type::friend_type][Contact_type::pitfall_type] = std::bind(_try_friend_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
     on_contact[Contact_type::player_type][Contact_type::pitfall_type] = std::bind(_try_player_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
@@ -86,6 +89,8 @@ void MagiciteGameContact::resiger_contact()
     on_contact[Contact_type::ground_type][Contact_type::enemy_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
     on_contact[Contact_type::enemy_type][Contact_type::enemy_type] = std::bind(_try_enemy_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
     on_contact[Contact_type::ammo_type][Contact_type::enemy_type] = std::bind(_try_ammo_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::edge_type][Contact_type::enemy_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
+
 
     on_contact[Contact_type::player_type][Contact_type::end_type] = std::bind(_try_player_contact_with_end, std::placeholders::_1, std::placeholders::_2);
 
@@ -94,6 +99,9 @@ void MagiciteGameContact::resiger_contact()
     on_contact[Contact_type::edge_type][Contact_type::ammo_type] = std::bind(_try_ammo_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
 
     on_contact[Contact_type::ammo_type][Contact_type::edge_type] = std::bind(_try_ammo_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::player_type][Contact_type::edge_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::friend_type][Contact_type::edge_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::enemy_type][Contact_type::edge_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
 
 }
 
@@ -205,3 +213,7 @@ void MagiciteGameContact::_try_ammo_contact_with_edge(MagiciteGameObject* object
     try_ammo_contact_with_edge(objectA, objectB);
 }
 
+void MagiciteGameContact::_try_living_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    try_living_contact_with_edge(objectA, objectB);
+}

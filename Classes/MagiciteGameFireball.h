@@ -24,6 +24,8 @@ public:
     CREATE_FUNC(MagiciteGameFireball);
 
 protected:
+    cocos2d::RepeatForever* createMoveAnimation();
+
     void setBodyXSpeed(float x_speed);
 };
 

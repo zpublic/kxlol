@@ -361,10 +361,23 @@ void MagiciteGameLayer::init_contact()
     {
         MagiciteGameLayer::try_ammo_contact_with_edge(objA, objB);
     };
+    MagiciteGameContact::try_living_contact_with_edge= [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_living_contact_with_edge(objA, objB);
+    };
     MagiciteGameContact::resiger_contact();
 }
 
 void MagiciteGameLayer::try_ammo_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
     objectA->Dead();
+}
+
+void MagiciteGameLayer::try_living_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    auto moveLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    if (!moveLiving->_is_contraled)
+    {
+        MagiciteGameContact::try_to_change_living_direction(moveLiving);
+    }
 }
