@@ -48,6 +48,13 @@ public:
     void init_contact();
 
     //void create_pitfall_with_tiled();
+    void create_end_cube(cocos2d::TMXObjectGroup*);
+    void create_player(cocos2d::TMXObjectGroup*);
+    void create_enemy(cocos2d::TMXObjectGroup*);
+    void create_pitfall(cocos2d::TMXObjectGroup*);
+    void create_ground(cocos2d::TMXObjectGroup*);
+
+
 
 private:
     MagiciteGameEnemyManager*           _enemyManager;

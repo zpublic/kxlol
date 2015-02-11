@@ -34,8 +34,10 @@ bool MagiciteGameLayer::init()
     _origin = Director::getInstance()->getVisibleOrigin();
 
     TMXTiledMap* tiled = TMXTiledMap::create("img\\Magicite\\map\\test.tmx");
-    _background = MagiciteGameMap::create(tiled);
     TMXObjectGroup* game = tiled->getObjectGroup("game");
+    TMXObjectGroup* ground = tiled->getObjectGroup("physics");
+
+    _background = MagiciteGameMap::create(tiled);
     this->addChild(_background);
     
     _phyLayer = MagiciteGamePhyLayer::create(
@@ -43,74 +45,11 @@ bool MagiciteGameLayer::init()
         [&](b2Contact* contact){MagiciteGameLayer::onOnBeginContact(contact); });
     this->addChild(_phyLayer,1);
 
-    ValueMap endMap = game->getObject("finish");
-    Size endSize = Size(endMap.at("width").asFloat(), endMap.at("height").asFloat());
-    Vec2 endPos = Vec2(endMap.at("x").asFloat() + endSize.width / 2, endMap.at("y").asFloat() + endSize.height / 2);
-    auto endCube = MagiciteGameObject::create(MagiciteGameObject::Type::T_End);
-    endCube->setContentSize(endSize);
-    endCube->setPosition(endPos);
-    _phyLayer->createPhyBody(endCube, true, Category::DEFAULT_END, Category::DEFAULT_LIVING);
-    _phyLayer->addChild(endCube);
-
-    _player = MagiciteGamePlayer::create(MagiciteGamePlayer::Chicken_Type);
-    this->runAction(Follow::create(_player->getSprite(), Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
-    ValueMap playerMap = game->getObject("player");
-    Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
-    _player->setPosition(playerPos);
-    _phyLayer->createPhyBody(_player->getSprite(), false, Category::DEFAULT_LIVING, Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_GROUND | Category::DEFAULT_END);
-    _phyLayer->addChild(_player->getSprite());
-
-    /*----------------------------------init finish---------------------------------------------------*/
-
-    ValueVector enemyVec = game->getObjects();
-    for (auto it = enemyVec.begin(); it != enemyVec.end(); ++it)
-    {
-        Value obj = *it;
-        ValueMap vm = obj.asValueMap();
-        if (vm.at("type").asString() == "enemy")
-        {
-            auto enemy = _enemyManager->createEnemy(MagiciteGameEnemyManager::Sheep);
-            enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
-            _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_AMMO);
-            _phyLayer->addChild(enemy);
-        }
-    }
-
-    ValueVector pitVec = game->getObjects();
-    for (auto it = pitVec.begin(); it != pitVec.end(); ++it)
-    {
-        Value obj = *it;
-        ValueMap vm = obj.asValueMap();
-        if (vm.at("type").asString() == "pitfall")
-        {
-            auto pit = _pitfallManager->createPitfall(MagiciteGamePitfallManager::Spine_Type);
-            pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
-            _phyLayer->createPhyBody(pit, true, Category::DEFAULT_PITFALL, Category::DEFAULT_GROUND | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND);
-            _phyLayer->addChild(pit);
-        }
-    }
-
-    TMXObjectGroup* ground = tiled->getObjectGroup("physics");
-    ValueVector VV = ground->getObjects();
-
-    for (auto it = VV.begin(); it != VV.end(); ++it)
-    {
-        Value obj = *it;
-        ValueMap vm = obj.asValueMap();
-        if (vm.at("type").asString() == "cube")
-        {
-            float x = vm.at("x").asFloat();
-            float w = vm.at("width").asFloat();
-            float h = vm.at("height").asFloat();
-            float y = vm.at("y").asFloat();
-            auto node = MagiciteGameObject::create();
-            node->setPosition(Vec2(x, y));
-            node->setContentSize(Size(w, h));
-            node->setAnchorPoint(Point::ZERO);
-            _phyLayer->createPhyBody(node,true);
-            _phyLayer->addChild(node);
-        }
-    }
+    create_end_cube(game);
+    create_player(game);
+    create_enemy(game);
+    create_pitfall(game);
+    create_ground(ground);
 
     init_contact();
 
@@ -319,6 +258,20 @@ void MagiciteGameLayer::try_ammo_contact_with_ground(MagiciteGameObject* objectA
     ammo->Dead();
 }
 
+void MagiciteGameLayer::try_ammo_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    objectA->Dead();
+}
+
+void MagiciteGameLayer::try_living_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    auto moveLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    if (!moveLiving->_is_contraled)
+    {
+        MagiciteGameContact::try_to_change_living_direction(moveLiving);
+    }
+}
+
 void MagiciteGameLayer::init_contact()
 {
     MagiciteGameContact::try_living_contact_with_ground = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
@@ -368,16 +321,85 @@ void MagiciteGameLayer::init_contact()
     MagiciteGameContact::resiger_contact();
 }
 
-void MagiciteGameLayer::try_ammo_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+
+void MagiciteGameLayer::create_end_cube(TMXObjectGroup* game)
 {
-    objectA->Dead();
+    ValueMap endMap = game->getObject("finish");
+    Size endSize = Size(endMap.at("width").asFloat(), endMap.at("height").asFloat());
+    Vec2 endPos = Vec2(endMap.at("x").asFloat() + endSize.width / 2, endMap.at("y").asFloat() + endSize.height / 2);
+    auto endCube = MagiciteGameObject::create(MagiciteGameObject::Type::T_End);
+    endCube->setContentSize(endSize);
+    endCube->setPosition(endPos);
+    _phyLayer->createPhyBody(endCube, true, Category::DEFAULT_END, Category::DEFAULT_LIVING);
+    _phyLayer->addChild(endCube);
 }
 
-void MagiciteGameLayer::try_living_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameLayer::create_player(TMXObjectGroup* game)
 {
-    auto moveLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
-    if (!moveLiving->_is_contraled)
+    _player = MagiciteGamePlayer::create(MagiciteGamePlayer::Chicken_Type);
+    this->runAction(Follow::create(_player->getSprite(), Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
+    ValueMap playerMap = game->getObject("player");
+    Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
+    _player->setPosition(playerPos);
+    _phyLayer->createPhyBody(_player->getSprite(), false, Category::DEFAULT_LIVING, Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_GROUND | Category::DEFAULT_END);
+    _phyLayer->addChild(_player->getSprite());
+}
+
+void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
+{
+    ValueVector enemyVec = game->getObjects();
+    for (auto it = enemyVec.begin(); it != enemyVec.end(); ++it)
     {
-        MagiciteGameContact::try_to_change_living_direction(moveLiving);
+        Value obj = *it;
+        ValueMap vm = obj.asValueMap();
+        if (vm.at("type").asString() == "enemy")
+        {
+            auto enemy = _enemyManager->createEnemy(MagiciteGameEnemyManager::Sheep);
+            enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
+            _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_AMMO);
+            _phyLayer->addChild(enemy);
+        }
+    }
+}
+
+void MagiciteGameLayer::create_pitfall(TMXObjectGroup* game)
+{
+    ValueVector pitVec = game->getObjects();
+    for (auto it = pitVec.begin(); it != pitVec.end(); ++it)
+    {
+        Value obj = *it;
+        ValueMap vm = obj.asValueMap();
+        if (vm.at("type").asString() == "pitfall")
+        {
+            auto pit = _pitfallManager->createPitfall(MagiciteGamePitfallManager::Spine_Type);
+            pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
+            _phyLayer->createPhyBody(pit, true, Category::DEFAULT_PITFALL, Category::DEFAULT_GROUND | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND);
+            _phyLayer->addChild(pit);
+        }
+    }
+}
+
+void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
+{
+
+    ValueVector VV = ground->getObjects();
+
+    for (auto it = VV.begin(); it != VV.end(); ++it)
+    {
+        Value obj = *it;
+        ValueMap vm = obj.asValueMap();
+        if (vm.at("type").asString() == "cube")
+        {
+            float x = vm.at("x").asFloat();
+            float w = vm.at("width").asFloat();
+            float h = vm.at("height").asFloat();
+            float y = vm.at("y").asFloat();
+            auto node = MagiciteGameObject::create();
+            node->setPosition(Vec2(x, y));
+            node->setContentSize(Size(w, h));
+            node->setAnchorPoint(Point::ZERO);
+            _phyLayer->createPhyBody(node, true);
+            _phyLayer->addChild(node);
+        }
     }
 }
