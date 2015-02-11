@@ -67,6 +67,9 @@
     <Filter Include="Magicite\GameLogic\Manager">
       <UniqueIdentifier>{84644294-323e-40c6-af0b-d96074115c8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Magicite\GameLogic\Object\Ammo">
+      <UniqueIdentifier>{e0f355ed-a9e5-4eae-b700-5e36624b87a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -204,6 +207,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameSheep.cpp">
       <Filter>Magicite\GameLogic\Object\Living</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameAmmo.cpp">
+      <Filter>Magicite\GameLogic\Object\Ammo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameFireball.cpp">
+      <Filter>Magicite\GameLogic\Object\Ammo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -363,6 +372,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameSheep.h">
       <Filter>Magicite\GameLogic\Object\Living</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameAmmo.h">
+      <Filter>Magicite\GameLogic\Object\Ammo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameFireball.h">
+      <Filter>Magicite\GameLogic\Object\Ammo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

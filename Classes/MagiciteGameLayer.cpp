@@ -71,7 +71,7 @@ bool MagiciteGameLayer::init()
         {
             auto enemy = _enemyManager->createEnemy(MagiciteGameEnemyManager::Sheep);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
-            _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND);
+            _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_AMMO);
             _phyLayer->addChild(enemy);
         }
     }
@@ -120,6 +120,7 @@ bool MagiciteGameLayer::init()
 void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
     MagiciteGameMoveAbleLiving* friends = nullptr;
+    MagiciteGameFireball*   fireball = nullptr;
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
@@ -134,6 +135,15 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
             Category::DEFAULT_FRIEND,
             Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL);
         _phyLayer->addChild(friends);
+        break;
+    case EventKeyboard::KeyCode::KEY_F:
+        fireball = MagiciteGameFireball::create();
+        fireball->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + fireball->getContentSize().height / 2 + 1);
+        _phyLayer->createPhyBody(fireball, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
+        _phyLayer->addChild(fireball);
+        fireball->getBody()->SetGravityScale(0.0f);
+        fireball->Move(_player->getDire());
+
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE :
         MagiciteGamePause::Pause(this);
@@ -163,9 +173,12 @@ void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
     b2Body* bodyB = contact->GetFixtureB()->GetBody();
     auto objectA = reinterpret_cast<MagiciteGameObject*>(bodyA->GetUserData());
     auto objectB = reinterpret_cast<MagiciteGameObject*>(bodyB->GetUserData());
-    if (objectA == nullptr || objectB == nullptr) return;
-    auto objectTypeA = MagiciteGameContact::trivial_contact_type(objectA);
-    auto objectTypeB = MagiciteGameContact::trivial_contact_type(objectB);
+    /*if (objectA != nullptr && objectB != nullptr) return;*/
+    MagiciteGameContact::Contact_type objectTypeA = MagiciteGameContact::Contact_type::unknow_type;
+    MagiciteGameContact::Contact_type objectTypeB = MagiciteGameContact::Contact_type::unknow_type;
+
+    objectTypeA = MagiciteGameContact::trivial_contact_type(objectA);
+    objectTypeB = MagiciteGameContact::trivial_contact_type(objectB);
     if (MagiciteGameContact::is_in_types(objectTypeA) == false || MagiciteGameContact::is_in_types(objectTypeB) == false) return;
 
     MagiciteGameContact::on_contact[objectTypeA][objectTypeB](objectA, objectB);
@@ -288,6 +301,24 @@ void MagiciteGameLayer::try_player_contact_with_end(MagiciteGameObject* objectA,
     MagiciteGameWin::Win(this);
 }
 
+void MagiciteGameLayer::try_ammo_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    auto ammo = reinterpret_cast<MagiciteGameAmmo*>(objectA);
+    auto enemy = reinterpret_cast<MagiciteGameLiving*>(objectB);
+    ammo->Dead();
+    enemy->attact();
+    if (enemy->getHP() <= 0)
+    {
+        _enemyManager->destroyEnemy(enemy);
+    }
+}
+
+void MagiciteGameLayer::try_ammo_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    auto ammo = reinterpret_cast<MagiciteGameAmmo*>(objectA);
+    ammo->Dead();
+}
+
 void MagiciteGameLayer::init_contact()
 {
     MagiciteGameContact::try_living_contact_with_ground = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
@@ -318,5 +349,35 @@ void MagiciteGameLayer::init_contact()
     {
         MagiciteGameLayer::try_player_contact_with_end(objA, objB);
     };
+    MagiciteGameContact::try_ammo_contact_with_enemy = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_ammo_contact_with_enemy(objA, objB);
+    };
+    MagiciteGameContact::try_ammo_contact_with_ground = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_ammo_contact_with_ground(objA, objB);
+    };
+    MagiciteGameContact::try_ammo_contact_with_edge = [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_ammo_contact_with_edge(objA, objB);
+    };
+    MagiciteGameContact::try_living_contact_with_edge= [&](MagiciteGameObject* objA, MagiciteGameObject* objB)
+    {
+        MagiciteGameLayer::try_living_contact_with_edge(objA, objB);
+    };
     MagiciteGameContact::resiger_contact();
+}
+
+void MagiciteGameLayer::try_ammo_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    objectA->Dead();
+}
+
+void MagiciteGameLayer::try_living_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    auto moveLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    if (!moveLiving->_is_contraled)
+    {
+        MagiciteGameContact::try_to_change_living_direction(moveLiving);
+    }
 }
