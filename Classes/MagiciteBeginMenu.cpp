@@ -17,7 +17,6 @@ bool MagiciteBeginMenu::init()
     this->addChild(background);
 
     auto ttfFont = cocos2d::Label::createWithTTF("Begin!", "fonts/Marker Felt.ttf", 32.0f, cocos2d::Size::ZERO,cocos2d::TextHAlignment::RIGHT);
-    ttfFont->enableOutline(cocos2d::Color4B(0.0f, 0.0f, 0.0f, 255.0f), 2);
     auto menuItem = cocos2d::MenuItemLabel::create(ttfFont, [&](Ref*){
         cocos2d::Director::getInstance()->replaceScene(MagiciteScene::create());
     });
@@ -28,7 +27,6 @@ bool MagiciteBeginMenu::init()
     this->addChild(menu);
 
     ttfFont = cocos2d::Label::createWithTTF("Select Pass", "fonts/Marker Felt.ttf", 32.0f, cocos2d::Size::ZERO,cocos2d::TextHAlignment::RIGHT);
-    ttfFont->enableOutline(cocos2d::Color4B(0.0f, 0.0f, 0.0f, 255.0f), 2);
     menuItem = cocos2d::MenuItemLabel::create(ttfFont, [&](Ref*){
         cocos2d::Director::getInstance()->replaceScene(MagiciteGameSelectLevel::create());
     });
@@ -39,7 +37,6 @@ bool MagiciteBeginMenu::init()
     this->addChild(menu);
 
     ttfFont = cocos2d::Label::createWithTTF("Piano", "fonts/Marker Felt.ttf", 32.0f, cocos2d::Size::ZERO,cocos2d::TextHAlignment::RIGHT);
-    ttfFont->enableOutline(cocos2d::Color4B(0.0f, 0.0f, 0.0f, 255.0f), 2);
     menuItem = cocos2d::MenuItemLabel::create(ttfFont, [&](Ref*){
        cocos2d::Director::getInstance()->replaceScene(AequitasScene::create());
     });
@@ -50,7 +47,6 @@ bool MagiciteBeginMenu::init()
     this->addChild(menu);
 
     ttfFont = cocos2d::Label::createWithTTF("Quit Game", "fonts/Marker Felt.ttf", 32.0f, cocos2d::Size::ZERO,cocos2d::TextHAlignment::RIGHT);
-    ttfFont->enableOutline(cocos2d::Color4B(0.0f, 0.0f, 0.0f, 255.0f), 2);
     menuItem = cocos2d::MenuItemLabel::create(ttfFont, [&](Ref*){
         cocos2d::Director::getInstance()->end();
     });
