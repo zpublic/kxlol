@@ -5,7 +5,9 @@
 #include "MagiciteGameObject.h"
 #include "MagiciteGameLiving.h"
 #include "MagiciteGamePitfall.h"
+#include "MagiciteGameFireball.h"
 #include "MagiciteGameMoveAbleLiving.h"
+#include "MagiciteGaemFactoryMethod.h"
 #include "map"
 
 namespace MagiciteGameContact
@@ -40,31 +42,25 @@ namespace MagiciteGameContact
 
     extern std::map<Contact_type, std::map<Contact_type, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>> on_contact;
 
-    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_living_contact_with_ground;
-    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_player_contact_with_enemy;
-    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_player_contact_with_pitfall;
-    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_friend_contact_with_pitfall;
-    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_friend_contact_with_enemy;
-    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_enemy_contact_with_enemy;
-    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_player_contact_with_end;
-    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_ammo_contact_with_enemy;
-    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_ammo_contact_with_ground;
-    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_ammo_contact_with_edge;
-    extern std::function<void(MagiciteGameObject*, MagiciteGameObject*)> try_living_contact_with_edge;
+    void holders();
 
-    void holders(MagiciteGameObject*, MagiciteGameObject*);
 
-    void _try_living_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
-    void _try_player_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
-    void _try_player_contact_with_pitfall(MagiciteGameObject*, MagiciteGameObject*);
-    void _try_friend_contact_with_pitfall(MagiciteGameObject*, MagiciteGameObject*);
-    void _try_friend_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
-    void _try_enemy_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
-    void _try_player_contact_with_end(MagiciteGameObject*, MagiciteGameObject*);
-    void _try_ammo_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
-    void _try_ammo_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
-    void _try_ammo_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
-    void _try_living_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
+    void try_living_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
+    void try_player_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
+    void try_player_contact_with_pitfall(MagiciteGameObject*, MagiciteGameObject*);
+    void try_friend_contact_with_pitfall(MagiciteGameObject*, MagiciteGameObject*);
+    void try_friend_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
+    void try_enemy_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
+    void try_player_contact_with_end(MagiciteGameObject*, MagiciteGameObject*);
+    void try_ammo_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
+    void try_ammo_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
+    void try_ammo_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
+    void try_living_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
+
+    extern std::function<void(void)> _onWin;
+    extern std::function<void(void)> _onOver;
+    void onWin();
+    void onOver();
 
     void resiger_contact();
 

@@ -39,16 +39,16 @@ void MagiciteGameMoveAbleLiving::Move(Direction dire)
     {
         if (_is_to_left)
         {
-            this->setFlippedX(_is_to_left);
             _is_to_left = !_is_to_left;
+            this->setFlippedX(_is_to_left);
         }
     }
     else
     {
         if (!_is_to_left)
         {
-            this->setFlippedX(_is_to_left);
             _is_to_left = !_is_to_left;
+            this->setFlippedX(_is_to_left);
         }
     }
     setBodyXSpeed(_speed * dire);
