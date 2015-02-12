@@ -59,8 +59,8 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
-        friends = MagiciteGameFriendManager::createFriend(
-            MagiciteGameFriendManager::Slime, 
+        friends = MagiciteGaemFactoryMethod::createFriend(
+            MagiciteGaemFactoryMethod::Slime,
             (_player->getDire() == MagiciteGameMoveAbleLiving::Direction::left ? true : false));
         friends->setPosition(Vec2(_player->getPosition().x, _player->getPosition().y));
 
@@ -158,7 +158,7 @@ void MagiciteGameLayer::try_player_contact_with_enemy(MagiciteGameObject* object
             enemy->attact();
             if (enemy->getHP() <= 0)
             {
-                MagiciteGameEnemyManager::destroyEnemy(enemy);
+                MagiciteGaemFactoryMethod::destroyEnemy(enemy);
             }
             player->JumpOver();
             player->Jump();
@@ -197,9 +197,9 @@ void MagiciteGameLayer::try_friend_contact_with_pitfall(MagiciteGameObject* obje
         living->attact();
         if (living->getHP() <= 0)
         {
-            MagiciteGameFriendManager::destroyFriend(living);
+            MagiciteGaemFactoryMethod::destroyFriend(living);
         }
-        MagiciteGamePitfallManager::destroyPitfall(pitfall);
+        MagiciteGaemFactoryMethod::destroyPitfall(pitfall);
     }
 }
 
@@ -212,13 +212,13 @@ void MagiciteGameLayer::try_friend_contact_with_enemy(MagiciteGameObject* object
     living->attact();
     if (living->getHP() <= 0)
     {
-        MagiciteGameFriendManager::destroyFriend(living);
+        MagiciteGaemFactoryMethod::destroyFriend(living);
     }
     MagiciteGameContact::change_moveable_direction(enemy);
     enemy->attact();
     if (enemy->getHP() <= 0)
     {
-        MagiciteGameEnemyManager::destroyEnemy(enemy);
+        MagiciteGaemFactoryMethod::destroyEnemy(enemy);
     }
 }
 
@@ -243,7 +243,7 @@ void MagiciteGameLayer::try_ammo_contact_with_enemy(MagiciteGameObject* objectA,
     enemy->attact();
     if (enemy->getHP() <= 0)
     {
-        MagiciteGameEnemyManager::destroyEnemy(enemy);
+        MagiciteGaemFactoryMethod::destroyEnemy(enemy);
     }
 }
 
@@ -349,7 +349,7 @@ void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "enemy")
         {
-            auto enemy = MagiciteGameEnemyManager::createEnemy(MagiciteGameEnemyManager::Sheep);
+            auto enemy = MagiciteGaemFactoryMethod::createEnemy(MagiciteGaemFactoryMethod::Sheep);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_AMMO);
             _phyLayer->addChild(enemy);
@@ -371,7 +371,7 @@ void MagiciteGameLayer::create_pitfall(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "pitfall")
         {
-            auto pit = MagiciteGamePitfallManager::createPitfall(MagiciteGamePitfallManager::Spine_Type);
+            auto pit = MagiciteGaemFactoryMethod::createPitfall(MagiciteGaemFactoryMethod::Spine_Type);
             pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(pit, true, Category::DEFAULT_PITFALL, Category::DEFAULT_GROUND | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND);
             _phyLayer->addChild(pit);

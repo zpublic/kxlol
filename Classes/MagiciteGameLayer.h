@@ -8,12 +8,10 @@
 #include "MagiciteGameOver.h"
 #include "MagiciteGameWin.h"
 #include "MagiciteGamePlayer.h"
-#include "MagiciteGameEnemyManager.h"
-#include "MagiciteGamePitfallManager.h"
-#include "MagiciteGameFriendManager.h"
 #include "MagiciteGameContact.h"
 #include "MagiciteGameControlAble.h"
 #include "MagiciteGameFireball.h"
+#include "MagiciteGaemFactoryMethod.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
 {
