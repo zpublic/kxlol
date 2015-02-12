@@ -5,12 +5,8 @@
 #include "MagiciteGameSpinePitfall.h"
 
 
-class MagiciteGamePitfallManager
+namespace MagiciteGamePitfallManager
 {
-public:
-    MagiciteGamePitfallManager();
-    ~MagiciteGamePitfallManager();
-
     enum Pitfall_Type : int
     {
         Spine_Type,
@@ -18,10 +14,6 @@ public:
 
     MagiciteGamePitfall* createPitfall(Pitfall_Type type, bool is_active = true);
     void destroyPitfall(MagiciteGamePitfall* ptr);
-
-    void updatePitfallAvtive();
-private:
-    std::vector<MagiciteGamePitfall*>               _pitfalls;
 };
 
 #endif //__MAGICITE__GAME_PITFALL_MANAGER__

@@ -8,11 +8,8 @@
 #include "MagiciteGameSlime.h"
 #include "MagiciteGameSheep.h"
 
-class MagiciteGameFriendManager
+namespace MagiciteGameFriendManager
 {
-public:
-    MagiciteGameFriendManager();
-
     enum Friend_Type : int
     {
         Human,
@@ -23,12 +20,6 @@ public:
 
     MagiciteGameMoveAbleLiving* createFriend(Friend_Type type, bool is_to_left = false);
     void destroyFriend(MagiciteGameMoveAbleLiving* living);
-
-    void updateFriendPos();
-
-private:
-    std::vector<MagiciteGameMoveAbleLiving*>                _friends;
-
 };
 
 #endif //__MAGICITE_GAME_FRIEND_MANAGER__

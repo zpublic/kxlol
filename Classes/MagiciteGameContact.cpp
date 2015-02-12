@@ -26,6 +26,7 @@ void MagiciteGameContact::change_moveable_direction(MagiciteGameMoveAbleLiving* 
     {
         moveObj->setDire(MagiciteGameMoveAbleLiving::Direction::right);
     }
+    moveObj->Move(moveObj->getDire());
 }
 
 bool MagiciteGameContact::is_moveable_on_ground(MagiciteGameMoveAbleLiving* moveObj, MagiciteGameObject* ground)

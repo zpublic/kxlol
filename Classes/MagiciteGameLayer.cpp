@@ -4,16 +4,12 @@ USING_NS_CC;
 
 MagiciteGameLayer::MagiciteGameLayer()
 {
-    _enemyManager = new MagiciteGameEnemyManager();
-    _pitfallManager = new MagiciteGamePitfallManager();
-    _friendManager = new MagiciteGameFriendManager();
+
 }
 
 MagiciteGameLayer::~MagiciteGameLayer()
 {
-    delete _enemyManager;
-    delete _pitfallManager;
-    delete _friendManager;
+
 }
 
 bool MagiciteGameLayer::init()
@@ -63,7 +59,7 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
-        friends = _friendManager->createFriend(
+        friends = MagiciteGameFriendManager::createFriend(
             MagiciteGameFriendManager::Slime, 
             (_player->getDire() == MagiciteGameMoveAbleLiving::Direction::left ? true : false));
         friends->setPosition(Vec2(_player->getPosition().x, _player->getPosition().y));
@@ -74,6 +70,8 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
             Category::DEFAULT_FRIEND,
             Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL);
         _phyLayer->addChild(friends);
+        friends->Move(friends->getDire());
+
         break;
     case EventKeyboard::KeyCode::KEY_F:
         fireball = MagiciteGameFireball::create();
@@ -100,9 +98,6 @@ void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, c
 
 void MagiciteGameLayer::update(float timeDelta)
 {
-    _enemyManager->updateEnemyPos();
-    _pitfallManager->updatePitfallAvtive();
-    _friendManager->updateFriendPos();
     _player->Move();
 }
 
@@ -163,7 +158,7 @@ void MagiciteGameLayer::try_player_contact_with_enemy(MagiciteGameObject* object
             enemy->attact();
             if (enemy->getHP() <= 0)
             {
-                _enemyManager->destroyEnemy(enemy);
+                MagiciteGameEnemyManager::destroyEnemy(enemy);
             }
             player->JumpOver();
             player->Jump();
@@ -202,9 +197,9 @@ void MagiciteGameLayer::try_friend_contact_with_pitfall(MagiciteGameObject* obje
         living->attact();
         if (living->getHP() <= 0)
         {
-            _friendManager->destroyFriend(living);
+            MagiciteGameFriendManager::destroyFriend(living);
         }
-        _pitfallManager->destroyPitfall(pitfall);
+        MagiciteGamePitfallManager::destroyPitfall(pitfall);
     }
 }
 
@@ -217,13 +212,13 @@ void MagiciteGameLayer::try_friend_contact_with_enemy(MagiciteGameObject* object
     living->attact();
     if (living->getHP() <= 0)
     {
-        _friendManager->destroyFriend(living);
+        MagiciteGameFriendManager::destroyFriend(living);
     }
     MagiciteGameContact::change_moveable_direction(enemy);
     enemy->attact();
     if (enemy->getHP() <= 0)
     {
-        _enemyManager->destroyEnemy(enemy);
+        MagiciteGameEnemyManager::destroyEnemy(enemy);
     }
 }
 
@@ -248,7 +243,7 @@ void MagiciteGameLayer::try_ammo_contact_with_enemy(MagiciteGameObject* objectA,
     enemy->attact();
     if (enemy->getHP() <= 0)
     {
-        _enemyManager->destroyEnemy(enemy);
+        MagiciteGameEnemyManager::destroyEnemy(enemy);
     }
 }
 
@@ -354,10 +349,15 @@ void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "enemy")
         {
-            auto enemy = _enemyManager->createEnemy(MagiciteGameEnemyManager::Sheep);
+            auto enemy = MagiciteGameEnemyManager::createEnemy(MagiciteGameEnemyManager::Sheep);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_AMMO);
             _phyLayer->addChild(enemy);
+            if (enemy->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
+            {
+                auto moveEnemy = reinterpret_cast<MagiciteGameMoveAbleLiving*>(enemy);
+                moveEnemy->Move(moveEnemy->getDire());
+            }
         }
     }
 }
@@ -371,7 +371,7 @@ void MagiciteGameLayer::create_pitfall(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "pitfall")
         {
-            auto pit = _pitfallManager->createPitfall(MagiciteGamePitfallManager::Spine_Type);
+            auto pit = MagiciteGamePitfallManager::createPitfall(MagiciteGamePitfallManager::Spine_Type);
             pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(pit, true, Category::DEFAULT_PITFALL, Category::DEFAULT_GROUND | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND);
             _phyLayer->addChild(pit);
