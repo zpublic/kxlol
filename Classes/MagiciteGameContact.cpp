@@ -1,16 +1,7 @@
 #include "MagiciteGameContact.h"
 
-std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_living_contact_with_ground = MagiciteGameContact::holders;
-std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_player_contact_with_enemy = MagiciteGameContact::holders;
-std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_player_contact_with_pitfall = MagiciteGameContact::holders;
-std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_friend_contact_with_pitfall = MagiciteGameContact::holders;
-std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_friend_contact_with_enemy = MagiciteGameContact::holders;
-std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_player_contact_with_end = MagiciteGameContact::holders;
-std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_enemy_contact_with_enemy = MagiciteGameContact::holders;
-std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_ammo_contact_with_enemy = MagiciteGameContact::holders;
-std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_ammo_contact_with_ground = MagiciteGameContact::holders;
-std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_ammo_contact_with_edge = MagiciteGameContact::holders;
-std::function<void(MagiciteGameObject*, MagiciteGameObject*)> MagiciteGameContact::try_living_contact_with_edge = MagiciteGameContact::holders;
+std::function<void(void)> MagiciteGameContact::_onWin = MagiciteGameContact::holders;
+std::function<void(void)> MagiciteGameContact::_onOver = MagiciteGameContact::holders;
 
 std::map<MagiciteGameContact::Contact_type, std::map<MagiciteGameContact::Contact_type, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>> MagiciteGameContact::on_contact;
 
@@ -64,94 +55,197 @@ void MagiciteGameContact::try_to_change_living_direction(MagiciteGameLiving* liv
 
 void MagiciteGameContact::resiger_contact()
 {
-    on_contact[Contact_type::enemy_type][Contact_type::ground_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::friend_type][Contact_type::ground_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::player_type][Contact_type::ground_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::enemy_type][Contact_type::ground_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::ammo_type][Contact_type::ground_type] = std::bind(_try_ammo_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::enemy_type][Contact_type::ground_type] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::friend_type][Contact_type::ground_type] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::player_type][Contact_type::ground_type] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::enemy_type][Contact_type::ground_type] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::ammo_type][Contact_type::ground_type] = std::bind(try_ammo_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
 
 
-    on_contact[Contact_type::enemy_type][Contact_type::player_type] = std::bind(_try_player_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::pitfall_type][Contact_type::player_type] = std::bind(_try_player_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::ground_type][Contact_type::player_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::end_type][Contact_type::player_type] = std::bind(_try_player_contact_with_end, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::edge_type][Contact_type::player_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::enemy_type][Contact_type::player_type] = std::bind(try_player_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::pitfall_type][Contact_type::player_type] = std::bind(try_player_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::ground_type][Contact_type::player_type] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::end_type][Contact_type::player_type] = std::bind(try_player_contact_with_end, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::edge_type][Contact_type::player_type] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
 
-    on_contact[Contact_type::enemy_type][Contact_type::friend_type] = std::bind(_try_friend_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::pitfall_type][Contact_type::friend_type] = std::bind(_try_friend_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::ground_type][Contact_type::friend_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::edge_type][Contact_type::friend_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::enemy_type][Contact_type::friend_type] = std::bind(try_friend_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::pitfall_type][Contact_type::friend_type] = std::bind(try_friend_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::ground_type][Contact_type::friend_type] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::edge_type][Contact_type::friend_type] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
 
-    on_contact[Contact_type::friend_type][Contact_type::pitfall_type] = std::bind(_try_friend_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::player_type][Contact_type::pitfall_type] = std::bind(_try_player_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::friend_type][Contact_type::pitfall_type] = std::bind(try_friend_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::player_type][Contact_type::pitfall_type] = std::bind(try_player_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
 
-    on_contact[Contact_type::friend_type][Contact_type::enemy_type] = std::bind(_try_friend_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::player_type][Contact_type::enemy_type] = std::bind(_try_player_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::ground_type][Contact_type::enemy_type] = std::bind(_try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::enemy_type][Contact_type::enemy_type] = std::bind(_try_enemy_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::ammo_type][Contact_type::enemy_type] = std::bind(_try_ammo_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::edge_type][Contact_type::enemy_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::friend_type][Contact_type::enemy_type] = std::bind(try_friend_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::player_type][Contact_type::enemy_type] = std::bind(try_player_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::ground_type][Contact_type::enemy_type] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::enemy_type][Contact_type::enemy_type] = std::bind(try_enemy_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::ammo_type][Contact_type::enemy_type] = std::bind(try_ammo_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::edge_type][Contact_type::enemy_type] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
 
 
-    on_contact[Contact_type::player_type][Contact_type::end_type] = std::bind(_try_player_contact_with_end, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::player_type][Contact_type::end_type] = std::bind(try_player_contact_with_end, std::placeholders::_1, std::placeholders::_2);
 
-    on_contact[Contact_type::enemy_type][Contact_type::ammo_type] = std::bind(_try_ammo_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::ground_type][Contact_type::ammo_type] = std::bind(_try_ammo_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::edge_type][Contact_type::ammo_type] = std::bind(_try_ammo_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::enemy_type][Contact_type::ammo_type] = std::bind(try_ammo_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::ground_type][Contact_type::ammo_type] = std::bind(try_ammo_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::edge_type][Contact_type::ammo_type] = std::bind(try_ammo_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
 
-    on_contact[Contact_type::ammo_type][Contact_type::edge_type] = std::bind(_try_ammo_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::player_type][Contact_type::edge_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::friend_type][Contact_type::edge_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::enemy_type][Contact_type::edge_type] = std::bind(_try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::ammo_type][Contact_type::edge_type] = std::bind(try_ammo_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::player_type][Contact_type::edge_type] = std::bind(try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::friend_type][Contact_type::edge_type] = std::bind(try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::enemy_type][Contact_type::edge_type] = std::bind(try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
 
 }
 
-void MagiciteGameContact::_try_living_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::try_living_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
-    try_living_contact_with_ground(objectA, objectB);
+    MagiciteGameMoveAbleLiving* living = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    MagiciteGameObject* ground = objectB;
+    if (MagiciteGameContact::is_moveable_on_ground(living, ground))
+    {
+        if (MagiciteGameContact::is_moveable_above_ground(living, ground))
+        {
+            living->JumpOver();
+        }
+    }
+    else
+    {
+        if (!living->_is_contraled)
+        {
+            MagiciteGameContact::change_moveable_direction(living);
+        }
+    }
 }
 
-void MagiciteGameContact::_try_player_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::try_player_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
-    try_player_contact_with_enemy(objectA, objectB);
+    MagiciteGameMoveAbleLiving* player = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    MagiciteGameLiving* enemy = reinterpret_cast<MagiciteGameLiving*>(objectB);
+
+    Vec2 playerPos = player->getPosition();
+    Vec2 enemyPos = enemy->getPosition();
+    Size playergSize = player->getContentSize();
+    Size enemySize = enemy->getContentSize();
+
+    if (playerPos.x + playergSize.width / 2 > enemyPos.x - enemySize.width / 2
+        && playerPos.x - playergSize.width / 2 < enemyPos.x + enemySize.width / 2)
+    {
+        if (playerPos.y - playergSize.height / 2 + -1 * (player->getBody()->GetLinearVelocity().y) + 1
+            >= enemyPos.y + enemySize.height / 2)
+        {
+            enemy->attact();
+            if (enemy->getHP() <= 0)
+            {
+                MagiciteGaemFactoryMethod::destroyEnemy(enemy);
+            }
+            player->JumpOver();
+            player->Jump();
+        }
+        else
+        {
+            player->attact();
+            if (player->getHP() <= 0)
+            {
+                onOver();
+            }
+        }
+    }
 }
 
-void MagiciteGameContact::_try_player_contact_with_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::try_player_contact_with_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
-    try_player_contact_with_pitfall(objectA, objectB);
+    MagiciteGameMoveAbleLiving* player = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    MagiciteGamePitfall* pitfall = reinterpret_cast<MagiciteGamePitfall*>(objectB);
+    if (pitfall->getPitFallAvtive())
+    {
+        player->attact();
+        if (player->getHP() <= 0)
+        {
+            onOver();
+        }
+    }
 }
 
-void MagiciteGameContact::_try_friend_contact_with_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::try_friend_contact_with_pitfall(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
-    try_friend_contact_with_pitfall(objectA, objectB);
+    MagiciteGameMoveAbleLiving* living = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    MagiciteGamePitfall* pitfall = reinterpret_cast<MagiciteGamePitfall*>(objectB);
+    if (pitfall->getPitFallAvtive())
+    {
+        living->attact();
+        if (living->getHP() <= 0)
+        {
+            MagiciteGaemFactoryMethod::destroyFriend(living);
+        }
+        MagiciteGaemFactoryMethod::destroyPitfall(pitfall);
+    }
 }
 
-void MagiciteGameContact::_try_friend_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::try_friend_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
-    try_friend_contact_with_enemy(objectA, objectB);
+    MagiciteGameMoveAbleLiving* living = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    MagiciteGameMoveAbleLiving* enemy = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectB);
+
+    MagiciteGameContact::change_moveable_direction(living);
+    living->attact();
+    if (living->getHP() <= 0)
+    {
+        MagiciteGaemFactoryMethod::destroyFriend(living);
+    }
+    MagiciteGameContact::change_moveable_direction(enemy);
+    enemy->attact();
+    if (enemy->getHP() <= 0)
+    {
+        MagiciteGaemFactoryMethod::destroyEnemy(enemy);
+    }
 }
 
-void MagiciteGameContact::_try_enemy_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::try_enemy_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
-    try_enemy_contact_with_enemy(objectA, objectB);
+    auto livingA = reinterpret_cast<MagiciteGameLiving*>(objectA);
+    auto livingB = reinterpret_cast<MagiciteGameLiving*>(objectB);
+    MagiciteGameContact::try_to_change_living_direction(livingA);
+    MagiciteGameContact::try_to_change_living_direction(livingB);
 }
 
-void MagiciteGameContact::_try_player_contact_with_end(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::try_player_contact_with_end(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
-    try_player_contact_with_end(objectA, objectB);
+    onWin();
 }
 
-void MagiciteGameContact::_try_ammo_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::try_ammo_contact_with_enemy(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
-    try_ammo_contact_with_enemy(objectA, objectB);
+    auto ammo = reinterpret_cast<MagiciteGameAmmo*>(objectA);
+    auto enemy = reinterpret_cast<MagiciteGameLiving*>(objectB);
+    ammo->Dead();
+    enemy->attact();
+    if (enemy->getHP() <= 0)
+    {
+        MagiciteGaemFactoryMethod::destroyEnemy(enemy);
+    }
 }
 
-void MagiciteGameContact::_try_ammo_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::try_ammo_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
-    try_ammo_contact_with_ground(objectA, objectB);
+    auto ammo = reinterpret_cast<MagiciteGameAmmo*>(objectA);
+    ammo->Dead();
 }
 
-void MagiciteGameContact::holders(MagiciteGameObject*, MagiciteGameObject*)
+void MagiciteGameContact::try_ammo_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    objectA->Dead();
+}
+
+void MagiciteGameContact::try_living_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    auto moveLiving = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    if (!moveLiving->_is_contraled)
+    {
+        MagiciteGameContact::try_to_change_living_direction(moveLiving);
+    }
+}
+
+void MagiciteGameContact::holders()
 {
 
 }
@@ -209,12 +303,12 @@ bool MagiciteGameContact::is_in_types(MagiciteGameContact::Contact_type type)
     return false;
 }
 
-void MagiciteGameContact::_try_ammo_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::onWin()
 {
-    try_ammo_contact_with_edge(objectA, objectB);
+    _onWin();
 }
 
-void MagiciteGameContact::_try_living_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+void MagiciteGameContact::onOver()
 {
-    try_living_contact_with_edge(objectA, objectB);
+    _onOver();
 }
