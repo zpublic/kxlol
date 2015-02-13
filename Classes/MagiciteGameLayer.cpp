@@ -68,7 +68,7 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
             friends,
             false,
             Category::DEFAULT_FRIEND,
-            Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL);
+            Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_HOLE);
         _phyLayer->addChild(friends);
         friends->Move(friends->getDire());
 
@@ -150,7 +150,7 @@ void MagiciteGameLayer::create_player(TMXObjectGroup* game)
     ValueMap playerMap = game->getObject("player");
     Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
     _player->setPosition(playerPos);
-    _phyLayer->createPhyBody(_player->getSprite(), false, Category::DEFAULT_LIVING, Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_GROUND | Category::DEFAULT_END);
+    _phyLayer->createPhyBody(_player->getSprite(), false, Category::DEFAULT_LIVING, Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_GROUND | Category::DEFAULT_END | Category::DEFAULT_HOLE);
     _phyLayer->addChild(_player->getSprite());
 }
 
@@ -165,7 +165,7 @@ void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
         {
             auto enemy = MagiciteGaemFactoryMethod::createEnemy(MagiciteGaemFactoryMethod::Sheep);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
-            _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_AMMO);
+            _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_AMMO | Category::DEFAULT_HOLE);
             _phyLayer->addChild(enemy);
             if (enemy->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
             {
@@ -195,7 +195,7 @@ void MagiciteGameLayer::create_pitfall(TMXObjectGroup* game)
             auto pit = MagiciteGaemFactoryMethod::createPitfall(MagiciteGaemFactoryMethod::Pitfall);
             pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             pit->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
-            _phyLayer->createPhyBody(pit, true, Category::DEFAULT_PITFALL, Category::DEFAULT_GROUND | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND);
+            _phyLayer->createPhyBody(pit, true, Category::DEFAULT_HOLE, Category::DEFAULT_GROUND | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_ENEMY);
             _phyLayer->addChild(pit);
         }
     }

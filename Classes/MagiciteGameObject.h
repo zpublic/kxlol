@@ -25,6 +25,7 @@ public:
         DEFAULT_END      = 0x0010,
         DEFAULT_FRIEND   = 0x0020,
         DEFAULT_AMMO     = 0x0040,
+        DEFAULT_HOLE     = 0x0080,
         DEFAULT_ALL      = 0xFFFF,
     };
 
