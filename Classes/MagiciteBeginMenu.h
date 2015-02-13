@@ -8,6 +8,8 @@ class MagiciteBeginMenu : public cocos2d::Scene
 public:
     virtual bool init();
 
+    void initBeginMenu2();
+
     CREATE_FUNC(MagiciteBeginMenu);
 };
 

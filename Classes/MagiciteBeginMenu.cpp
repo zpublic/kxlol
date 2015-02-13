@@ -9,6 +9,14 @@ bool MagiciteBeginMenu::init()
     if(!Scene::init())
         return false;
 
+    srand(time(0));
+
+    if(rand() % 2 == 1)
+    {
+        initBeginMenu2();
+        return true;
+    }
+
     auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
     auto origin = cocos2d::Director::getInstance()->getVisibleOrigin();
 
@@ -70,5 +78,39 @@ bool MagiciteBeginMenu::init()
     logo->runAction(cocos2d::RepeatForever::create(cocos2d::Sequence::create(actions)));
 
     return true;
+}
+
+void MagiciteBeginMenu::initBeginMenu2()
+{
+    auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+    auto origin = cocos2d::Director::getInstance()->getVisibleOrigin();
+    auto background = cocos2d::Sprite::create("img/Magicite/background/background_menu.png");
+    background->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    this->addChild(background);
+
+    cocos2d::Vector<cocos2d::Menu*> menus;
+
+    auto spr = cocos2d::Sprite::create("img/Magicite/UI/menu.png", cocos2d::Rect(0.0f, 0.0f, 154.0f, 65.0f));
+    auto menuItem = cocos2d::MenuItemSprite::create(spr, spr);
+    menuItem->setCallback([](cocos2d::Ref* ){
+        cocos2d::Director::getInstance()->replaceScene(MagiciteScene::create());
+    });
+    menuItem->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    auto menu = cocos2d::Menu::create(menuItem, nullptr);
+    menu->setPosition(0.0f, 0.0f);
+    this->addChild(menu);
+    menus.pushBack(menu);
+
+    spr = cocos2d::Sprite::create("img/Magicite/UI/menu.png", cocos2d::Rect(0.0f, 65.0f, 154.0f, 65.0f));
+    menuItem = cocos2d::MenuItemSprite::create(spr, spr);
+    menuItem->setCallback([](cocos2d::Ref* ){
+        cocos2d::Director::getInstance()->end();
+    });
+    menuItem->setPosition(visibleSize.width / 2, visibleSize.height / 2 - 65.0f);
+    menu = cocos2d::Menu::create(menuItem, nullptr);
+    menu->setPosition(0.0f, 0.0f);
+    this->addChild(menu);
+    menus.pushBack(menu);
+
 }
 
