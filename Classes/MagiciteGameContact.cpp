@@ -177,7 +177,10 @@ void MagiciteGameContact::try_friend_contact_with_pitfall(MagiciteGameObject* ob
         {
             MagiciteGaemFactoryMethod::destroyFriend(living);
         }
-        MagiciteGaemFactoryMethod::destroyPitfall(pitfall);
+        if (pitfall->PiffallType == MagiciteGamePitfall::Spine)
+        {
+            MagiciteGaemFactoryMethod::destroyPitfall(pitfall);
+        }
     }
 }
 

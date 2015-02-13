@@ -3,6 +3,7 @@
 USING_NS_CC;
 
 MagiciteGameSpinePitfall::MagiciteGameSpinePitfall()
+:MagiciteGamePitfall(MagiciteGamePitfall::Spine)
 {
 
 }

@@ -190,6 +190,14 @@ void MagiciteGameLayer::create_pitfall(TMXObjectGroup* game)
             _phyLayer->createPhyBody(pit, true, Category::DEFAULT_PITFALL, Category::DEFAULT_GROUND | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND);
             _phyLayer->addChild(pit);
         }
+        else if (vm.at("type").asString() == "hole")
+        {
+            auto pit = MagiciteGaemFactoryMethod::createPitfall(MagiciteGaemFactoryMethod::Pitfall);
+            pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
+            pit->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
+            _phyLayer->createPhyBody(pit, true, Category::DEFAULT_PITFALL, Category::DEFAULT_GROUND | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND);
+            _phyLayer->addChild(pit);
+        }
     }
 }
 

@@ -7,7 +7,12 @@
 class MagiciteGamePitfall : public MagiciteGameObject
 {
 public:
-    MagiciteGamePitfall();
+    enum Type{
+        hold,
+        Spine,
+    }PiffallType;
+
+    MagiciteGamePitfall(Type type = hold);
 
     virtual bool init();
     virtual bool initWithFile(const char* filename);

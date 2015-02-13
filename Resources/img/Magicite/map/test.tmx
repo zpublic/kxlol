@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="10" tilewidth="32" tileheight="32" nextobjectid="27">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="10" tilewidth="32" tileheight="32" nextobjectid="32">
  <tileset firstgid="1" name="g" tilewidth="32" tileheight="32">
   <image source="ground.png" width="1280" height="320"/>
  </tileset>
- <layer name="ground" width="40" height="10">
+ <layer name="ground" width="50" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC83S1W5UURQA0Bke0C/A3YoU95LgLsWhgrS4O22hhhQv8gW4a3C+AHdN8C/AXdak9yYTXoZHTrJykpu7JfvsSOT/ON1IYRvb2cFOmpJEM5rTgpYk04rWtKEt7WhPBzrSic50oWtcje5MTWAa08lkItlB/AUuconLpDKCkYxiNGMYyzjGM4E00smIyzmJyUwhK6gR1t6SwFZKg55iNgfxL3nFa96QQy55rGQV+RRQSBHFrGYNa1lHCevZwEY2BTXC2omUBnc4t5QgvmI0EqlEZaqwy7fd7GEv+9jPAQ5yiMMc4SjHOM4JTnKK05TjDGc59w/OB72FcwvnfuIvV7jKNa5zg5vc4jZ3uMs97vOAhzziMU94GvQX84zn/+BF0FsonPujv7zlHe/5wEc+8ZkvfOUb3/nBT37xm4j5RykXLduLUPloYhWiZXsSryTIG6+q/6pRnRrUpBa1qUNd6lGfBjSkEY1pQlOSomV7EWoZTSyZTnSmC13pFuSN14Oe9KI3fehLP/ozgIEMYjBDGMowhpPKCEYyitGMYSzjGM8E0kgng0wmMonJTCGLbKYyjenMYCazmM0c5jKP+SxgIYtYzBKWsozlrCCHXPJYGXtn8imgkCKKWc0a1sbelRLWs4GNbGIzW9hKKdv4A9uXreVABgAA
+   H4sIAAAAAAAAC83T1Y4UURAA0Bke8B/A3WFZ3BYS3J3F3d3dfZGFxX4Adw0OP4C7Jjg/gLucDj3ZYQKZ5Y1KTm7PQ1XX7aqJRP6PSKNxeKbF/W6Sw/xKVKYKValGCtVJpQY1qUVt6lCXetSnAQ1plPDuEUmMZBQDGcTwhPx4OYmudKM7PUinJ73oTR/60o/+DIh792CGMJRhYS+xHtclsZ6sSPa3z4z8Pot/nccc5jKP+SxgIYtYzBKWsozlrGAlGaxiNWtYG/YS6zGZrPCMn0PwnDsaieSJZp8jE/oN8jawkU1sZgtb2cZ2drCTXexmD3vZx34OcJBDHOYIRzlGLo5zgpM5cCrsOzPy+xxT9F49mn0mRpB3mjOc5RznucBFLnGZK1zlGte5wU1ucZs73OUe93nAw/AegUc8zoEn4R1iYnO8lyAxgrynPOM5L3jJK17zhre84z0f+MgnPvOFr3zjOz+Cor5XlFzRX/sYkzuaXLAzwX7GywjrxkuMIC8v+chPAQpSiMIUoSjFKE4JSlKK0pShLOUoTwUqUonK0V/7GJMSTS7Ymfo0oCGNSAvrxkuMIC+VGtSkFrVpSjOa04KWtKI1bWhLO9rTgY50ojNd6Eo3utODdHrSi970oS/96M8ABjKIwQxhKMMYzojgv80oRv/hHn+rO4axjGM8E5jIJCYzhalMYzozmMksZjOHucxjfrBfLGQRi1nCUpaxnBXBPpHBKlazhrVkso71ZLHhD/f4W92fp2PVgNAHAAA=
   </data>
  </layer>
  <objectgroup name="physics">
@@ -13,12 +13,14 @@
   <object id="12" type="cube" x="252" y="29" width="291" height="20"/>
   <object id="14" type="cube" x="579" y="224" width="699" height="94"/>
   <object id="15" type="cube" x="1153" y="130" width="125" height="92"/>
+  <object id="27" type="cube" x="1409" y="225" width="190" height="94"/>
  </objectgroup>
  <objectgroup name="game">
   <object id="17" name="player" x="96" y="95" width="32" height="30"/>
-  <object id="18" name="finish" x="1218" y="84" width="29" height="45"/>
+  <object id="18" name="finish" x="1505" y="178" width="29" height="45"/>
   <object id="24" type="pitfall" x="863" y="191" width="32" height="32"/>
   <object id="25" type="enemy" x="704" y="189" width="32" height="32"/>
   <object id="26" type="enemy" x="992" y="189" width="32" height="32"/>
+  <object id="30" type="hole" x="1279" y="314" width="128" height="5"/>
  </objectgroup>
 </map>
