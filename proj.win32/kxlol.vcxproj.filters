@@ -181,12 +181,6 @@
     <ClCompile Include="..\Classes\MagiciteGameSpinePitfall.cpp">
       <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameEnemyManager.cpp">
-      <Filter>Magicite\GameLogic\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGamePitfallManager.cpp">
-      <Filter>Magicite\GameLogic\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\AequitasKeyMap.cpp">
       <Filter>src\lab\Aequitas（音乐类）</Filter>
     </ClCompile>
@@ -195,9 +189,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePhyWorld.cpp">
       <Filter>Magicite\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameFriendManager.cpp">
-      <Filter>Magicite\GameLogic\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameControlAble.cpp">
       <Filter>Magicite\GameLogic\Object</Filter>
@@ -213,6 +204,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameFireball.cpp">
       <Filter>Magicite\GameLogic\Object\Ammo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGaemFactoryMethod.cpp">
+      <Filter>Magicite\GameLogic\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -328,12 +322,6 @@
     <ClInclude Include="..\Classes\MagiciteGameSpinePitfall.h">
       <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameEnemyManager.h">
-      <Filter>Magicite\GameLogic\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGamePitfallManager.h">
-      <Filter>Magicite\GameLogic\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\AequitasKeyMap.h">
       <Filter>src\lab\Aequitas（音乐类）</Filter>
     </ClInclude>
@@ -361,9 +349,6 @@
     <ClInclude Include="..\Classes\MagiciteEffectPositive.h">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameFriendManager.h">
-      <Filter>Magicite\GameLogic\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameControlAble.h">
       <Filter>Magicite\GameLogic\Object</Filter>
     </ClInclude>
@@ -378,6 +363,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameFireball.h">
       <Filter>Magicite\GameLogic\Object\Ammo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGaemFactoryMethod.h">
+      <Filter>Magicite\GameLogic\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

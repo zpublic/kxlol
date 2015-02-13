@@ -147,13 +147,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\base\Player.cpp" />
     <ClCompile Include="..\Classes\Component\slot.cpp" />
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGaemFactoryMethod.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameAmmo.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameChicken.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameContact.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameControlAble.cpp" />
-    <ClCompile Include="..\Classes\MagiciteGameEnemyManager.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameFireball.cpp" />
-    <ClCompile Include="..\Classes\MagiciteGameFriendManager.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameHuman.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameMoveAbleLiving.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameObject.cpp" />
@@ -170,7 +169,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteGamePhyWorld.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePiranha.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePitfall.cpp" />
-    <ClCompile Include="..\Classes\MagiciteGamePitfallManager.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePlayer.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameSelectLevel.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameSheep.cpp" />
@@ -204,13 +202,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteEffectPositive.h" />
     <ClInclude Include="..\Classes\MagiciteEffectShoot.h" />
     <ClInclude Include="..\Classes\MagiciteEffectValueChange.h" />
+    <ClInclude Include="..\Classes\MagiciteGaemFactoryMethod.h" />
     <ClInclude Include="..\Classes\MagiciteGameAmmo.h" />
     <ClInclude Include="..\Classes\MagiciteGameChicken.h" />
     <ClInclude Include="..\Classes\MagiciteGameContact.h" />
     <ClInclude Include="..\Classes\MagiciteGameControlAble.h" />
-    <ClInclude Include="..\Classes\MagiciteGameEnemyManager.h" />
     <ClInclude Include="..\Classes\MagiciteGameFireball.h" />
-    <ClInclude Include="..\Classes\MagiciteGameFriendManager.h" />
     <ClInclude Include="..\Classes\MagiciteGameHuman.h" />
     <ClInclude Include="..\Classes\MagiciteGameMoveAbleLiving.h" />
     <ClInclude Include="..\Classes\MagiciteGameObject.h" />
@@ -227,7 +224,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGamePhyWorld.h" />
     <ClInclude Include="..\Classes\MagiciteGamePiranha.h" />
     <ClInclude Include="..\Classes\MagiciteGamePitfall.h" />
-    <ClInclude Include="..\Classes\MagiciteGamePitfallManager.h" />
     <ClInclude Include="..\Classes\MagiciteGamePlayer.h" />
     <ClInclude Include="..\Classes\MagiciteGameSelectLevel.h" />
     <ClInclude Include="..\Classes\MagiciteGameSheep.h" />
