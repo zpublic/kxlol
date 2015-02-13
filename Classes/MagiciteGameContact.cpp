@@ -75,6 +75,7 @@ void MagiciteGameContact::resiger_contact()
 
     on_contact[Contact_type::friend_type][Contact_type::pitfall_type] = std::bind(try_friend_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
     on_contact[Contact_type::player_type][Contact_type::pitfall_type] = std::bind(try_player_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Contact_type::enemy_type][Contact_type::pitfall_type] = std::bind(try_enemy_contact_with_hole, std::placeholders::_1, std::placeholders::_2);
 
     on_contact[Contact_type::friend_type][Contact_type::enemy_type] = std::bind(try_friend_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
     on_contact[Contact_type::player_type][Contact_type::enemy_type] = std::bind(try_player_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
@@ -82,6 +83,7 @@ void MagiciteGameContact::resiger_contact()
     on_contact[Contact_type::enemy_type][Contact_type::enemy_type] = std::bind(try_enemy_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
     on_contact[Contact_type::ammo_type][Contact_type::enemy_type] = std::bind(try_ammo_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
     on_contact[Contact_type::edge_type][Contact_type::enemy_type] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::pitfall_type][Contact_type::enemy_type] = std::bind(try_enemy_contact_with_hole, std::placeholders::_2, std::placeholders::_1);
 
 
     on_contact[Contact_type::player_type][Contact_type::end_type] = std::bind(try_player_contact_with_end, std::placeholders::_1, std::placeholders::_2);
@@ -177,7 +179,10 @@ void MagiciteGameContact::try_friend_contact_with_pitfall(MagiciteGameObject* ob
         {
             MagiciteGaemFactoryMethod::destroyFriend(living);
         }
-        MagiciteGaemFactoryMethod::destroyPitfall(pitfall);
+        if (pitfall->PiffallType == MagiciteGamePitfall::Spine)
+        {
+            MagiciteGaemFactoryMethod::destroyPitfall(pitfall);
+        }
     }
 }
 
@@ -227,13 +232,12 @@ void MagiciteGameContact::try_ammo_contact_with_enemy(MagiciteGameObject* object
 
 void MagiciteGameContact::try_ammo_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
-    auto ammo = reinterpret_cast<MagiciteGameAmmo*>(objectA);
-    ammo->Dead();
+    reinterpret_cast<MagiciteGameAmmo*>(objectA)->Dead();
 }
 
 void MagiciteGameContact::try_ammo_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
-    objectA->Dead();
+    reinterpret_cast<MagiciteGameAmmo*>(objectA)->Dead();
 }
 
 void MagiciteGameContact::try_living_contact_with_edge(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
@@ -311,4 +315,9 @@ void MagiciteGameContact::onWin()
 void MagiciteGameContact::onOver()
 {
     _onOver();
+}
+
+void MagiciteGameContact::try_enemy_contact_with_hole(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    reinterpret_cast<MagiciteGameLiving*>(objectA)->Dead();
 }

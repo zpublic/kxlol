@@ -129,6 +129,13 @@ MagiciteGamePitfall* MagiciteGaemFactoryMethod::createPitfall(Pitfall_Type type,
             ptr->setPitFallAvtive(is_active);
         }
         return ptr;
+    case MagiciteGaemFactoryMethod::Pitfall:
+        ptr = MagiciteGamePitfall::create();
+        if (ptr != nullptr)
+        {
+            ptr->setPitFallAvtive(is_active);
+        }
+        return ptr;
     default:
         break;
     }

@@ -13,6 +13,7 @@ namespace MagiciteGaemFactoryMethod
 {
     enum Pitfall_Type : int
     {
+        Pitfall,
         Spine_Type,
     };
     enum LivingType

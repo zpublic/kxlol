@@ -2,8 +2,8 @@
 
 USING_NS_CC;
 
-MagiciteGamePitfall::MagiciteGamePitfall()
-:MagiciteGameObject(MagiciteGameObject::T_Pitfall),_is_active(true), _change_flag(false)
+MagiciteGamePitfall::MagiciteGamePitfall(Type type/* = hold*/)
+:MagiciteGameObject(MagiciteGameObject::T_Pitfall), _is_active(true), _change_flag(false), PiffallType(type)
 {
 
 }

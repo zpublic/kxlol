@@ -47,6 +47,7 @@ namespace MagiciteGameContact
 
     void try_living_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
+    void try_enemy_contact_with_hole(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_with_pitfall(MagiciteGameObject*, MagiciteGameObject*);
     void try_friend_contact_with_pitfall(MagiciteGameObject*, MagiciteGameObject*);
     void try_friend_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
