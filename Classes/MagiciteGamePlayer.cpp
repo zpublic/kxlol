@@ -195,6 +195,6 @@ void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* ev
 
 void MagiciteGamePlayer::activeSpeedUp()
 {
-    auto buff = new MagiciteEffectSpeenUp(_player);
+    auto buff = new MagiciteEffectSpeedUp(_player);
     buff->positive();
 }

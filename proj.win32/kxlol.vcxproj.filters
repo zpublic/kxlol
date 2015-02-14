@@ -208,7 +208,7 @@
     <ClCompile Include="..\Classes\MagiciteGaemFactoryMethod.cpp">
       <Filter>Magicite\GameLogic\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteEffectSpeenUp.cpp">
+    <ClCompile Include="..\Classes\MagiciteEffectSpeedUp.cpp">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClCompile>
   </ItemGroup>
@@ -370,7 +370,7 @@
     <ClInclude Include="..\Classes\MagiciteGaemFactoryMethod.h">
       <Filter>Magicite\GameLogic\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteEffectSpeenUp.h">
+    <ClInclude Include="..\Classes\MagiciteEffectSpeedUp.h">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClInclude>
   </ItemGroup>

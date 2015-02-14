@@ -5,10 +5,10 @@
 #include "MagiciteGameMoveAbleLiving.h"
 #include "MagiciteEffectBuffer.h"
 
-class MagiciteEffectSpeenUp : public MagiciteEffectBuffer
+class MagiciteEffectSpeedUp : public MagiciteEffectBuffer
 {
 public:
-    MagiciteEffectSpeenUp(MagiciteGameMoveAbleLiving* moveable);
+    MagiciteEffectSpeedUp(MagiciteGameMoveAbleLiving* moveable);
 
     virtual void positive();
         //MagiciteEffectValueChange.positive

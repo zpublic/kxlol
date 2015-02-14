@@ -5,7 +5,7 @@
 #include "MagiciteGameChicken.h"
 #include "MagiciteGameHuman.h"
 #include "MagiciteGameControlAble.h"
-#include "MagiciteEffectSpeenUp.h"
+#include "MagiciteEffectSpeedUp.h"
 
 class MagiciteGamePlayer : public MagiciteGameControlAble
 {
