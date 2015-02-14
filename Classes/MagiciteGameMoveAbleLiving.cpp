@@ -88,12 +88,12 @@ void MagiciteGameMoveAbleLiving::JumpOver()
 {
     if (getState(State::S_Jump))
     {
-        setState(State::S_Jump, false);
         this->stopAnimation(AnimationTag::Jump_Tag);
         if (getState(State::S_Move))
         {
             this->startAnimation(MagiciteGameMoveAble::Move_Tag);
         }
+        setState(State::S_Jump, false);
     }
 }
 
@@ -112,7 +112,7 @@ void MagiciteGameMoveAbleLiving::startAnimation(AnimationTag tag)
     switch (tag)
     {
     case MagiciteGameMoveAble::Move_Tag:
-        if (getState(State::S_Move) == false)
+        if (getState(State::S_Move) == false || getState(State::S_Jump))
         {
             this->runAction(createAnimateMove());
         }

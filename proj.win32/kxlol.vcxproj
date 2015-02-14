@@ -147,6 +147,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\base\Player.cpp" />
     <ClCompile Include="..\Classes\Component\slot.cpp" />
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
+    <ClCompile Include="..\Classes\MagiciteEffectJumpHigh.cpp" />
+    <ClCompile Include="..\Classes\MagiciteEffectSpeedUp.cpp" />
     <ClCompile Include="..\Classes\MagiciteGaemFactoryMethod.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameAmmo.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameChicken.cpp" />
@@ -199,8 +201,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteEffect.h" />
     <ClInclude Include="..\Classes\MagiciteEffectBuffer.h" />
     <ClInclude Include="..\Classes\MagiciteEffectCreatePitfall.h" />
+    <ClInclude Include="..\Classes\MagiciteEffectJumpHigh.h" />
     <ClInclude Include="..\Classes\MagiciteEffectPositive.h" />
     <ClInclude Include="..\Classes\MagiciteEffectShoot.h" />
+    <ClInclude Include="..\Classes\MagiciteEffectSpeedUp.h" />
     <ClInclude Include="..\Classes\MagiciteEffectValueChange.h" />
     <ClInclude Include="..\Classes\MagiciteGaemFactoryMethod.h" />
     <ClInclude Include="..\Classes\MagiciteGameAmmo.h" />
@@ -229,6 +233,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGameSheep.h" />
     <ClInclude Include="..\Classes\MagiciteGameSlime.h" />
     <ClInclude Include="..\Classes\MagiciteGameSpinePitfall.h" />
+    <ClInclude Include="..\Classes\MagiciteGameTagManager.h" />
     <ClInclude Include="..\Classes\MagiciteGameWin.h" />
     <ClInclude Include="..\Classes\MagiciteScene.h" />
     <ClInclude Include="..\Classes\MainBasicInfoLayer.h" />
@@ -254,6 +259,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

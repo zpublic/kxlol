@@ -208,6 +208,12 @@
     <ClCompile Include="..\Classes\MagiciteGaemFactoryMethod.cpp">
       <Filter>Magicite\GameLogic\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteEffectSpeedUp.cpp">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteEffectJumpHigh.cpp">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -367,10 +373,22 @@
     <ClInclude Include="..\Classes\MagiciteGaemFactoryMethod.h">
       <Filter>Magicite\GameLogic\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectSpeedUp.h">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameTagManager.h">
+      <Filter>Magicite\GameLogic\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectJumpHigh.h">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
       <Filter>resource</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

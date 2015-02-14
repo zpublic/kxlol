@@ -168,6 +168,12 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
     case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
         _move_right = true;
         break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_1:
+        activeSpeedUp();
+        break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_2:
+        (new MagiciteEffectJumpHigh(_player))->positive();
+        break;
     default:
         break;
     }
@@ -188,4 +194,10 @@ void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* ev
     default:
         break;
     }
+}
+
+void MagiciteGamePlayer::activeSpeedUp()
+{
+    auto buff = new MagiciteEffectSpeedUp(_player);
+    buff->positive();
 }
