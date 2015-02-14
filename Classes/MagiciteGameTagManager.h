@@ -8,6 +8,7 @@ namespace MagiciteGameTagManager
         Move_Tag,
         Jump_Tag,
         Speed_Up_Tag,
+        Jump_High_Tag,
     };
 }
 

@@ -10,6 +10,7 @@ public:
     enum Buff_Type : int
     {
         Speed_Up = MagiciteGameTagManager::Speed_Up_Tag,
+        Jump_High = MagiciteGameTagManager::Jump_High_Tag,
     };
 
     virtual void positive() 

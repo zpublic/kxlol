@@ -211,6 +211,9 @@
     <ClCompile Include="..\Classes\MagiciteEffectSpeedUp.cpp">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteEffectJumpHigh.cpp">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -375,6 +378,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameTagManager.h">
       <Filter>Magicite\GameLogic\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectJumpHigh.h">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
