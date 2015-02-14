@@ -231,6 +231,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGameSheep.h" />
     <ClInclude Include="..\Classes\MagiciteGameSlime.h" />
     <ClInclude Include="..\Classes\MagiciteGameSpinePitfall.h" />
+    <ClInclude Include="..\Classes\MagiciteGameTagManager.h" />
     <ClInclude Include="..\Classes\MagiciteGameWin.h" />
     <ClInclude Include="..\Classes\MagiciteScene.h" />
     <ClInclude Include="..\Classes\MainBasicInfoLayer.h" />
@@ -256,6 +257,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

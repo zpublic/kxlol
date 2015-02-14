@@ -1,7 +1,8 @@
 #ifndef __MAGICITE_GAME_MOVEABLE__
 #define __MAGICITE_GAME_MOVEABLE__
 
-#include "map"
+#include <map>
+#include "MagiciteGameTagManager.h"
 
 class MagiciteGameMoveAble
 {
@@ -44,8 +45,8 @@ public:
 
     enum AnimationTag : int
     {
-        Move_Tag,
-        Jump_Tag,
+        Move_Tag = MagiciteGameTagManager::Move_Tag,
+        Jump_Tag = MagiciteGameTagManager::Jump_Tag,
     };
     virtual void initAnimation() = 0;
     virtual void startAnimation(AnimationTag) = 0;

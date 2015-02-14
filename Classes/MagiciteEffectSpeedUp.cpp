@@ -11,15 +11,25 @@ void MagiciteEffectSpeedUp::positive()
 {
     if (_moveable != nullptr)
     {
-        _moveable->setSpeed(_moveable->getSpeed() * 2);
         auto action = Sequence::create(DelayTime::create(3), CallFunc::create([&]()
         {
             _moveable->setSpeed(_moveable->getSpeed() / 2);
+            _moveable->_buff_map[Speed_Up] = false;
 
             delete this;
         }), nullptr);
+
+        action->setTag(Speed_Up);
+        if (!_moveable->_buff_map[Speed_Up])
+        {
+            _moveable->setSpeed(_moveable->getSpeed() * 2);
+            _moveable->_buff_map[Speed_Up] = true;
+        }
+        else
+        {
+            _moveable->stopAllActionsByTag(Speed_Up);
+        }
         _moveable->runAction(action);
-        
     }
     //MagiciteEffectValueChange.positive
     //timer-negative

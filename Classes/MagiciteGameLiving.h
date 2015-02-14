@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 #include "MagiciteGameObject.h"
+#include "MagiciteEffectBuffer.h"
+#include <map>
 
 class MagiciteGameLiving : public MagiciteGameObject
 {
@@ -37,9 +39,11 @@ public:
 
     void attact(int damage = 1);
 
+    std::map<MagiciteEffectBuffer::Buff_Type, bool>         _buff_map;
+
 protected:
-    int                                 _health_point;
-    int                                 _mana_point;
+    int                                                     _health_point;
+    int                                                     _mana_point;
 };
 
 #endif //__MAGICITE_GAME_LIVING__

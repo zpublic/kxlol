@@ -373,10 +373,16 @@
     <ClInclude Include="..\Classes\MagiciteEffectSpeedUp.h">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameTagManager.h">
+      <Filter>Magicite\GameLogic\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
       <Filter>resource</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
