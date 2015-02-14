@@ -14,7 +14,6 @@ void MagiciteEffectSpeenUp::positive()
         _moveable->setSpeed(_moveable->getSpeed() * 2);
         _moveable->runAction(Sequence::create(DelayTime::create(3), CallFunc::create([&]()
         {
-            log("fuck");
             _moveable->setSpeed(_moveable->getSpeed() / 2);
 
             delete this;
