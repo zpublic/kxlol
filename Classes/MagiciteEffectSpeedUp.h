@@ -1,5 +1,5 @@
-#ifndef __MAGICITE_GAME_EFFECT_SPEED_UP__
-#define __MAGICITE_GAME_EFFECT_SPEED_UP__
+#ifndef __MAGICITE_EFFECT_SPEED_UP__
+#define __MAGICITE_EFFECT_SPEED_UP__
 
 #include "cocos2d.h"
 #include "MagiciteGameMoveAbleLiving.h"
@@ -20,4 +20,4 @@ private:
     MagiciteGameMoveAbleLiving*                     _moveable;
 };
 
-#endif //__MAGICITE_GAME_EFFECT_SPEED_UP__
+#endif //__MAGICITE_EFFECT_SPEED_UP__
