@@ -5,6 +5,7 @@
 #include "MagiciteGameChicken.h"
 #include "MagiciteGameHuman.h"
 #include "MagiciteGameControlAble.h"
+#include "MagiciteEffectSpeenUp.h"
 
 class MagiciteGamePlayer : public MagiciteGameControlAble
 {
@@ -52,6 +53,8 @@ public:
 
     cocos2d::Size getContentSize() const;
     void setContentSize(cocos2d::Size size);
+
+    void activeSpeedUp();
 
     virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
