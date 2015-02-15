@@ -173,7 +173,7 @@ void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "enemy")
         {
-            auto enemy = MagiciteGaemFactoryMethod::createEnemy(MagiciteGaemFactoryMethod::Sheep);
+            auto enemy = MagiciteGaemFactoryMethod::createEnemy(MagiciteGaemFactoryMethod::Dirt);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_AMMO | Category::DEFAULT_HOLE);
             _phyLayer->addChild(enemy);

@@ -10,6 +10,7 @@
 #include "MagiciteGameSpinePitfall.h"
 #include "MagiciteGameFireball.h"
 #include "MagiciteGameAcid.h"
+#include "MagiciteGameDirt.h"
 
 namespace MagiciteGaemFactoryMethod
 {
@@ -25,6 +26,7 @@ namespace MagiciteGaemFactoryMethod
         Chicken,
         Slime,
         Sheep,
+        Dirt,
     };
 
     enum AmmoType : int

@@ -50,6 +50,15 @@ MagiciteGameLiving* MagiciteGaemFactoryMethod::createEnemy(LivingType type, bool
             return ptr;
         }
         break;
+    case MagiciteGaemFactoryMethod::Dirt:
+        ptr = MagiciteGameDirt::create();
+        if (ptr != nullptr)
+        {
+            auto Dirt = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
+            Dirt->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
+            return ptr;
+        }
+        break;
     default:
         break;
     }
@@ -98,6 +107,16 @@ MagiciteGameMoveAbleLiving* MagiciteGaemFactoryMethod::createFriend(LivingType t
         break;
     case MagiciteGaemFactoryMethod::Sheep:
         ptr = MagiciteGameSheep::create();
+        if (ptr != nullptr)
+        {
+            ptr->_is_friend = true;
+            auto slime = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
+            slime->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
+            return ptr;
+        }
+        break;
+    case MagiciteGaemFactoryMethod::Dirt:
+        ptr = MagiciteGameDirt::create();
         if (ptr != nullptr)
         {
             ptr->_is_friend = true;
