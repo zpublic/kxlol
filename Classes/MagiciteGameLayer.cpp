@@ -55,7 +55,7 @@ bool MagiciteGameLayer::init()
 void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
     MagiciteGameMoveAbleLiving* friends = nullptr;
-    MagiciteGameAcid*   fireball = nullptr;
+    MagiciteGameAmmo*   ammo = nullptr;
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
@@ -74,12 +74,19 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
 
         break;
     case EventKeyboard::KeyCode::KEY_F:
-        fireball = MagiciteGameAcid::create();
-        fireball->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + fireball->getContentSize().height / 2 + 1);
-        _phyLayer->createPhyBody(fireball, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
-        _phyLayer->addChild(fireball);
-        fireball->getBody()->SetGravityScale(0.0f);
-        fireball->Move(_player->getDire());
+        if (rand() % 5 == 0)
+        {
+            ammo = MagiciteGameAcid::create();
+        }
+        else
+        {
+            ammo = MagiciteGameFireball::create();
+        }
+        ammo->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + ammo->getContentSize().height / 2 + 1);
+        _phyLayer->createPhyBody(ammo, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
+        _phyLayer->addChild(ammo);
+        ammo->getBody()->SetGravityScale(0.0f);
+        ammo->Move(_player->getDire());
 
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE :

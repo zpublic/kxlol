@@ -25,18 +25,3 @@ bool MagiciteGameAmmo::initWithFile(const char* filename)
     }
     return true;
 }
-
-MagiciteGameAmmo* MagiciteGameAmmo::create(const char* filename)
-{
-    auto ptr = new MagiciteGameAmmo();
-    if (ptr && ptr->initWithFile(filename))
-    {
-        ptr->autorelease();
-        return ptr;
-    }
-    else
-    {
-        CC_SAFE_DELETE(ptr);
-        return nullptr;
-    }
-}

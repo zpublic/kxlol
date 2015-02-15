@@ -5,7 +5,7 @@
 #include "MagiciteGameAmmo.h"
 #include "MagiciteGameMoveAble.h"
 
-class MagiciteGameFireball : public MagiciteGameAmmo, public MagiciteGameMoveAble
+class MagiciteGameFireball : public MagiciteGameAmmo
 {
 public:
     MagiciteGameFireball();
