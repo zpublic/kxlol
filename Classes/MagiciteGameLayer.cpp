@@ -76,16 +76,19 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     case EventKeyboard::KeyCode::KEY_F:
         if (rand() % 5 == 0)
         {
-            ammo = MagiciteGameAcid::create();
+            ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::Acid);
+            ammo->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + ammo->getContentSize().height / 2 + 1);
+            _phyLayer->createPhyBody(ammo, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
+            ammo->getBody()->SetLinearVelocity(b2Vec2(0, 10));
         }
         else
         {
-            ammo = MagiciteGameFireball::create();
+            ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::FireBall);
+            ammo->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + ammo->getContentSize().height / 2 + 1);
+            _phyLayer->createPhyBody(ammo, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
+            ammo->getBody()->SetGravityScale(0.0f);
         }
-        ammo->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + ammo->getContentSize().height / 2 + 1);
-        _phyLayer->createPhyBody(ammo, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
         _phyLayer->addChild(ammo);
-        ammo->getBody()->SetGravityScale(0.0f);
         ammo->Move(_player->getDire());
 
         break;

@@ -8,6 +8,8 @@
 #include "MagiciteGameSlime.h"
 #include "MagiciteGameSheep.h"
 #include "MagiciteGameSpinePitfall.h"
+#include "MagiciteGameFireball.h"
+#include "MagiciteGameAcid.h"
 
 namespace MagiciteGaemFactoryMethod
 {
@@ -25,6 +27,12 @@ namespace MagiciteGaemFactoryMethod
         Sheep,
     };
 
+    enum AmmoType : int
+    {
+        FireBall,
+        Acid,
+    };
+
     MagiciteGameMoveAbleLiving* createFriend(LivingType type, bool is_to_left = false);
     void destroyFriend(MagiciteGameMoveAbleLiving* living);
 
@@ -33,6 +41,8 @@ namespace MagiciteGaemFactoryMethod
 
     MagiciteGamePitfall* createPitfall(Pitfall_Type type, bool is_active = true);
     void destroyPitfall(MagiciteGamePitfall* ptr);
+
+    MagiciteGameAmmo* createAmmo(AmmoType type);
 
 };
 

@@ -146,3 +146,21 @@ void MagiciteGaemFactoryMethod::destroyPitfall(MagiciteGamePitfall* ptr)
 {
     ptr->Dead();
 }
+
+MagiciteGameAmmo* MagiciteGaemFactoryMethod::createAmmo(AmmoType type)
+{
+    MagiciteGameAmmo* ammo = nullptr;
+    switch (type)
+    {
+    case MagiciteGaemFactoryMethod::FireBall:
+        ammo = MagiciteGameFireball::create();
+        break;
+    case MagiciteGaemFactoryMethod::Acid:
+        ammo = MagiciteGameAcid::create();
+        break;
+    default:
+        break;
+    }
+
+    return ammo;
+}
