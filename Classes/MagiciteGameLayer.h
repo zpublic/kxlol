@@ -11,6 +11,7 @@
 #include "MagiciteGameContact.h"
 #include "MagiciteGameControlAble.h"
 #include "MagiciteGameFireball.h"
+#include "MagiciteGameAcid.h"
 #include "MagiciteGaemFactoryMethod.h"
 
 class MagiciteGameLayer : public cocos2d::Layer

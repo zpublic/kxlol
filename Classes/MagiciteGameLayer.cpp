@@ -55,7 +55,7 @@ bool MagiciteGameLayer::init()
 void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
     MagiciteGameMoveAbleLiving* friends = nullptr;
-    MagiciteGameFireball*   fireball = nullptr;
+    MagiciteGameAcid*   fireball = nullptr;
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
@@ -74,7 +74,7 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
 
         break;
     case EventKeyboard::KeyCode::KEY_F:
-        fireball = MagiciteGameFireball::create();
+        fireball = MagiciteGameAcid::create();
         fireball->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + fireball->getContentSize().height / 2 + 1);
         _phyLayer->createPhyBody(fireball, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
         _phyLayer->addChild(fireball);
