@@ -7,6 +7,7 @@
 #include "MagiciteGameControlAble.h"
 #include "MagiciteEffectSpeedUp.h"
 #include "MagiciteEffectJumpHigh.h"
+#include "MagiciteEffectSprint.h"
 
 class MagiciteGamePlayer : public MagiciteGameControlAble
 {

@@ -214,6 +214,9 @@
     <ClCompile Include="..\Classes\MagiciteEffectJumpHigh.cpp">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteEffectSprint.cpp">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -380,6 +383,9 @@
       <Filter>Magicite\GameLogic\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteEffectJumpHigh.h">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectSprint.h">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClInclude>
   </ItemGroup>
