@@ -11,6 +11,7 @@ public:
     {
         Speed_Up = MagiciteGameTagManager::Speed_Up_Tag,
         Jump_High = MagiciteGameTagManager::Jump_High_Tag,
+        Sprint_Tag = MagiciteGameTagManager::Sprint_Tag,
     };
 
     virtual void positive() 

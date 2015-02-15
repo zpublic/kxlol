@@ -41,8 +41,8 @@ public:
     void setJumpHeight(int offset);
     int getJumpHeight() const;
 
-    void setSpeed(int value);
-    int getSpeed() const;
+    void setSpeed(float value);
+    float getSpeed() const;
 
     void setState(MagiciteGameMoveAbleLiving::State state, bool x);
     bool getState(MagiciteGameMoveAbleLiving::State state) const;

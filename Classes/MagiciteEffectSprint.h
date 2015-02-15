@@ -22,7 +22,8 @@ public:
 
 private:
     MagiciteGameMoveAbleLiving*                         _moveable;
-    int                                                 _old_speed;
+    float                                               _sprint_speed;
+    float                                               _base_sprint_speed;
 };
 
 #endif //__MAGICITE_EFFECT_SPRINT__

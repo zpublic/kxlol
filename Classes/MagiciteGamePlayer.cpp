@@ -104,12 +104,12 @@ int MagiciteGamePlayer::getJumpHeight() const
     return _player->getJumpHeight();
 }
 
-void MagiciteGamePlayer::setSpeed(int value)
+void MagiciteGamePlayer::setSpeed(float value)
 {
     _player->setSpeed(value);
 }
 
-int MagiciteGamePlayer::getSpeed() const
+float MagiciteGamePlayer::getSpeed() const
 {
     return _player->getSpeed();
 }
