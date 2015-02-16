@@ -73,6 +73,22 @@ bool MagiciteScene::init()
         }
     });
     
+    auto listener = EventListenerKeyboard::create();
+    listener->onKeyPressed = [lblStory, actionOut](EventKeyboard::KeyCode key, Event* event){
+        switch (key)
+        {
+        case cocos2d::EventKeyboard::KeyCode::KEY_KP_ENTER:
+        case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+            lblStory->stopAllActions();
+            lblStory->runAction(Sequence::create(actionOut));
+            break;
+        default:
+            break;
+        }
+
+    };
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
     return true;    
 }
 
