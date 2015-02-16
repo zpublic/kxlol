@@ -10,6 +10,8 @@ bool MagiciteScene::init()
         return false;
     }
 
+    _is_ready = false;
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -19,7 +21,7 @@ bool MagiciteScene::init()
     auto lblStory = Label::createWithBMFont( "fonts/Chinese.fnt", str); 
     lblStory->setDimensions(visibleSize.width - 100.0f, 0.0f);
     lblStory->setAnchorPoint(Vec2(0.5f, 0.5f));
-    lblStory->setPosition(origin.x + visibleSize.width / 2.0f, origin.y + visibleSize.height / 2.0f);
+    lblStory->setPosition(origin.x + visibleSize.width / 2.0f, origin.y - lblStory->getContentSize().height / 2.0f);
     this->addChild(lblStory);
     lblStory->setOpacity(0);
 
@@ -34,6 +36,10 @@ bool MagiciteScene::init()
     Vector<FiniteTimeAction*> actionIn;
     Vector<FiniteTimeAction*> actionOut;
     actionIn.pushBack(FadeIn::create(0.3f));
+    actionIn.pushBack(MoveTo::create(str.length() * 0.01f, Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2)));
+    actionIn.pushBack(CallFunc::create([this](){
+        this->_is_ready = true;
+    }));
     actionIn.pushBack(DelayTime::create(str.length() * 0.01f));
     actionOut.pushBack(CallFunc::create([btnBg](){
         btnBg->setEnabled(false);
@@ -47,10 +53,23 @@ bool MagiciteScene::init()
     actionIn.pushBack(Sequence::create(actionOut));
     lblStory->runAction(Sequence::create(actionIn));
 
-    btnBg->addTouchEventListener([lblStory, actionOut](Ref*, ui::Widget::TouchEventType eve){
+    btnBg->addTouchEventListener([lblStory, actionOut,this, origin, visibleSize, str](Ref*, ui::Widget::TouchEventType eve){
         if(eve == ui::Widget::TouchEventType::BEGAN){
-            lblStory->stopAllActions();
-            lblStory->runAction(Sequence::create(actionOut));
+            if (this->_is_ready)
+            {
+                lblStory->runAction(Sequence::create(actionOut));
+            }
+            else
+            {
+                this->_is_ready = true;
+                lblStory->stopAllActions();
+                lblStory->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2));
+
+                Vector<FiniteTimeAction*> reAction;
+                reAction.pushBack(DelayTime::create(str.length() * 0.01f));
+                reAction.pushBack(Sequence::create(actionOut));
+                lblStory->runAction(Sequence::create(reAction));
+            }
         }
     });
     

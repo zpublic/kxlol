@@ -15,6 +15,7 @@ public:
 
     static MagiciteScene* create();
 
+    bool _is_ready;
 private:
     static int LevelNumber;
 };
