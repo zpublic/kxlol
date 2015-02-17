@@ -46,6 +46,7 @@ bool MagiciteGameLayer::init()
     create_enemy(game);
     create_pitfall(game);
     create_ground(ground);
+    create_Particle();
 
     init_contact();
 
@@ -234,4 +235,27 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
             _phyLayer->addChild(node);
         }
     }
+}
+
+void MagiciteGameLayer::create_Particle()
+{
+    auto snow = ParticleSnow::create();
+    snow->setTexture(Director::getInstance()->getTextureCache()->addImage("img\\Magicite\\Particle\\snow.png"));
+
+    snow->setDuration(-1);
+    snow->setGravity(Vec2(0.0f, -80.0f));
+
+    snow->setAngle(90.0f);
+    snow->setAngleVar(360.0f);
+
+    snow->setPosition(_visibleSize.width / 2, _visibleSize.height);
+    snow->setPosVar(Vec2(_visibleSize.width / 2,0));
+
+    snow->setStartSpin(30);
+    snow->setStartSpinVar(60);
+    snow->setEndSpin(60);
+    snow->setEndSpinVar(60);
+
+    snow->setEmissionRate(6);
+    this->addChild(snow);
 }
