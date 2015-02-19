@@ -43,6 +43,12 @@ bool MagiciteGameLayer::init()
 
     create_end_cube(game);
     create_player(game);
+
+    auto pet = MagiciteGameIncubator::create();
+    pet->setPosition(Vec2(_player->getContentSize().width / -2.0f, _player->getContentSize().height * 1.2f));
+    pet->setFloat();
+    _player->setPetFollow(pet);
+
     create_enemy(game);
     create_pitfall(game);
     create_ground(ground);

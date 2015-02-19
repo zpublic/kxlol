@@ -70,6 +70,9 @@
     <Filter Include="Magicite\GameLogic\Object\Ammo">
       <UniqueIdentifier>{e0f355ed-a9e5-4eae-b700-5e36624b87a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Magicite\GameLogic\Object\Pet">
+      <UniqueIdentifier>{8848931e-422d-480e-a237-d3a3cb222541}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -222,6 +225,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameDirt.cpp">
       <Filter>Magicite\GameLogic\Object\Living</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePet.cpp">
+      <Filter>Magicite\GameLogic\Object\Pet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameIncubator.cpp">
+      <Filter>Magicite\GameLogic\Object\Pet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -399,6 +408,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameDirt.h">
       <Filter>Magicite\GameLogic\Object\Living</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePet.h">
+      <Filter>Magicite\GameLogic\Object\Pet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameIncubator.h">
+      <Filter>Magicite\GameLogic\Object\Pet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
