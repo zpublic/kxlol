@@ -16,6 +16,27 @@ bool MagiciteGameFireball::init()
 
     setSpeed(5);
     this->initAnimation();
+
+    ParticleSystemQuad* emtter = ParticleMeteor::createWithTotalParticles(20);
+
+    emtter->setGravity(Point::ZERO);
+    emtter->setPosVar(Point::ZERO);
+
+    emtter->setStartColor(Color4F(255.0f, 0.0f, 0.0f, 255.0f));
+    emtter->setStartColorVar(Color4F(0.0f, 0.0f, 0.0f, 0.0f));
+
+    emtter->setEndColor(Color4F(255.0f, 0.0f, 0.0f, 255.0f));
+    emtter->setEndColorVar(Color4F(0.0f, 0.0f, 0.0f, 0.0f));
+
+    emtter->setLife(0.6f);
+    emtter->setLifeVar(0.25f);
+
+    emtter->setSpeed(getSpeed());
+    emtter->setSpeedVar(0.5f);
+
+    emtter->setPosition(Vec2(getPositionX() + getContentSize().width / 2,getPositionY() + getContentSize().height / 2));
+    this->addChild(emtter);
+
     return true;
 }
 

@@ -104,12 +104,12 @@ int MagiciteGamePlayer::getJumpHeight() const
     return _player->getJumpHeight();
 }
 
-void MagiciteGamePlayer::setSpeed(int value)
+void MagiciteGamePlayer::setSpeed(float value)
 {
     _player->setSpeed(value);
 }
 
-int MagiciteGamePlayer::getSpeed() const
+float MagiciteGamePlayer::getSpeed() const
 {
     return _player->getSpeed();
 }
@@ -173,6 +173,9 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_2:
         (new MagiciteEffectJumpHigh(_player))->positive();
+        break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_3:
+        (new MagiciteEffectSprint(_player))->positive();
         break;
     default:
         break;

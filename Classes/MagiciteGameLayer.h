@@ -10,7 +10,6 @@
 #include "MagiciteGamePlayer.h"
 #include "MagiciteGameContact.h"
 #include "MagiciteGameControlAble.h"
-#include "MagiciteGameFireball.h"
 #include "MagiciteGaemFactoryMethod.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
@@ -38,6 +37,7 @@ public:
     void create_enemy(cocos2d::TMXObjectGroup*);
     void create_pitfall(cocos2d::TMXObjectGroup*);
     void create_ground(cocos2d::TMXObjectGroup*);
+    void create_Particle();
 
 private:
     MagiciteGamePlayer*                 _player;

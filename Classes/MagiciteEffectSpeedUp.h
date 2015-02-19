@@ -18,6 +18,7 @@ public:
         ///> 这儿不需要做啥 交给timer来取消效果
 private:
     MagiciteGameMoveAbleLiving*                     _moveable;
+    float                                           _old_speed;
 };
 
 #endif //__MAGICITE_EFFECT_SPEED_UP__

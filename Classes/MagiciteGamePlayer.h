@@ -7,6 +7,7 @@
 #include "MagiciteGameControlAble.h"
 #include "MagiciteEffectSpeedUp.h"
 #include "MagiciteEffectJumpHigh.h"
+#include "MagiciteEffectSprint.h"
 
 class MagiciteGamePlayer : public MagiciteGameControlAble
 {
@@ -40,8 +41,8 @@ public:
     void setJumpHeight(int offset);
     int getJumpHeight() const;
 
-    void setSpeed(int value);
-    int getSpeed() const;
+    void setSpeed(float value);
+    float getSpeed() const;
 
     void setState(MagiciteGameMoveAbleLiving::State state, bool x);
     bool getState(MagiciteGameMoveAbleLiving::State state) const;

@@ -6,6 +6,7 @@ MagiciteGameMoveAble::MagiciteGameMoveAble()
     _state[S_Jump] = false;
     _state[S_Animate] = false;
     _speed = DEFAULT_SPEED;
+    _base_speed = DEFAULT_SPEED;
     _jumpHeight = DEFAULT_JUMP_HEIGHT;
     _is_to_left = false;
     _is_dire_changed = false;
@@ -21,12 +22,12 @@ int MagiciteGameMoveAble::getJumpHeight() const
     return _jumpHeight;
 }
 
-void MagiciteGameMoveAble::setSpeed(int value)
+void MagiciteGameMoveAble::setSpeed(float value)
 {
     _speed = value;
 }
 
-int MagiciteGameMoveAble::getSpeed() const
+float MagiciteGameMoveAble::getSpeed() const
 {
     return _speed;
 }
@@ -61,4 +62,15 @@ void MagiciteGameMoveAble::setDire(Direction dire)
         _is_dire_changed = true;
         _is_to_left = !_is_to_left;
     }
+}
+
+void MagiciteGameMoveAble::setBaseSpeed(float value)
+{
+    _base_speed = value;
+    _speed = value;
+}
+
+float MagiciteGameMoveAble::getBaseSpeed() const
+{
+    return _base_speed;
 }

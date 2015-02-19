@@ -30,8 +30,10 @@ public:
     void setJumpHeight(int offset);
     int getJumpHeight() const;
 
-    void setSpeed(int value);
-    int getSpeed() const;
+    void setSpeed(float value);
+    float getSpeed() const;
+    void setBaseSpeed(float value);
+    float getBaseSpeed() const;
 
     enum State : int
     {
@@ -59,7 +61,8 @@ protected:
     bool                            _is_dire_changed;
     bool                            _is_to_left;
     int                             _jumpHeight;
-    int                             _speed;
+    float                           _speed;
+    float                           _base_speed;
 };
 
 #endif //__MAGICITE_GAME_MOVEABLE__

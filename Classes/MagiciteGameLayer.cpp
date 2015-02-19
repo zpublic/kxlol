@@ -46,6 +46,7 @@ bool MagiciteGameLayer::init()
     create_enemy(game);
     create_pitfall(game);
     create_ground(ground);
+    create_Particle();
 
     init_contact();
 
@@ -55,7 +56,7 @@ bool MagiciteGameLayer::init()
 void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
     MagiciteGameMoveAbleLiving* friends = nullptr;
-    MagiciteGameFireball*   fireball = nullptr;
+    MagiciteGameAmmo*   ammo = nullptr;
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
@@ -74,12 +75,22 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
 
         break;
     case EventKeyboard::KeyCode::KEY_F:
-        fireball = MagiciteGameFireball::create();
-        fireball->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + fireball->getContentSize().height / 2 + 1);
-        _phyLayer->createPhyBody(fireball, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
-        _phyLayer->addChild(fireball);
-        fireball->getBody()->SetGravityScale(0.0f);
-        fireball->Move(_player->getDire());
+        if (rand() % 5 == 0)
+        {
+            ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::Acid);
+            ammo->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + ammo->getContentSize().height / 2 + 1);
+            _phyLayer->createPhyBody(ammo, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
+            ammo->getBody()->SetLinearVelocity(b2Vec2(0, 10));
+        }
+        else
+        {
+            ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::FireBall);
+            ammo->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + ammo->getContentSize().height / 2 + 1);
+            _phyLayer->createPhyBody(ammo, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
+            ammo->getBody()->SetGravityScale(0.0f);
+        }
+        _phyLayer->addChild(ammo);
+        ammo->Move(_player->getDire());
 
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE :
@@ -163,7 +174,7 @@ void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "enemy")
         {
-            auto enemy = MagiciteGaemFactoryMethod::createEnemy(MagiciteGaemFactoryMethod::Sheep);
+            auto enemy = MagiciteGaemFactoryMethod::createEnemy(MagiciteGaemFactoryMethod::Dirt);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_AMMO | Category::DEFAULT_HOLE);
             _phyLayer->addChild(enemy);
@@ -224,4 +235,27 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
             _phyLayer->addChild(node);
         }
     }
+}
+
+void MagiciteGameLayer::create_Particle()
+{
+    auto snow = ParticleSnow::create();
+    snow->setTexture(Director::getInstance()->getTextureCache()->addImage("img\\Magicite\\Particle\\snow.png"));
+
+    snow->setDuration(-1);
+    snow->setGravity(Vec2(0.0f, -80.0f));
+
+    snow->setAngle(90.0f);
+    snow->setAngleVar(360.0f);
+
+    snow->setPosition(_visibleSize.width / 2, _visibleSize.height);
+    snow->setPosVar(Vec2(_visibleSize.width / 2,0));
+
+    snow->setStartSpin(30);
+    snow->setStartSpinVar(60);
+    snow->setEndSpin(60);
+    snow->setEndSpinVar(60);
+
+    snow->setEmissionRate(6);
+    this->addChild(snow);
 }

@@ -50,6 +50,15 @@ MagiciteGameLiving* MagiciteGaemFactoryMethod::createEnemy(LivingType type, bool
             return ptr;
         }
         break;
+    case MagiciteGaemFactoryMethod::Dirt:
+        ptr = MagiciteGameDirt::create();
+        if (ptr != nullptr)
+        {
+            auto Dirt = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
+            Dirt->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
+            return ptr;
+        }
+        break;
     default:
         break;
     }
@@ -106,6 +115,16 @@ MagiciteGameMoveAbleLiving* MagiciteGaemFactoryMethod::createFriend(LivingType t
             return ptr;
         }
         break;
+    case MagiciteGaemFactoryMethod::Dirt:
+        ptr = MagiciteGameDirt::create();
+        if (ptr != nullptr)
+        {
+            ptr->_is_friend = true;
+            auto slime = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
+            slime->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
+            return ptr;
+        }
+        break;
     default:
         break;
     }
@@ -145,4 +164,22 @@ MagiciteGamePitfall* MagiciteGaemFactoryMethod::createPitfall(Pitfall_Type type,
 void MagiciteGaemFactoryMethod::destroyPitfall(MagiciteGamePitfall* ptr)
 {
     ptr->Dead();
+}
+
+MagiciteGameAmmo* MagiciteGaemFactoryMethod::createAmmo(AmmoType type)
+{
+    MagiciteGameAmmo* ammo = nullptr;
+    switch (type)
+    {
+    case MagiciteGaemFactoryMethod::FireBall:
+        ammo = MagiciteGameFireball::create();
+        break;
+    case MagiciteGaemFactoryMethod::Acid:
+        ammo = MagiciteGameAcid::create();
+        break;
+    default:
+        break;
+    }
+
+    return ammo;
 }

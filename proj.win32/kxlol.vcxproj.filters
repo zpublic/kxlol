@@ -214,6 +214,15 @@
     <ClCompile Include="..\Classes\MagiciteEffectJumpHigh.cpp">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteEffectSprint.cpp">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameAcid.cpp">
+      <Filter>Magicite\GameLogic\Object\Ammo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameDirt.cpp">
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -381,6 +390,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteEffectJumpHigh.h">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectSprint.h">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameAcid.h">
+      <Filter>Magicite\GameLogic\Object\Ammo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameDirt.h">
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
