@@ -20,6 +20,7 @@ public:
     virtual void stopAnimation(AnimationTag);
 
     virtual bool init();
+    virtual void initParticle();
 
     CREATE_FUNC(MagiciteGameAcid);
 
