@@ -254,8 +254,8 @@ void MagiciteGameLayer::create_Particle()
     snow->setAngle(90.0f);
     snow->setAngleVar(360.0f);
 
-    snow->setPosition(_visibleSize.width / 2, _visibleSize.height);
-    snow->setPosVar(Vec2(_visibleSize.width / 2,0));
+    snow->setPosition(_background->getBackSize().width / 2, _visibleSize.height);
+    snow->setPosVar(Vec2(_background->getBackSize().width / 2, 0));
 
     snow->setStartSpin(30);
     snow->setStartSpinVar(60);
