@@ -73,6 +73,12 @@
     <Filter Include="Magicite\GameLogic\Object\Pet">
       <UniqueIdentifier>{8848931e-422d-480e-a237-d3a3cb222541}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Magicite\GameLogic\Item">
+      <UniqueIdentifier>{9722d40d-5613-45b4-9b97-e084d0d2365b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Magicite\GameLogic\Object\Item">
+      <UniqueIdentifier>{a0990774-54b8-44f1-a7af-5b7c88849ea2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -231,6 +237,24 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameIncubator.cpp">
       <Filter>Magicite\GameLogic\Object\Pet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteEffectItem.cpp">
+      <Filter>Magicite\GameLogic\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteItem.cpp">
+      <Filter>Magicite\GameLogic\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteTempItem.cpp">
+      <Filter>Magicite\GameLogic\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteForeverItem.cpp">
+      <Filter>Magicite\GameLogic\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteItemObject.cpp">
+      <Filter>Magicite\GameLogic\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteItemCoin.cpp">
+      <Filter>Magicite\GameLogic\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -414,6 +438,24 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameIncubator.h">
       <Filter>Magicite\GameLogic\Object\Pet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectItem.h">
+      <Filter>Magicite\GameLogic\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteItem.h">
+      <Filter>Magicite\GameLogic\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteTempItem.h">
+      <Filter>Magicite\GameLogic\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteForeverItem.h">
+      <Filter>Magicite\GameLogic\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteItemObject.h">
+      <Filter>Magicite\GameLogic\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteItemCoin.h">
+      <Filter>Magicite\GameLogic\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
