@@ -24,3 +24,8 @@ void MagiciteItem::destroy()
 {
 
 }
+
+MagiciteItemObject* MagiciteItem::getItemObject()
+{
+    return nullptr;
+}

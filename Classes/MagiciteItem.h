@@ -2,6 +2,7 @@
 #define __MAGICITE_ITEM__
 
 #include "cocos2d.h"
+#include "MagiciteItemObject.h"
 
 class MagiciteItem
 {
@@ -12,7 +13,7 @@ public:
     std::string getItemName() const;
     void setItemName(const std::string& name);
 
-    //void getItemObject();
+    virtual MagiciteItemObject* getItemObject();
 
     void destroy();
 
