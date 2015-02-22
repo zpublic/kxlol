@@ -253,7 +253,7 @@
     <ClCompile Include="..\Classes\MagiciteItemObject.cpp">
       <Filter>Magicite\GameLogic\Object\Item</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteItemCoin.cpp">
+    <ClCompile Include="..\Classes\MagiciteItemCoinObject.cpp">
       <Filter>Magicite\GameLogic\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
@@ -454,7 +454,7 @@
     <ClInclude Include="..\Classes\MagiciteItemObject.h">
       <Filter>Magicite\GameLogic\Object\Item</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteItemCoin.h">
+    <ClInclude Include="..\Classes\MagiciteItemCoinObject.h">
       <Filter>Magicite\GameLogic\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
