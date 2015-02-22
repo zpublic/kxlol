@@ -58,6 +58,8 @@ public:
 
     void activeSpeedUp();
 
+    void setPetFollow(MagiciteGameObject*);
+
     virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 

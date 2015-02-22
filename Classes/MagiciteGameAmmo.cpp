@@ -14,6 +14,7 @@ bool MagiciteGameAmmo::init()
     {
         return false;
     }
+    this->initParticle();
     return true;
 }
 
@@ -23,5 +24,6 @@ bool MagiciteGameAmmo::initWithFile(const char* filename)
     {
         return false;
     }
+    this->initParticle();
     return true;
 }

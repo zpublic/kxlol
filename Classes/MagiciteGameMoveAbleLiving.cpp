@@ -8,6 +8,12 @@ MagiciteGameMoveAbleLiving::MagiciteGameMoveAbleLiving(MoveLivingType type /*= U
 
 }
 
+MagiciteGameMoveAbleLiving::~MagiciteGameMoveAbleLiving()
+{
+    _jumpAnimate->release();
+    _moveAnimate->release();
+}
+
 bool MagiciteGameMoveAbleLiving::init()
 {
     if (!MagiciteGameLiving::init())
@@ -25,6 +31,8 @@ bool MagiciteGameMoveAbleLiving::initWithFile(const char* filename)
         return false;
     }
     this->initAnimation();
+    createAnimate();
+
     return true;
 }
 
@@ -114,13 +122,13 @@ void MagiciteGameMoveAbleLiving::startAnimation(AnimationTag tag)
     case MagiciteGameMoveAble::Move_Tag:
         if (getState(State::S_Move) == false || getState(State::S_Jump))
         {
-            this->runAction(createAnimateMove());
+            this->runAction(getMoveAnimate());
         }
         break;
     case MagiciteGameMoveAble::Jump_Tag:
         if (getState(State::S_Jump) == false)
         {
-            this->runAction(createAnimateJump());
+            this->runAction(getJumpAnimate());
         }
         break;
     default:
@@ -136,4 +144,22 @@ void MagiciteGameMoveAbleLiving::stopAnimation(AnimationTag tag)
         this->stopAllActionsByTag(tag);
         tryToStopAnimate();
     }
+}
+
+RepeatForever* MagiciteGameMoveAbleLiving::getJumpAnimate()
+{
+    return _jumpAnimate;
+}
+
+RepeatForever* MagiciteGameMoveAbleLiving::getMoveAnimate()
+{
+    return _moveAnimate;
+}
+
+void MagiciteGameMoveAbleLiving::createAnimate()
+{
+    _jumpAnimate = this->createAnimateJump();
+    _jumpAnimate->retain();
+    _moveAnimate = this->createAnimateMove();
+    _moveAnimate->retain();
 }

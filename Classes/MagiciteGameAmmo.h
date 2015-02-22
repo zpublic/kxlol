@@ -12,6 +12,7 @@ public:
 
     virtual bool init();
     virtual bool initWithFile(const char* filename);
+    virtual void initParticle() = 0;
 
 };
 

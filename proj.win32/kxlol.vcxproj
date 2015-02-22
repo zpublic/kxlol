@@ -159,6 +159,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteGameDirt.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameFireball.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameHuman.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameIncubator.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameMoveAbleLiving.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameObject.cpp" />
     <ClCompile Include="..\Classes\MagiciteBeginMenu.cpp" />
@@ -169,6 +170,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteGameMoveAble.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameOver.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePause.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGamePet.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePhyLayer.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp" />
     <ClCompile Include="..\Classes\MagiciteGamePhyWorld.cpp" />
@@ -219,6 +221,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGameDirt.h" />
     <ClInclude Include="..\Classes\MagiciteGameFireball.h" />
     <ClInclude Include="..\Classes\MagiciteGameHuman.h" />
+    <ClInclude Include="..\Classes\MagiciteGameIncubator.h" />
     <ClInclude Include="..\Classes\MagiciteGameMoveAbleLiving.h" />
     <ClInclude Include="..\Classes\MagiciteGameObject.h" />
     <ClInclude Include="..\Classes\MagiciteBeginMenu.h" />
@@ -229,6 +232,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGameMoveAble.h" />
     <ClInclude Include="..\Classes\MagiciteGameOver.h" />
     <ClInclude Include="..\Classes\MagiciteGamePause.h" />
+    <ClInclude Include="..\Classes\MagiciteGamePet.h" />
     <ClInclude Include="..\Classes\MagiciteGamePhyLayer.h" />
     <ClInclude Include="..\Classes\MagiciteGamePhySprite.h" />
     <ClInclude Include="..\Classes\MagiciteGamePhyWorld.h" />

@@ -204,3 +204,8 @@ void MagiciteGamePlayer::activeSpeedUp()
     auto buff = new MagiciteEffectSpeedUp(_player);
     buff->positive();
 }
+
+void MagiciteGamePlayer::setPetFollow(MagiciteGameObject* pet)
+{
+    _player->addChild(pet);
+}

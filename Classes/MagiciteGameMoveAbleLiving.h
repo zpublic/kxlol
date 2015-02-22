@@ -19,6 +19,7 @@ public:
     }MoveAbleLivingType;
 
     MagiciteGameMoveAbleLiving(MoveLivingType type = Unknow);
+    ~MagiciteGameMoveAbleLiving();
 
     virtual void Move(Direction dire);
     virtual void Stop();
@@ -26,6 +27,10 @@ public:
     virtual void JumpOver();
 
     virtual void initAnimation() = 0;
+    void createAnimate();
+    virtual cocos2d::RepeatForever* getJumpAnimate();
+    virtual cocos2d::RepeatForever* getMoveAnimate();
+
     virtual void startAnimation(AnimationTag);
     virtual void stopAnimation(AnimationTag);
 
@@ -37,6 +42,8 @@ public:
 protected:
     virtual cocos2d::RepeatForever* createAnimateJump() = 0;
     virtual cocos2d::RepeatForever* createAnimateMove() = 0;
+    cocos2d::RepeatForever*             _jumpAnimate;
+    cocos2d::RepeatForever*             _moveAnimate;
 
     void setBodyXSpeed(float x_speed);
     void setBodyYSpeed(float y_speed);
