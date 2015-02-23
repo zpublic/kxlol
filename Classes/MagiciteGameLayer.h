@@ -40,6 +40,8 @@ public:
     void create_ground(cocos2d::TMXObjectGroup*);
     void create_Particle();
 
+    void flash();
+
 private:
     MagiciteGamePlayer*                 _player;
     MagiciteGamePhyLayer*               _phyLayer;

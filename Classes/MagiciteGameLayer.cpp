@@ -102,6 +102,9 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE :
         MagiciteGamePause::Pause(this);
         break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_A:
+        flash();
+        break;
     default:
         break;
     }
@@ -264,4 +267,49 @@ void MagiciteGameLayer::create_Particle()
 
     snow->setEmissionRate(6);
     this->addChild(snow);
+}
+
+void MagiciteGameLayer::flash()
+{
+    int PTM_RATIO = MagiciteGamePhyLayer::PTM_RATIO;
+
+    b2Fixture* fixture = nullptr;
+    float fraction = 0.0f;
+    bool flag = _phyLayer->Ray_Cast(_player->getSprite(), 200, fixture, fraction);
+    int dire = (_player->getSprite()->getDire() == MagiciteGameMoveAbleLiving::Direction::right ? 1 : -1);
+    b2Vec2 distance(200 / PTM_RATIO * fraction, 0);
+
+    b2Body* body = _player->getSprite()->getBody();
+
+    if (!flag)
+    {
+        b2Vec2 pos(body->GetPosition().x + 200 / PTM_RATIO * dire, body->GetPosition().y);
+        body->SetTransform(pos, 0);
+    }
+    else
+    {
+        MagiciteGameObject* obj = reinterpret_cast<MagiciteGameObject*>(fixture->GetBody()->GetUserData());
+        if (obj == nullptr)
+        {
+            b2Vec2 pos(
+                body->GetPosition().x + (distance.x - _player->getSprite()->getContentSize().width / 2 / PTM_RATIO) * dire,
+                body->GetPosition().y);
+            body->SetTransform(pos, 0);
+        }
+        else
+        {
+            if ((obj->getContentSize().width + 200 * fraction + _player->getSprite()->getContentSize().width / 2 < 200))
+            {
+                b2Vec2 pos(body->GetPosition().x + 200 / PTM_RATIO * dire, body->GetPosition().y);
+                body->SetTransform(pos, 0);
+            }
+            else
+            {
+                b2Vec2 pos(body->GetPosition().x + (distance.x - _player->getSprite()->getContentSize().width / 2 / PTM_RATIO) * dire,
+                    body->GetPosition().y);
+                body->SetTransform(pos, 0);
+            }
+        }
+    }
+    body->SetAwake(true);
 }

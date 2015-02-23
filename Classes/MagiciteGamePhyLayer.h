@@ -8,6 +8,7 @@
 #include "GLES-Render.h"
 #include "MagiciteGameObject.h"
 #include "MagiciteGamePhyWorld.h"
+#include "MagiciteGameMoveAbleLiving.h"
 
 class MagiciteGamePhyLayer : public cocos2d::Layer
 {
@@ -28,6 +29,8 @@ public:
     void update(float timeDelta);
 
     static MagiciteGamePhyLayer* create(cocos2d::Size size, const std::function<void(b2Contact*)> &contactFunc);
+
+    bool Ray_Cast(MagiciteGameMoveAbleLiving* sprite, float length, b2Fixture*& outFix, float& output);
 
 private:
     cocos2d::Size                       _visibleSize;
