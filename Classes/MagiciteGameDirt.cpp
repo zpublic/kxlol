@@ -9,16 +9,6 @@ MagiciteGameDirt::MagiciteGameDirt()
     _mana_point = dirt_mp;
 }
 
-void MagiciteGameDirt::useSkill(int skillId)
-{
-
-}
-
-void MagiciteGameDirt::useSkillEx()
-{
-
-}
-
 void MagiciteGameDirt::initAnimation()
 {
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("img\\Magicite\\dirt\\dirt.plist", "img\\Magicite\\dirt\\dirt.png");

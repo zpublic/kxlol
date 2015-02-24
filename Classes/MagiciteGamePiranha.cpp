@@ -8,16 +8,6 @@ MagiciteGamePiranha::MagiciteGamePiranha()
 
 }
 
-void MagiciteGamePiranha::useSkill(int skillId)
-{
-
-}
-
-void MagiciteGamePiranha::useSkillEx()
-{
-
-}
-
 bool MagiciteGamePiranha::init()
 {
     if (!MagiciteGameLiving::initWithFile("CloseSelected"))

@@ -1,4 +1,6 @@
 #include "MagiciteGameLayer.h"
+#include "MagiciteEffectFlash.h"
+#include "MagiciteEffectFireBall.h"
 
 USING_NS_CC;
 
@@ -81,26 +83,15 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
 
         break;
     case EventKeyboard::KeyCode::KEY_F:
-        if (rand() % 5 == 0)
-        {
-            ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::Acid);
-            ammo->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + ammo->getContentSize().height / 2 + 1);
-            _phyLayer->createPhyBody(ammo, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
-            ammo->getBody()->SetLinearVelocity(b2Vec2(0, 10));
-        }
-        else
-        {
-            ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::FireBall);
-            ammo->setPosition(_player->getPosition().x, _player->getPosition().y - _player->getContentSize().height / 2 + ammo->getContentSize().height / 2 + 1);
-            _phyLayer->createPhyBody(ammo, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
-            ammo->getBody()->SetGravityScale(0.0f);
-        }
-        _phyLayer->addChild(ammo);
-        ammo->Move(_player->getDire());
-
+        _player->useSkill(new MagiciteEffectFireBall(Vec2(_player->getPosition()),
+            _phyLayer,
+            _player->getDire()));
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE :
         MagiciteGamePause::Pause(this);
+        break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_A:
+        _player->useSkill(new MagiciteEffectFlash(_phyLayer, _player->getSprite(), 200));
         break;
     default:
         break;

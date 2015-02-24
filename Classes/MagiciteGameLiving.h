@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "MagiciteGameObject.h"
 #include "MagiciteEffectBuffer.h"
+#include "MagiciteEffect.h"
 #include <map>
 
 class MagiciteGameLiving : public MagiciteGameObject
@@ -25,8 +26,7 @@ public:
         MoveAbleType movetype = MoveAbleType::NormalLiving, 
         LivingType livingtype = LivingType::Unknow);
 
-    virtual void useSkill(int skillId) = 0;
-    virtual void useSkillEx() = 0;
+    virtual void useSkill(MagiciteEffect* effect);
 
     virtual bool init();
     virtual bool initWithFile(const char* filename);

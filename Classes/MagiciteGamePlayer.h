@@ -27,8 +27,7 @@ public:
 
     MagiciteGameMoveAbleLiving* getSprite();
 
-    void useSkill(int skillId);
-    void useSkillEx();
+    void useSkill(MagiciteEffect* effect);
 
     void Move();
     void Stop();

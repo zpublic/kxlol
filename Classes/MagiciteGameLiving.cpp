@@ -53,3 +53,8 @@ void MagiciteGameLiving::attact(int damage/* = 1*/)
 {
    _health_point -= damage;
 }
+
+void MagiciteGameLiving::useSkill(MagiciteEffect* effect)
+{
+    effect->positive();
+}

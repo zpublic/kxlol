@@ -48,14 +48,9 @@ bool MagiciteGamePlayer::init(PlayerType type)
     return true;
 }
 
-void MagiciteGamePlayer::useSkill(int skillId)
+void MagiciteGamePlayer::useSkill(MagiciteEffect* effect)
 {
-    _player->useSkill(skillId);
-}
-
-void MagiciteGamePlayer::useSkillEx()
-{
-    _player->useSkillEx();
+    _player->useSkill(effect);
 }
 
 void MagiciteGamePlayer::Move()
