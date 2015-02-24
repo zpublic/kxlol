@@ -9,16 +9,6 @@ MagiciteGameChicken::MagiciteGameChicken()
     _mana_point = chicken_mp;
 }
 
-void MagiciteGameChicken::useSkill(int skillId)
-{
-
-}
-
-void MagiciteGameChicken::useSkillEx()
-{
-
-}
-
 void MagiciteGameChicken::initAnimation()
 {
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("img\\Magicite\\enemy\\chicken.plist", "img\\Magicite\\enemy\\chicken.png");

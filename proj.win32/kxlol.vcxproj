@@ -147,6 +147,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\base\Player.cpp" />
     <ClCompile Include="..\Classes\Component\slot.cpp" />
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
+    <ClCompile Include="..\Classes\MagiciteEffectFireBall.cpp" />
+    <ClCompile Include="..\Classes\MagiciteEffectFlash.cpp" />
     <ClCompile Include="..\Classes\MagiciteEffectItem.cpp" />
     <ClCompile Include="..\Classes\MagiciteEffectJumpHigh.cpp" />
     <ClCompile Include="..\Classes\MagiciteEffectSpeedUp.cpp" />
@@ -213,6 +215,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteEffect.h" />
     <ClInclude Include="..\Classes\MagiciteEffectBuffer.h" />
     <ClInclude Include="..\Classes\MagiciteEffectCreatePitfall.h" />
+    <ClInclude Include="..\Classes\MagiciteEffectFireBall.h" />
+    <ClInclude Include="..\Classes\MagiciteEffectFlash.h" />
     <ClInclude Include="..\Classes\MagiciteEffectItem.h" />
     <ClInclude Include="..\Classes\MagiciteEffectJumpHigh.h" />
     <ClInclude Include="..\Classes\MagiciteEffectPositive.h" />

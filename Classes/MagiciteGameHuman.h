@@ -15,9 +15,6 @@ public:
         human_mp = 1,
     };
 
-    virtual void useSkill(int skillId);
-    virtual void useSkillEx();
-
     virtual void initAnimation();
 
     virtual bool init();

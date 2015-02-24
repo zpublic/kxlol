@@ -9,16 +9,6 @@ MagiciteGameHuman::MagiciteGameHuman()
     _mana_point = human_mp;
 }
 
-void MagiciteGameHuman::useSkill(int skillId)
-{
-
-}
-
-void MagiciteGameHuman::useSkillEx()
-{
-
-}
-
 void MagiciteGameHuman::initAnimation()
 {
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("img\\Magicite\\player\\player.plist", "img\\Magicite\\player\\player.png");

@@ -9,16 +9,6 @@ MagiciteGameSlime::MagiciteGameSlime()
     _mana_point = slime_mp;
 }
 
-void MagiciteGameSlime::useSkill(int skillId)
-{
-
-}
-
-void MagiciteGameSlime::useSkillEx()
-{
-
-}
-
 void MagiciteGameSlime::initAnimation()
 {
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("img\\Magicite\\slime\\slime.plist", "img\\Magicite\\slime\\slime.png");

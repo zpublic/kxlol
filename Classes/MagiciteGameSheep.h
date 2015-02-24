@@ -15,9 +15,6 @@ public:
         sheep_mp = 1,
     };
 
-    virtual void useSkill(int skillId);
-    virtual void useSkillEx();
-
     //MagiciteGameMoveAbleLiving
     virtual void initAnimation();
 

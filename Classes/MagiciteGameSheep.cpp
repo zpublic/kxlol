@@ -9,16 +9,6 @@ MagiciteGameSheep::MagiciteGameSheep()
     _mana_point = sheep_mp;
 }
 
-void MagiciteGameSheep::useSkill(int skillId)
-{
-
-}
-
-void MagiciteGameSheep::useSkillEx()
-{
-
-}
-
 void MagiciteGameSheep::initAnimation()
 {
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("img\\Magicite\\sheep\\sheep.plist", "img\\Magicite\\sheep\\sheep.png");

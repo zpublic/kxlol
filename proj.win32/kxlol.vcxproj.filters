@@ -259,6 +259,12 @@
     <ClCompile Include="..\Classes\MagiciteItemCoin.cpp">
       <Filter>Magicite\GameLogic\Item</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteEffectFlash.cpp">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteEffectFireBall.cpp">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -462,6 +468,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteItemCoin.h">
       <Filter>Magicite\GameLogic\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectFlash.h">
+      <Filter>Magicite\GameLogic\Effect\Value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectFireBall.h">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

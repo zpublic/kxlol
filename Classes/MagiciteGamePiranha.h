@@ -9,9 +9,6 @@ class MagiciteGamePiranha : public MagiciteGameLiving
 public:
     MagiciteGamePiranha();
 
-    virtual void useSkill(int skillId);
-    virtual void useSkillEx();
-
     virtual bool init();
     
     CREATE_FUNC(MagiciteGamePiranha);
