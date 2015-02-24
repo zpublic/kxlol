@@ -1,7 +1,9 @@
-#pragma once
-#include "MagiciteEffect.h"
+#ifndef __MAGICITE_EFFECT_SHOOT__
+#define __MAGICITE_EFFECT_SHOOT__
 
-class MagiciteEffectShoot : public MagiciteEffect
+#include "MagiciteEffectCreate.h"
+
+class MagiciteEffectShoot : public MagiciteEffectCreate
 {
 public:
     virtual void positive() 
@@ -10,3 +12,5 @@ public:
     }
 
 };
+
+#endif //__MAGICITE_EFFECT_SHOOT__

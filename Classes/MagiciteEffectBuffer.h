@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __MAGICITE_EFFECT_BUFER__
+#define __MAGICITE_EFFECT_BUFER__
+
 #include "MagiciteEffect.h"
 #include "MagiciteGameTagManager.h"
 
@@ -26,3 +28,5 @@ public:
     }
 
 };
+
+#endif //__MAGICITE_EFFECT_BUFER__

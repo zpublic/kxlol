@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MAGICITE_EFFECT_POSITIVE__
+#define __MAGICITE_EFFECT_POSITIVE__
 #include "MagiciteEffect.h"
 
 ///> 这是一个永久增强
@@ -16,3 +17,5 @@ public:
     }
 
 };
+
+#endif //__MAGICITE_EFFECT_POSITIVE__

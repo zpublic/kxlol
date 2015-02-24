@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MAGICITE_EFFECT__
+#define __MAGICITE_EFFECT__
 
 class MagiciteEffect
 {
@@ -18,3 +19,5 @@ public:
 
     }
 };
+
+#endif //__MAGICITE_EFFECT__

@@ -10,7 +10,6 @@
 class MagiciteEffectFireBall : public MagiciteEffectShoot
 {
 public:
-    typedef MagiciteGameObject::_entityCategory Category;
 
     MagiciteEffectFireBall(const cocos2d::Vec2& pos, MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAble::Direction dire);
    

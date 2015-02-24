@@ -1,6 +1,7 @@
 #include "MagiciteGameLayer.h"
 #include "MagiciteEffectFlash.h"
 #include "MagiciteEffectFireBall.h"
+#include "MagiciteEffectCreateFriend.h"
 
 USING_NS_CC;
 
@@ -68,19 +69,9 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
-        friends = MagiciteGaemFactoryMethod::createFriend(
-            MagiciteGaemFactoryMethod::Slime,
-            (_player->getDire() == MagiciteGameMoveAbleLiving::Direction::left ? true : false));
-        friends->setPosition(Vec2(_player->getPosition().x, _player->getPosition().y));
-
-        _phyLayer->createPhyBody(
-            friends,
-            false,
-            Category::DEFAULT_FRIEND,
-            Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_HOLE);
-        _phyLayer->addChild(friends);
-        friends->Move(friends->getDire());
-
+        _player->useSkill(new MagiciteEffectCreateFriend(Vec2(_player->getPosition()),
+            _phyLayer,
+            _player->getDire(), MagiciteEffectCreateFriend::LivingType::Slime));
         break;
     case EventKeyboard::KeyCode::KEY_F:
         _player->useSkill(new MagiciteEffectFireBall(Vec2(_player->getPosition()),

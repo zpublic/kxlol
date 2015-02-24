@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __MAGICITE__EFFECT_VALUE_CHANGE__
+#define __MAGICITE__EFFECT_VALUE_CHANGE__
+
 #include "MagiciteEffect.h"
 
 class MagiciteEffectValueChange : public MagiciteEffect
@@ -15,3 +17,5 @@ public:
     }
 
 };
+
+#endif //__MAGICITE__EFFECT_VALUE_CHANGE__

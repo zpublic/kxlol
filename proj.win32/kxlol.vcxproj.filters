@@ -265,6 +265,9 @@
     <ClCompile Include="..\Classes\MagiciteEffectFireBall.cpp">
       <Filter>Magicite\GameLogic\Effect\Create</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteEffectCreateFriend.cpp">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -473,6 +476,12 @@
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteEffectFireBall.h">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectCreate.h">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectCreateFriend.h">
       <Filter>Magicite\GameLogic\Effect\Create</Filter>
     </ClInclude>
   </ItemGroup>

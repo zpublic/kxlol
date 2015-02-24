@@ -1,7 +1,9 @@
-#pragma once
-#include "MagiciteEffect.h"
+#ifndef __MAGICITE_EFFECT_CREATE_PITFALL__
+#define __MAGICITE_EFFECT_CREATE_PITFALL__
 
-class MagiciteEffectCreatePitfall : public MagiciteEffect
+#include "MagiciteEffectCreate.h"
+
+class MagiciteEffectCreatePitfall : public MagiciteEffectCreate
 {
 public:
     virtual void positive() 
@@ -10,3 +12,5 @@ public:
     }
 
 };
+
+#endif //__MAGICITE_EFFECT_CREATE_PITFALL__
