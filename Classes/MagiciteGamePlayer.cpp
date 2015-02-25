@@ -164,19 +164,18 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
         _move_right = true;
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_1:
-        useSkill(MagiciteEffectSpeedUp::create(_player));
+        useSkill(MagiciteEffectSpeedUp::create());
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_2:
-        useSkill(MagiciteEffectJumpHigh::create(_player));
+        useSkill(MagiciteEffectJumpHigh::create());
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_3:
-        useSkill(MagiciteEffectSprint::create(_player));
+        useSkill(MagiciteEffectSprint::create());
         break;
     default:
         break;
     }
 
-    Sprite::runAction();
 }
 
 void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)

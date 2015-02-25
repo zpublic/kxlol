@@ -10,7 +10,7 @@ MagiciteForeverItem::~MagiciteForeverItem()
 
 }
 
-void MagiciteForeverItem::positive()
+void MagiciteForeverItem::positive(MagiciteGameObject* obj)
 {
-    _effect->positive();
+    _effect->positive(obj);
 }

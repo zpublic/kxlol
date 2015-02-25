@@ -56,5 +56,5 @@ void MagiciteGameLiving::attact(int damage/* = 1*/)
 
 void MagiciteGameLiving::useSkill(MagiciteEffect* effect)
 {
-    effect->positive();
+    effect->positive(this);
 }

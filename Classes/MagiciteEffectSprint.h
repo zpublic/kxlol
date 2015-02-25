@@ -14,14 +14,13 @@ public:
 
     static const int time = 3;
 
-    virtual void positive();
+    virtual void positive(MagiciteGameObject* obj);
 
     virtual void negative();
 
-    static MagiciteEffectSprint* create(MagiciteGameMoveAbleLiving* moveable);
-    virtual bool init(MagiciteGameMoveAbleLiving* moveable);
+    static MagiciteEffectSprint* create();
+    virtual bool init();
 private:
-    MagiciteGameMoveAbleLiving*                         _moveable;
     float                                               _sprint_speed;
     float                                               _base_sprint_speed;
 };

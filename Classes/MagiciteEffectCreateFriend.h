@@ -15,7 +15,7 @@ public:
     MagiciteEffectCreateFriend();
 
     //MagiciteEffectCreate
-    virtual void positive();
+    virtual void positive(MagiciteGameObject* obj);
 
     static MagiciteEffectCreateFriend* create(
         const cocos2d::Vec2& pos,

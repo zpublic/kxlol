@@ -6,7 +6,7 @@
 class MagiciteEffectPositive : public MagiciteEffect
 {
 public:
-    virtual void positive() 
+    virtual void positive(MagiciteGameObject* obj)
     {
         //MagiciteEffectValueChange.positive
     }

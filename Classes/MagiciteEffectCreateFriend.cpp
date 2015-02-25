@@ -7,7 +7,7 @@ MagiciteEffectCreateFriend::MagiciteEffectCreateFriend()
 
 }
 
-void MagiciteEffectCreateFriend::positive()
+void MagiciteEffectCreateFriend::positive(MagiciteGameObject* obj)
 {
     MagiciteGameMoveAbleLiving* friends = MagiciteGaemFactoryMethod::createFriend(
         _type,

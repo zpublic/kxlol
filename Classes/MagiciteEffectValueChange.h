@@ -6,7 +6,7 @@
 class MagiciteEffectValueChange : public MagiciteEffect
 {
 public:
-    virtual void positive() 
+    virtual void positive(MagiciteGameObject* obj)
     {
         ///> 比如在这里加三点力量
     }

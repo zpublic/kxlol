@@ -3,6 +3,7 @@
 
 #include "MagiciteItem.h"
 #include "MagiciteEffect.h"
+#include "MagiciteGameObject.h"
 
 class MagiciteEffectItem : public MagiciteItem
 {
@@ -10,7 +11,7 @@ public:
     MagiciteEffectItem();
     ~MagiciteEffectItem();
 
-    virtual void positive();
+    virtual void positive(MagiciteGameObject* obj);
 
 protected:
     MagiciteEffect*                         _effect;

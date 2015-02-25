@@ -7,7 +7,7 @@ MagiciteEffectFireBall::MagiciteEffectFireBall()
 
 }
 
-void MagiciteEffectFireBall::positive()
+void MagiciteEffectFireBall::positive(MagiciteGameObject* obj)
 {
     MagiciteGameAmmo* ammo = nullptr;
     if (rand() % 5 == 0)

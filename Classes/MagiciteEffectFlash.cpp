@@ -8,9 +8,10 @@ MagiciteEffectFlash::MagiciteEffectFlash()
 }
 
 
-void MagiciteEffectFlash::positive()
+void MagiciteEffectFlash::positive(MagiciteGameObject* obj)
 {
     int PTM_RATIO = MagiciteGamePhyLayer::PTM_RATIO;
+    auto _player = static_cast<MagiciteGameMoveAbleLiving*>(obj);
 
     b2Fixture* fixture = nullptr;
     float fraction = 0.0f;
@@ -60,10 +61,10 @@ void MagiciteEffectFlash::negative()
 
 }
 
-MagiciteEffectFlash* MagiciteEffectFlash::create(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAbleLiving* player, float length)
+MagiciteEffectFlash* MagiciteEffectFlash::create(MagiciteGamePhyLayer* phyLayer, float length)
 {
     auto ptr = new MagiciteEffectFlash();
-    if (ptr && ptr->init(phyLayer, player, length))
+    if (ptr && ptr->init(phyLayer, length))
     {
         return ptr;
     }
@@ -74,10 +75,9 @@ MagiciteEffectFlash* MagiciteEffectFlash::create(MagiciteGamePhyLayer* phyLayer,
     }
 }
 
-bool MagiciteEffectFlash::init(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAbleLiving* player, float length)
+bool MagiciteEffectFlash::init(MagiciteGamePhyLayer* phyLayer, float length)
 {
     _phyLayer = phyLayer;
-    _player = player;
     _length = length;
 
     return true;

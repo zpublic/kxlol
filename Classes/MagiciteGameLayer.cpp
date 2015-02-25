@@ -84,7 +84,7 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
         MagiciteGamePause::Pause(this);
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_A:
-        _player->useSkill(MagiciteEffectFlash::create(_phyLayer, _player->getSprite(), 200));
+        _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));
         break;
     default:
         break;

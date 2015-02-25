@@ -7,11 +7,13 @@ MagiciteEffectJumpHigh::MagiciteEffectJumpHigh()
 
 }
 
-void MagiciteEffectJumpHigh::positive()
+void MagiciteEffectJumpHigh::positive(MagiciteGameObject* obj)
 {
+    auto _moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);
+
     if (_moveable != nullptr)
     {
-        auto action = Sequence::create(DelayTime::create(3), CallFunc::create([&]()
+        auto action = Sequence::create(DelayTime::create(3), CallFunc::create([_moveable,this]()
         {
             _moveable->setJumpHeight(_moveable->getJumpHeight() / 2);
             _moveable->_buff_map[Jump_High] = false;
@@ -40,10 +42,10 @@ void MagiciteEffectJumpHigh::negative()
 
 }
 
-MagiciteEffectJumpHigh* MagiciteEffectJumpHigh::create(MagiciteGameMoveAbleLiving* moveable)
+MagiciteEffectJumpHigh* MagiciteEffectJumpHigh::create()
 {
     auto ptr = new MagiciteEffectJumpHigh();
-    if (ptr && ptr->init(moveable))
+    if (ptr && ptr->init())
     {
         return ptr;
     }
@@ -54,9 +56,9 @@ MagiciteEffectJumpHigh* MagiciteEffectJumpHigh::create(MagiciteGameMoveAbleLivin
     }
 }
 
-bool MagiciteEffectJumpHigh::init(MagiciteGameMoveAbleLiving* moveable)
+bool MagiciteEffectJumpHigh::init()
 {
-    _moveable = moveable;
+    // do something
 
     return true;
 }

@@ -6,7 +6,7 @@
 class MagiciteEffectShoot : public MagiciteEffectCreate
 {
 public:
-    virtual void positive() 
+    virtual void positive(MagiciteGameObject* obj)
     {
         ///> 创建一个子弹object 给个速度和方向 射出去就行了
     }

@@ -9,7 +9,7 @@ class MagiciteEffectCreate : public MagiciteEffect
 public:
     typedef MagiciteGameObject::_entityCategory Category;
 
-    virtual void positive()
+    virtual void positive(MagiciteGameObject* obj)
     {
         ///> 在指定位置创建一个陷阱
     }

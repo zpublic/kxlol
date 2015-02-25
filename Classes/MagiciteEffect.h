@@ -1,6 +1,8 @@
 #ifndef __MAGICITE_EFFECT__
 #define __MAGICITE_EFFECT__
 
+#include "MagiciteGameObject.h"
+
 class MagiciteEffect
 {
 public:
@@ -10,7 +12,7 @@ public:
         T_Unkwon,
     }EffectType;
 
-    virtual void positive()
+    virtual void positive(MagiciteGameObject* obj)
     {
 
     }

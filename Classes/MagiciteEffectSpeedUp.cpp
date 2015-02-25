@@ -6,13 +6,15 @@ MagiciteEffectSpeedUp::MagiciteEffectSpeedUp()
 {
 
 }
-void MagiciteEffectSpeedUp::positive()
+void MagiciteEffectSpeedUp::positive(MagiciteGameObject* obj)
 {
+    auto _moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);
+
     if (_moveable != nullptr)
     {
         _old_speed = _moveable->getBaseSpeed();
 
-        auto action = Sequence::create(DelayTime::create(3), CallFunc::create([&]()
+        auto action = Sequence::create(DelayTime::create(3), CallFunc::create([_moveable,this]()
         {
             if (_moveable->getSpeed() - _old_speed + 0.00005 > _old_speed)
             {
@@ -44,10 +46,10 @@ void MagiciteEffectSpeedUp::negative()
     ///> 这儿不需要做啥 交给timer来取消效果
 }
 
-MagiciteEffectSpeedUp* MagiciteEffectSpeedUp::create(MagiciteGameMoveAbleLiving* moveable)
+MagiciteEffectSpeedUp* MagiciteEffectSpeedUp::create()
 {
     auto ptr = new MagiciteEffectSpeedUp();
-    if (ptr && ptr->init(moveable))
+    if (ptr && ptr->init())
     {
         return ptr;
     }
@@ -58,9 +60,9 @@ MagiciteEffectSpeedUp* MagiciteEffectSpeedUp::create(MagiciteGameMoveAbleLiving*
     }
 }
 
-bool MagiciteEffectSpeedUp::init(MagiciteGameMoveAbleLiving* moveable)
+bool MagiciteEffectSpeedUp::init()
 {
-    _moveable = moveable;
+    // do something
 
     return true;
 }

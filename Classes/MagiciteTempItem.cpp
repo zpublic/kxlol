@@ -11,9 +11,9 @@ MagiciteTempItem::~MagiciteTempItem()
 
 }
 
-void MagiciteTempItem::positive()
+void MagiciteTempItem::positive(MagiciteGameObject* obj)
 {
-    _effect->positive();
+    _effect->positive(obj);
     --_life;
 
     if (_life <= 0)

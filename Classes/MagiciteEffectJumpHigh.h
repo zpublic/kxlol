@@ -10,18 +10,16 @@ class MagiciteEffectJumpHigh : public MagiciteEffectBuffer
 public:
     MagiciteEffectJumpHigh();
 
-    virtual void positive();
+    virtual void positive(MagiciteGameObject* obj);
     //MagiciteEffectValueChange.positive
     //timer-negative
 
     virtual void negative();
     ///> 这儿不需要做啥 交给timer来取消效果
 
-    static MagiciteEffectJumpHigh* create(MagiciteGameMoveAbleLiving* moveable);
-    virtual bool init(MagiciteGameMoveAbleLiving* moveable);
+    static MagiciteEffectJumpHigh* create();
+    virtual bool init();
 
-private:
-    MagiciteGameMoveAbleLiving*                     _moveable;
 };
 
 #endif //__MAGICITE_EFFECT_JUMPHIGH__

@@ -14,7 +14,7 @@ public:
     MagiciteEffectFireBall();
    
     //MagiciteEffectShoot
-    virtual void positive();
+    virtual void positive(MagiciteGameObject* obj);
 
     static MagiciteEffectFireBall* create(
         const cocos2d::Vec2& pos, 

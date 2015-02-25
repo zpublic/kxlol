@@ -16,7 +16,7 @@ public:
         Sprint_Tag = MagiciteGameTagManager::Sprint_Tag,
     };
 
-    virtual void positive() 
+    virtual void positive(MagiciteGameObject* obj)
     {
         //MagiciteEffectValueChange.positive
         //timer-negative
