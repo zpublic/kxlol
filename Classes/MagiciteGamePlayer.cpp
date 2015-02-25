@@ -170,11 +170,13 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
         useSkill(MagiciteEffectJumpHigh::create(_player));
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_3:
-        (new MagiciteEffectSprint(_player))->positive();
+        useSkill(MagiciteEffectSprint::create(_player));
         break;
     default:
         break;
     }
+
+    Sprite::runAction();
 }
 
 void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)

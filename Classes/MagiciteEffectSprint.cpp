@@ -2,8 +2,7 @@
 
 USING_NS_CC;
 
-MagiciteEffectSprint::MagiciteEffectSprint(MagiciteGameMoveAbleLiving* moveable)
-:_moveable(moveable)
+MagiciteEffectSprint::MagiciteEffectSprint()
 {
 
 }
@@ -44,4 +43,25 @@ void MagiciteEffectSprint::positive()
 void MagiciteEffectSprint::negative()
 {
 
+}
+
+MagiciteEffectSprint* MagiciteEffectSprint::create(MagiciteGameMoveAbleLiving* moveable)
+{
+    auto ptr = new MagiciteEffectSprint();
+    if (ptr && ptr->init(moveable))
+    {
+        return ptr;
+    }
+    else
+    {
+        CC_SAFE_DELETE(ptr);
+        return nullptr;
+    }
+}
+
+bool MagiciteEffectSprint::init(MagiciteGameMoveAbleLiving* moveable)
+{
+    _moveable = moveable;
+
+    return true;
 }
