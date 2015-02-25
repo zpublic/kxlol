@@ -9,11 +9,15 @@
 class MagiciteEffectFlash : public MagiciteEffectPositive
 {
 public:
-    MagiciteEffectFlash(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAbleLiving* player, float length);
+    MagiciteEffectFlash();
 
     //MagiciteEffectPositive
     virtual void positive();
     virtual void negative();
+
+    static MagiciteEffectFlash* create(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAbleLiving* player, float length);
+
+    virtual bool init(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAbleLiving* player, float length);
 
 private:
     MagiciteGamePhyLayer*                               _phyLayer;

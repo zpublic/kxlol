@@ -2,8 +2,7 @@
 
 USING_NS_CC;
 
-MagiciteEffectSpeedUp::MagiciteEffectSpeedUp(MagiciteGameMoveAbleLiving* moveable)
-:_moveable(moveable)
+MagiciteEffectSpeedUp::MagiciteEffectSpeedUp()
 {
 
 }
@@ -45,3 +44,23 @@ void MagiciteEffectSpeedUp::negative()
     ///> 这儿不需要做啥 交给timer来取消效果
 }
 
+MagiciteEffectSpeedUp* MagiciteEffectSpeedUp::create(MagiciteGameMoveAbleLiving* moveable)
+{
+    auto ptr = new MagiciteEffectSpeedUp();
+    if (ptr && ptr->init(moveable))
+    {
+        return ptr;
+    }
+    else
+    {
+        CC_SAFE_DELETE(ptr);
+        return nullptr;
+    }
+}
+
+bool MagiciteEffectSpeedUp::init(MagiciteGameMoveAbleLiving* moveable)
+{
+    _moveable = moveable;
+
+    return true;
+}

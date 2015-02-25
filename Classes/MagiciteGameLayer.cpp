@@ -69,12 +69,14 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
-        _player->useSkill(new MagiciteEffectCreateFriend(Vec2(_player->getPosition()),
+        _player->useSkill(MagiciteEffectCreateFriend::create(
+            Vec2(_player->getPosition()),
             _phyLayer,
             _player->getDire(), MagiciteEffectCreateFriend::LivingType::Slime));
         break;
     case EventKeyboard::KeyCode::KEY_F:
-        _player->useSkill(new MagiciteEffectFireBall(Vec2(_player->getPosition()),
+        _player->useSkill(MagiciteEffectFireBall::create(
+            Vec2(_player->getPosition()),
             _phyLayer,
             _player->getDire()));
         break;
@@ -82,7 +84,7 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
         MagiciteGamePause::Pause(this);
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_A:
-        _player->useSkill(new MagiciteEffectFlash(_phyLayer, _player->getSprite(), 200));
+        _player->useSkill(MagiciteEffectFlash::create(_phyLayer, _player->getSprite(), 200));
         break;
     default:
         break;

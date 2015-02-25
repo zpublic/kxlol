@@ -164,10 +164,10 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
         _move_right = true;
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_1:
-        activeSpeedUp();
+        useSkill(MagiciteEffectSpeedUp::create(_player));
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_2:
-        (new MagiciteEffectJumpHigh(_player))->positive();
+        useSkill(MagiciteEffectJumpHigh::create(_player));
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_3:
         (new MagiciteEffectSprint(_player))->positive();
@@ -192,12 +192,6 @@ void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* ev
     default:
         break;
     }
-}
-
-void MagiciteGamePlayer::activeSpeedUp()
-{
-    auto buff = new MagiciteEffectSpeedUp(_player);
-    buff->positive();
 }
 
 void MagiciteGamePlayer::setPetFollow(MagiciteGameObject* pet)

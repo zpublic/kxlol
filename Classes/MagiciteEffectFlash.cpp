@@ -2,8 +2,7 @@
 
 USING_NS_CC;
 
-MagiciteEffectFlash::MagiciteEffectFlash(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAbleLiving* player, float length)
-:_phyLayer(phyLayer), _player(player), _length(length)
+MagiciteEffectFlash::MagiciteEffectFlash()
 {
 
 }
@@ -59,4 +58,27 @@ void MagiciteEffectFlash::positive()
 void MagiciteEffectFlash::negative()
 {
 
+}
+
+MagiciteEffectFlash* MagiciteEffectFlash::create(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAbleLiving* player, float length)
+{
+    auto ptr = new MagiciteEffectFlash();
+    if (ptr && ptr->init(phyLayer, player, length))
+    {
+        return ptr;
+    }
+    else
+    {
+        CC_SAFE_DELETE(ptr);
+        return nullptr;
+    }
+}
+
+bool MagiciteEffectFlash::init(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAbleLiving* player, float length)
+{
+    _phyLayer = phyLayer;
+    _player = player;
+    _length = length;
+
+    return true;
 }

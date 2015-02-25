@@ -8,7 +8,7 @@
 class MagiciteEffectSpeedUp : public MagiciteEffectBuffer
 {
 public:
-    MagiciteEffectSpeedUp(MagiciteGameMoveAbleLiving* moveable);
+    MagiciteEffectSpeedUp();
 
     virtual void positive();
         //MagiciteEffectValueChange.positive
@@ -16,6 +16,11 @@ public:
 
     virtual void negative();
         ///> 这儿不需要做啥 交给timer来取消效果
+
+    static MagiciteEffectSpeedUp* create(MagiciteGameMoveAbleLiving* moveable);
+    virtual bool init(MagiciteGameMoveAbleLiving* moveable);
+
+
 private:
     MagiciteGameMoveAbleLiving*                     _moveable;
     float                                           _old_speed;

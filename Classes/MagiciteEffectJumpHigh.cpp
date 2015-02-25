@@ -2,8 +2,7 @@
 
 USING_NS_CC;
 
-MagiciteEffectJumpHigh::MagiciteEffectJumpHigh(MagiciteGameMoveAbleLiving* moveable)
-:_moveable(moveable)
+MagiciteEffectJumpHigh::MagiciteEffectJumpHigh()
 {
 
 }
@@ -39,4 +38,25 @@ void MagiciteEffectJumpHigh::positive()
 void MagiciteEffectJumpHigh::negative()
 {
 
+}
+
+MagiciteEffectJumpHigh* MagiciteEffectJumpHigh::create(MagiciteGameMoveAbleLiving* moveable)
+{
+    auto ptr = new MagiciteEffectJumpHigh();
+    if (ptr && ptr->init(moveable))
+    {
+        return ptr;
+    }
+    else
+    {
+        CC_SAFE_DELETE(ptr);
+        return nullptr;
+    }
+}
+
+bool MagiciteEffectJumpHigh::init(MagiciteGameMoveAbleLiving* moveable)
+{
+    _moveable = moveable;
+
+    return true;
 }

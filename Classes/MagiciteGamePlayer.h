@@ -55,8 +55,6 @@ public:
     cocos2d::Size getContentSize() const;
     void setContentSize(cocos2d::Size size);
 
-    void activeSpeedUp();
-
     void setPetFollow(MagiciteGameObject*);
 
     virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);

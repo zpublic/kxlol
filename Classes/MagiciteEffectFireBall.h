@@ -11,10 +11,20 @@ class MagiciteEffectFireBall : public MagiciteEffectShoot
 {
 public:
 
-    MagiciteEffectFireBall(const cocos2d::Vec2& pos, MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAble::Direction dire);
+    MagiciteEffectFireBall();
    
     //MagiciteEffectShoot
     virtual void positive();
+
+    static MagiciteEffectFireBall* create(
+        const cocos2d::Vec2& pos, 
+        MagiciteGamePhyLayer* phyLayer, 
+        MagiciteGameMoveAble::Direction dire);
+
+    virtual bool init(
+        const cocos2d::Vec2& pos, 
+        MagiciteGamePhyLayer* phyLayer, 
+        MagiciteGameMoveAble::Direction dire);
 
 private:
     cocos2d::Vec2                                   _pos;

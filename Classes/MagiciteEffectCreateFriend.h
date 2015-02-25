@@ -12,14 +12,22 @@ public:
 
     typedef MagiciteGaemFactoryMethod::LivingType LivingType;
 
-    MagiciteEffectCreateFriend(
-        const cocos2d::Vec2& pos, 
-        MagiciteGamePhyLayer* phyLayer, 
-        MagiciteGameMoveAble::Direction dire, 
-        LivingType type);
+    MagiciteEffectCreateFriend();
 
     //MagiciteEffectCreate
     virtual void positive();
+
+    static MagiciteEffectCreateFriend* create(
+        const cocos2d::Vec2& pos,
+        MagiciteGamePhyLayer* phyLayer,
+        MagiciteGameMoveAble::Direction dire,
+        LivingType type);
+
+    virtual bool init(
+        const cocos2d::Vec2& pos,
+        MagiciteGamePhyLayer* phyLayer,
+        MagiciteGameMoveAble::Direction dire,
+        LivingType type);
 
 private:
     cocos2d::Vec2                               _pos;
