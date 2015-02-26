@@ -91,12 +91,12 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     default:
         break;
     }
-    MagiciteGameControlAble::dispatchKeyPress(keyCode, event, static_cast<MagiciteGameControlAble*>(_player));
+    MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
 }
 
 void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    MagiciteGameControlAble::dispatchKeyRelease(keyCode, event, static_cast<MagiciteGameControlAble*>(_player));
+    MagiciteGameControlAble::dispatchKeyRelease(keyCode, event, _player);
 }
 
 void MagiciteGameLayer::update(float timeDelta)
