@@ -147,6 +147,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\base\Player.cpp" />
     <ClCompile Include="..\Classes\Component\slot.cpp" />
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
+    <ClCompile Include="..\Classes\MagiciteCaptionScene.cpp" />
     <ClCompile Include="..\Classes\MagiciteEffectCreateFriend.cpp" />
     <ClCompile Include="..\Classes\MagiciteEffectFireBall.cpp" />
     <ClCompile Include="..\Classes\MagiciteEffectFlash.cpp" />
@@ -215,6 +216,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\base\Player.h" />
     <ClInclude Include="..\Classes\Component\slot.h" />
     <ClInclude Include="..\Classes\GLES-Render.h" />
+    <ClInclude Include="..\Classes\MagiciteCaptionScene.h" />
     <ClInclude Include="..\Classes\MagiciteEffect.h" />
     <ClInclude Include="..\Classes\MagiciteEffectBuffer.h" />
     <ClInclude Include="..\Classes\MagiciteEffectCreate.h" />
