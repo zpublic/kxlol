@@ -55,7 +55,9 @@ bool MagiciteGameLayer::init()
     create_enemy(game);
     create_pitfall(game);
     create_ground(ground);
-    create_Particle();
+    //create_Particle();
+
+    use_weather(new MagiciteWeatherSnow);
 
     init_contact();
 
@@ -227,25 +229,8 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
     }
 }
 
-void MagiciteGameLayer::create_Particle()
+void MagiciteGameLayer::use_weather(MagiciteWeather* weather)
 {
-    auto snow = ParticleSnow::create();
-    snow->setTexture(Director::getInstance()->getTextureCache()->addImage("img\\Magicite\\Particle\\snow.png"));
-
-    snow->setDuration(-1);
-    snow->setGravity(Vec2(0.0f, -80.0f));
-
-    snow->setAngle(90.0f);
-    snow->setAngleVar(360.0f);
-
-    snow->setPosition(_background->getBackSize().width / 2, _visibleSize.height);
-    snow->setPosVar(Vec2(_background->getBackSize().width / 2, 0));
-
-    snow->setStartSpin(30);
-    snow->setStartSpinVar(60);
-    snow->setEndSpin(60);
-    snow->setEndSpinVar(60);
-
-    snow->setEmissionRate(6);
-    this->addChild(snow);
+    auto weatherEffect = weather->getWeatherEffect(Vec2(_background->getBackSize().width / 2, _visibleSize.height));
+    weatherEffect->positive(this);
 }

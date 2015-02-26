@@ -12,6 +12,7 @@
 #include "MagiciteGameControlAble.h"
 #include "MagiciteGaemFactoryMethod.h"
 #include "MagiciteGameIncubator.h"
+#include "MagiciteWeatherSnow.h"
 
 class MagiciteGameLayer : public cocos2d::Layer
 {
@@ -38,7 +39,8 @@ public:
     void create_enemy(cocos2d::TMXObjectGroup*);
     void create_pitfall(cocos2d::TMXObjectGroup*);
     void create_ground(cocos2d::TMXObjectGroup*);
-    void create_Particle();
+
+    void use_weather(MagiciteWeather* weather);
 
 private:
     MagiciteGamePlayer*                 _player;
