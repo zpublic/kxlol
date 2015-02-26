@@ -12,7 +12,7 @@ public:
 
     static const int sprint_speed_seed = 3;
 
-    static const int time = 3;
+    static const int time = 1;
 
     virtual void positive(MagiciteGameObject* obj);
 
@@ -21,8 +21,8 @@ public:
     static MagiciteEffectSprint* create();
     virtual bool init();
 private:
-    float                                               _sprint_speed;
     float                                               _base_sprint_speed;
+    float                                               _step_speed;
 };
 
 #endif //__MAGICITE_EFFECT_SPRINT__
