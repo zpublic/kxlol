@@ -9,7 +9,7 @@ public:
     MagiciteForeverItem();
     ~MagiciteForeverItem();
 
-    virtual void positive();
+    virtual void positive(MagiciteGameObject* obj);
 };
 
 #endif //__MAGICITE_FOREVER_ITEM__

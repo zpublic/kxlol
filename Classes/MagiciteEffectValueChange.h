@@ -1,10 +1,12 @@
-#pragma once
+#ifndef __MAGICITE__EFFECT_VALUE_CHANGE__
+#define __MAGICITE__EFFECT_VALUE_CHANGE__
+
 #include "MagiciteEffect.h"
 
 class MagiciteEffectValueChange : public MagiciteEffect
 {
 public:
-    virtual void positive() 
+    virtual void positive(MagiciteGameObject* obj)
     {
         ///> 比如在这里加三点力量
     }
@@ -15,3 +17,5 @@ public:
     }
 
 };
+
+#endif //__MAGICITE__EFFECT_VALUE_CHANGE__

@@ -8,20 +8,19 @@
 class MagiciteEffectSprint :public MagiciteEffectBuffer
 {
 public:
-    MagiciteEffectSprint(MagiciteGameMoveAbleLiving* moveable);
+    MagiciteEffectSprint();
 
     static const int sprint_speed_seed = 3;
 
     static const int time = 3;
 
-    virtual void positive();
+    virtual void positive(MagiciteGameObject* obj);
 
     virtual void negative();
 
-    void step(float dTime);
-
+    static MagiciteEffectSprint* create();
+    virtual bool init();
 private:
-    MagiciteGameMoveAbleLiving*                         _moveable;
     float                                               _sprint_speed;
     float                                               _base_sprint_speed;
 };

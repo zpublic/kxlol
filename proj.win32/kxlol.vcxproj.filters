@@ -79,6 +79,9 @@
     <Filter Include="Magicite\GameLogic\Object\Item">
       <UniqueIdentifier>{a0990774-54b8-44f1-a7af-5b7c88849ea2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Magicite\GameLogic\Weather">
+      <UniqueIdentifier>{9848ab7f-0b4a-4349-bbef-438730ea9ebf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -264,6 +267,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteEffectFireBall.cpp">
       <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteEffectCreateFriend.cpp">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteWeatherEffectSnow.cpp">
+      <Filter>Magicite\GameLogic\Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteWeatherSnow.cpp">
+      <Filter>Magicite\GameLogic\Weather</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -474,6 +486,24 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteEffectFireBall.h">
       <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectCreate.h">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectCreateFriend.h">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteWeather.h">
+      <Filter>Magicite\GameLogic\Weather</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteWeatherEffect.h">
+      <Filter>Magicite\GameLogic\Weather</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteWeatherEffectSnow.h">
+      <Filter>Magicite\GameLogic\Weather</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteWeatherSnow.h">
+      <Filter>Magicite\GameLogic\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

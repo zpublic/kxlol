@@ -2,17 +2,18 @@
 
 USING_NS_CC;
 
-MagiciteEffectJumpHigh::MagiciteEffectJumpHigh(MagiciteGameMoveAbleLiving* moveable)
-:_moveable(moveable)
+MagiciteEffectJumpHigh::MagiciteEffectJumpHigh()
 {
 
 }
 
-void MagiciteEffectJumpHigh::positive()
+void MagiciteEffectJumpHigh::positive(MagiciteGameObject* obj)
 {
+    auto _moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);
+
     if (_moveable != nullptr)
     {
-        auto action = Sequence::create(DelayTime::create(3), CallFunc::create([&]()
+        auto action = Sequence::create(DelayTime::create(3), CallFunc::create([_moveable,this]()
         {
             _moveable->setJumpHeight(_moveable->getJumpHeight() / 2);
             _moveable->_buff_map[Jump_High] = false;
@@ -39,4 +40,25 @@ void MagiciteEffectJumpHigh::positive()
 void MagiciteEffectJumpHigh::negative()
 {
 
+}
+
+MagiciteEffectJumpHigh* MagiciteEffectJumpHigh::create()
+{
+    auto ptr = new MagiciteEffectJumpHigh();
+    if (ptr && ptr->init())
+    {
+        return ptr;
+    }
+    else
+    {
+        CC_SAFE_DELETE(ptr);
+        return nullptr;
+    }
+}
+
+bool MagiciteEffectJumpHigh::init()
+{
+    // do something
+
+    return true;
 }

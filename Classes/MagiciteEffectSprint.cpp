@@ -2,14 +2,15 @@
 
 USING_NS_CC;
 
-MagiciteEffectSprint::MagiciteEffectSprint(MagiciteGameMoveAbleLiving* moveable)
-:_moveable(moveable)
+MagiciteEffectSprint::MagiciteEffectSprint()
 {
 
 }
 
-void MagiciteEffectSprint::positive()
+void MagiciteEffectSprint::positive(MagiciteGameObject* obj)
 {
+    auto _moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);
+
     if (_moveable != nullptr)
     {
         if (!_moveable->_buff_map[Sprint_Tag])
@@ -18,7 +19,7 @@ void MagiciteEffectSprint::positive()
             _sprint_speed = _base_sprint_speed * 2;
             _moveable->setSpeed(_base_sprint_speed + _sprint_speed);
 
-            _moveable->schedule([&](float){
+            _moveable->schedule([_moveable,this](float){
 
                 if (_sprint_speed - 0.00005f <= 0.0f || _moveable->getSpeed() - 0.00005f <= _base_sprint_speed)
                 {
@@ -44,4 +45,25 @@ void MagiciteEffectSprint::positive()
 void MagiciteEffectSprint::negative()
 {
 
+}
+
+MagiciteEffectSprint* MagiciteEffectSprint::create()
+{
+    auto ptr = new MagiciteEffectSprint();
+    if (ptr && ptr->init())
+    {
+        return ptr;
+    }
+    else
+    {
+        CC_SAFE_DELETE(ptr);
+        return nullptr;
+    }
+}
+
+bool MagiciteEffectSprint::init()
+{
+    // do something
+
+    return true;
 }

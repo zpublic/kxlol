@@ -2,16 +2,16 @@
 
 USING_NS_CC;
 
-MagiciteEffectFlash::MagiciteEffectFlash(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAbleLiving* player, float length)
-:_phyLayer(phyLayer), _player(player), _length(length)
+MagiciteEffectFlash::MagiciteEffectFlash()
 {
 
 }
 
 
-void MagiciteEffectFlash::positive()
+void MagiciteEffectFlash::positive(MagiciteGameObject* obj)
 {
     int PTM_RATIO = MagiciteGamePhyLayer::PTM_RATIO;
+    auto _player = static_cast<MagiciteGameMoveAbleLiving*>(obj);
 
     b2Fixture* fixture = nullptr;
     float fraction = 0.0f;
@@ -59,4 +59,26 @@ void MagiciteEffectFlash::positive()
 void MagiciteEffectFlash::negative()
 {
 
+}
+
+MagiciteEffectFlash* MagiciteEffectFlash::create(MagiciteGamePhyLayer* phyLayer, float length)
+{
+    auto ptr = new MagiciteEffectFlash();
+    if (ptr && ptr->init(phyLayer, length))
+    {
+        return ptr;
+    }
+    else
+    {
+        CC_SAFE_DELETE(ptr);
+        return nullptr;
+    }
+}
+
+bool MagiciteEffectFlash::init(MagiciteGamePhyLayer* phyLayer, float length)
+{
+    _phyLayer = phyLayer;
+    _length = length;
+
+    return true;
 }

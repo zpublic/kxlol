@@ -10,7 +10,7 @@ public:
     ~MagiciteTempItem();
 
     //MagiciteEffectItem
-    virtual void positive();
+    virtual void positive(MagiciteGameObject* obj);
 
 private:
     int                             _life;

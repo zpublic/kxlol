@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __MAGICITE_EFFECT_BUFER__
+#define __MAGICITE_EFFECT_BUFER__
+
 #include "MagiciteEffect.h"
 #include "MagiciteGameTagManager.h"
 
@@ -14,7 +16,7 @@ public:
         Sprint_Tag = MagiciteGameTagManager::Sprint_Tag,
     };
 
-    virtual void positive() 
+    virtual void positive(MagiciteGameObject* obj)
     {
         //MagiciteEffectValueChange.positive
         //timer-negative
@@ -26,3 +28,5 @@ public:
     }
 
 };
+
+#endif //__MAGICITE_EFFECT_BUFER__

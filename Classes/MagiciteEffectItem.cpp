@@ -10,7 +10,7 @@ MagiciteEffectItem::~MagiciteEffectItem()
 
 }
 
-void MagiciteEffectItem::positive()
+void MagiciteEffectItem::positive(MagiciteGameObject* obj)
 {
-    _effect->positive();
+    _effect->positive(obj);
 }

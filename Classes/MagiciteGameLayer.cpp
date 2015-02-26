@@ -1,6 +1,7 @@
 #include "MagiciteGameLayer.h"
 #include "MagiciteEffectFlash.h"
 #include "MagiciteEffectFireBall.h"
+#include "MagiciteEffectCreateFriend.h"
 
 USING_NS_CC;
 
@@ -54,7 +55,9 @@ bool MagiciteGameLayer::init()
     create_enemy(game);
     create_pitfall(game);
     create_ground(ground);
-    create_Particle();
+    //create_Particle();
+
+    use_weather(new MagiciteWeatherSnow);
 
     init_contact();
 
@@ -68,22 +71,14 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
-        friends = MagiciteGaemFactoryMethod::createFriend(
-            MagiciteGaemFactoryMethod::Slime,
-            (_player->getDire() == MagiciteGameMoveAbleLiving::Direction::left ? true : false));
-        friends->setPosition(Vec2(_player->getPosition().x, _player->getPosition().y));
-
-        _phyLayer->createPhyBody(
-            friends,
-            false,
-            Category::DEFAULT_FRIEND,
-            Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_HOLE);
-        _phyLayer->addChild(friends);
-        friends->Move(friends->getDire());
-
+        _player->useSkill(MagiciteEffectCreateFriend::create(
+            Vec2(_player->getPosition()),
+            _phyLayer,
+            _player->getDire(), MagiciteEffectCreateFriend::LivingType::Slime));
         break;
     case EventKeyboard::KeyCode::KEY_F:
-        _player->useSkill(new MagiciteEffectFireBall(Vec2(_player->getPosition()),
+        _player->useSkill(MagiciteEffectFireBall::create(
+            Vec2(_player->getPosition()),
             _phyLayer,
             _player->getDire()));
         break;
@@ -91,17 +86,17 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
         MagiciteGamePause::Pause(this);
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_A:
-        _player->useSkill(new MagiciteEffectFlash(_phyLayer, _player->getSprite(), 200));
+        _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));
         break;
     default:
         break;
     }
-    MagiciteGameControlAble::dispatchKeyPress(keyCode, event, static_cast<MagiciteGameControlAble*>(_player));
+    MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
 }
 
 void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    MagiciteGameControlAble::dispatchKeyRelease(keyCode, event, static_cast<MagiciteGameControlAble*>(_player));
+    MagiciteGameControlAble::dispatchKeyRelease(keyCode, event, _player);
 }
 
 void MagiciteGameLayer::update(float timeDelta)
@@ -234,25 +229,8 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
     }
 }
 
-void MagiciteGameLayer::create_Particle()
+void MagiciteGameLayer::use_weather(MagiciteWeather* weather)
 {
-    auto snow = ParticleSnow::create();
-    snow->setTexture(Director::getInstance()->getTextureCache()->addImage("img\\Magicite\\Particle\\snow.png"));
-
-    snow->setDuration(-1);
-    snow->setGravity(Vec2(0.0f, -80.0f));
-
-    snow->setAngle(90.0f);
-    snow->setAngleVar(360.0f);
-
-    snow->setPosition(_background->getBackSize().width / 2, _visibleSize.height);
-    snow->setPosVar(Vec2(_background->getBackSize().width / 2, 0));
-
-    snow->setStartSpin(30);
-    snow->setStartSpinVar(60);
-    snow->setEndSpin(60);
-    snow->setEndSpinVar(60);
-
-    snow->setEmissionRate(6);
-    this->addChild(snow);
+    auto weatherEffect = weather->getWeatherEffect(Vec2(_background->getBackSize().width / 2, _visibleSize.height));
+    weatherEffect->positive(this);
 }
