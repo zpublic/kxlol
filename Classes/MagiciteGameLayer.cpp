@@ -231,6 +231,6 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
 
 void MagiciteGameLayer::use_weather(MagiciteWeather* weather)
 {
-    auto weatherEffect = weather->getWeatherEffect(Vec2(_background->getBackSize().width / 2, _visibleSize.height));
+    auto weatherEffect = weather->getWeatherEffect(Vec2(_background->getBackSize().width, _visibleSize.height));
     weatherEffect->positive(this);
 }
