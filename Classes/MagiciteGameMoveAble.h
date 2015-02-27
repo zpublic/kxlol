@@ -39,6 +39,7 @@ public:
     {
         S_Move,
         S_Jump,
+        S_DoubleJump,
         S_Animate,
     };
 

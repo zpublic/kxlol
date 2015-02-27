@@ -80,7 +80,7 @@ void MagiciteGameMoveAbleLiving::Stop()
 
 void MagiciteGameMoveAbleLiving::Jump()
 {
-    if (!getState(State::S_Jump))
+    if (getState(State::S_Jump) == false && getState(State::S_DoubleJump) == false)
     {
         setBodyYSpeed(_jumpHeight);
         if (getState(State::S_Move))
@@ -90,11 +90,19 @@ void MagiciteGameMoveAbleLiving::Jump()
         this->startAnimation(AnimationTag::Jump_Tag);
         setState(State::S_Jump, true);
     }
+    else if (getState(State::S_Jump) == true && getState(State::S_DoubleJump) == false)
+    {
+        setBodyYSpeed(_jumpHeight);
+        this->stopAnimation(AnimationTag::Jump_Tag);
+        this->startAnimation(AnimationTag::Jump_Tag);
+        setState(State::S_Jump, false);
+        setState(State::S_DoubleJump, true);
+    }
 }
 
 void MagiciteGameMoveAbleLiving::JumpOver()
 {
-    if (getState(State::S_Jump))
+    if (getState(State::S_Jump) || getState(State::S_DoubleJump))
     {
         this->stopAnimation(AnimationTag::Jump_Tag);
         if (getState(State::S_Move))
@@ -102,6 +110,7 @@ void MagiciteGameMoveAbleLiving::JumpOver()
             this->startAnimation(MagiciteGameMoveAble::Move_Tag);
         }
         setState(State::S_Jump, false);
+        setState(State::S_DoubleJump, false);
     }
 }
 
