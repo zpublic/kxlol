@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "cocos-ext.h"
-#include "MagiciteScene.h"
+#include "MagiciteCaptionScene.h"
 
 class MagiciteGameSelectLevel : public cocos2d::Scene
 {

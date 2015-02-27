@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "MagiciteGameLayer.h"
-#include "MagiciteGameSelectLevel.h"
 
 class MagiciteScene : public cocos2d::Scene
 {
@@ -13,9 +12,8 @@ public:
     static void setLevel(int level);
     static int getLevel();
 
-    static MagiciteScene* create();
+    CREATE_FUNC(MagiciteScene);
 
-    bool _is_ready;
 private:
     static int LevelNumber;
 };

@@ -63,7 +63,7 @@ Layer* MagiciteGameSelectLevel::getContainerLayer()
             "CloseSelected.png",
             [i](Ref*){
             MagiciteScene::setLevel(i);
-            Director::getInstance()->replaceScene(MagiciteScene::create());
+            Director::getInstance()->replaceScene(MagiciteCaptionScene::create());
         });
         item->setPosition(Vec2(((size.width / pageItem) * i + size.width / pageItem / 2), size.height / 2));
         menu->addChild(item);

@@ -1,5 +1,6 @@
 #include "MagiciteBeginMenu.h"
 #include "MagiciteScene.h"
+#include "MagiciteCaptionScene.h"
 #include "MagiciteGameSelectLevel.h"
 #include "AequitasScene.h"
 
@@ -26,7 +27,7 @@ bool MagiciteBeginMenu::init()
 
     auto ttfFont = cocos2d::Label::createWithTTF("Begin!", "fonts/Marker Felt.ttf", 32.0f, cocos2d::Size::ZERO,cocos2d::TextHAlignment::RIGHT);
     auto menuItem = cocos2d::MenuItemLabel::create(ttfFont, [&](Ref*){
-        cocos2d::Director::getInstance()->replaceScene(MagiciteScene::create());
+        cocos2d::Director::getInstance()->replaceScene(MagiciteCaptionScene::create());
     });
     menuItem->setAnchorPoint(cocos2d::Vec2(1, 0.5));
     menuItem->setPosition(origin.x + visibleSize.width - 40, origin.y + 200);
@@ -93,7 +94,7 @@ void MagiciteBeginMenu::initBeginMenu2()
     auto spr = cocos2d::Sprite::create("img/Magicite/UI/menu.png", cocos2d::Rect(0.0f, 0.0f, 154.0f, 65.0f));
     auto menuItem = cocos2d::MenuItemSprite::create(spr, spr);
     menuItem->setCallback([](cocos2d::Ref* ){
-        cocos2d::Director::getInstance()->replaceScene(MagiciteScene::create());
+        cocos2d::Director::getInstance()->replaceScene(MagiciteCaptionScene::create());
     });
     menuItem->setPosition(visibleSize.width / 2, visibleSize.height / 2);
     auto menu = cocos2d::Menu::create(menuItem, nullptr);

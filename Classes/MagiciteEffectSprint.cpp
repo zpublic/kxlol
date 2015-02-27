@@ -13,31 +13,29 @@ void MagiciteEffectSprint::positive(MagiciteGameObject* obj)
 
     if (_moveable != nullptr)
     {
+        _base_sprint_speed = _moveable->getBaseSpeed();
+        _step_speed = 0.1f * _base_sprint_speed * (sprint_speed_seed - 1);
+
         if (!_moveable->_buff_map[Sprint_Tag])
         {
-            _base_sprint_speed = _moveable->getBaseSpeed();
-            _sprint_speed = _base_sprint_speed * 2;
-            _moveable->setSpeed(_base_sprint_speed + _sprint_speed);
-
+            _moveable->setSpeed(_base_sprint_speed * sprint_speed_seed);
             _moveable->schedule([_moveable,this](float){
 
-                if (_sprint_speed - 0.00005f <= 0.0f || _moveable->getSpeed() - 0.00005f <= _base_sprint_speed)
+                if (_moveable->getSpeed() - 0.00005f <= _base_sprint_speed)
                 {
                     _moveable->unschedule("Sprint_key");
                     _moveable->_buff_map[Sprint_Tag] = false;
                 }
                 else
                 {
-                    _sprint_speed -= 0.5f;
-                    _moveable->setSpeed(_moveable->getSpeed() - 0.5f);
+                    _moveable->setSpeed(_moveable->getSpeed() - _step_speed);
                 }
-            }, 0.2f, "Sprint_key");
+            }, 0.1f, "Sprint_key");
             _moveable->_buff_map[Sprint_Tag] = true;
         }
         else
         {
-            _sprint_speed = _base_sprint_speed * 2;
-            _moveable->setSpeed(_base_sprint_speed + _sprint_speed);
+            _moveable->setSpeed(_base_sprint_speed * sprint_speed_seed);
         }
     }
 }
