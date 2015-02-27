@@ -1,4 +1,9 @@
 #include "MagiciteGamePlayer.h"
+#include "MagiciteEffectSpeedUp.h"
+#include "MagiciteEffectJumpHigh.h"
+#include "MagiciteEffectSprint.h"
+#include "MagiciteGameChicken.h"
+#include "MagiciteGameHuman.h"
 
 USING_NS_CC;
 

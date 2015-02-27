@@ -3,8 +3,9 @@
 
 #include "Box2D/Box2D.h"
 #include "cocos2d.h"
-#include "MagiciteGameObject.h"
-#include "MagiciteGameContactListener.h"
+
+class MagiciteGameObject;
+class MagiciteGameContactListener;
 
 class MagiciteGamePhyWorld : public b2World
 {

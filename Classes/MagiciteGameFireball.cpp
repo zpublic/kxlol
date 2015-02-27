@@ -1,4 +1,5 @@
 #include "MagiciteGameFireball.h"
+#include "MagiciteGameMoveAble.h"
 
 USING_NS_CC;
 

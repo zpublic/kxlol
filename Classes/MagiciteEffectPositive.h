@@ -1,5 +1,6 @@
 #ifndef __MAGICITE_EFFECT_POSITIVE__
 #define __MAGICITE_EFFECT_POSITIVE__
+
 #include "MagiciteEffect.h"
 
 ///> 这是一个永久增强

@@ -1,4 +1,6 @@
+#include "MagiciteWeatherEffectSnow.h"
 #include "MagiciteWeatherSnow.h"
+#include "MagiciteWeatherEffect.h"
 
 USING_NS_CC;
 

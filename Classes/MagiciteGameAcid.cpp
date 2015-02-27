@@ -1,4 +1,5 @@
 #include "MagiciteGameAcid.h"
+#include "MagiciteGameMoveAble.h"
 
 USING_NS_CC;
 

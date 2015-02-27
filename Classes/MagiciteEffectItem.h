@@ -2,8 +2,9 @@
 #define __MAGICITE_EFFECT_ITEM__
 
 #include "MagiciteItem.h"
-#include "MagiciteEffect.h"
-#include "MagiciteGameObject.h"
+
+class MagiciteEffect;
+class MagiciteGameObject;
 
 class MagiciteEffectItem : public MagiciteItem
 {

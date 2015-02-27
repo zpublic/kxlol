@@ -2,8 +2,6 @@
 #define __MAGICITE_GAME_OVER__
 
 #include "cocos2d.h"
-#include "MagiciteScene.h"
-#include "WelcomeScene.h"
 
 class MagiciteGameOver : public cocos2d::Scene
 {

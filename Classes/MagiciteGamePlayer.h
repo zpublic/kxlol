@@ -2,12 +2,14 @@
 #define __MAGICITE_GAME_PLAYER__
 
 #include "cocos2d.h"
-#include "MagiciteGameChicken.h"
-#include "MagiciteGameHuman.h"
 #include "MagiciteGameControlAble.h"
-#include "MagiciteEffectSpeedUp.h"
-#include "MagiciteEffectJumpHigh.h"
-#include "MagiciteEffectSprint.h"
+#include "MagiciteGameMoveAbleLiving.h"
+
+class MagiciteEffectSpeedUp;
+class MagiciteEffectJumpHigh;
+class MagiciteEffectSprint;
+class MagiciteGameChicken;
+class MagiciteGameHuman;
 
 class MagiciteGamePlayer : public MagiciteGameControlAble
 {

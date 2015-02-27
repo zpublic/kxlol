@@ -1,4 +1,5 @@
 #include "MagiciteItemCoin.h"
+#include "MagiciteItemCoinObject.h"
 std::string MagiciteItemCoin::name = "Coin";
 
 USING_NS_CC;

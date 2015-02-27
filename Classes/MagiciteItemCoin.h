@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "MagiciteTempItem.h"
-#include "MagiciteItemCoinObject.h"
 
 class MagiciteItemCoin : public MagiciteTempItem
 {

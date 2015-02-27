@@ -2,7 +2,6 @@
 #define __MAGICITE_SCENE_H__
 
 #include "cocos2d.h"
-#include "MagiciteGameLayer.h"
 
 class MagiciteScene : public cocos2d::Scene
 {

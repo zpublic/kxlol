@@ -1,4 +1,5 @@
 #include "MagiciteEffectJumpHigh.h"
+#include "MagiciteGameMoveAbleLiving.h"
 
 USING_NS_CC;
 

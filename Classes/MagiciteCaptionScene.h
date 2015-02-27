@@ -2,8 +2,6 @@
 #define  __MAGICITE_CAPTION_SCENE__
 
 #include "cocos2d.h"
-#include "MagiciteScene.h"
-#include "MagiciteGameLayer.h"
 
 class MagiciteCaptionScene : public cocos2d::Scene
 {

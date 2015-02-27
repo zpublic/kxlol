@@ -1,4 +1,5 @@
 #include "MagiciteEffectSpeedUp.h"
+#include "MagiciteGameMoveAbleLiving.h"
 
 USING_NS_CC;
 
@@ -6,6 +7,7 @@ MagiciteEffectSpeedUp::MagiciteEffectSpeedUp()
 {
 
 }
+
 void MagiciteEffectSpeedUp::positive(MagiciteGameObject* obj)
 {
     auto _moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);

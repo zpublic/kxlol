@@ -3,8 +3,9 @@
 
 #include "cocos2d.h"
 #include "MagiciteEffectPositive.h"
-#include "MagiciteGamePhyLayer.h"
-#include "MagiciteGameMoveAbleLiving.h"
+
+class MagiciteGamePhyLayer;
+class MagiciteGameMoveAbleLiving;
 
 class MagiciteEffectFlash : public MagiciteEffectPositive
 {

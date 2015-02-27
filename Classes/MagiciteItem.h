@@ -2,7 +2,7 @@
 #define __MAGICITE_ITEM__
 
 #include "cocos2d.h"
-#include "MagiciteItemObject.h"
+class MagiciteItemObject;
 
 class MagiciteItem
 {

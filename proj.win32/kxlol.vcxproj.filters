@@ -505,11 +505,11 @@
     <ClInclude Include="..\Classes\MagiciteWeatherEffectSnow.h">
       <Filter>Magicite\GameLogic\Weather</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteWeatherSnow.h">
-      <Filter>Magicite\GameLogic\Object</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteCaptionScene.h">
       <Filter>Magicite\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteWeatherSnow.h">
+      <Filter>Magicite\GameLogic\Weather</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

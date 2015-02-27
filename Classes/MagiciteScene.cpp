@@ -1,4 +1,5 @@
 #include "MagiciteScene.h"
+#include "MagiciteGameLayer.h"
 int MagiciteScene::LevelNumber = 0;
 
 USING_NS_CC;

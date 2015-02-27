@@ -1,16 +1,10 @@
 #ifndef __MAGICITE_GAME_FACTORY_METHOD__
 #define __MAGICITE_GAME_FACTORY_METHOD__
 
-#include "MagiciteGameLiving.h"
-#include "MagiciteGameHuman.h"
-#include "MagiciteGameChicken.h"
-#include "MagiciteGamePiranha.h"
-#include "MagiciteGameSlime.h"
-#include "MagiciteGameSheep.h"
-#include "MagiciteGameSpinePitfall.h"
-#include "MagiciteGameFireball.h"
-#include "MagiciteGameAcid.h"
-#include "MagiciteGameDirt.h"
+class MagiciteGameLiving;
+class MagiciteGameMoveAbleLiving;
+class MagiciteGamePitfall;
+class MagiciteGameAmmo;
 
 namespace MagiciteGaemFactoryMethod
 {

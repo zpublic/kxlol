@@ -1,4 +1,6 @@
 #include "MagiciteGameSelectLevel.h"
+#include "MagiciteCaptionScene.h"
+#include "MagiciteScene.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
