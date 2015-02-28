@@ -2,7 +2,6 @@
 #define __MAGICITE_GAME_WIN__
 
 #include "cocos2d.h"
-#include "WelcomeScene.h"
 
 class MagiciteGameWin : public cocos2d::Scene
 {

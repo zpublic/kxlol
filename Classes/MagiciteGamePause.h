@@ -2,8 +2,6 @@
 #define __MAGICITE_GAME_PAUSE__
 
 #include "cocos2d.h"
-#include "MagiciteScene.h"
-#include "WelcomeScene.h"
 
 class MagiciteGamePause : public cocos2d::Scene
 {

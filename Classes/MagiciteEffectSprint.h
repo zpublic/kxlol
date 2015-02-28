@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "MagiciteEffectBuffer.h"
-#include "MagiciteGameMoveAbleLiving.h"
 
 class MagiciteEffectSprint :public MagiciteEffectBuffer
 {

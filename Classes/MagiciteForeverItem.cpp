@@ -1,4 +1,5 @@
 #include "MagiciteForeverItem.h"
+#include "MagiciteEffect.h"
 
 MagiciteForeverItem::MagiciteForeverItem()
 {

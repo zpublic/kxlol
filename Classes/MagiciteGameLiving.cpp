@@ -1,4 +1,5 @@
 #include "MagiciteGameLiving.h"
+#include "MagiciteEffect.h"
 
 USING_NS_CC;
 

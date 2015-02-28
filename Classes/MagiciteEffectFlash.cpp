@@ -1,4 +1,6 @@
 #include "MagiciteEffectFlash.h"
+#include "MagiciteGamePhyLayer.h"
+#include "MagiciteGameMoveAbleLiving.h"
 
 USING_NS_CC;
 

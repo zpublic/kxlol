@@ -2,17 +2,14 @@
 #define __MAGICITE_GAME_LAYER_H__
 
 #include "cocos2d.h"
-#include "MagiciteGameMap.h"
-#include "MagiciteGamePhyLayer.h"
-#include "MagiciteGamePause.h"
-#include "MagiciteGameOver.h"
-#include "MagiciteGameWin.h"
-#include "MagiciteGamePlayer.h"
-#include "MagiciteGameContact.h"
-#include "MagiciteGameControlAble.h"
-#include "MagiciteGaemFactoryMethod.h"
-#include "MagiciteGameIncubator.h"
-#include "MagiciteWeatherSnow.h"
+#include "Box2D/Box2D.h"
+#include "MagiciteGameObject.h"
+
+class MagiciteGameMap;
+class MagiciteGamePhyLayer;
+class MagiciteGamePlayer;
+class MagiciteGameControlAble;
+class MagiciteWeather;
 
 class MagiciteGameLayer : public cocos2d::Layer
 {

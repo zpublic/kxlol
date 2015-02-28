@@ -2,6 +2,19 @@
 #include "MagiciteEffectFlash.h"
 #include "MagiciteEffectFireBall.h"
 #include "MagiciteEffectCreateFriend.h"
+#include "MagiciteGameMap.h"
+#include "MagiciteGamePhyLayer.h"
+#include "MagiciteGamePause.h"
+#include "MagiciteGameOver.h"
+#include "MagiciteGameWin.h"
+#include "MagiciteGamePlayer.h"
+#include "MagiciteGameContact.h"
+#include "MagiciteGameControlAble.h"
+#include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGameIncubator.h"
+#include "MagiciteWeatherSnow.h"
+#include "MagiciteWeatherEffect.h"
+#include "MagiciteGamePitfall.h"
 
 USING_NS_CC;
 

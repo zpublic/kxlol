@@ -1,7 +1,7 @@
 #ifndef __MAGICITE_EFFECT__
 #define __MAGICITE_EFFECT__
 
-#include "MagiciteGameObject.h"
+class MagiciteGameObject;
 
 class MagiciteEffect
 {

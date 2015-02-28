@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "MagiciteGameAmmo.h"
-#include "MagiciteGameMoveAble.h"
 
 class MagiciteGameAcid : public MagiciteGameAmmo
 {

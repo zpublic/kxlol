@@ -3,7 +3,8 @@
 
 #include "cocos2d.h"
 #include "MagiciteWeather.h"
-#include "MagiciteWeatherEffectSnow.h"
+
+class MagiciteWeatherEffect;
 
 class MagiciteWeatherSnow : public MagiciteWeather
 {

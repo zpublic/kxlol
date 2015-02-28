@@ -2,13 +2,12 @@
 #define __MAGICITE_GAME_CONTACT__
 
 #include "cocos2d.h"
-#include "MagiciteGameObject.h"
-#include "MagiciteGameLiving.h"
-#include "MagiciteGamePitfall.h"
-#include "MagiciteGameFireball.h"
-#include "MagiciteGameMoveAbleLiving.h"
-#include "MagiciteGaemFactoryMethod.h"
-#include "map"
+#include <map>
+
+class MagiciteGameObject;
+class MagiciteGameLiving;
+class MagiciteGameMoveAbleLiving;
+
 
 namespace MagiciteGameContact
 {

@@ -2,10 +2,11 @@
 #define __MAGICITE_GAME_LIVING__
 
 #include "cocos2d.h"
+#include <map>
 #include "MagiciteGameObject.h"
 #include "MagiciteEffectBuffer.h"
-#include "MagiciteEffect.h"
-#include <map>
+
+class MagiciteEffect;
 
 class MagiciteGameLiving : public MagiciteGameObject
 {

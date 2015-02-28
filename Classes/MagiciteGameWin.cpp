@@ -1,4 +1,6 @@
 #include "MagiciteGameWin.h"
+#include "WelcomeScene.h"
+#include "MagiciteScene.h"
 
 USING_NS_CC;
 

@@ -2,8 +2,9 @@
 #define __MAGICITE_EFFECT_SPEED_UP__
 
 #include "cocos2d.h"
-#include "MagiciteGameMoveAbleLiving.h"
 #include "MagiciteEffectBuffer.h"
+
+class MagiciteGameObject;
 
 class MagiciteEffectSpeedUp : public MagiciteEffectBuffer
 {

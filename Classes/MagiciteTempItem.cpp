@@ -1,4 +1,5 @@
 #include "MagiciteTempItem.h"
+#include "MagiciteEffect.h"
 
 MagiciteTempItem::MagiciteTempItem(int life)
 :_life(life)

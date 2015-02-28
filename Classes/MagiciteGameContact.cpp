@@ -1,4 +1,10 @@
 #include "MagiciteGameContact.h"
+#include "MagiciteGameObject.h"
+#include "MagiciteGameLiving.h"
+#include "MagiciteGamePitfall.h"
+#include "MagiciteGameFireball.h"
+#include "MagiciteGameMoveAbleLiving.h"
+#include "MagiciteGaemFactoryMethod.h"
 
 std::function<void(void)> MagiciteGameContact::_onWin = MagiciteGameContact::holders;
 std::function<void(void)> MagiciteGameContact::_onOver = MagiciteGameContact::holders;

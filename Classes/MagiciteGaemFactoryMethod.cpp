@@ -1,4 +1,17 @@
 #include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGamePitfall.h"
+#include "MagiciteGameLiving.h"
+#include "MagiciteGameAmmo.h"
+#include "MagiciteGameHuman.h"
+#include "MagiciteGameChicken.h"
+#include "MagiciteGamePiranha.h"
+#include "MagiciteGameSlime.h"
+#include "MagiciteGameSheep.h"
+#include "MagiciteGameSpinePitfall.h"
+#include "MagiciteGameFireball.h"
+#include "MagiciteGameAcid.h"
+#include "MagiciteGameDirt.h"
+
 
 USING_NS_CC;
 

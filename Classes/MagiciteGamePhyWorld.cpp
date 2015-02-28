@@ -1,4 +1,6 @@
 #include "MagiciteGamePhyWorld.h"
+#include "MagiciteGameObject.h"
+#include "MagiciteGameContactListener.h"
 
 USING_NS_CC;
 

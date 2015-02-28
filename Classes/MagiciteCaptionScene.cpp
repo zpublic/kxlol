@@ -1,4 +1,7 @@
 #include "MagiciteCaptionScene.h"
+#include "MagiciteGameLayer.h"
+#include "MagiciteScene.h"
+#include "ui\CocosGUI.h"
 
 USING_NS_CC;
 

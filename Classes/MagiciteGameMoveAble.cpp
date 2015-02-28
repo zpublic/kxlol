@@ -5,6 +5,7 @@ MagiciteGameMoveAble::MagiciteGameMoveAble()
     _state[S_Move] = false;
     _state[S_Jump] = false;
     _state[S_Animate] = false;
+    _state[S_DoubleJump] = false;
     _speed = DEFAULT_SPEED;
     _base_speed = DEFAULT_SPEED;
     _jumpHeight = DEFAULT_JUMP_HEIGHT;
