@@ -82,6 +82,9 @@
     <Filter Include="Magicite\GameLogic\Weather">
       <UniqueIdentifier>{9848ab7f-0b4a-4349-bbef-438730ea9ebf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Magicite\GameLogic\Item\SkillCrad">
+      <UniqueIdentifier>{3ee5aa43-9431-4be5-bfe6-7bac989924b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -279,6 +282,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteCaptionScene.cpp">
       <Filter>Magicite\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteTempSkillCard.cpp">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteForeverSkillCard.cpp">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteSkillCardFireBall.cpp">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -510,6 +522,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteWeatherSnow.h">
       <Filter>Magicite\GameLogic\Weather</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteTempSkillCard.h">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteForeverSkillCard.h">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteSkillCardFireBall.h">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

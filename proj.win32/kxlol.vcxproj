@@ -156,6 +156,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteEffectSpeedUp.cpp" />
     <ClCompile Include="..\Classes\MagiciteEffectSprint.cpp" />
     <ClCompile Include="..\Classes\MagiciteForeverItem.cpp" />
+    <ClCompile Include="..\Classes\MagiciteForeverSkillCard.cpp" />
     <ClCompile Include="..\Classes\MagiciteGaemFactoryMethod.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameAcid.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameAmmo.cpp" />
@@ -193,7 +194,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteItemCoinObject.cpp" />
     <ClCompile Include="..\Classes\MagiciteItemObject.cpp" />
     <ClCompile Include="..\Classes\MagiciteScene.cpp" />
+    <ClCompile Include="..\Classes\MagiciteSkillCardFireBall.cpp" />
     <ClCompile Include="..\Classes\MagiciteTempItem.cpp" />
+    <ClCompile Include="..\Classes\MagiciteTempSkillCard.cpp" />
     <ClCompile Include="..\Classes\MagiciteWeatherEffectSnow.cpp" />
     <ClCompile Include="..\Classes\MagiciteWeatherSnow.cpp" />
     <ClCompile Include="..\Classes\MainBasicInfoLayer.cpp" />
@@ -232,6 +235,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteEffectSprint.h" />
     <ClInclude Include="..\Classes\MagiciteEffectValueChange.h" />
     <ClInclude Include="..\Classes\MagiciteForeverItem.h" />
+    <ClInclude Include="..\Classes\MagiciteForeverSkillCard.h" />
     <ClInclude Include="..\Classes\MagiciteGaemFactoryMethod.h" />
     <ClInclude Include="..\Classes\MagiciteGameAcid.h" />
     <ClInclude Include="..\Classes\MagiciteGameAmmo.h" />
@@ -270,7 +274,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteItemCoinObject.h" />
     <ClInclude Include="..\Classes\MagiciteItemObject.h" />
     <ClInclude Include="..\Classes\MagiciteScene.h" />
+    <ClInclude Include="..\Classes\MagiciteSkillCardFireBall.h" />
     <ClInclude Include="..\Classes\MagiciteTempItem.h" />
+    <ClInclude Include="..\Classes\MagiciteTempSkillCard.h" />
     <ClInclude Include="..\Classes\MagiciteWeather.h" />
     <ClInclude Include="..\Classes\MagiciteWeatherEffect.h" />
     <ClInclude Include="..\Classes\MagiciteWeatherEffectSnow.h" />
