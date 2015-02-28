@@ -1,4 +1,7 @@
 #include "MagiciteEffectFireBall.h"
+#include "MagiciteGamePhyLayer.h"
+#include "MagiciteGameFireball.h"
+#include "MagiciteGaemFactoryMethod.h"
 
 USING_NS_CC;
 
@@ -14,14 +17,14 @@ void MagiciteEffectFireBall::positive(MagiciteGameObject* obj)
     {
         ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::Acid);
         ammo->setPosition(_pos);
-        _phyLayer->createPhyBody(ammo, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
+        _phyLayer->createPhyBody(ammo, false);
         ammo->getBody()->SetLinearVelocity(b2Vec2(0, 10));
     }
     else
     {
         ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::FireBall);
         ammo->setPosition(_pos);
-        _phyLayer->createPhyBody(ammo, false, Category::DEFAULT_AMMO, Category::DEFAULT_ENEMY | Category::DEFAULT_GROUND);
+        _phyLayer->createPhyBody(ammo, false);
         ammo->getBody()->SetGravityScale(0.0f);
     }
     _phyLayer->addChild(ammo);

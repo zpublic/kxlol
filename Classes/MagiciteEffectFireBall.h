@@ -3,9 +3,9 @@
 
 #include "cocos2d.h"
 #include "MagiciteEffectShoot.h"
-#include "MagiciteGameFireball.h"
-#include "MagiciteGamePhyLayer.h"
-#include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGameMoveAble.h"
+
+class MagiciteGamePhyLayer;
 
 class MagiciteEffectFireBall : public MagiciteEffectShoot
 {

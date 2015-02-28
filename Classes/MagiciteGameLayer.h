@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "Box2D/Box2D.h"
-#include "MagiciteGameObject.h"
 
 class MagiciteGameMap;
 class MagiciteGamePhyLayer;
@@ -17,13 +16,12 @@ public:
     MagiciteGameLayer();
     ~MagiciteGameLayer();
 
-    typedef MagiciteGameObject::_entityCategory   Category;
-
     virtual bool init();
 
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     void onOnBeginContact(b2Contact* contact);
+    bool onOnJudgeContact(b2Contact* contact);
 
     CREATE_FUNC(MagiciteGameLayer);
 

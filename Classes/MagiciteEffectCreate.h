@@ -2,12 +2,12 @@
 #define __MAGICITE_EFFECT_CREATE__
 
 #include "MagiciteEffect.h"
-#include "MagiciteGameObject.h"
+
+class MagiciteGameObject;
 
 class MagiciteEffectCreate : public MagiciteEffect
 {
 public:
-    typedef MagiciteGameObject::_entityCategory Category;
 
     virtual void positive(MagiciteGameObject* obj)
     {
