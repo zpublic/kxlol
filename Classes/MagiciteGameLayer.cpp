@@ -77,8 +77,6 @@ bool MagiciteGameLayer::init()
 
 void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    MagiciteGameMoveAbleLiving* friends = nullptr;
-    MagiciteGameAmmo*   ammo = nullptr;
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
@@ -100,9 +98,10 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
         _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));
         break;
     default:
+        MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
         break;
     }
-    MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
+    
 }
 
 void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
