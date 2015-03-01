@@ -160,7 +160,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteGaemFactoryMethod.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameAcid.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameAmmo.cpp" />
-    <ClCompile Include="..\Classes\MagiciteGameBagManager.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameBagView.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameChicken.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameContact.cpp" />
@@ -244,7 +243,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGaemFactoryMethod.h" />
     <ClInclude Include="..\Classes\MagiciteGameAcid.h" />
     <ClInclude Include="..\Classes\MagiciteGameAmmo.h" />
-    <ClInclude Include="..\Classes\MagiciteGameBagManager.h" />
     <ClInclude Include="..\Classes\MagiciteGameBagView.h" />
     <ClInclude Include="..\Classes\MagiciteGameChicken.h" />
     <ClInclude Include="..\Classes\MagiciteGameContact.h" />

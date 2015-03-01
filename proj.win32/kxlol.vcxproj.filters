@@ -304,7 +304,6 @@
     <ClCompile Include="..\Classes\MagiciteGameBagView.cpp">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameBagManager.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameContainerView.cpp">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClCompile>
@@ -557,7 +556,6 @@
     <ClInclude Include="..\Classes\MagiciteGameBagView.h">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameBagManager.h" />
     <ClInclude Include="..\Classes\MagiciteGameContainerView.h">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClInclude>
