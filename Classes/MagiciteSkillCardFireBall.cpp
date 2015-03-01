@@ -33,7 +33,7 @@ bool MagiciteSkillCardFireBall::init(
     MagiciteGamePhyLayer* phyLayer,
     MagiciteGameMoveAble::Direction dire)
 {
-    _effect = MagiciteEffectFireBall::create(pos, phyLayer, dire);
+    _effect = MagiciteEffectFireBall::create(phyLayer, dire);
 
     return true;
 }

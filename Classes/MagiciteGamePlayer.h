@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "MagiciteGameControlAble.h"
 #include "MagiciteGameMoveAbleLiving.h"
+#include "MagiciteGamePhyLayer.h"
 
 class MagiciteEffectSpeedUp;
 class MagiciteEffectJumpHigh;
@@ -27,9 +28,9 @@ public:
     };
     typedef  MagiciteGameMoveAbleLiving::Direction      Direction;
 
-    static MagiciteGamePlayer* create(PlayerType type);
+    static MagiciteGamePlayer* create(PlayerType type, MagiciteGamePhyLayer* phyLayer);
 
-    bool init(PlayerType type);
+    bool init(PlayerType type, MagiciteGamePhyLayer* phyLayer);
 
     MagiciteGameMoveAbleLiving* getSprite();
 
@@ -71,6 +72,7 @@ public:
 protected:
     MagiciteGameMoveAbleLiving*             _player;
     MagiciteItemBag*                        _bag;
+    MagiciteGamePhyLayer*                   _phyLayer;
     bool                                    _move_left;
     bool                                    _move_right;
 };

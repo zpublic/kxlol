@@ -2,10 +2,14 @@
 #include "MagiciteEffectSpeedUp.h"
 #include "MagiciteEffectJumpHigh.h"
 #include "MagiciteEffectSprint.h"
+#include "MagiciteEffectFireBall.h"
+#include "MagiciteEffectCreateFriend.h"
+#include "MagiciteGaemFactoryMethod.h"
 #include "MagiciteGameChicken.h"
 #include "MagiciteGameHuman.h"
 #include "MagiciteItemBag.h"
 #include "MagiciteGameContainerView.h"
+#include "MagiciteEffectFlash.h"
 
 USING_NS_CC;
 
@@ -20,10 +24,10 @@ MagiciteGamePlayer::~MagiciteGamePlayer()
     CC_SAFE_DELETE(_bag);
 }
 
-MagiciteGamePlayer* MagiciteGamePlayer::create(PlayerType type)
+MagiciteGamePlayer* MagiciteGamePlayer::create(PlayerType type, MagiciteGamePhyLayer* phyLayer)
 {
     auto ptr = new MagiciteGamePlayer();
-    if (ptr && ptr->init(type))
+    if (ptr && ptr->init(type, phyLayer))
     {
         return ptr;
     }
@@ -38,7 +42,7 @@ MagiciteGameMoveAbleLiving* MagiciteGamePlayer::getSprite()
     return _player;
 }
 
-bool MagiciteGamePlayer::init(PlayerType type)
+bool MagiciteGamePlayer::init(PlayerType type, MagiciteGamePhyLayer* phyLayer)
 {
     switch (type)
     {
@@ -57,7 +61,7 @@ bool MagiciteGamePlayer::init(PlayerType type)
         return false;
     }
     _player->_is_contraled = true;
-
+    _phyLayer = phyLayer;
     _bag = new MagiciteItemBag();
 
     return true;
@@ -168,24 +172,33 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
 {
     switch (keyCode)
     {
-    case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
-    case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+    case EventKeyboard::KeyCode::KEY_UP_ARROW:
+    case EventKeyboard::KeyCode::KEY_SPACE:
         _player->Jump();
         break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+    case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
         _move_left = true;
         break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+    case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
         _move_right = true;
         break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_1:
+    case EventKeyboard::KeyCode::KEY_1:
         useSkill(MagiciteEffectSpeedUp::create());
         break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_2:
+    case EventKeyboard::KeyCode::KEY_2:
         useSkill(MagiciteEffectJumpHigh::create());
         break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_3:
+    case EventKeyboard::KeyCode::KEY_3:
         useSkill(MagiciteEffectSprint::create());
+        break;
+    case EventKeyboard::KeyCode::KEY_C:
+        _player->useSkill(MagiciteEffectCreateFriend::create(_phyLayer,_player->getDire(), MagiciteEffectCreateFriend::LivingType::Slime));
+        break;
+    case EventKeyboard::KeyCode::KEY_F:
+        _player->useSkill(MagiciteEffectFireBall::create(_phyLayer, _player->getDire()));
+        break;
+    case EventKeyboard::KeyCode::KEY_A:
+        _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));
         break;
     default:
         break;

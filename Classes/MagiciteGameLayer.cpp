@@ -1,7 +1,4 @@
 #include "MagiciteGameLayer.h"
-#include "MagiciteEffectFlash.h"
-#include "MagiciteEffectFireBall.h"
-#include "MagiciteEffectCreateFriend.h"
 #include "MagiciteGameMap.h"
 #include "MagiciteGamePhyLayer.h"
 #include "MagiciteGamePause.h"
@@ -89,24 +86,11 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
 {
     switch (keyCode)
     {
-    case EventKeyboard::KeyCode::KEY_C:
-        _player->useSkill(MagiciteEffectCreateFriend::create(
-            Vec2(_player->getPosition()),
-            _phyLayer,
-            _player->getDire(), MagiciteEffectCreateFriend::LivingType::Slime));
-        break;
-    case EventKeyboard::KeyCode::KEY_F:
-        _player->useSkill(MagiciteEffectFireBall::create(
-            Vec2(_player->getPosition()),
-            _phyLayer,
-            _player->getDire()));
-        break;
+    
     case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE :
         MagiciteGamePause::Pause(this);
         break;
-    case cocos2d::EventKeyboard::KeyCode::KEY_A:
-        _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));
-        break;
+    
     default:
         MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
         break;
@@ -184,7 +168,7 @@ void MagiciteGameLayer::create_end_cube(TMXObjectGroup* game)
 
 void MagiciteGameLayer::create_player(TMXObjectGroup* game)
 {
-    _player = MagiciteGamePlayer::create(MagiciteGamePlayer::Chicken_Type);
+    _player = MagiciteGamePlayer::create(MagiciteGamePlayer::Chicken_Type, _phyLayer);
     this->runAction(Follow::create(_player->getSprite(), Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
     ValueMap playerMap = game->getObject("player");
     Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());

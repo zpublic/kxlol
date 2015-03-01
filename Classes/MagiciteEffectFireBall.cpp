@@ -16,14 +16,14 @@ void MagiciteEffectFireBall::positive(MagiciteGameObject* obj)
     if (rand() % 5 == 0)
     {
         ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::Acid);
-        ammo->setPosition(_pos);
+        ammo->setPosition(obj->getPosition());
         _phyLayer->createPhyBody(ammo, false);
         ammo->getBody()->SetLinearVelocity(b2Vec2(0, 10));
     }
     else
     {
         ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::FireBall);
-        ammo->setPosition(_pos);
+        ammo->setPosition(obj->getPosition());
         _phyLayer->createPhyBody(ammo, false);
         ammo->getBody()->SetGravityScale(0.0f);
     }
@@ -33,10 +33,10 @@ void MagiciteEffectFireBall::positive(MagiciteGameObject* obj)
     delete this;
 }
 
-MagiciteEffectFireBall* MagiciteEffectFireBall::create(const Vec2& pos, MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAble::Direction dire)
+MagiciteEffectFireBall* MagiciteEffectFireBall::create(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAble::Direction dire)
 {
     auto ptr = new MagiciteEffectFireBall();
-    if (ptr && ptr->init(pos, phyLayer, dire))
+    if (ptr && ptr->init(phyLayer, dire))
     {
         return ptr;
     }
@@ -47,9 +47,8 @@ MagiciteEffectFireBall* MagiciteEffectFireBall::create(const Vec2& pos, Magicite
     }
 }
 
-bool MagiciteEffectFireBall::init(const Vec2& pos, MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAble::Direction dire)
+bool MagiciteEffectFireBall::init(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAble::Direction dire)
 {
-    _pos = pos;
     _phyLayer = phyLayer;
     _dire = dire;
 
