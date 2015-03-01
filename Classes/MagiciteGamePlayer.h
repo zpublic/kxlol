@@ -10,11 +10,15 @@ class MagiciteEffectJumpHigh;
 class MagiciteEffectSprint;
 class MagiciteGameChicken;
 class MagiciteGameHuman;
+class MagiciteItemContainer;
+class MagiciteItemBag;
+class MagiciteGameContainerView;
 
 class MagiciteGamePlayer : public MagiciteGameControlAble
 {
 public:
     MagiciteGamePlayer();
+    ~MagiciteGamePlayer();
 
     enum PlayerType : int
     {
@@ -62,8 +66,11 @@ public:
     virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
+    void bindBagView(MagiciteGameContainerView* view);
+    MagiciteItemContainer* getBag();
 protected:
     MagiciteGameMoveAbleLiving*             _player;
+    MagiciteItemBag*                        _bag;
     bool                                    _move_left;
     bool                                    _move_right;
 };

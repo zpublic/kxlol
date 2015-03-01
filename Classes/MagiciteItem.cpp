@@ -1,6 +1,9 @@
 #include "MagiciteItem.h"
 #include "MagiciteItemObject.h"
 
+std::string MagiciteItem::_name = "item";
+int MagiciteItem::_id = 0;
+
 MagiciteItem::MagiciteItem()
 {
 
@@ -26,7 +29,17 @@ void MagiciteItem::destroy()
 
 }
 
-MagiciteItemObject* MagiciteItem::getItemObject()
+MagiciteGameObject* MagiciteItem::getItemObject()
 {
     return nullptr;
+}
+
+int MagiciteItem::getItemId() const
+{
+    return _id;
+}
+
+void MagiciteItem::setItemId(int Id)
+{
+    _id = Id;
 }

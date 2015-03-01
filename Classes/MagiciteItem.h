@@ -2,23 +2,32 @@
 #define __MAGICITE_ITEM__
 
 #include "cocos2d.h"
-class MagiciteItemObject;
+
+class MagiciteGameObject;
 
 class MagiciteItem
 {
 public:
+
     MagiciteItem();
     ~MagiciteItem();
 
     std::string getItemName() const;
-    void setItemName(const std::string& name);
+    int getItemId() const;
 
-    virtual MagiciteItemObject* getItemObject();
+    virtual MagiciteGameObject* getItemObject();
 
     void destroy();
 
+    static std::string                      _name;
+    static int                              _id;
+
 protected:
-    std::string                     _name;
+    void setItemId(int Id);
+    void setItemName(const std::string& name);
+    
+    int                                     _number;
+    bool                                    _overlap;
     
 };
 

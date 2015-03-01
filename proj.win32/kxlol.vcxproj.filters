@@ -85,6 +85,9 @@
     <Filter Include="Magicite\GameLogic\Item\SkillCrad">
       <UniqueIdentifier>{3ee5aa43-9431-4be5-bfe6-7bac989924b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Magicite\GameLogic\Item\Container">
+      <UniqueIdentifier>{a57bbe2f-e1d8-48b6-b032-eb1b7bc2599d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -291,6 +294,19 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteSkillCardFireBall.cpp">
       <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteItemContainer.cpp">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteItemBag.cpp">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameBagView.cpp">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameBagManager.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameContainerView.cpp">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -531,6 +547,19 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteSkillCardFireBall.h">
       <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteItemContainer.h">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteItemBag.h">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameBagView.h">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameBagManager.h" />
+    <ClInclude Include="..\Classes\MagiciteGameContainerView.h">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

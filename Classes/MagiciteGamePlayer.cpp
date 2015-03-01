@@ -4,6 +4,8 @@
 #include "MagiciteEffectSprint.h"
 #include "MagiciteGameChicken.h"
 #include "MagiciteGameHuman.h"
+#include "MagiciteItemBag.h"
+#include "MagiciteGameContainerView.h"
 
 USING_NS_CC;
 
@@ -11,6 +13,11 @@ MagiciteGamePlayer::MagiciteGamePlayer()
 :_player(nullptr), _move_left(false), _move_right(false)
 {
 
+}
+
+MagiciteGamePlayer::~MagiciteGamePlayer()
+{
+    CC_SAFE_DELETE(_bag);
 }
 
 MagiciteGamePlayer* MagiciteGamePlayer::create(PlayerType type)
@@ -50,6 +57,9 @@ bool MagiciteGamePlayer::init(PlayerType type)
         return false;
     }
     _player->_is_contraled = true;
+
+    _bag = new MagiciteItemBag();
+
     return true;
 }
 
@@ -203,4 +213,14 @@ void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* ev
 void MagiciteGamePlayer::setPetFollow(MagiciteGameObject* pet)
 {
     _player->addChild(pet);
+}
+
+void MagiciteGamePlayer::bindBagView(MagiciteGameContainerView* view)
+{
+    _bag->bindView(view);
+}
+
+MagiciteItemContainer* MagiciteGamePlayer::getBag()
+{
+    return _bag;
 }

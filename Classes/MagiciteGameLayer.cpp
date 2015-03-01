@@ -15,6 +15,9 @@
 #include "MagiciteWeatherSnow.h"
 #include "MagiciteWeatherEffect.h"
 #include "MagiciteGamePitfall.h"
+#include "MagiciteGameBagView.h"
+#include "MagiciteItemCoin.h"
+#include "MagiciteItemContainer.h"
 
 USING_NS_CC;
 
@@ -72,6 +75,13 @@ bool MagiciteGameLayer::init()
 
     init_contact();
 
+    auto view =  MagiciteGameBagView::create();
+    view->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
+    view->runAction(Follow::create(this));
+    this->addChild(view,999);
+    _player->bindBagView(view);
+
+    _player->getBag()->addItem(new MagiciteItemCoin());
     return true;
 }
 

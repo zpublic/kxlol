@@ -17,7 +17,7 @@ public:
     MagiciteItemCoin();
     ~MagiciteItemCoin();
 
-    virtual MagiciteItemObject* getItemObject();
+    virtual MagiciteGameObject* getItemObject();
 };
 
 #endif //__MAGICITE_ITEM_COIN__
