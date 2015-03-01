@@ -14,12 +14,10 @@ public:
     ~MagiciteSkillCardFireBall();
 
     static MagiciteSkillCardFireBall* create(
-        const cocos2d::Vec2& pos,
         MagiciteGamePhyLayer* phyLayer,
         MagiciteGameMoveAble::Direction dire);
 
     virtual bool init(
-        const cocos2d::Vec2& pos,
         MagiciteGamePhyLayer* phyLayer,
         MagiciteGameMoveAble::Direction dire);
 };

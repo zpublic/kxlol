@@ -12,12 +12,11 @@ MagiciteSkillCardFireBall::~MagiciteSkillCardFireBall()
 }
 
 MagiciteSkillCardFireBall* MagiciteSkillCardFireBall::create(
-    const cocos2d::Vec2& pos,
     MagiciteGamePhyLayer* phyLayer,
     MagiciteGameMoveAble::Direction dire)
 {
     auto ptr = new MagiciteSkillCardFireBall();
-    if (ptr && ptr->init(pos, phyLayer, dire))
+    if (ptr && ptr->init(phyLayer, dire))
     {
         return ptr;
     }
@@ -29,7 +28,6 @@ MagiciteSkillCardFireBall* MagiciteSkillCardFireBall::create(
 }
 
 bool MagiciteSkillCardFireBall::init(
-    const cocos2d::Vec2& pos,
     MagiciteGamePhyLayer* phyLayer,
     MagiciteGameMoveAble::Direction dire)
 {

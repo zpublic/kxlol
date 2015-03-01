@@ -10,6 +10,7 @@
 #include "MagiciteItemBag.h"
 #include "MagiciteGameContainerView.h"
 #include "MagiciteEffectFlash.h"
+#include "MagiciteEffectItem.h"
 
 USING_NS_CC;
 
@@ -236,4 +237,9 @@ void MagiciteGamePlayer::bindBagView(MagiciteGameContainerView* view)
 MagiciteItemContainer* MagiciteGamePlayer::getBag()
 {
     return _bag;
+}
+
+void MagiciteGamePlayer::useItem(MagiciteEffectItem* item)
+{
+    item->positive(_player);
 }

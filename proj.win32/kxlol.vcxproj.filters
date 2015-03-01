@@ -307,6 +307,9 @@
     <ClCompile Include="..\Classes\MagiciteGameContainerView.cpp">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteSkillCardFriend.cpp">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -558,6 +561,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameContainerView.h">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteSkillCardFriend.h">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
