@@ -2,6 +2,7 @@
 #define __MAGICITE_GAME_CONTACT__
 
 #include "cocos2d.h"
+#include "Box2D/Box2D.h"
 #include <map>
 
 class MagiciteGameObject;
@@ -39,10 +40,8 @@ namespace MagiciteGameContact
     bool is_in_types(Contact_type);
     /*≈–∂œ «∑Ò Ù”⁄Contact_type*/
 
-    extern std::map<Contact_type, std::map<Contact_type, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>> on_contact;
-
-    void holders();
-
+    extern std::map < Contact_type, std::map<Contact_type, bool>>                                                           judge_contact;
+    extern std::map<Contact_type, std::map<Contact_type, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>>    on_contact;
 
     void try_living_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
@@ -57,8 +56,11 @@ namespace MagiciteGameContact
     void try_ammo_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
     void try_living_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
 
-    extern std::function<void(void)> _onWin;
-    extern std::function<void(void)> _onOver;
+    extern std::function<void(void)>                       _onWin;
+    extern std::function<void(void)>                       _onOver;
+    extern std::function<bool(b2Contact* contact)>         _onJudgeContact;
+    extern std::function<void(b2Contact* contact)>         _onBeginContact;
+
     void onWin();
     void onOver();
 

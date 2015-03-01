@@ -5,10 +5,11 @@ MagiciteGameMoveAble::MagiciteGameMoveAble()
     _state[S_Move] = false;
     _state[S_Jump] = false;
     _state[S_Animate] = false;
-    _state[S_DoubleJump] = false;
     _speed = DEFAULT_SPEED;
     _base_speed = DEFAULT_SPEED;
     _jumpHeight = DEFAULT_JUMP_HEIGHT;
+    _max_jump_time = DEFAULT_JUMP_TIME;
+    _jump_time = 0;
     _is_to_left = false;
     _is_dire_changed = false;
 }

@@ -1,15 +1,23 @@
 #include "MagiciteGameContactListener.h"
+#include "MagiciteGameContact.h"
 
 USING_NS_CC;
 
 void MagiciteGameContactListener::BeginContact(b2Contact* contact)
 {
-    _onBeginContact(contact);
+
 }
 
 void MagiciteGameContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold)
 {
-
+    if (MagiciteGameContact::_onJudgeContact(contact))
+    {
+        MagiciteGameContact::_onBeginContact(contact);
+    }
+    else
+    {
+        contact->SetEnabled(false);
+    }
 }
 
 void MagiciteGameContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)
@@ -22,10 +30,10 @@ void MagiciteGameContactListener::EndContact(b2Contact* contact)
 
 }
 
-MagiciteGameContactListener* MagiciteGameContactListener::create(const std::function<void(b2Contact* contact)> &f)
+MagiciteGameContactListener* MagiciteGameContactListener::create()
 {
     auto ptr = new MagiciteGameContactListener();
-    if (ptr && ptr->init(f))
+    if (ptr && ptr->init())
     {
         return ptr;
     }
@@ -36,8 +44,8 @@ MagiciteGameContactListener* MagiciteGameContactListener::create(const std::func
     }
 }
 
-bool MagiciteGameContactListener::init(const std::function<void(b2Contact* contact)> &f)
+bool MagiciteGameContactListener::init()
 {
-    _onBeginContact = f;
+    
     return true;
 }

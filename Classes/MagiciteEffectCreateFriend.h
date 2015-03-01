@@ -3,8 +3,11 @@
 
 #include "cocos2d.h"
 #include "MagiciteEffectCreate.h"
-#include "MagiciteGamePhyLayer.h"
 #include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGameMoveAble.h"
+
+class MagiciteGameObject;
+class MagiciteGamePhyLayer;
 
 class MagiciteEffectCreateFriend : public MagiciteEffectCreate
 {

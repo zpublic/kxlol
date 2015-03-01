@@ -20,6 +20,7 @@ public:
     enum :int{
         DEFAULT_SPEED = 3,
         DEFAULT_JUMP_HEIGHT = 10,
+        DEFAULT_JUMP_TIME = 2,
     };
 
     virtual void Move(Direction dire) = 0;
@@ -39,7 +40,6 @@ public:
     {
         S_Move,
         S_Jump,
-        S_DoubleJump,
         S_Animate,
     };
 
@@ -64,6 +64,8 @@ protected:
     int                             _jumpHeight;
     float                           _speed;
     float                           _base_speed;
+    int                             _jump_time;
+    int                             _max_jump_time;
 };
 
 #endif //__MAGICITE_GAME_MOVEABLE__

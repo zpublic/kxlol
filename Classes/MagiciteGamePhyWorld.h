@@ -15,11 +15,11 @@ public:
 
     static const int PTM_RATIO = 32;
 
-    void createPhyBody(MagiciteGameObject* ptr, bool is_static, uint16 Category, uint16 mask);
+    void createPhyBody(MagiciteGameObject* ptr, bool is_static);
     void updateBody();
 
-    bool init(cocos2d::Size size, const std::function<void(b2Contact*)> &contactFunc);
-    static MagiciteGamePhyWorld* create(b2Vec2 gravity, cocos2d::Size size, const std::function<void(b2Contact*)> &contactFunc);
+    bool init(cocos2d::Size size);
+    static MagiciteGamePhyWorld* create(b2Vec2 gravity, cocos2d::Size size);
 
 private:
     MagiciteGameContactListener*        _contactListener;

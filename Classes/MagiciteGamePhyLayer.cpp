@@ -1,4 +1,6 @@
 #include "MagiciteGamePhyLayer.h"
+#include "MagiciteGameObject.h"
+#include "MagiciteGamePhyWorld.h"
 
 USING_NS_CC;
 
@@ -14,7 +16,7 @@ MagiciteGamePhyLayer::~MagiciteGamePhyLayer()
     CC_SAFE_DELETE(_debugDraw);
 }
 
-bool MagiciteGamePhyLayer::initPhysics(Size size, const std::function<void(b2Contact*)> &contactFunc)
+bool MagiciteGamePhyLayer::initPhysics(Size size)
 {
     if (!Layer::init())
     {
@@ -26,7 +28,7 @@ bool MagiciteGamePhyLayer::initPhysics(Size size, const std::function<void(b2Con
 
     b2Vec2 gravity;
     gravity.Set(0.0f, -10.0f);
-    _world = MagiciteGamePhyWorld::create(gravity, size, contactFunc);
+    _world = MagiciteGamePhyWorld::create(gravity, size);
     
     _debugDraw = new GLESDebugDraw(PTM_RATIO);
     _world->SetDebugDraw(_debugDraw);
@@ -43,11 +45,9 @@ bool MagiciteGamePhyLayer::initPhysics(Size size, const std::function<void(b2Con
 
 void MagiciteGamePhyLayer::createPhyBody(
     MagiciteGameObject* ptr, 
-    bool is_static,
-    uint16 Category /*= MagiciteGameObject::DEFAULT_GROUND*/,
-    uint16 mask /*= MagiciteGameObject::DEFAULT_ALL*/)
+    bool is_static)
 {
-    _world->createPhyBody(ptr, is_static, Category, mask);
+    _world->createPhyBody(ptr, is_static);
 }
 
 void MagiciteGamePhyLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags)
@@ -62,10 +62,10 @@ void MagiciteGamePhyLayer::update(float timeDelta)
     _world->updateBody();
 }
 
-MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(Size size, const std::function<void(b2Contact*)> &contactFunc)
+MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(Size size)
 {
     auto ptr = new MagiciteGamePhyLayer();
-    if (ptr && ptr->initPhysics(size,contactFunc))
+    if (ptr && ptr->initPhysics(size))
     {
         ptr->autorelease();
         return ptr;

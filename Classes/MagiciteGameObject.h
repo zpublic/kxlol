@@ -16,19 +16,6 @@ public:
         T_Ammo,
     }ObjType;
 
-    enum _entityCategory : uint16
-    {
-        DEFAULT_GROUND   = 0x0001,
-        DEFAULT_LIVING   = 0x0002,
-        DEFAULT_ENEMY    = 0x0004,
-        DEFAULT_PITFALL  = 0x0008,
-        DEFAULT_END      = 0x0010,
-        DEFAULT_FRIEND   = 0x0020,
-        DEFAULT_AMMO     = 0x0040,
-        DEFAULT_HOLE     = 0x0080,
-        DEFAULT_ALL      = 0xFFFF,
-    };
-
     MagiciteGameObject(Type type = T_Ground);
 
     virtual bool init();

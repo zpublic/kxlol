@@ -3,12 +3,12 @@
 
 MagiciteEffectItem::MagiciteEffectItem()
 {
-
+    
 }
 
 MagiciteEffectItem::~MagiciteEffectItem()
 {
-
+    CC_SAFE_DELETE(_effect);
 }
 
 void MagiciteEffectItem::positive(MagiciteGameObject* obj)

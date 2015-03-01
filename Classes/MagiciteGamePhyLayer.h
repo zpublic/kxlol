@@ -6,9 +6,10 @@
 #include "cocos2d.h"
 #include "Box2D\Box2D.h"
 #include "GLES-Render.h"
-#include "MagiciteGameObject.h"
-#include "MagiciteGamePhyWorld.h"
 #include "MagiciteGameMoveAbleLiving.h"
+
+class MagiciteGameObject;
+class MagiciteGamePhyWorld;
 
 class MagiciteGamePhyLayer : public cocos2d::Layer
 {
@@ -18,17 +19,15 @@ public:
 
     static const int PTM_RATIO = 32;
 
-    bool initPhysics(cocos2d::Size size, const std::function<void(b2Contact*)> &contactFunc);
+    bool initPhysics(cocos2d::Size size);
     void createPhyBody(
         MagiciteGameObject* ptr, 
-        bool is_static, 
-        uint16 Category = MagiciteGameObject::DEFAULT_GROUND, 
-        uint16 mask = MagiciteGameObject::DEFAULT_ALL);
+        bool is_static);
 
     virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags);
     void update(float timeDelta);
 
-    static MagiciteGamePhyLayer* create(cocos2d::Size size, const std::function<void(b2Contact*)> &contactFunc);
+    static MagiciteGamePhyLayer* create(cocos2d::Size size);
 
     bool Ray_Cast(MagiciteGameMoveAbleLiving* sprite, float length, b2Fixture*& outFix, float& output);
 

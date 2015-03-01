@@ -1,4 +1,5 @@
 #include "MagiciteEffectCreateFriend.h"
+#include "MagiciteGamePhyLayer.h"
 
 USING_NS_CC;
 
@@ -16,9 +17,7 @@ void MagiciteEffectCreateFriend::positive(MagiciteGameObject* obj)
 
     _phyLayer->createPhyBody(
         friends,
-        false,
-        Category::DEFAULT_FRIEND,
-        Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_HOLE);
+        false);
     _phyLayer->addChild(friends);
     friends->Move(friends->getDire());
 

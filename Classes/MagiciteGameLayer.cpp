@@ -52,9 +52,7 @@ bool MagiciteGameLayer::init()
     _background = MagiciteGameMap::create(tiled);
     this->addChild(_background);
     
-    _phyLayer = MagiciteGamePhyLayer::create(
-        Size(_background->getBackSize().width, _visibleSize.height),
-        [&](b2Contact* contact){MagiciteGameLayer::onOnBeginContact(contact); });
+    _phyLayer = MagiciteGamePhyLayer::create(Size(_background->getBackSize().width, _visibleSize.height));
     this->addChild(_phyLayer,1);
 
     create_end_cube(game);
@@ -79,8 +77,6 @@ bool MagiciteGameLayer::init()
 
 void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    MagiciteGameMoveAbleLiving* friends = nullptr;
-    MagiciteGameAmmo*   ammo = nullptr;
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_C:
@@ -102,9 +98,10 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
         _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));
         break;
     default:
+        MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
         break;
     }
-    MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
+    
 }
 
 void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
@@ -117,13 +114,27 @@ void MagiciteGameLayer::update(float timeDelta)
     _player->Move();
 }
 
+bool MagiciteGameLayer::onOnJudgeContact(b2Contact* contact)
+{
+    b2Body* bodyA = contact->GetFixtureA()->GetBody();
+    b2Body* bodyB = contact->GetFixtureB()->GetBody();
+    auto objectA = reinterpret_cast<MagiciteGameObject*>(bodyA->GetUserData());
+    auto objectB = reinterpret_cast<MagiciteGameObject*>(bodyB->GetUserData());
+    MagiciteGameContact::Contact_type objectTypeA = MagiciteGameContact::Contact_type::unknow_type;
+    MagiciteGameContact::Contact_type objectTypeB = MagiciteGameContact::Contact_type::unknow_type;
+
+    objectTypeA = MagiciteGameContact::trivial_contact_type(objectA);
+    objectTypeB = MagiciteGameContact::trivial_contact_type(objectB);
+
+    return MagiciteGameContact::judge_contact[objectTypeA][objectTypeB];
+}
+
 void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
 {
     b2Body* bodyA = contact->GetFixtureA()->GetBody();
     b2Body* bodyB = contact->GetFixtureB()->GetBody();
     auto objectA = reinterpret_cast<MagiciteGameObject*>(bodyA->GetUserData());
     auto objectB = reinterpret_cast<MagiciteGameObject*>(bodyB->GetUserData());
-    /*if (objectA != nullptr && objectB != nullptr) return;*/
     MagiciteGameContact::Contact_type objectTypeA = MagiciteGameContact::Contact_type::unknow_type;
     MagiciteGameContact::Contact_type objectTypeB = MagiciteGameContact::Contact_type::unknow_type;
 
@@ -143,6 +154,8 @@ void MagiciteGameLayer::init_contact()
     MagiciteGameContact::_onOver = [&](){
         MagiciteGameOver::Over(this);
     };
+    MagiciteGameContact::_onJudgeContact = std::bind(&MagiciteGameLayer::onOnJudgeContact, this, std::placeholders::_1);
+    MagiciteGameContact::_onBeginContact = std::bind(&MagiciteGameLayer::onOnBeginContact, this, std::placeholders::_1);;
 
     MagiciteGameContact::resiger_contact();
 }
@@ -155,7 +168,7 @@ void MagiciteGameLayer::create_end_cube(TMXObjectGroup* game)
     auto endCube = MagiciteGameObject::create(MagiciteGameObject::Type::T_End);
     endCube->setContentSize(endSize);
     endCube->setPosition(endPos);
-    _phyLayer->createPhyBody(endCube, true, Category::DEFAULT_END, Category::DEFAULT_LIVING);
+    _phyLayer->createPhyBody(endCube, true);
     _phyLayer->addChild(endCube);
 }
 
@@ -166,7 +179,7 @@ void MagiciteGameLayer::create_player(TMXObjectGroup* game)
     ValueMap playerMap = game->getObject("player");
     Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
     _player->setPosition(playerPos);
-    _phyLayer->createPhyBody(_player->getSprite(), false, Category::DEFAULT_LIVING, Category::DEFAULT_ENEMY | Category::DEFAULT_PITFALL | Category::DEFAULT_GROUND | Category::DEFAULT_END | Category::DEFAULT_HOLE);
+    _phyLayer->createPhyBody(_player->getSprite(), false);
     _phyLayer->addChild(_player->getSprite());
 }
 
@@ -181,7 +194,7 @@ void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
         {
             auto enemy = MagiciteGaemFactoryMethod::createEnemy(MagiciteGaemFactoryMethod::Dirt);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
-            _phyLayer->createPhyBody(enemy, false, Category::DEFAULT_ENEMY, Category::DEFAULT_GROUND | Category::DEFAULT_ENEMY | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_AMMO | Category::DEFAULT_HOLE);
+            _phyLayer->createPhyBody(enemy, false);
             _phyLayer->addChild(enemy);
             if (enemy->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
             {
@@ -203,7 +216,7 @@ void MagiciteGameLayer::create_pitfall(TMXObjectGroup* game)
         {
             auto pit = MagiciteGaemFactoryMethod::createPitfall(MagiciteGaemFactoryMethod::Spine_Type);
             pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
-            _phyLayer->createPhyBody(pit, true, Category::DEFAULT_PITFALL, Category::DEFAULT_GROUND | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND);
+            _phyLayer->createPhyBody(pit, true);
             _phyLayer->addChild(pit);
         }
         else if (vm.at("type").asString() == "hole")
@@ -211,7 +224,7 @@ void MagiciteGameLayer::create_pitfall(TMXObjectGroup* game)
             auto pit = MagiciteGaemFactoryMethod::createPitfall(MagiciteGaemFactoryMethod::Pitfall);
             pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             pit->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
-            _phyLayer->createPhyBody(pit, true, Category::DEFAULT_HOLE, Category::DEFAULT_GROUND | Category::DEFAULT_LIVING | Category::DEFAULT_FRIEND | Category::DEFAULT_ENEMY);
+            _phyLayer->createPhyBody(pit, true);
             _phyLayer->addChild(pit);
         }
     }

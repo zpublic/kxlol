@@ -15,7 +15,7 @@ MagiciteGamePhyWorld::~MagiciteGamePhyWorld()
 
 }
 
-bool MagiciteGamePhyWorld::init(Size size, const std::function<void(b2Contact*)> &contactFunc)
+bool MagiciteGamePhyWorld::init(Size size)
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
 
@@ -42,13 +42,13 @@ bool MagiciteGamePhyWorld::init(Size size, const std::function<void(b2Contact*)>
     groundBox.Set(b2Vec2(boxSize.width / PTM_RATIO, boxSize.height / PTM_RATIO), b2Vec2(boxSize.width / PTM_RATIO, 0));
     body->CreateFixture(&groundBox, 0);
 
-    _contactListener = MagiciteGameContactListener::create(contactFunc);
+    _contactListener = MagiciteGameContactListener::create();
     this->SetContactListener(_contactListener);
 
     return true;
 }
 
-void MagiciteGamePhyWorld::createPhyBody(MagiciteGameObject* ptr, bool is_static, uint16 Category, uint16 mask)
+void MagiciteGamePhyWorld::createPhyBody(MagiciteGameObject* ptr, bool is_static)
 {
     b2BodyDef bodyDef;
     bodyDef.type = is_static ? b2_staticBody : b2_dynamicBody;
@@ -60,8 +60,6 @@ void MagiciteGamePhyWorld::createPhyBody(MagiciteGameObject* ptr, bool is_static
     b2PolygonShape dynamicBox;
     dynamicBox.SetAsBox(ptr->getContentSize().width / 2 / PTM_RATIO, ptr->getContentSize().height / 2 / PTM_RATIO);
     b2FixtureDef fixtureDef;
-    fixtureDef.filter.categoryBits = Category;
-    fixtureDef.filter.maskBits = mask;
     fixtureDef.friction = 0.0f;
     fixtureDef.shape = &dynamicBox;
     body->CreateFixture(&fixtureDef);
@@ -99,10 +97,10 @@ void MagiciteGamePhyWorld::updateBody()
     }
 }
 
-MagiciteGamePhyWorld* MagiciteGamePhyWorld::create(b2Vec2 gravity, cocos2d::Size size, const std::function<void(b2Contact*)> &contactFunc)
+MagiciteGamePhyWorld* MagiciteGamePhyWorld::create(b2Vec2 gravity, Size size)
 {
     auto ptr = new MagiciteGamePhyWorld(gravity);
-    if (ptr && ptr->init(size,contactFunc))
+    if (ptr && ptr->init(size))
     {
         return ptr;
     }

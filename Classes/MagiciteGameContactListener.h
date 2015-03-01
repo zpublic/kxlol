@@ -12,11 +12,10 @@ private:
     virtual void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
     virtual void EndContact(b2Contact* contact);
 
-    std::function<void(b2Contact* contact)>     _onBeginContact;
 public:
-    static MagiciteGameContactListener* create(const std::function<void(b2Contact* contact)> &f);
+    static MagiciteGameContactListener* create();
     
-    virtual bool init(const std::function<void(b2Contact* contact)> &f);
+    virtual bool init();
 };
 
 #endif //__MAGICITE_GAME_CONTACT_LISTENER__
