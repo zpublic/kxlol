@@ -20,7 +20,7 @@ public:
     enum :int{
         DEFAULT_SPEED = 3,
         DEFAULT_JUMP_HEIGHT = 10,
-        DEFAULT_JUMP_TIME = 2,
+        DEFAULT_JUMP_TIME = 3,
     };
 
     virtual void Move(Direction dire) = 0;
