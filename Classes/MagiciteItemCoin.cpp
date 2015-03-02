@@ -15,7 +15,7 @@ MagiciteItemCoin::~MagiciteItemCoin()
 
 }
 
-MagiciteItemObject* MagiciteItemCoin::getItemObject()
+MagiciteGameObject* MagiciteItemCoin::getItemObject()
 {
     return MagiciteItemCoinObject::create();
 }

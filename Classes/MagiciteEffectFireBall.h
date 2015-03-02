@@ -17,17 +17,14 @@ public:
     virtual void positive(MagiciteGameObject* obj);
 
     static MagiciteEffectFireBall* create(
-        const cocos2d::Vec2& pos, 
         MagiciteGamePhyLayer* phyLayer, 
         MagiciteGameMoveAble::Direction dire);
 
     virtual bool init(
-        const cocos2d::Vec2& pos, 
         MagiciteGamePhyLayer* phyLayer, 
         MagiciteGameMoveAble::Direction dire);
 
 private:
-    cocos2d::Vec2                                   _pos;
     MagiciteGamePhyLayer*                           _phyLayer;
     MagiciteGameMoveAble::Direction                 _dire;
 };

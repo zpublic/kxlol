@@ -4,17 +4,23 @@
 #include "cocos2d.h"
 #include "MagiciteGameControlAble.h"
 #include "MagiciteGameMoveAbleLiving.h"
+#include "MagiciteGamePhyLayer.h"
 
 class MagiciteEffectSpeedUp;
 class MagiciteEffectJumpHigh;
 class MagiciteEffectSprint;
 class MagiciteGameChicken;
 class MagiciteGameHuman;
+class MagiciteItemContainer;
+class MagiciteItemBag;
+class MagiciteGameContainerView;
+class MagiciteEffectItem;
 
 class MagiciteGamePlayer : public MagiciteGameControlAble
 {
 public:
     MagiciteGamePlayer();
+    ~MagiciteGamePlayer();
 
     enum PlayerType : int
     {
@@ -23,13 +29,14 @@ public:
     };
     typedef  MagiciteGameMoveAbleLiving::Direction      Direction;
 
-    static MagiciteGamePlayer* create(PlayerType type);
+    static MagiciteGamePlayer* create(PlayerType type, MagiciteGamePhyLayer* phyLayer);
 
-    bool init(PlayerType type);
+    bool init(PlayerType type, MagiciteGamePhyLayer* phyLayer);
 
     MagiciteGameMoveAbleLiving* getSprite();
 
     void useSkill(MagiciteEffect* effect);
+    void useItem(MagiciteEffectItem* item);
 
     void Move();
     void Stop();
@@ -59,11 +66,17 @@ public:
 
     void setPetFollow(MagiciteGameObject*);
 
+    //MagiciteContralAble
     virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
+    void bindBagView(MagiciteGameContainerView* view);
+    MagiciteItemContainer* getBag();
+
 protected:
     MagiciteGameMoveAbleLiving*             _player;
+    MagiciteItemBag*                        _bag;
+    MagiciteGamePhyLayer*                   _phyLayer;
     bool                                    _move_left;
     bool                                    _move_right;
 };
