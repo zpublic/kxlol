@@ -1,5 +1,6 @@
 #include "MagiciteSkillCardFireBall.h"
 #include "MagiciteEffectFireBall.h"
+#include "MagiciteItemCardObject.h"
 
 MagiciteSkillCardFireBall::MagiciteSkillCardFireBall()
 {
@@ -12,11 +13,10 @@ MagiciteSkillCardFireBall::~MagiciteSkillCardFireBall()
 }
 
 MagiciteSkillCardFireBall* MagiciteSkillCardFireBall::create(
-    MagiciteGamePhyLayer* phyLayer,
-    MagiciteGameMoveAble::Direction dire)
+    MagiciteGamePhyLayer* phyLayer)
 {
     auto ptr = new MagiciteSkillCardFireBall();
-    if (ptr && ptr->init(phyLayer, dire))
+    if (ptr && ptr->init(phyLayer))
     {
         return ptr;
     }
@@ -28,10 +28,14 @@ MagiciteSkillCardFireBall* MagiciteSkillCardFireBall::create(
 }
 
 bool MagiciteSkillCardFireBall::init(
-    MagiciteGamePhyLayer* phyLayer,
-    MagiciteGameMoveAble::Direction dire)
+    MagiciteGamePhyLayer* phyLayer)
 {
-    _effect = MagiciteEffectFireBall::create(phyLayer, dire);
+    _effect = MagiciteEffectFireBall::create(phyLayer);
 
     return true;
+}
+
+MagiciteGameObject* MagiciteSkillCardFireBall::getItemObject()
+{
+    return MagiciteItemCardObject::create();
 }

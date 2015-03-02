@@ -153,7 +153,7 @@ void MagiciteGameContact::try_living_contact_with_ground(MagiciteGameObject* obj
     }
     else
     {
-        if (!living->_is_contraled)
+        if (living->_is_contraled == false && is_moveable_above_ground(living, ground) == false)
         {
             MagiciteGameContact::change_moveable_direction(living);
         }

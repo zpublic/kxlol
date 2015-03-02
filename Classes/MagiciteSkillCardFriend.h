@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "MagiciteForeverSkillCard.h"
-#include "MagiciteGameMoveAble.h"
 #include "MagiciteGaemFactoryMethod.h"
 
 class MagiciteGamePhyLayer;
@@ -18,13 +17,11 @@ public:
 
     static MagiciteSkillCardFriend* create(
         LivingType type,
-        MagiciteGamePhyLayer* phyLayer,
-        MagiciteGameMoveAble::Direction dire);
+        MagiciteGamePhyLayer* phyLayer);
 
     virtual bool init(
         LivingType type,
-        MagiciteGamePhyLayer* phyLayer,
-        MagiciteGameMoveAble::Direction dire);
+        MagiciteGamePhyLayer* phyLayer);
 };
 
 #endif //__MAGICITE_SKILL_CARD_FRIEND__

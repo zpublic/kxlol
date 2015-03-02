@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "MagiciteEffectShoot.h"
-#include "MagiciteGameMoveAble.h"
 
 class MagiciteGamePhyLayer;
 
@@ -17,16 +16,13 @@ public:
     virtual void positive(MagiciteGameObject* obj);
 
     static MagiciteEffectFireBall* create(
-        MagiciteGamePhyLayer* phyLayer, 
-        MagiciteGameMoveAble::Direction dire);
+        MagiciteGamePhyLayer* phyLayer);
 
     virtual bool init(
-        MagiciteGamePhyLayer* phyLayer, 
-        MagiciteGameMoveAble::Direction dire);
+        MagiciteGamePhyLayer* phyLayer);
 
 private:
     MagiciteGamePhyLayer*                           _phyLayer;
-    MagiciteGameMoveAble::Direction                 _dire;
 };
 
 #endif //__MAGICITE_EFFECT_FIREBALL__

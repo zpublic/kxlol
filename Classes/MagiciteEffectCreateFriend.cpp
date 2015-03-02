@@ -10,9 +10,10 @@ MagiciteEffectCreateFriend::MagiciteEffectCreateFriend()
 
 void MagiciteEffectCreateFriend::positive(MagiciteGameObject* obj)
 {
+    auto moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);
     MagiciteGameMoveAbleLiving* friends = MagiciteGaemFactoryMethod::createFriend(
         _type,
-        (_dire == MagiciteGameMoveAbleLiving::Direction::left ? true : false));
+        (moveable->getDire() == MagiciteGameMoveAbleLiving::Direction::left ? true : false));
     friends->setPosition(obj->getPosition());
 
     _phyLayer->createPhyBody(
@@ -26,11 +27,10 @@ void MagiciteEffectCreateFriend::positive(MagiciteGameObject* obj)
 
 MagiciteEffectCreateFriend* MagiciteEffectCreateFriend::create(   
     MagiciteGamePhyLayer* phyLayer,
-    MagiciteGameMoveAble::Direction dire,
     LivingType type)
 {
     auto ptr = new MagiciteEffectCreateFriend();
-    if (ptr && ptr->init(phyLayer, dire, type))
+    if (ptr && ptr->init(phyLayer, type))
     {
         return ptr;
     }
@@ -43,11 +43,9 @@ MagiciteEffectCreateFriend* MagiciteEffectCreateFriend::create(
 
 bool MagiciteEffectCreateFriend::init(
     MagiciteGamePhyLayer* phyLayer,
-    MagiciteGameMoveAble::Direction dire,
     LivingType type)
 {
     _phyLayer = phyLayer;
-    _dire = dire;
     _type = type;
 
     return true;

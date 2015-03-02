@@ -12,6 +12,7 @@ MagiciteEffectFireBall::MagiciteEffectFireBall()
 
 void MagiciteEffectFireBall::positive(MagiciteGameObject* obj)
 {
+    auto moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);
     MagiciteGameAmmo* ammo = nullptr;
     if (rand() % 5 == 0)
     {
@@ -28,15 +29,15 @@ void MagiciteEffectFireBall::positive(MagiciteGameObject* obj)
         ammo->getBody()->SetGravityScale(0.0f);
     }
     _phyLayer->addChild(ammo);
-    ammo->Move(_dire);
+    ammo->Move(moveable->getDire());
     
     delete this;
 }
 
-MagiciteEffectFireBall* MagiciteEffectFireBall::create(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAble::Direction dire)
+MagiciteEffectFireBall* MagiciteEffectFireBall::create(MagiciteGamePhyLayer* phyLayer)
 {
     auto ptr = new MagiciteEffectFireBall();
-    if (ptr && ptr->init(phyLayer, dire))
+    if (ptr && ptr->init(phyLayer))
     {
         return ptr;
     }
@@ -47,10 +48,9 @@ MagiciteEffectFireBall* MagiciteEffectFireBall::create(MagiciteGamePhyLayer* phy
     }
 }
 
-bool MagiciteEffectFireBall::init(MagiciteGamePhyLayer* phyLayer, MagiciteGameMoveAble::Direction dire)
+bool MagiciteEffectFireBall::init(MagiciteGamePhyLayer* phyLayer)
 {
     _phyLayer = phyLayer;
-    _dire = dire;
 
     return true;
 }
