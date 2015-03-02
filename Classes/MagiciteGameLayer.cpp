@@ -79,8 +79,8 @@ bool MagiciteGameLayer::init()
     this->addChild(view,999);
     _player->bindBagView(view);
 
-    _player->getBag()->addItem(new MagiciteItemCoin());
-    _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer, _player->getDire()));
+    _player->getBag()->addItem(MagiciteItemCoin::create());
+    _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
     return true;
 }
 

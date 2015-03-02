@@ -193,10 +193,10 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
         useSkill(MagiciteEffectSprint::create());
         break;
     case EventKeyboard::KeyCode::KEY_C:
-        _player->useSkill(MagiciteEffectCreateFriend::create(_phyLayer,_player->getDire(), MagiciteEffectCreateFriend::LivingType::Slime));
+        _player->useSkill(MagiciteEffectCreateFriend::create(_phyLayer, MagiciteEffectCreateFriend::LivingType::Slime));
         break;
     case EventKeyboard::KeyCode::KEY_F:
-        _player->useSkill(MagiciteEffectFireBall::create(_phyLayer, _player->getDire()));
+        _player->useSkill(MagiciteEffectFireBall::create(_phyLayer));
         break;
     case EventKeyboard::KeyCode::KEY_A:
         _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));

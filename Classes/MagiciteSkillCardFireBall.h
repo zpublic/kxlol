@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "MagiciteForeverSkillCard.h"
-#include "MagiciteGameMoveAble.h"
 
 class MagiciteGamePhyLayer;
 
@@ -14,12 +13,10 @@ public:
     ~MagiciteSkillCardFireBall();
 
     static MagiciteSkillCardFireBall* create(
-        MagiciteGamePhyLayer* phyLayer,
-        MagiciteGameMoveAble::Direction dire);
+        MagiciteGamePhyLayer* phyLayer);
 
     virtual bool init(
-        MagiciteGamePhyLayer* phyLayer,
-        MagiciteGameMoveAble::Direction dire);
+        MagiciteGamePhyLayer* phyLayer);
 
     virtual MagiciteGameObject* getItemObject();
 };

@@ -13,11 +13,10 @@ MagiciteSkillCardFriend::~MagiciteSkillCardFriend()
 
 MagiciteSkillCardFriend* MagiciteSkillCardFriend::create(
     LivingType type,
-    MagiciteGamePhyLayer* phyLayer,
-    MagiciteGameMoveAble::Direction dire)
+    MagiciteGamePhyLayer* phyLayer)
 {
     auto ptr = new MagiciteSkillCardFriend();
-    if (ptr && ptr->init(type, phyLayer, dire))
+    if (ptr && ptr->init(type, phyLayer))
     {
         return ptr;
     }
@@ -30,10 +29,9 @@ MagiciteSkillCardFriend* MagiciteSkillCardFriend::create(
 
 bool MagiciteSkillCardFriend::init(
     LivingType type,
-    MagiciteGamePhyLayer* phyLayer,
-    MagiciteGameMoveAble::Direction dire)
+    MagiciteGamePhyLayer* phyLayer)
 {
-    _effect = MagiciteEffectCreateFriend::create(phyLayer, dire, type);
+    _effect = MagiciteEffectCreateFriend::create(phyLayer, type);
 
     return true;
 }

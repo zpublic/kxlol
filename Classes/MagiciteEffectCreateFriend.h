@@ -4,7 +4,6 @@
 #include "cocos2d.h"
 #include "MagiciteEffectCreate.h"
 #include "MagiciteGaemFactoryMethod.h"
-#include "MagiciteGameMoveAble.h"
 
 class MagiciteGameObject;
 class MagiciteGamePhyLayer;
@@ -22,17 +21,14 @@ public:
 
     static MagiciteEffectCreateFriend* create(
         MagiciteGamePhyLayer* phyLayer,
-        MagiciteGameMoveAble::Direction dire,
         LivingType type);
 
     virtual bool init(
         MagiciteGamePhyLayer* phyLayer,
-        MagiciteGameMoveAble::Direction dire,
         LivingType type);
 
 private:
     MagiciteGamePhyLayer*                       _phyLayer;
-    MagiciteGameMoveAble::Direction             _dire;
     LivingType                                  _type;
 };
 
