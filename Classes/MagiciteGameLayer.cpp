@@ -15,6 +15,7 @@
 #include "MagiciteGameBagView.h"
 #include "MagiciteItemCoin.h"
 #include "MagiciteItemContainer.h"
+#include "MagiciteSkillCardFireBall.h"
 
 USING_NS_CC;
 
@@ -79,6 +80,7 @@ bool MagiciteGameLayer::init()
     _player->bindBagView(view);
 
     _player->getBag()->addItem(new MagiciteItemCoin());
+    _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer, _player->getDire()));
     return true;
 }
 

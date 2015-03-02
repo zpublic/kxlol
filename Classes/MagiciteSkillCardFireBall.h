@@ -20,6 +20,8 @@ public:
     virtual bool init(
         MagiciteGamePhyLayer* phyLayer,
         MagiciteGameMoveAble::Direction dire);
+
+    virtual MagiciteGameObject* getItemObject();
 };
 
 #endif //__MAGICITE_SKILL_CARD_FIREBALL_
