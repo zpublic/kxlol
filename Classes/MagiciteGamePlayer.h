@@ -12,7 +12,6 @@ class MagiciteEffectSprint;
 class MagiciteGameChicken;
 class MagiciteGameHuman;
 class MagiciteItemContainer;
-class MagiciteItemBag;
 class MagiciteGameContainerView;
 class MagiciteEffectItem;
 
@@ -70,12 +69,11 @@ public:
     virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
-    void bindBagView(MagiciteGameContainerView* view);
-    MagiciteItemContainer* getBag();
+    MagiciteGameContainerView* getBag();
 
 protected:
     MagiciteGameMoveAbleLiving*             _player;
-    MagiciteItemBag*                        _bag;
+    MagiciteGameContainerView*              _bag;
     MagiciteGamePhyLayer*                   _phyLayer;
     bool                                    _move_left;
     bool                                    _move_right;

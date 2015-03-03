@@ -14,11 +14,15 @@ MagiciteTempItem::~MagiciteTempItem()
 
 void MagiciteTempItem::positive(MagiciteGameObject* obj)
 {
-    _effect->positive(obj);
-    --_life;
-
-    if (_life <= 0)
+    if (_effect != nullptr)
     {
-        this->destroy();
+        _effect->positive(obj);
+        --_life;
+
+        if (_life <= 0)
+        {
+            this->destroy();
+        }
     }
+   
 }

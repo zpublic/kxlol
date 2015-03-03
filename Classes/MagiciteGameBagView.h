@@ -7,14 +7,17 @@
 class MagiciteGameBagView : public MagiciteGameContainerView
 {
 public:
+
+    enum :int {DEFAULT_MAX_SIZE = 9};
+
     MagiciteGameBagView();
     ~MagiciteGameBagView();
 
-    virtual bool init();
-    virtual void addItem(MagiciteGameObject* item);
+    virtual void addItem(MagiciteItem* item);
     virtual void eraseItem(int num);
 
-    CREATE_FUNC(MagiciteGameBagView);
+    virtual bool init(MagiciteGameObject* obj, int max_size);
+    static MagiciteGameBagView* create(MagiciteGameObject* obj, int max_size = DEFAULT_MAX_SIZE);
 
 protected:
     float Id2Pos(int n);
@@ -24,7 +27,6 @@ protected:
     int                                             _bag_blank = 5;
     float                                           _block_size;
     float                                           _offset;
-    static const int                                _max_size = 9;
 };
 
 #endif //__MAGICITE_GAME_BAG_VIEW__

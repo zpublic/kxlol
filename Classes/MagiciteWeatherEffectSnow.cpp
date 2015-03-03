@@ -2,8 +2,7 @@
 
 USING_NS_CC;
 
-MagiciteWeatherEffectSnow::MagiciteWeatherEffectSnow(const cocos2d::Vec2& range)
-:_range(range)
+MagiciteWeatherEffectSnow::MagiciteWeatherEffectSnow()
 {
 
 }
@@ -30,4 +29,25 @@ void MagiciteWeatherEffectSnow::positive(cocos2d::Layer* layer)
     snow->setEmissionRate(6);
 
     layer->addChild(snow);
+}
+
+bool MagiciteWeatherEffectSnow::init(const cocos2d::Vec2& range)
+{
+    _range = range;
+
+    return true;
+}
+
+MagiciteWeatherEffectSnow* MagiciteWeatherEffectSnow::create(const cocos2d::Vec2& range)
+{
+    auto ptr = new MagiciteWeatherEffectSnow();
+    if (ptr && ptr->init(range))
+    {
+        return ptr;
+    }
+    else
+    {
+        CC_SAFE_DELETE(ptr);
+        return nullptr;
+    }
 }

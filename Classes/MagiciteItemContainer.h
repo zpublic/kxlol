@@ -5,23 +5,22 @@
 #include <vector>
 
 class MagiciteItem;
-class MagiciteGameContainerView;
 
 class MagiciteItemContainer
 {
 public:
-    MagiciteItemContainer();
+    MagiciteItemContainer(int max_size);
     ~MagiciteItemContainer();
 
     virtual void addItem(MagiciteItem* item);
     virtual void eraseItem(int id);
-    virtual MagiciteItem* getItem(int id);
+    virtual MagiciteItem* getItem(int index);
 
-    void bindView(MagiciteGameContainerView* view);
+    void touchEvent(int n);
+
 protected:
     std::vector<std::pair<int, MagiciteItem*>>              _container;
-    MagiciteGameContainerView*                              _view;
-    static const int                                        _max_size = 9;
+    int                                                     _max_size;
 };
 
 #endif //__MAGICITE_ITEM_CONTAINER__
