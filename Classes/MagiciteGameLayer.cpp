@@ -67,18 +67,15 @@ bool MagiciteGameLayer::init()
     create_enemy(game);
     create_pitfall(game);
     create_ground(ground);
-    //create_Particle();
 
     use_weather(new MagiciteWeatherSnow);
 
     init_contact();
 
-    auto view =  MagiciteGameBagView::create();
-    view->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
-    view->runAction(Follow::create(this));
-    this->addChild(view,999);
-    _player->bindBagView(view);
-
+    auto bag_view =  _player->getBag();
+    bag_view->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
+    bag_view->runAction(Follow::create(this));
+    this->addChild(bag_view, 999);
     _player->getBag()->addItem(MagiciteItemCoin::create());
     _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
     return true;

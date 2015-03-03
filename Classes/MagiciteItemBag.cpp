@@ -1,8 +1,7 @@
 #include "MagiciteItemBag.h"
 
-
-MagiciteItemBag::MagiciteItemBag(MagiciteGameObject* obj)
-:MagiciteItemContainer(obj)
+MagiciteItemBag::MagiciteItemBag(int max_size)
+:MagiciteItemContainer(max_size)
 {
 
 }

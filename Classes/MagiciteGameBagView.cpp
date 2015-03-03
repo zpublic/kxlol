@@ -1,9 +1,10 @@
 #include "MagiciteGameBagView.h"
+#include "MagiciteItemContainer.h"
+#include "MagiciteItem.h"
 
 USING_NS_CC;
 
 MagiciteGameBagView::MagiciteGameBagView()
-:MagiciteGameContainerView(_max_size)
 {
 
 }
@@ -13,9 +14,9 @@ MagiciteGameBagView::~MagiciteGameBagView()
 
 }
 
-bool MagiciteGameBagView::init()
+bool MagiciteGameBagView::init(MagiciteGameObject* obj, int max_size)
 {
-    if (!MagiciteGameContainerView::init())
+    if (!MagiciteGameContainerView::init(obj, max_size))
     {
         return false;
     }
@@ -35,7 +36,7 @@ bool MagiciteGameBagView::init()
     {
         auto node = MenuItem::create();
         node->setCallback([this,i](Ref*){
-            this->_touch_event(i - 1);
+            this->ItemEvent(i - 1);
         });
         node->setPosition(Vec2(_origin.x + Id2Pos(i), _origin.y - _offset));
         node->setContentSize(Size(_block_size, _block_size));
@@ -52,30 +53,48 @@ bool MagiciteGameBagView::init()
 }
 
 
-void MagiciteGameBagView::addItem(MagiciteGameObject* item)
+void MagiciteGameBagView::addItem(MagiciteItem* item)
 {
     if (item != nullptr)
     {
-        this->addChild(item);
+        _container->addItem(item);
+        auto itemObj = item->getItemObject();
 
-        auto iter = std::find(_list.begin(), _list.end(), nullptr);
-        if (iter != _list.end())
+        auto iter = std::find(_list->begin(), _list->end(), nullptr);
+        if (iter != _list->end())
         {
-            *iter = item;
+            *iter = itemObj;
         }
 
-        item->setPosition(Vec2(_origin.x + Id2Pos(iter - _list.begin() + 1) + _block_size / 2, _origin.y - _offset + _block_size / 2));
+        itemObj->setPosition(Vec2(_origin.x + Id2Pos(iter - _list->begin() + 1) + _block_size / 2, _origin.y - _offset + _block_size / 2));
+        this->addChild(itemObj);
     }
 }
 
 void MagiciteGameBagView::eraseItem(int num)
 {
-    auto remove_tmp = _list[num];
+    auto remove_tmp = *(_list->begin() + num);
     remove_tmp->removeFromParentAndCleanup(true);
-    _list[num] = nullptr;
+    *(_list->begin() + num) = nullptr;
+
+    _container->eraseItem(num);
 }
 
 float MagiciteGameBagView::Id2Pos(int n)
 {
     return (_block_size + _bag_blank) * n;
+}
+
+MagiciteGameBagView* MagiciteGameBagView::create(MagiciteGameObject* obj, int max_size/* = DEFAULT_MAX_SIZE*/)
+{
+    auto ptr = new MagiciteGameBagView();
+    if (ptr && ptr->init(obj, max_size))
+    {
+        return ptr;
+    }
+    else
+    {
+        CC_SAFE_DELETE(ptr);
+        return nullptr;
+    }
 }

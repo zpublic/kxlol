@@ -5,26 +5,33 @@
 #include "MagiciteGameControlAble.h"
 #include <vector>
 
+class MagiciteItemContainer;
+class MagiciteItemObject;
+class MagiciteItem;
+
 class MagiciteGameContainerView : public MagiciteGameObject, public MagiciteGameControlAble
 {
 public:
-    MagiciteGameContainerView(int n = _max_size);
+    MagiciteGameContainerView();
     ~MagiciteGameContainerView();
 
-    virtual bool init();
 
-    virtual void addItem(MagiciteGameObject* item) = 0;
+    virtual void addItem(MagiciteItem* item) = 0;
     virtual void eraseItem(int num) = 0;
+
+    void ItemEvent(int n);
  
     //MagiciteGameContralAble
     virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
-    std::function<void(int)>                        _touch_event;
+    virtual bool init(MagiciteGameObject* obj, int max_size);
 
 protected:
-    std::vector<MagiciteGameObject*>                _list;
-    static const int                                _max_size = 9;
+    MagiciteItemContainer*                          _container;
+    std::vector<MagiciteGameObject*>*               _list;
+    MagiciteGameObject*                             _obj;
+    int                                             _max_size;
 };
 
 #endif //__MAGICITE_GAME_CONTAINER_VIEW__
