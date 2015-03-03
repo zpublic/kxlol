@@ -22,3 +22,13 @@ bool MagiciteGameContainerView::init()
 
     return true;
 }
+
+void MagiciteGameContainerView::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
+{
+
+}
+
+void MagiciteGameContainerView::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
+{
+
+}

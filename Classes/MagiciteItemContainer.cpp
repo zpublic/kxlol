@@ -1,10 +1,12 @@
 #include "MagiciteItemContainer.h"
 #include "MagiciteItem.h"
 #include "MagiciteGameContainerView.h"
+#include "MagiciteEffectItem.h"
 
 USING_NS_CC;
 
-MagiciteItemContainer::MagiciteItemContainer()
+MagiciteItemContainer::MagiciteItemContainer(MagiciteGameObject* obj)
+:_obj(obj)
 {
 
 }
@@ -36,12 +38,10 @@ void MagiciteItemContainer::eraseItem(int id)
 
 MagiciteItem* MagiciteItemContainer::getItem(int id)
 {
-    auto iter = std::find_if(_container.begin(), _container.end(), [id](const std::pair<int, MagiciteItem*>& x)->bool{
-        return x.first == id;
-    });
-    if (iter != _container.end())
+    if (std::size_t(id) < _container.size())
     {
-        return iter->second;
+        auto item = _container[id];
+        return item.second;
     }
     return nullptr;
 }
@@ -49,4 +49,17 @@ MagiciteItem* MagiciteItemContainer::getItem(int id)
 void MagiciteItemContainer::bindView(MagiciteGameContainerView* view)
 {
     _view = view;
+    _view->_touch_event = std::bind(&MagiciteItemContainer::touchEvent, this, std::placeholders::_1);
+}
+
+void MagiciteItemContainer::touchEvent(int n)
+{
+    auto item = getItem(n);
+    if (item != nullptr)
+    {
+        if (item->_itemType == MagiciteItem::EffectItem)
+        {
+            reinterpret_cast<MagiciteEffectItem*>(item)->positive(_obj);
+        }
+    }
 }

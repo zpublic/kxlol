@@ -63,7 +63,7 @@ bool MagiciteGamePlayer::init(PlayerType type, MagiciteGamePhyLayer* phyLayer)
     }
     _player->_is_contraled = true;
     _phyLayer = phyLayer;
-    _bag = new MagiciteItemBag();
+    _bag = new MagiciteItemBag(_player);
 
     return true;
 }
@@ -202,6 +202,7 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
         _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));
         break;
     default:
+        //MagiciteGameControlAble::dispatchKeyPress(keyCode, event, static_cast<MagiciteGameControlAble*>())
         break;
     }
 

@@ -28,16 +28,25 @@ bool MagiciteGameBagView::init()
     this->setContentSize(Size(_size.width, _block_size));
     this->setAnchorPoint(Vec2(0.5f, 0.5f));
 
+    auto menu = Menu::create();
+    menu->setPosition(Point::ZERO);
+
     for (int i = 1; i <= _max_size; ++i)
     {
-        auto node = Node::create();
+        auto node = MenuItem::create();
+        node->setCallback([this,i](Ref*){
+            this->_touch_event(i - 1);
+        });
         node->setPosition(Vec2(_origin.x + Id2Pos(i), _origin.y - _offset));
         node->setContentSize(Size(_block_size, _block_size));
+        node->setAnchorPoint(Point::ZERO);
         auto color = LayerColor::create(Color4B(0xee, 0xee, 0xee, 0x80));
         color->setContentSize(Size(_block_size, _block_size));
         node->addChild(color);
-        this->addChild(node);
+        menu->addChild(node);
     }
+
+    this->addChild(menu);
 
     return true;
 }

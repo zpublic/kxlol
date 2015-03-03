@@ -13,5 +13,8 @@ MagiciteForeverItem::~MagiciteForeverItem()
 
 void MagiciteForeverItem::positive(MagiciteGameObject* obj)
 {
-    _effect->positive(obj);
+    if (_effect != nullptr)
+    {
+        _effect->positive(obj);
+    }
 }

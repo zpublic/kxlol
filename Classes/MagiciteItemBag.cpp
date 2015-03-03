@@ -1,7 +1,8 @@
 #include "MagiciteItemBag.h"
 
 
-MagiciteItemBag::MagiciteItemBag()
+MagiciteItemBag::MagiciteItemBag(MagiciteGameObject* obj)
+:MagiciteItemContainer(obj)
 {
 
 }

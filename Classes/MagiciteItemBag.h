@@ -4,11 +4,12 @@
 #include "MagiciteItemContainer.h"
 
 class MagiciteGameBagView;
+class MagiciteGameObject;
 
 class MagiciteItemBag : public MagiciteItemContainer
 {
 public:
-    MagiciteItemBag();
+    MagiciteItemBag(MagiciteGameObject* obj);
 
 };
 
