@@ -68,7 +68,7 @@ bool MagiciteGameLayer::init()
     create_pitfall(game);
     create_ground(ground);
 
-    use_weather(new MagiciteWeatherSnow);
+    use_weather(MagiciteWeatherSnow::create());
 
     init_contact();
 

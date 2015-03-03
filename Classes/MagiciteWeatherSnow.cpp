@@ -11,5 +11,24 @@ MagiciteWeatherSnow::MagiciteWeatherSnow()
 
 MagiciteWeatherEffect* MagiciteWeatherSnow::getWeatherEffect(const Vec2& range)
 {
-    return new MagiciteWeatherEffectSnow(range);
+    return MagiciteWeatherEffectSnow::create(range);
+}
+
+bool MagiciteWeatherSnow::init()
+{
+    return true;
+}
+
+MagiciteWeatherSnow* MagiciteWeatherSnow::create()
+{
+    auto ptr = new MagiciteWeatherSnow();
+    if (ptr && ptr->init())
+    {
+        return ptr;
+    }
+    else
+    {
+        CC_SAFE_DELETE(ptr);
+        return nullptr;
+    }
 }
