@@ -21,7 +21,7 @@ protected:
 
     cocos2d::Size                                   _size;
     cocos2d::Vec2                                   _origin;
-    int                                             _bag_blank = 5;
+    int                                             _bag_blank;
     float                                           _block_size;
     float                                           _offset;
     static const int                                _max_size = 9;
