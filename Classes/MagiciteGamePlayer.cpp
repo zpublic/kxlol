@@ -7,8 +7,7 @@
 #include "MagiciteGaemFactoryMethod.h"
 #include "MagiciteGameChicken.h"
 #include "MagiciteGameHuman.h"
-#include "MagiciteItemBag.h"
-#include "MagiciteGameContainerView.h"
+#include "MagiciteGameBagView.h"
 #include "MagiciteEffectFlash.h"
 #include "MagiciteEffectItem.h"
 
@@ -63,7 +62,7 @@ bool MagiciteGamePlayer::init(PlayerType type, MagiciteGamePhyLayer* phyLayer)
     }
     _player->_is_contraled = true;
     _phyLayer = phyLayer;
-    _bag = new MagiciteItemBag();
+    _bag = MagiciteGameBagView::create(_player , 9);
 
     return true;
 }
@@ -202,6 +201,7 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
         _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));
         break;
     default:
+        MagiciteGameControlAble::dispatchKeyPress(keyCode, event, static_cast<MagiciteGameControlAble*>(_bag));
         break;
     }
 
@@ -229,12 +229,7 @@ void MagiciteGamePlayer::setPetFollow(MagiciteGameObject* pet)
     _player->addChild(pet);
 }
 
-void MagiciteGamePlayer::bindBagView(MagiciteGameContainerView* view)
-{
-    _bag->bindView(view);
-}
-
-MagiciteItemContainer* MagiciteGamePlayer::getBag()
+MagiciteGameContainerView* MagiciteGamePlayer::getBag()
 {
     return _bag;
 }

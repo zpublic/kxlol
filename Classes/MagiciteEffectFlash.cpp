@@ -55,7 +55,6 @@ void MagiciteEffectFlash::positive(MagiciteGameObject* obj)
     }
     body->SetAwake(true);
 
-    delete this;
 }
 
 void MagiciteEffectFlash::negative()

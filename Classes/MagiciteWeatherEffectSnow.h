@@ -6,9 +6,13 @@
 class MagiciteWeatherEffectSnow : public MagiciteWeatherEffect
 {
 public:
-    MagiciteWeatherEffectSnow(const cocos2d::Vec2& range);
+    MagiciteWeatherEffectSnow();
 
     virtual void positive(cocos2d::Layer* layer);
+
+    virtual bool init(const cocos2d::Vec2& range);
+
+    static MagiciteWeatherEffectSnow* create(const cocos2d::Vec2& range);
 private:
     cocos2d::Vec2                   _range;
 };

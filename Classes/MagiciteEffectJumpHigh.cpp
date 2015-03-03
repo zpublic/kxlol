@@ -19,7 +19,6 @@ void MagiciteEffectJumpHigh::positive(MagiciteGameObject* obj)
             _moveable->setJumpHeight(_moveable->getJumpHeight() / 2);
             _moveable->_buff_map[Jump_High] = false;
 
-            delete this;
         }), nullptr);
 
         action->setTag(Jump_High);
