@@ -313,6 +313,9 @@
     <ClCompile Include="..\Classes\MagiciteItemCardObject.cpp">
       <Filter>Magicite\GameLogic\Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteDialogue.cpp">
+      <Filter>Magicite\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -570,6 +573,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteItemCardObject.h">
       <Filter>Magicite\GameLogic\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteDialogue.h">
+      <Filter>Magicite\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

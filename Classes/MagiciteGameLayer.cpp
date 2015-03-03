@@ -16,6 +16,7 @@
 #include "MagiciteItemCoin.h"
 #include "MagiciteItemContainer.h"
 #include "MagiciteSkillCardFireBall.h"
+#include "MagiciteDialogue.h"
 
 USING_NS_CC;
 
@@ -81,6 +82,8 @@ bool MagiciteGameLayer::init()
 
     _player->getBag()->addItem(MagiciteItemCoin::create());
     _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
+
+    this->addChild(MagiciteDialogue::create(1L), 1000);
     return true;
 }
 
