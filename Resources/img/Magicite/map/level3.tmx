@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="32" tileheight="32" nextobjectid="12">
+ <tileset firstgid="1" name="06" tilewidth="32" tileheight="32">
+  <image source="03.png" width="1568" height="640"/>
+ </tileset>
+ <layer name="ground" width="60" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3WZbCUdRQH4OVe7PxggXR3Y+cHe6xLd3d3q6CCdHfXpVExQLq7sfODBdLd6LPjMiw7l717r+I4jv+ZZ/Z9d/ac8zsbMxsI/H/+y6dtfCDQjvZ0oCOd6EwXXuN13qAr3WiurgUtaUVr2gR70S54HZ/yvm1ikJqskSeWOSmdlZiKusRk/F35kpsTy6xIkXUXs/yVzym5fLH2TOkuV1NqfwMp/e79W0xjOjOYySxmM4e5vMt7vM+8VNaVTxMIVKAilahMFapSjerUoCa1qE0d6lKP+jSgIY1oTBOa0ozmtKAlrWhNG9rSjvZ0oCOd6EwXfo+7pKv7brzJW7xNd3qEcsaaNagnvehNH/rSj/4MYCCDGMwQhjKM4YxgJKMYzRjGMo7xTGAik5jMFKaSyDSmM4OZzGI2c5gbse889x/wIR/xMfNZEMoZa9aghSxiMUtYyjKWs4KVrGI1a1jLOtazgY1sYjNb2Mo2trODneziUz7jc77gS77ia77hW77je36I2PdH9z/xM7/wK7vZE8oZa9agvexjPwc4yCEOc4SjHOM4JzjJKU5zhrOc4zwXgjkJyJiGOOJJyzVcy3Vczw3cyE3czC3cym3cHnf5vndwJ3dxN/eQjvRxf+aMNWtQBjUZyURmspCVbGQnBznJRW7ykJd85KcABSlEYYpQlGIUpwQluY/7eYAHeYiHeYRHeYzHeYInI/Z9iqd5hmd5jud5IZQz1qxBL/ISL/MKr5JAKUpThrKUozwVqEglKlOFqlSjOjWoSS1qU4e61KM+DWhIIxrThKY0ozktaBmxb1va0Z4OdKQTnUM5Y80a1I/+DGAggxichHfoSS9604e+UeqHMJRhDGcEIxnFaMYwlnGMZwITmRTqGb5vvzD9o8zsTo8oWYOWsZwVrGQVq5PwCQtZxGKWsDRK/RrWso71bGAjm9jMFrayje3sYCe7Qj3D910WZnmUmfNZEJE1EH+5Q547zBGOcozjSfiNvexjPwc4GHfl+hOc5BSnOcNZznGeC6FdghnSEEc8aUOZwvc9FOZwlJm72RORNXLfrGQjOznISa4k3EsGMpKJzGSJUp+bPOQlH/kpQEEKUZgiFKUYxSlByVDP8H2zxl+SLcrMdKSPyHpxzyyhxwRKUZoylKVcEv7JkxDKFdz14nVCWNYrZY52gv+LgmcYQ5IxNPS64YwI1jIqxteMZgxjGcd4JjCRSUxmClNJZBrTmXGV+qZkp5S8F39lz5nMukr9/wD5N6HvwBIAAA==
+  </data>
+ </layer>
+ <objectgroup name="physics">
+  <object id="1" type="cube" x="0" y="576" width="1917.33" height="62.6667"/>
+  <object id="3" type="platform" x="0" y="221.333" width="1214.67" height="16"/>
+  <object id="4" type="platform" x="1314.67" y="221.333" width="605.333" height="16"/>
+ </objectgroup>
+ <objectgroup name="game">
+  <object id="5" name="player" x="32" y="540" width="33.3333" height="34.6667"/>
+  <object id="6" name="finish" x="1858.67" y="542.667" width="28" height="33.3333"/>
+  <object id="7" type="enemy" x="1570.67" y="189.333" width="28" height="29.3333"/>
+  <object id="8" type="pitfall" x="1441.33" y="541.333" width="30.6667" height="32"/>
+  <object id="9" type="item" x="34.6667" y="189.333" width="28" height="30.6667"/>
+  <object id="10" type="enemy" x="641" y="192" width="31" height="29"/>
+ </objectgroup>
+</map>

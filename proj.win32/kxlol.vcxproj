@@ -193,12 +193,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteGameSpinePitfall.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameWin.cpp" />
     <ClCompile Include="..\Classes\MagiciteItem.cpp" />
-    <ClCompile Include="..\Classes\MagiciteItemBag.cpp" />
-    <ClCompile Include="..\Classes\MagiciteItemCardObject.cpp" />
     <ClCompile Include="..\Classes\MagiciteItemCoin.cpp" />
-    <ClCompile Include="..\Classes\MagiciteItemCoinObject.cpp" />
-    <ClCompile Include="..\Classes\MagiciteItemContainer.cpp" />
-    <ClCompile Include="..\Classes\MagiciteItemObject.cpp" />
     <ClCompile Include="..\Classes\MagiciteScene.cpp" />
     <ClCompile Include="..\Classes\MagiciteSkillCardFireBall.cpp" />
     <ClCompile Include="..\Classes\MagiciteSkillCardFriend.cpp" />
@@ -280,12 +275,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGameTagManager.h" />
     <ClInclude Include="..\Classes\MagiciteGameWin.h" />
     <ClInclude Include="..\Classes\MagiciteItem.h" />
-    <ClInclude Include="..\Classes\MagiciteItemBag.h" />
-    <ClInclude Include="..\Classes\MagiciteItemCardObject.h" />
     <ClInclude Include="..\Classes\MagiciteItemCoin.h" />
-    <ClInclude Include="..\Classes\MagiciteItemCoinObject.h" />
-    <ClInclude Include="..\Classes\MagiciteItemContainer.h" />
-    <ClInclude Include="..\Classes\MagiciteItemObject.h" />
     <ClInclude Include="..\Classes\MagiciteScene.h" />
     <ClInclude Include="..\Classes\MagiciteSkillCardFireBall.h" />
     <ClInclude Include="..\Classes\MagiciteSkillCardFriend.h" />

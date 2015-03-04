@@ -1,5 +1,4 @@
 #include "MagiciteGameBagView.h"
-#include "MagiciteItemContainer.h"
 #include "MagiciteItem.h"
 
 USING_NS_CC;
@@ -58,27 +57,27 @@ void MagiciteGameBagView::addItem(MagiciteItem* item)
 {
     if (item != nullptr)
     {
-        _container->addItem(item);
-        auto itemObj = item->getItemObject();
-
-        auto iter = std::find(_list->begin(), _list->end(), nullptr);
+        auto iter = std::find_if(_list->begin(), _list->end(), [](const std::pair<int, MagiciteItem*> &p)->bool{
+            return p.second == nullptr;
+        });
         if (iter != _list->end())
         {
-            *iter = itemObj;
+            iter->first = item->getItemId();
+            iter->second = item;
+            item->setPosition(Vec2(_origin.x + Id2Pos(iter - _list->begin() + 1) + _block_size / 2, _origin.y - _offset + _block_size / 2));
+            this->addChild(item);
         }
-
-        itemObj->setPosition(Vec2(_origin.x + Id2Pos(iter - _list->begin() + 1) + _block_size / 2, _origin.y - _offset + _block_size / 2));
-        this->addChild(itemObj);
     }
 }
 
 void MagiciteGameBagView::eraseItem(int num)
 {
-    auto remove_tmp = *(_list->begin() + num);
-    remove_tmp->removeFromParentAndCleanup(true);
-    *(_list->begin() + num) = nullptr;
-
-    _container->eraseItem(num);
+    auto remove_tmp = _list->begin() + num;
+    if (remove_tmp->second != nullptr)
+    {
+        remove_tmp->second->removeFromParentAndCleanup(true);
+        (_list->begin() + num)->second = nullptr;
+    }
 }
 
 float MagiciteGameBagView::Id2Pos(int n)

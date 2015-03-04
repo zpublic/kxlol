@@ -17,11 +17,11 @@ public:
     MagiciteItemCoin();
     ~MagiciteItemCoin();
 
-    virtual MagiciteGameObject* getItemObject();
-
     virtual bool init();
+    CREATE_FUNC(MagiciteItemCoin);
 
-    static MagiciteItemCoin* create();
+    //MagiciteItem
+    virtual MagiciteItem* clone();
 };
 
 #endif //__MAGICITE_ITEM_COIN__

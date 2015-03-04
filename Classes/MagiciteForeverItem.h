@@ -9,6 +9,10 @@ public:
     MagiciteForeverItem();
     ~MagiciteForeverItem();
 
+    //MagiciteEffectItem
+    virtual bool init();
+    virtual bool initWithFile(const char* filename);
+
     virtual void positive(MagiciteGameObject* obj);
 };
 

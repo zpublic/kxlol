@@ -4,13 +4,16 @@
 #include "MagiciteItem.h"
 
 class MagiciteEffect;
-class MagiciteGameObject;
 
 class MagiciteEffectItem : public MagiciteItem
 {
 public:
     MagiciteEffectItem();
     ~MagiciteEffectItem();
+
+    //MagiciteItem
+    virtual bool init();
+    virtual bool initWithFile(const char* filename);
 
     virtual void positive(MagiciteGameObject* obj);
 
