@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="32" tileheight="32" nextobjectid="14">
+ <tileset firstgid="1" name="03" tilewidth="32" tileheight="32">
+  <image source="01.png" width="1568" height="640"/>
+ </tileset>
+ <layer name="ground" width="60" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC73U15MUVRQH4O5pcnxUzKkQJOcMr0YQ1FJMqATJoD6Zs4WYQGVh8y6YMDxbglnyBrJZ/wslbfDboq2VqdmFwVt9q76qqZk5fe+5Z34TRdmtUsoop4JKqqimhlo2s4X3eJ8P+JCP2MrHfJLhmc9n5eIoStjndR31NNDIfg5wkEMc5ghH+ZGf+Jlf+JXf+J0LPO9CBnARF3MJl3IZl3MFV3IVV3NNnE2/Y+wzllNeN9FMC61tH3o/jtvvpAtd6UZ3etCTXvSmD325nhu4kZu4mVuYySxuZTZzuI3buSOjfhfYZyFDGcZwRjCSUYyO2+9kHOOZwEQmMZkpTGUa03mcJ3iSp3iaZ3iW53ieF3iRl3iZVzLqd4N9StjIJkopo5wKKqmimhpq2RyHy/qnfMbnGfW7yz672cPethxTRz0NNBaY8eE4XNb/4M+05yzWMWc/zglOtuWYJpppoZX5cfvvflE621BZ70f/OLt+B+WiaDCLWcJSlrGcFaxkFat5hEd5LHdu8yt2xlmsubnwWTzfuizW2lz4LBZbtyV3ui7UvZ/tOaGzWGxdW7/9A/4Hhp7fjCSM3vShL/2S03MJJWQ+VydhTGUa09P+66JwQs63NgljBStZlfbfFIUTMp+HkjCqqKYm7f8vOf6bYxznBCc5RRPNtNBK5PtxWtOZc33e/6n99yw5ErrQlW50pwc96ZWX4YFcyyAGcx1DGMowhjOCkYxidFrTkbPdxX8Vqi/2LGMYyzjGM4GJTGIyU/IyfCd3MZe7uYd7uY/7mccDPMhDzE9rOtLZXeQrVF/sWRawkEU8zGKWsJRlLE/OzPAaXmUtr/E6b/Amb7GO9bzNO7yb1nSks7vIV6i+2LNsoISNbKKUMsqpoDI5M8NfsI3tfMlXfM03fMt3fM8P7GBnWtORzu4iX6H6Ys+yi93sYS/7qKOeBhrZzwEO8g//7ZAswBIAAA==
+  </data>
+ </layer>
+ <objectgroup name="physics">
+  <object id="2" type="cube" x="0" y="482" width="1218" height="161"/>
+  <object id="3" type="cube" x="1218" y="356" width="704" height="287"/>
+  <object id="4" type="platform" x="865.333" y="224.833" width="382.667" height="32.6667"/>
+ </objectgroup>
+ <objectgroup name="game">
+  <object id="6" name="player" x="32" y="452" width="30" height="30"/>
+  <object id="7" name="finish" x="1854" y="320" width="32" height="30"/>
+  <object id="8" type="enemy" x="958" y="194" width="30" height="30"/>
+  <object id="9" type="pitfall" x="1408" y="320" width="32" height="32"/>
+  <object id="10" type="item" x="386" y="322" width="30" height="32"/>
+ </objectgroup>
+</map>

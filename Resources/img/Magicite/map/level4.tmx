@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="32" tileheight="32" nextobjectid="13">
+ <tileset firstgid="1" name="07" tilewidth="32" tileheight="32">
+  <image source="04.png" width="1568" height="640"/>
+ </tileset>
+ <layer name="ground" width="60" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3URXAXZxjAYUhwqNyoYFUswan3Tg2p4g7Fa7gUqeKWAPFgCQQpUsUtgXhCcCpTF6yKE/pk+ufWCWSGQA55Z5/Lzje7v3cPW6ZM6ZRO6RQ2YYQzj/ksIIJIoogmhljiiGchi1jMEpaSQCLLWE7SDdyhKJNMCrvZQypppJNBJllkk0Mue8ljH/s5wEEOcZgjHL2RSxRhTnOGs5zjPBe4yCXyuVxwsKyLIIIpR3kqUJFKVKYKValW9iYtdJWpq6se9WlAQ0IIpRGNaUJTmtGcFrTkIR7mER7lMR7nCZ4sofu219WBjnSiM13oSje604Oe9KI3fejLq/SjPwMYyCAGM6SE7jtZ1xSmMo3pzGAms5jNHOYSRjjzmM8CIogkimhiiCWuhO67QddGNrGZLWxlG9vZwU52kUwKu9lDKmmkk0EmWWSTU0L3PabrOCc4ySl+5w/+5C/+5h9Oc4aznOM8F7jIJfK5XLBnkH9b0M3e7P+nhq6a1KI2dbiHe7mP+3mAB6lLPerTgIaEEEojGtOEpjS7Dvv284z+DGAggxjMEF7jdd7gTd5iKMMYzghGMorRjGEs42hNG9rSjud5gRd5iZd5hfZ0oCOd6Bz0X1NxdUUQSRTRxBBLHPEsZBGLWcJSEkhkGctJYgUrWcVqxjOBiUziHd7lPd7nAz5kMlOYyjSmB5qKqyuNdDLIJItscshlL3nsYz8HOMghDnOEo3zJV3zNN6xhLetYz8d8wqd8xud8wQY2sonNbAk0FVfXBS5yiXwuUybYv4EggilHeSpQkUpUpgpVqcYt3Mpt3M63nvMd3/MDP/ITP/MLv/IbxzjOCU5yKtB0vbuGB7pCCKURjWlCU5rRnBa0pHrAHVdR2Lkr9+/kLu6mBjWpRW3qBJqupat6EQwPvLsLXelGd3rQk170pg99aRXw1FUUdu7K/ad5hmd5jta0oS3tAk3X0tWqiArePYOZzGI2c5hLGOHMYz4LiCCSKKKJIZY44lnIIhYzlGGB7zqCkYxiNGMYyzjeZjwTmMikQFNxdW1lG9vZwU52kUwKu9lDKmmkk0EmWWSTQy57yWMfS0kgkWUsJ4kVrGQVq/mINaxlHesDTcXV9S/DIcamwBIAAA==
+  </data>
+ </layer>
+ <objectgroup name="physics">
+  <object id="1" type="cube" x="2.66667" y="544" width="1914.67" height="94.6667"/>
+ </objectgroup>
+ <objectgroup name="game">
+  <object id="6" name="player" x="34.6667" y="510.667" width="28" height="29.3333"/>
+  <object id="7" name="finish" x="1857.33" y="509.333" width="30.6667" height="32"/>
+  <object id="8" type="enemy" x="1216" y="512" width="30.6667" height="30.6667"/>
+  <object id="9" type="enemy" x="1282.67" y="509.333" width="29.3333" height="34.6667"/>
+  <object id="10" type="enemy" x="1345.33" y="514.667" width="29.3333" height="24"/>
+  <object id="11" type="enemy" x="1409.33" y="512" width="29.3333" height="30.6667"/>
+ </objectgroup>
+</map>

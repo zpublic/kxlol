@@ -4,6 +4,7 @@
 #include "MagiciteGamePause.h"
 #include "MagiciteGameOver.h"
 #include "MagiciteGameWin.h"
+#include "MagiciteScene.h"
 #include "MagiciteGamePlayer.h"
 #include "MagiciteGameContact.h"
 #include "MagiciteGameControlAble.h"
@@ -73,7 +74,10 @@ bool MagiciteGameLayer::init()
     _visibleSize = Director::getInstance()->getVisibleSize();
     _origin = Director::getInstance()->getVisibleOrigin();
 
-    TMXTiledMap* tiled = TMXTiledMap::create("img\\Magicite\\map\\test.tmx");
+    char tiledPath[200];
+    std::sprintf(tiledPath, "img\\Magicite\\map\\level%d.tmx", MagiciteScene::getLevel() % 5);
+    TMXTiledMap* tiled = TMXTiledMap::create(tiledPath);
+
     TMXObjectGroup* game = tiled->getObjectGroup("game");
     TMXObjectGroup* ground = tiled->getObjectGroup("physics");
 
@@ -244,7 +248,7 @@ void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "enemy")
         {
-            auto enemy = MagiciteGaemFactoryMethod::createEnemy(MagiciteGaemFactoryMethod::Dirt);
+            auto enemy = MagiciteGaemFactoryMethod::createEnemy(MagiciteGaemFactoryMethod::Dirt, true);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(enemy, false);
             _phyLayer->addChild(enemy);

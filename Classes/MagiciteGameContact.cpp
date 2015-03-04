@@ -103,7 +103,7 @@ void MagiciteGameContact::resiger_contact()
     on_contact[Contact_type::enemy_type][Contact_type::pitfall_type] = std::bind(try_enemy_contact_with_hole, std::placeholders::_1, std::placeholders::_2);
     judge_contact[Contact_type::friend_type][Contact_type::pitfall_type] = true;
     judge_contact[Contact_type::player_type][Contact_type::pitfall_type] = true;
-    judge_contact[Contact_type::enemy_type][Contact_type::pitfall_type] = false;
+    judge_contact[Contact_type::enemy_type][Contact_type::pitfall_type] = true;
 
 
     on_contact[Contact_type::friend_type][Contact_type::enemy_type] = std::bind(try_friend_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
@@ -119,7 +119,7 @@ void MagiciteGameContact::resiger_contact()
     judge_contact[Contact_type::enemy_type][Contact_type::enemy_type] = true;
     judge_contact[Contact_type::ammo_type][Contact_type::enemy_type] = true;
     judge_contact[Contact_type::edge_type][Contact_type::enemy_type] = true;
-    judge_contact[Contact_type::pitfall_type][Contact_type::enemy_type] = false;
+    judge_contact[Contact_type::pitfall_type][Contact_type::enemy_type] = true;
 
 
     on_contact[Contact_type::player_type][Contact_type::end_type] = std::bind(try_player_contact_with_end, std::placeholders::_1, std::placeholders::_2);
