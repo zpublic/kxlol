@@ -31,7 +31,21 @@ bool MagiciteSkillCardFriend::init(
     LivingType type,
     MagiciteGamePhyLayer* phyLayer)
 {
+
+    if (!MagiciteForeverSkillCard::initWithFile("img\\Magicite\\Item\\card.png"))
+    {
+        return false;
+    }
+
     _effect = MagiciteEffectCreateFriend::create(phyLayer, type);
 
+    _type = type;
+    _phyLayer = phyLayer;
+
     return true;
+}
+
+MagiciteItem* MagiciteSkillCardFriend::clone()
+{
+    return create(_type, _phyLayer);
 }

@@ -3,9 +3,9 @@
 
 #include "cocos2d.h"
 
-class MagiciteGameObject;
+#include "MagiciteGameObject.h"
 
-class MagiciteItem
+class MagiciteItem : public MagiciteGameObject
 {
 public:
 
@@ -20,12 +20,16 @@ public:
     MagiciteItem(ItemType type = NormalItem);
     ~MagiciteItem();
 
+    //MagiciteGameObject
+    virtual bool init();
+    virtual bool initWithFile(const char* filename);
+
     std::string getItemName() const;
     int getItemId() const;
 
-    virtual MagiciteGameObject* getItemObject();
-
     void destroy();
+
+    virtual MagiciteItem* clone() = 0;
 
     static std::string                      _name;
     static int                              _id;
@@ -33,10 +37,6 @@ public:
 protected:
     void setItemId(int Id);
     void setItemName(const std::string& name);
-    
-    int                                     _number;
-    bool                                    _overlap;
-    
 };
 
 #endif //__MAGICITE_ITEM__

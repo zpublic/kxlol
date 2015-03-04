@@ -1,6 +1,5 @@
 #include "MagiciteSkillCardFireBall.h"
 #include "MagiciteEffectFireBall.h"
-#include "MagiciteItemCardObject.h"
 
 MagiciteSkillCardFireBall::MagiciteSkillCardFireBall()
 {
@@ -30,12 +29,17 @@ MagiciteSkillCardFireBall* MagiciteSkillCardFireBall::create(
 bool MagiciteSkillCardFireBall::init(
     MagiciteGamePhyLayer* phyLayer)
 {
-    _effect = MagiciteEffectFireBall::create(phyLayer);
 
+    if (!MagiciteForeverSkillCard::initWithFile("img\\Magicite\\Item\\card.png"))
+    {
+        return false;
+    }
+    _effect = MagiciteEffectFireBall::create(phyLayer);
+    _phyLayer = phyLayer;
     return true;
 }
 
-MagiciteGameObject* MagiciteSkillCardFireBall::getItemObject()
+MagiciteItem* MagiciteSkillCardFireBall::clone()
 {
-    return MagiciteItemCardObject::create();
+    return create(_phyLayer);
 }

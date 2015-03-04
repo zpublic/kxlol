@@ -22,6 +22,12 @@ public:
     virtual bool init(
         LivingType type,
         MagiciteGamePhyLayer* phyLayer);
+
+    virtual MagiciteItem* clone();
+
+protected:
+    LivingType                                  _type;
+    MagiciteGamePhyLayer*                       _phyLayer;
 };
 
 #endif //__MAGICITE_SKILL_CARD_FRIEND__

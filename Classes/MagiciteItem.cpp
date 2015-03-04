@@ -1,11 +1,10 @@
 #include "MagiciteItem.h"
-#include "MagiciteItemObject.h"
 
 std::string MagiciteItem::_name = "item";
 int MagiciteItem::_id = 0;
 
 MagiciteItem::MagiciteItem(ItemType type /*= NormalItem*/)
-:_itemType(type)
+:MagiciteGameObject(T_Item),_itemType(type)
 {
 
 }
@@ -30,11 +29,6 @@ void MagiciteItem::destroy()
 
 }
 
-MagiciteGameObject* MagiciteItem::getItemObject()
-{
-    return nullptr;
-}
-
 int MagiciteItem::getItemId() const
 {
     return _id;
@@ -43,4 +37,22 @@ int MagiciteItem::getItemId() const
 void MagiciteItem::setItemId(int Id)
 {
     _id = Id;
+}
+
+bool MagiciteItem::init()
+{
+    if (!MagiciteGameObject::init())
+    {
+        return false;
+    }
+    return true;
+}
+
+bool MagiciteItem::initWithFile(const char* filename)
+{
+    if (!MagiciteGameObject::initWithFile(filename))
+    {
+        return false;
+    }
+    return true;
 }

@@ -26,3 +26,21 @@ void MagiciteTempItem::positive(MagiciteGameObject* obj)
     }
    
 }
+
+bool MagiciteTempItem::init()
+{
+    if (!MagiciteEffectItem::init())
+    {
+        return false;
+    }
+    return true;
+}
+
+bool MagiciteTempItem::initWithFile(const char* filename)
+{
+    if (!MagiciteEffectItem::initWithFile(filename))
+    {
+        return false;
+    }
+    return true;
+}

@@ -9,7 +9,7 @@ MagiciteEffectItem::MagiciteEffectItem()
 
 MagiciteEffectItem::~MagiciteEffectItem()
 {
-    CC_SAFE_DELETE(_effect);
+
 }
 
 void MagiciteEffectItem::positive(MagiciteGameObject* obj)
@@ -18,4 +18,23 @@ void MagiciteEffectItem::positive(MagiciteGameObject* obj)
     {
         _effect->positive(obj);
     }
+}
+
+bool MagiciteEffectItem::init()
+{
+    if (!MagiciteItem::init())
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool MagiciteEffectItem::initWithFile(const char* filename)
+{
+    if (!MagiciteItem::initWithFile(filename))
+    {
+        return false;
+    }
+    return true;
 }

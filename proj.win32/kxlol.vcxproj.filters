@@ -76,9 +76,6 @@
     <Filter Include="Magicite\GameLogic\Item">
       <UniqueIdentifier>{9722d40d-5613-45b4-9b97-e084d0d2365b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Magicite\GameLogic\Object\Item">
-      <UniqueIdentifier>{a0990774-54b8-44f1-a7af-5b7c88849ea2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Magicite\GameLogic\Weather">
       <UniqueIdentifier>{9848ab7f-0b4a-4349-bbef-438730ea9ebf}</UniqueIdentifier>
     </Filter>
@@ -259,12 +256,6 @@
     <ClCompile Include="..\Classes\MagiciteForeverItem.cpp">
       <Filter>Magicite\GameLogic\Item</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteItemObject.cpp">
-      <Filter>Magicite\GameLogic\Object\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteItemCoinObject.cpp">
-      <Filter>Magicite\GameLogic\Object\Item</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MagiciteItemCoin.cpp">
       <Filter>Magicite\GameLogic\Item</Filter>
     </ClCompile>
@@ -295,12 +286,6 @@
     <ClCompile Include="..\Classes\MagiciteSkillCardFireBall.cpp">
       <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteItemContainer.cpp">
-      <Filter>Magicite\GameLogic\Item\Container</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteItemBag.cpp">
-      <Filter>Magicite\GameLogic\Item\Container</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameBagView.cpp">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClCompile>
@@ -309,9 +294,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteSkillCardFriend.cpp">
       <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteItemCardObject.cpp">
-      <Filter>Magicite\GameLogic\Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteDialogue.cpp">
       <Filter>Magicite\Scene</Filter>
@@ -514,12 +496,6 @@
     <ClInclude Include="..\Classes\MagiciteForeverItem.h">
       <Filter>Magicite\GameLogic\Item</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteItemObject.h">
-      <Filter>Magicite\GameLogic\Object\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteItemCoinObject.h">
-      <Filter>Magicite\GameLogic\Object\Item</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteItemCoin.h">
       <Filter>Magicite\GameLogic\Item</Filter>
     </ClInclude>
@@ -559,12 +535,6 @@
     <ClInclude Include="..\Classes\MagiciteSkillCardFireBall.h">
       <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteItemContainer.h">
-      <Filter>Magicite\GameLogic\Item\Container</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteItemBag.h">
-      <Filter>Magicite\GameLogic\Item\Container</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameBagView.h">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClInclude>
@@ -573,9 +543,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteSkillCardFriend.h">
       <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteItemCardObject.h">
-      <Filter>Magicite\GameLogic\Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteDialogue.h">
       <Filter>Magicite\Scene</Filter>
