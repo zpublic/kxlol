@@ -9,7 +9,15 @@ class MagiciteItem
 {
 public:
 
-    MagiciteItem();
+    enum ItemType : int
+    {
+        EffectItem,
+        NormalItem,
+    };
+
+    ItemType                                _itemType;
+
+    MagiciteItem(ItemType type = NormalItem);
     ~MagiciteItem();
 
     std::string getItemName() const;

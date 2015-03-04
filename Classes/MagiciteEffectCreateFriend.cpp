@@ -22,7 +22,6 @@ void MagiciteEffectCreateFriend::positive(MagiciteGameObject* obj)
     _phyLayer->addChild(friends);
     friends->Move(friends->getDire());
 
-    delete this;
 }
 
 MagiciteEffectCreateFriend* MagiciteEffectCreateFriend::create(   

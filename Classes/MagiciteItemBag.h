@@ -8,7 +8,7 @@ class MagiciteGameBagView;
 class MagiciteItemBag : public MagiciteItemContainer
 {
 public:
-    MagiciteItemBag();
+    MagiciteItemBag(int max_size);
 
 };
 

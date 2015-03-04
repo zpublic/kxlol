@@ -2,6 +2,7 @@
 #include "MagiciteEffect.h"
 
 MagiciteEffectItem::MagiciteEffectItem()
+:MagiciteItem(EffectItem), _effect(nullptr)
 {
     
 }
@@ -13,5 +14,8 @@ MagiciteEffectItem::~MagiciteEffectItem()
 
 void MagiciteEffectItem::positive(MagiciteGameObject* obj)
 {
-    _effect->positive(obj);
+    if (_effect != nullptr)
+    {
+        _effect->positive(obj);
+    }
 }

@@ -31,7 +31,6 @@ void MagiciteEffectFireBall::positive(MagiciteGameObject* obj)
     _phyLayer->addChild(ammo);
     ammo->Move(moveable->getDire());
     
-    delete this;
 }
 
 MagiciteEffectFireBall* MagiciteEffectFireBall::create(MagiciteGamePhyLayer* phyLayer)

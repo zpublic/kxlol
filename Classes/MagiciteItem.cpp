@@ -4,7 +4,8 @@
 std::string MagiciteItem::_name = "item";
 int MagiciteItem::_id = 0;
 
-MagiciteItem::MagiciteItem()
+MagiciteItem::MagiciteItem(ItemType type /*= NormalItem*/)
+:_itemType(type)
 {
 
 }

@@ -24,7 +24,6 @@ void MagiciteEffectSpeedUp::positive(MagiciteGameObject* obj)
             }
             _moveable->_buff_map[Speed_Up] = false;
 
-            delete this;
         }), nullptr);
         action->setTag(Speed_Up);
         if (!_moveable->_buff_map[Speed_Up])

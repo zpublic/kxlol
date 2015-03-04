@@ -16,9 +16,35 @@
 #include "MagiciteItemCoin.h"
 #include "MagiciteItemContainer.h"
 #include "MagiciteSkillCardFireBall.h"
-#include "MagiciteDialogue.h"
 
 USING_NS_CC;
+
+/*add*/
+static bool solve_one_side_platform(b2Body* player , b2Body* platform)
+{
+	const auto one_sided_redundance = 2.0f * b2_linearSlop;
+
+	CCASSERT(player->GetFixtureList()->GetShape()->m_type == b2Shape::e_polygon, "bad shape");
+	CCASSERT(platform->GetFixtureList()->GetShape()->m_type == b2Shape::e_polygon, "bad shape");
+	auto player_shape = reinterpret_cast<b2PolygonShape*>(player->GetFixtureList()->GetShape());
+	auto player_min_y = player_shape->m_vertices[0].y;
+	for (auto i = 1; i < player_shape->m_count; i++) {
+		if (player_shape->m_vertices[i].y < player_min_y) {
+			player_min_y = player_shape->m_vertices[i].y;
+		}
+	}
+	player_min_y += player->GetPosition().y;
+	auto platform_shape = reinterpret_cast<b2PolygonShape*>(platform->GetFixtureList()->GetShape());
+	auto platform_max_y = platform_shape->m_vertices[0].y;
+	for (auto i = 1; i < platform_shape->m_count; i++) {
+		if (platform_shape->m_vertices[i].y > platform_max_y) {
+			platform_max_y = platform_shape->m_vertices[i].y;
+		}
+	}
+	platform_max_y += platform->GetPosition().y;
+	return player_min_y + one_sided_redundance <= platform_max_y;
+}
+/*~*/
 
 MagiciteGameLayer::MagiciteGameLayer()
 {
@@ -68,22 +94,17 @@ bool MagiciteGameLayer::init()
     create_enemy(game);
     create_pitfall(game);
     create_ground(ground);
-    //create_Particle();
 
-    use_weather(new MagiciteWeatherSnow);
+    use_weather(MagiciteWeatherSnow::create());
 
     init_contact();
 
-    auto view =  MagiciteGameBagView::create();
-    view->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
-    view->runAction(Follow::create(this));
-    this->addChild(view,999);
-    _player->bindBagView(view);
-
+    auto bag_view =  _player->getBag();
+    bag_view->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
+    bag_view->runAction(Follow::create(this));
+    this->addChild(bag_view, 999);
     _player->getBag()->addItem(MagiciteItemCoin::create());
     _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
-
-    this->addChild(MagiciteDialogue::create(1L), 1000);
     return true;
 }
 
@@ -124,6 +145,16 @@ bool MagiciteGameLayer::onOnJudgeContact(b2Contact* contact)
 
     objectTypeA = MagiciteGameContact::trivial_contact_type(objectA);
     objectTypeB = MagiciteGameContact::trivial_contact_type(objectB);
+
+	/*add*/
+	if (objectTypeA == MagiciteGameContact::Contact_type::player_type &&
+		objectTypeB == MagiciteGameContact::Contact_type::ground_type &&
+		objectB->getUserData() != nullptr) {
+		if (solve_one_side_platform(bodyA, bodyB)) {
+			return false;
+		}
+	}
+	/*~*/
 
     return MagiciteGameContact::judge_contact[objectTypeA][objectTypeB];
 }
@@ -238,7 +269,7 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
     {
         Value obj = *it;
         ValueMap vm = obj.asValueMap();
-        if (vm.at("type").asString() == "cube")
+		if (vm.at("type").asString() == "cube" /*add*/|| vm.at("type").asString() == "platform"/*~*/)
         {
             float x = vm.at("x").asFloat();
             float w = vm.at("width").asFloat();
@@ -250,6 +281,7 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
             node->setAnchorPoint(Point::ZERO);
             _phyLayer->createPhyBody(node, true);
             _phyLayer->addChild(node);
+			/*add*/node->setUserData(reinterpret_cast<void*>(vm.at("type").asString() == "platform"));/*~*/
         }
     }
 }
