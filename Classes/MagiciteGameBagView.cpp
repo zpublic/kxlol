@@ -4,6 +4,7 @@
 USING_NS_CC;
 
 MagiciteGameBagView::MagiciteGameBagView()
+:_bag_blank(5)
 {
 
 }

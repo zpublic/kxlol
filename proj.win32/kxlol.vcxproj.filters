@@ -295,6 +295,9 @@
     <ClCompile Include="..\Classes\MagiciteSkillCardFriend.cpp">
       <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteDialogue.cpp">
+      <Filter>Magicite\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -537,6 +540,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteSkillCardFriend.h">
       <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteDialogue.h">
+      <Filter>Magicite\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
