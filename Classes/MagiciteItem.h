@@ -3,9 +3,9 @@
 
 #include "cocos2d.h"
 
-class MagiciteGameObject;
+#include "MagiciteGameObject.h"
 
-class MagiciteItem
+class MagiciteItem : public MagiciteGameObject
 {
 public:
 
@@ -20,10 +20,12 @@ public:
     MagiciteItem(ItemType type = NormalItem);
     ~MagiciteItem();
 
+    //MagiciteGameObject
+    virtual bool init();
+    virtual bool initWithFile(const char* filename);
+
     std::string getItemName() const;
     int getItemId() const;
-
-    virtual MagiciteGameObject* getItemObject();
 
     void destroy();
 

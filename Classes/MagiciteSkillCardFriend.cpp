@@ -31,6 +31,12 @@ bool MagiciteSkillCardFriend::init(
     LivingType type,
     MagiciteGamePhyLayer* phyLayer)
 {
+
+    if (!MagiciteForeverSkillCard::initWithFile("img\\Magicite\\Item\\card.png"))
+    {
+        return false;
+    }
+
     _effect = MagiciteEffectCreateFriend::create(phyLayer, type);
 
     return true;

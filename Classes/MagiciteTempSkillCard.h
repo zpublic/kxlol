@@ -16,6 +16,9 @@ public:
 
     MagiciteTempSkillCard();
 
+    virtual bool init();
+    virtual bool initWithFile(const char* filename);
+
 };
 
 #endif //__MAGICITE_TEMP_SKILL_CARD__

@@ -14,7 +14,7 @@
 #include "MagiciteGamePitfall.h"
 #include "MagiciteGameBagView.h"
 #include "MagiciteItemCoin.h"
-#include "MagiciteItemContainer.h"
+#include "MagiciteSkillCardFriend.h"
 #include "MagiciteSkillCardFireBall.h"
 
 USING_NS_CC;
@@ -98,13 +98,7 @@ bool MagiciteGameLayer::init()
     use_weather(MagiciteWeatherSnow::create());
 
     init_contact();
-
-    auto bag_view =  _player->getBag();
-    bag_view->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
-    bag_view->runAction(Follow::create(this));
-    this->addChild(bag_view, 999);
-    _player->getBag()->addItem(MagiciteItemCoin::create());
-    _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
+    
     return true;
 }
 
@@ -211,6 +205,14 @@ void MagiciteGameLayer::create_player(TMXObjectGroup* game)
     _player->setPosition(playerPos);
     _phyLayer->createPhyBody(_player->getSprite(), false);
     _phyLayer->addChild(_player->getSprite());
+
+    auto bag_view = _player->getBag();
+    bag_view->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
+    bag_view->runAction(Follow::create(this));
+    this->addChild(bag_view, 999);
+    _player->getBag()->addItem(MagiciteItemCoin::create());
+    _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
+    _player->getBag()->addItem(MagiciteSkillCardFriend::create(MagiciteSkillCardFriend::LivingType::Sheep, _phyLayer));
 }
 
 void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)

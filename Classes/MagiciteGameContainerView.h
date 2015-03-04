@@ -6,7 +6,6 @@
 #include <vector>
 
 class MagiciteItemContainer;
-class MagiciteItemObject;
 class MagiciteItem;
 
 class MagiciteGameContainerView : public MagiciteGameObject, public MagiciteGameControlAble
@@ -28,10 +27,10 @@ public:
     virtual bool init(MagiciteGameObject* obj, int max_size);
 
 protected:
-    MagiciteItemContainer*                          _container;
-    std::vector<MagiciteGameObject*>*               _list;
-    MagiciteGameObject*                             _obj;
-    int                                             _max_size;
+    MagiciteItemContainer*                                  _container;
+    std::vector<std::pair<int, MagiciteItem*>>*             _list;
+    MagiciteGameObject*                                     _obj;
+    int                                                     _max_size;
 };
 
 #endif //__MAGICITE_GAME_CONTAINER_VIEW__

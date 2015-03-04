@@ -1,5 +1,4 @@
 #include "MagiciteItemCoin.h"
-#include "MagiciteItemCoinObject.h"
 std::string MagiciteItemCoin::name = "Coin";
 
 USING_NS_CC;
@@ -15,26 +14,11 @@ MagiciteItemCoin::~MagiciteItemCoin()
 
 }
 
-MagiciteGameObject* MagiciteItemCoin::getItemObject()
-{
-    return MagiciteItemCoinObject::create();
-}
-
 bool MagiciteItemCoin::init()
 {
+    if (!MagiciteTempItem::initWithFile("img\\Magicite\\Item\\coin.png"))
+    {
+        return false;
+    }
     return true;
-}
-
-MagiciteItemCoin* MagiciteItemCoin::create()
-{
-    auto ptr = new MagiciteItemCoin();
-    if (ptr && ptr->init())
-    {
-        return ptr;
-    }
-    else
-    {
-        CC_SAFE_DELETE(ptr);
-        return nullptr;
-    }
 }
