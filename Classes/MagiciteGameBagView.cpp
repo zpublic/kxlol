@@ -5,7 +5,7 @@
 USING_NS_CC;
 
 MagiciteGameBagView::MagiciteGameBagView()
-:MagiciteGameContainerView(_max_size), _bag_blank(5)
+:_bag_blank(5)
 {
 
 }
