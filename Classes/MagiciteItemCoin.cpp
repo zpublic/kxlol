@@ -22,3 +22,8 @@ bool MagiciteItemCoin::init()
     }
     return true;
 }
+
+MagiciteItem* MagiciteItemCoin::clone()
+{
+    return create();
+}

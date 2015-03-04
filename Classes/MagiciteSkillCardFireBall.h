@@ -17,6 +17,10 @@ public:
 
     virtual bool init(
         MagiciteGamePhyLayer* phyLayer);
+
+    virtual MagiciteItem* clone();
+protected:
+    MagiciteGamePhyLayer*               _phyLayer;
 };
 
 #endif //__MAGICITE_SKILL_CARD_FIREBALL_

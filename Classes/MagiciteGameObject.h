@@ -14,6 +14,7 @@ public:
         T_Pitfall,
         T_End,
         T_Ammo,
+        T_Item,
     }ObjType;
 
     MagiciteGameObject(Type type = T_Ground);

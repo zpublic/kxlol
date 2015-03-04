@@ -19,6 +19,9 @@ public:
 
     virtual bool init();
     CREATE_FUNC(MagiciteItemCoin);
+
+    //MagiciteItem
+    virtual MagiciteItem* clone();
 };
 
 #endif //__MAGICITE_ITEM_COIN__

@@ -99,6 +99,20 @@ bool MagiciteGameLayer::init()
 
     init_contact();
     
+    ValueVector enemyVec = game->getObjects();
+    for (auto it = enemyVec.begin(); it != enemyVec.end(); ++it)
+    {
+        Value obj = *it;
+        ValueMap vm = obj.asValueMap();
+        if (vm.at("type").asString() == "item")
+        {
+            auto item = MagiciteSkillCardFriend::create(MagiciteSkillCardFriend::LivingType::Sheep, _phyLayer);
+            item->setPosition(vm.at("x").asFloat(), vm.at("y").asFloat());
+            _phyLayer->createPhyBody(item, true);
+            _phyLayer->addChild(item);
+        }
+    }
+
     return true;
 }
 
@@ -178,6 +192,12 @@ void MagiciteGameLayer::init_contact()
     MagiciteGameContact::_onOver = [&](){
         MagiciteGameOver::Over(this);
     };
+    MagiciteGameContact::_onPick = [&](MagiciteItem* item){
+        auto item_clone = item->clone();
+        item->Dead();
+        item->removeFromParent();
+        _player->getBag()->addItem(item_clone);
+    };
     MagiciteGameContact::_onJudgeContact = std::bind(&MagiciteGameLayer::onOnJudgeContact, this, std::placeholders::_1);
     MagiciteGameContact::_onBeginContact = std::bind(&MagiciteGameLayer::onOnBeginContact, this, std::placeholders::_1);;
 
@@ -212,7 +232,7 @@ void MagiciteGameLayer::create_player(TMXObjectGroup* game)
     this->addChild(bag_view, 999);
     _player->getBag()->addItem(MagiciteItemCoin::create());
     _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
-    _player->getBag()->addItem(MagiciteSkillCardFriend::create(MagiciteSkillCardFriend::LivingType::Sheep, _phyLayer));
+    //_player->getBag()->addItem(MagiciteSkillCardFriend::create(MagiciteSkillCardFriend::LivingType::Sheep, _phyLayer));
 }
 
 void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)

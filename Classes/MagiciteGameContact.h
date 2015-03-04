@@ -8,7 +8,7 @@
 class MagiciteGameObject;
 class MagiciteGameLiving;
 class MagiciteGameMoveAbleLiving;
-
+class MagiciteItem;
 
 namespace MagiciteGameContact
 {
@@ -22,6 +22,7 @@ namespace MagiciteGameContact
         end_type,
         ammo_type,
         edge_type,
+        item_type,
         unknow_type,
     };
 
@@ -55,9 +56,11 @@ namespace MagiciteGameContact
     void try_ammo_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
     void try_ammo_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
     void try_living_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
+    void try_player_contact_with_item(MagiciteGameObject*, MagiciteGameObject*);
 
     extern std::function<void(void)>                       _onWin;
     extern std::function<void(void)>                       _onOver;
+    extern std::function<void(MagiciteItem*)>              _onPick;
     extern std::function<bool(b2Contact* contact)>         _onJudgeContact;
     extern std::function<void(b2Contact* contact)>         _onBeginContact;
 

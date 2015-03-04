@@ -39,5 +39,13 @@ bool MagiciteSkillCardFriend::init(
 
     _effect = MagiciteEffectCreateFriend::create(phyLayer, type);
 
+    _type = type;
+    _phyLayer = phyLayer;
+
     return true;
+}
+
+MagiciteItem* MagiciteSkillCardFriend::clone()
+{
+    return create(_type, _phyLayer);
 }

@@ -35,6 +35,11 @@ bool MagiciteSkillCardFireBall::init(
         return false;
     }
     _effect = MagiciteEffectFireBall::create(phyLayer);
-
+    _phyLayer = phyLayer;
     return true;
+}
+
+MagiciteItem* MagiciteSkillCardFireBall::clone()
+{
+    return create(_phyLayer);
 }
