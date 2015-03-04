@@ -59,7 +59,7 @@ void MagiciteGamePhyLayer::draw(Renderer *renderer, const Mat4 &transform, uint3
 
 void MagiciteGamePhyLayer::update(float timeDelta)
 {
-    _world->updateBody();
+    _world->updateBody(timeDelta);
 }
 
 MagiciteGamePhyLayer* MagiciteGamePhyLayer::create(Size size)

@@ -66,11 +66,11 @@ void MagiciteGamePhyWorld::createPhyBody(MagiciteGameObject* ptr, bool is_static
     ptr->setBody(body);
 }
 
-void MagiciteGamePhyWorld::updateBody()
+void MagiciteGamePhyWorld::updateBody(float timeDelta)
 {
     int velocityIterations = 8;
     int positionIterations = 1;
-    this->Step(0.03f, velocityIterations, positionIterations);
+    this->Step(timeDelta, velocityIterations, positionIterations);
 
     std::vector<b2Body*> deadlist;
     for (auto it = this->GetBodyList(); it; it = it->GetNext())
