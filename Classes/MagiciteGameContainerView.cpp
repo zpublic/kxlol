@@ -13,7 +13,7 @@ MagiciteGameContainerView::~MagiciteGameContainerView()
     CC_SAFE_DELETE(_list);
 }
 
-bool MagiciteGameContainerView::init(MagiciteGameObject* obj, int max_size)
+bool MagiciteGameContainerView::init(int max_size)
 {
     if (!MagiciteGameObject::init())
     {
@@ -21,32 +21,22 @@ bool MagiciteGameContainerView::init(MagiciteGameObject* obj, int max_size)
     }
 
     _max_size = max_size;
-    _obj = obj;
     _list = new std::vector<std::pair<int, MagiciteItem*>>(max_size);
 
     return true;
 }
 
-void MagiciteGameContainerView::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
+MagiciteItem* MagiciteGameContainerView::getItem(int num)
 {
-
+    return _list->at(num).second;
 }
 
-void MagiciteGameContainerView::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
+void MagiciteGameContainerView::setViewInvisible(bool is_visible)
 {
-
+    this->setVisible(is_visible);
 }
 
-void MagiciteGameContainerView::ItemEvent(int n)
+bool MagiciteGameContainerView::getViewInvisible() const
 {
-    auto iter = _list->at(n);
-    auto item = iter.second;
-
-    if (item != nullptr)
-    {
-        if (item->_itemType == MagiciteItem::EffectItem)
-        {
-            reinterpret_cast<MagiciteEffectItem*>(item)->positive(_obj);
-        }
-    }
+    return this->isVisible();
 }

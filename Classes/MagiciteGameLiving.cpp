@@ -1,5 +1,6 @@
 #include "MagiciteGameLiving.h"
 #include "MagiciteEffect.h"
+#include "MagiciteLifeBar.h"
 
 USING_NS_CC;
 
@@ -18,7 +19,12 @@ bool MagiciteGameLiving::init()
     {
         return false;
     }
-    return false;
+
+    _life_bar = MagiciteLifeBar::create(getHP(),this->getContentSize());
+    this->addChild(_life_bar);
+    this->setPosition(Point::ZERO);
+
+    return true;
 }
 
 bool MagiciteGameLiving::initWithFile(const char* filename)
@@ -27,6 +33,11 @@ bool MagiciteGameLiving::initWithFile(const char* filename)
     {
         return false;
     }
+
+    _life_bar = MagiciteLifeBar::create(getHP(), this->getContentSize());
+    this->addChild(_life_bar);
+    this->setPosition(Point::ZERO);
+
     return true;
 }
 
@@ -53,6 +64,7 @@ int MagiciteGameLiving::getMP() const
 void MagiciteGameLiving::attact(int damage/* = 1*/)
 {
    _health_point -= damage;
+   _life_bar->attact(damage);
 }
 
 void MagiciteGameLiving::useSkill(MagiciteEffect* effect)

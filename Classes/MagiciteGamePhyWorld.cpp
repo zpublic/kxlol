@@ -70,7 +70,7 @@ void MagiciteGamePhyWorld::updateBody(float timeDelta)
 {
     int velocityIterations = 8;
     int positionIterations = 1;
-    this->Step(timeDelta, velocityIterations, positionIterations);
+    this->Step(timeDelta * 2.0f, velocityIterations, positionIterations);
 
     std::vector<b2Body*> deadlist;
     for (auto it = this->GetBodyList(); it; it = it->GetNext())

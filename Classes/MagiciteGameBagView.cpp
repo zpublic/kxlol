@@ -14,9 +14,9 @@ MagiciteGameBagView::~MagiciteGameBagView()
 
 }
 
-bool MagiciteGameBagView::init(MagiciteGameObject* obj, int max_size)
+bool MagiciteGameBagView::init(int max_size)
 {
-    if (!MagiciteGameContainerView::init(obj, max_size))
+    if (!MagiciteGameContainerView::init(max_size))
     {
         return false;
     }
@@ -36,7 +36,7 @@ bool MagiciteGameBagView::init(MagiciteGameObject* obj, int max_size)
     {
         auto node = MenuItem::create();
         node->setCallback([this,i](Ref*){
-            this->ItemEvent(i - 1);
+            _itemEvent(i - 1);
         });
         node->setPosition(Vec2(_origin.x + Id2Pos(i), _origin.y - _offset));
         node->setContentSize(Size(_block_size, _block_size));
@@ -85,10 +85,10 @@ float MagiciteGameBagView::Id2Pos(int n)
     return (_block_size + _bag_blank) * n;
 }
 
-MagiciteGameBagView* MagiciteGameBagView::create(MagiciteGameObject* obj, int max_size/* = DEFAULT_MAX_SIZE*/)
+MagiciteGameBagView* MagiciteGameBagView::create(int max_size/* = DEFAULT_MAX_SIZE*/)
 {
     auto ptr = new MagiciteGameBagView();
-    if (ptr && ptr->init(obj, max_size))
+    if (ptr && ptr->init(max_size))
     {
         return ptr;
     }

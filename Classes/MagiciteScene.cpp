@@ -11,6 +11,7 @@ bool MagiciteScene::init()
         return false;
     }
 
+    this->addChild(LayerColor::create(Color4B(0xDE, 0xDF, 0xDE, 0x7F)));
     this->addChild(MagiciteGameLayer::create());
 
     return true;    

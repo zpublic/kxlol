@@ -16,8 +16,8 @@ public:
     virtual void addItem(MagiciteItem* item);
     virtual void eraseItem(int num);
 
-    virtual bool init(MagiciteGameObject* obj, int max_size);
-    static MagiciteGameBagView* create(MagiciteGameObject* obj, int max_size = DEFAULT_MAX_SIZE);
+    virtual bool init(int max_size);
+    static MagiciteGameBagView* create(int max_size = DEFAULT_MAX_SIZE);
 
 protected:
     float Id2Pos(int n);

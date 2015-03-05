@@ -70,6 +70,8 @@ public:
     virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
     MagiciteGameContainerView* getBag();
+    void useBagItem(int num);
+    void switchBagInvisible();
 
 protected:
     MagiciteGameMoveAbleLiving*             _player;

@@ -7,6 +7,7 @@
 #include "MagiciteEffectBuffer.h"
 
 class MagiciteEffect;
+class MagiciteLifeBar;
 
 class MagiciteGameLiving : public MagiciteGameObject
 {
@@ -45,6 +46,7 @@ public:
 protected:
     int                                                     _health_point;
     int                                                     _mana_point;
+    MagiciteLifeBar*                                        _life_bar;
 };
 
 #endif //__MAGICITE_GAME_LIVING__
