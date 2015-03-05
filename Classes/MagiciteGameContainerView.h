@@ -20,6 +20,9 @@ public:
 
     virtual bool init(int max_size);
 
+    void setViewInvisible(bool);
+    bool getViewInvisible() const;
+
     std::function<void(int)>                                _itemEvent;
 
 protected:

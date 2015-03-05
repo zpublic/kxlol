@@ -71,6 +71,7 @@ public:
 
     MagiciteGameContainerView* getBag();
     void useBagItem(int num);
+    void switchBagInvisible();
 
 protected:
     MagiciteGameMoveAbleLiving*             _player;

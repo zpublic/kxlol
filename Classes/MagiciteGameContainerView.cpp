@@ -30,3 +30,13 @@ MagiciteItem* MagiciteGameContainerView::getItem(int num)
 {
     return _list->at(num).second;
 }
+
+void MagiciteGameContainerView::setViewInvisible(bool is_visible)
+{
+    this->setVisible(is_visible);
+}
+
+bool MagiciteGameContainerView::getViewInvisible() const
+{
+    return this->isVisible();
+}
