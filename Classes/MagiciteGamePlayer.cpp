@@ -62,7 +62,8 @@ bool MagiciteGamePlayer::init(PlayerType type, MagiciteGamePhyLayer* phyLayer)
     }
     _player->_is_contraled = true;
     _phyLayer = phyLayer;
-    _bag = MagiciteGameBagView::create(_player , 9);
+    _bag = MagiciteGameBagView::create(9);
+    _bag->_itemEvent = std::bind(&MagiciteGamePlayer::useBagItem, this, std::placeholders::_1);
 
     return true;
 }
@@ -201,7 +202,6 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
         _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));
         break;
     default:
-        MagiciteGameControlAble::dispatchKeyPress(keyCode, event, static_cast<MagiciteGameControlAble*>(_bag));
         break;
     }
 
@@ -237,4 +237,16 @@ MagiciteGameContainerView* MagiciteGamePlayer::getBag()
 void MagiciteGamePlayer::useItem(MagiciteEffectItem* item)
 {
     item->positive(_player);
+}
+
+void MagiciteGamePlayer::useBagItem(int n)
+{
+    auto item = _bag->getItem(n);
+    if (item != nullptr)
+    {
+        if (item->_itemType == MagiciteItem::EffectItem)
+        {
+            useItem(reinterpret_cast<MagiciteEffectItem*>(item));
+        }
+    }
 }
