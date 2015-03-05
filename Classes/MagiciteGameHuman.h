@@ -13,6 +13,7 @@ public:
     {
         human_hp = 1,
         human_mp = 1,
+        human_speed = 4,
     };
 
     virtual void initAnimation();

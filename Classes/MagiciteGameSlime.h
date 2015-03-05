@@ -13,6 +13,7 @@ public:
     {
         slime_hp = 1,
         slime_mp = 1,
+        slime_speed = 3,
     };
 
     //MagiciteGameMoveAbleLiving

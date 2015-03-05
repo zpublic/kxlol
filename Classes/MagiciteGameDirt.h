@@ -13,6 +13,7 @@ public:
     {
         dirt_hp = 3,
         dirt_mp = 1,
+        dirt_speed = 2,
     };
 
     virtual void initAnimation();

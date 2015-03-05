@@ -7,6 +7,7 @@ MagiciteGameHuman::MagiciteGameHuman()
 {
     _health_point = human_hp;
     _mana_point = human_mp;
+
 }
 
 void MagiciteGameHuman::initAnimation()
@@ -20,6 +21,8 @@ bool MagiciteGameHuman::init()
     {
         return false;
     }
+    setSpeed(human_speed);
+
     return true;
 }
 

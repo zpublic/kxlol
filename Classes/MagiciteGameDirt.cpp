@@ -20,6 +20,8 @@ bool MagiciteGameDirt::init()
     {
         return false;
     }
+    setSpeed(dirt_speed);
+
     return true;
 }
 
