@@ -16,7 +16,7 @@ public:
     static const int PTM_RATIO = 32;
 
     void createPhyBody(MagiciteGameObject* ptr, bool is_static);
-    void updateBody();
+    void updateBody(float timeDelta);
 
     bool init(cocos2d::Size size);
     static MagiciteGamePhyWorld* create(b2Vec2 gravity, cocos2d::Size size);

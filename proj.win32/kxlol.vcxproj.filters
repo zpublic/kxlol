@@ -298,6 +298,9 @@
     <ClCompile Include="..\Classes\MagiciteDialogue.cpp">
       <Filter>Magicite\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePackView.cpp">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -543,6 +546,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteDialogue.h">
       <Filter>Magicite\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePackView.h">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
