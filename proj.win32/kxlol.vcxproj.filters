@@ -85,6 +85,9 @@
     <Filter Include="Magicite\GameLogic\Item\Container">
       <UniqueIdentifier>{a57bbe2f-e1d8-48b6-b032-eb1b7bc2599d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Magicite\GameLogic\Object\Living\life_bar">
+      <UniqueIdentifier>{d771e647-80a3-471b-b8d6-72f7399afcba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -300,6 +303,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePackView.cpp">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteLifeBar.cpp">
+      <Filter>Magicite\GameLogic\Object\Living\life_bar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -549,6 +555,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePackView.h">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteLifeBar.h">
+      <Filter>Magicite\GameLogic\Object\Living\life_bar</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
