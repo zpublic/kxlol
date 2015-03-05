@@ -200,8 +200,6 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
         break;
     case EventKeyboard::KeyCode::KEY_A:
         _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));
-    case EventKeyboard::KeyCode::KEY_TAB:
-        switchBagInvisible();
         break;
     default:
         break;

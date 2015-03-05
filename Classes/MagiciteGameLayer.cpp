@@ -128,7 +128,9 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
     case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE:
         MagiciteGamePause::Pause(this);
         break;
-
+    case cocos2d::EventKeyboard::KeyCode::KEY_TAB:
+        _player->switchBagInvisible();
+        break;
     default:
         MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
         break;
