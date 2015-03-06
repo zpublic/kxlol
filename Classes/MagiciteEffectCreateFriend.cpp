@@ -31,6 +31,7 @@ MagiciteEffectCreateFriend* MagiciteEffectCreateFriend::create(
     auto ptr = new MagiciteEffectCreateFriend();
     if (ptr && ptr->init(phyLayer, type))
     {
+        ptr->autorelease();
         return ptr;
     }
     else

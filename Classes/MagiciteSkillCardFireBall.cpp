@@ -11,8 +11,7 @@ MagiciteSkillCardFireBall::~MagiciteSkillCardFireBall()
 
 }
 
-MagiciteSkillCardFireBall* MagiciteSkillCardFireBall::create(
-    MagiciteGamePhyLayer* phyLayer)
+MagiciteSkillCardFireBall* MagiciteSkillCardFireBall::create(MagiciteGamePhyLayer* phyLayer)
 {
     auto ptr = new MagiciteSkillCardFireBall();
     if (ptr && ptr->init(phyLayer))
@@ -26,10 +25,8 @@ MagiciteSkillCardFireBall* MagiciteSkillCardFireBall::create(
     }
 }
 
-bool MagiciteSkillCardFireBall::init(
-    MagiciteGamePhyLayer* phyLayer)
+bool MagiciteSkillCardFireBall::init(MagiciteGamePhyLayer* phyLayer)
 {
-
     if (!MagiciteForeverSkillCard::initWithFile("img\\Magicite\\Item\\fireball.png"))
     {
         return false;
@@ -38,6 +35,7 @@ bool MagiciteSkillCardFireBall::init(
     setEffect(MagiciteEffectFireBall::create(phyLayer));
 
     _phyLayer = phyLayer;
+
     return true;
 }
 

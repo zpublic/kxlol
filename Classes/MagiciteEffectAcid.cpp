@@ -1,30 +1,30 @@
-#include "MagiciteEffectFireBall.h"
+#include "MagiciteEffectAcid.h"
+#include "MagiciteGameAcid.h"
 #include "MagiciteGamePhyLayer.h"
-#include "MagiciteGameFireball.h"
 #include "MagiciteGaemFactoryMethod.h"
 
 USING_NS_CC;
 
-MagiciteEffectFireBall::MagiciteEffectFireBall()
+MagiciteEffectAcid::MagiciteEffectAcid()
 {
 
 }
 
-void MagiciteEffectFireBall::positive(MagiciteGameObject* obj)
+void MagiciteEffectAcid::positive(MagiciteGameObject* obj)
 {
     auto moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);
-    MagiciteGameAmmo* ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::FireBall);
+    MagiciteGameAmmo* ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::Acid);
 
     ammo->setPosition(obj->getPosition());
     _phyLayer->createPhyBody(ammo, false);
-    ammo->getBody()->SetGravityScale(0.0f);
+    ammo->getBody()->SetLinearVelocity(b2Vec2(0, 10));
     _phyLayer->addChild(ammo);
     ammo->Move(moveable->getDire());
 }
 
-MagiciteEffectFireBall* MagiciteEffectFireBall::create(MagiciteGamePhyLayer* phyLayer)
+MagiciteEffectAcid* MagiciteEffectAcid::create(MagiciteGamePhyLayer* phyLayer)
 {
-    auto ptr = new MagiciteEffectFireBall();
+    auto ptr = new MagiciteEffectAcid();
     if (ptr && ptr->init(phyLayer))
     {
         ptr->autorelease();
@@ -37,7 +37,7 @@ MagiciteEffectFireBall* MagiciteEffectFireBall::create(MagiciteGamePhyLayer* phy
     }
 }
 
-bool MagiciteEffectFireBall::init(MagiciteGamePhyLayer* phyLayer)
+bool MagiciteEffectAcid::init(MagiciteGamePhyLayer* phyLayer)
 {
     _phyLayer = phyLayer;
 

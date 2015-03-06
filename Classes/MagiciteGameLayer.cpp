@@ -20,6 +20,7 @@
 #include "MagiciteSkillCardFlash.h"
 #include "MagiciteSkillCardSpeedUp.h"
 #include "MagiciteSkillCardSprint.h"
+#include "MagiciteSkillCardAcid.h"
 #include "MagiciteGamePackView.h"
 
 USING_NS_CC;
@@ -253,8 +254,9 @@ void MagiciteGameLayer::create_player(TMXObjectGroup* game)
     bag_view->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
     bag_view->runAction(Follow::create(this));
     this->addChild(bag_view, 999);
-    _player->getBag()->addItem(MagiciteItemCoin::create());
+    //_player->getBag()->addItem(MagiciteItemCoin::create());
     _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
+    _player->getBag()->addItem(MagiciteSkillCardAcid::create(_phyLayer));
     //_player->getBag()->addItem(MagiciteSkillCardFriend::create(MagiciteSkillCardFriend::LivingType::Sheep, _phyLayer));
     _player->getBag()->addItem(MagiciteSkillCardFlash::create(_phyLayer, 200));
     _player->getBag()->addItem(MagiciteSkillCardSpeedUp::create());

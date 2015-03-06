@@ -12,11 +12,9 @@ public:
     MagiciteSkillCardFireBall();
     ~MagiciteSkillCardFireBall();
 
-    static MagiciteSkillCardFireBall* create(
-        MagiciteGamePhyLayer* phyLayer);
+    static MagiciteSkillCardFireBall* create(MagiciteGamePhyLayer* phyLayer);
 
-    virtual bool init(
-        MagiciteGamePhyLayer* phyLayer);
+    virtual bool init(MagiciteGamePhyLayer* phyLayer);
 
     virtual MagiciteItem* clone();
 protected:
