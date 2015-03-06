@@ -322,6 +322,9 @@
     <ClCompile Include="..\Classes\MagiciteSkillCardAcid.cpp">
       <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameNPC.cpp">
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">

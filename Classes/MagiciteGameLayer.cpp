@@ -103,6 +103,7 @@ bool MagiciteGameLayer::init()
     create_enemy(game);
     create_pitfall(game);
     create_ground(ground);
+    create_NPC(game);
 
     use_weather(MagiciteWeatherSnow::create());
 
@@ -339,6 +340,21 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
 void MagiciteGameLayer::create_NPC( TMXObjectGroup* game)
 {
     ValueVector npcVector = game->getObjects();
+
+    for(auto it = npcVector.begin(); it != npcVector.end(); ++it)
+    {
+        Value obj = *it;
+        ValueMap vm = obj.asValueMap();
+        auto str = vm.at("type").asString();
+        if(str == "NPC")
+        {
+            auto npc = MagiciteGaemFactoryMethod::createFriend(MagiciteGaemFactoryMethod::NPC, true);
+            npc->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
+            npc->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
+            _phyLayer->createPhyBody(npc, true);
+            _phyLayer->addChild(npc);
+        }
+    }
 }
 
 

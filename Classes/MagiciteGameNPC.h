@@ -8,6 +8,7 @@ class MagiciteGameNPC : public MagiciteGameMoveAbleLiving
 public:
     MagiciteGameNPC();
 
+    virtual void initAnimation();
     virtual bool init();
 
     CREATE_FUNC(MagiciteGameNPC);
