@@ -8,10 +8,19 @@ bool MagiciteGamePackView::init()
     auto origin = cocos2d::Director::getInstance()->getVisibleOrigin();
     auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
 
-    _table = cocos2d::extension::TableView::create(this, cocos2d::Size(600.0f, 400.0f));
-    _table->setPosition(origin.x + visibleSize.width / 2 - 300.0f, 
-        origin.y + visibleSize.height / 2 - 200.0f);
-    this->addChild(_table);
+    _table = cocos2d::extension::TableView::create(this, cocos2d::Size(400.0f, 500.0f));
+
+    auto title = cocos2d::Label::createWithTTF("Pack", "fonts/Marker Felt.ttf", 32);
+    title->setPosition(200.0f, 520.0f);
+    title->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+
+    auto bg = cocos2d::LayerColor::create(cocos2d::Color4B(0x00, 0x00, 0x00, 0xff), 402.0f, 552.0f);
+    bg->setPosition(origin.x + visibleSize.width / 2 - 200.0f, 
+        origin.y + visibleSize.height / 2 - 250.0f);
+
+    bg->addChild(_table);
+    bg->addChild(title);
+    this->addChild(bg);
 
     return true;
 }
@@ -24,13 +33,13 @@ cocos2d::extension::TableViewCell* MagiciteGamePackView::tableCellAtIndex( cocos
         cell = cocos2d::extension::TableViewCell::create();
 
         auto node = cocos2d::Node::create();
-        node->setContentSize(cocos2d::Size(600.0f, 100.0f));
+        node->setContentSize(cocos2d::Size(400.0f, 50.0f));
         cell->addChild(node);
 
-        for(int i = 0; i < 6; ++i)
+        for(int i = 0; i < 8; ++i)
         {
             auto packCell = MagiciteGamePackCell::create();
-            packCell->setPosition(i * 100.0f, 0.0f);
+            packCell->setPosition(i * 50.0f, 0.0f);
             node->addChild(packCell);
         }
 
@@ -41,7 +50,7 @@ cocos2d::extension::TableViewCell* MagiciteGamePackView::tableCellAtIndex( cocos
 
 cocos2d::Size MagiciteGamePackView::cellSizeForTable( cocos2d::extension::TableView *table )
 {
-    return cocos2d::Size(600.0f, 100.0f);
+    return cocos2d::Size(400.0f, 50.0f);
 }
 
 ssize_t MagiciteGamePackView::numberOfCellsInTableView( cocos2d::extension::TableView* table )
@@ -54,12 +63,31 @@ void MagiciteGamePackView::tableCellTouched( cocos2d::extension::TableView* tabl
 
 }
 
+MagiciteGamePackView* MagiciteGamePackView::getInstance()
+{
+    if(nullptr == _instance)
+    {
+        _instance = new MagiciteGamePackView;
+        _instance->init();
+    }
+
+    return _instance;
+}
+
+void MagiciteGamePackView::release()
+{
+    delete _instance;
+    _instance = nullptr;
+}
+
+MagiciteGamePackView* MagiciteGamePackView::_instance = nullptr;
+
 bool MagiciteGamePackCell::init()
 {
     if(!Node::init())
         return false;
 
-    auto bg = cocos2d::LayerColor::create(cocos2d::Color4B(0xee, 0xee, 0xee, 0x80), 96.0f, 96.0f);
+    auto bg = cocos2d::LayerColor::create(cocos2d::Color4B(0xee, 0xee, 0xee, 0x80), 48.0, 48.0f);
     bg->setAnchorPoint(cocos2d::Vec2(0.0f, 0.0f));
     bg->setPosition(2.0f, 2.0f);
     this->addChild(bg);

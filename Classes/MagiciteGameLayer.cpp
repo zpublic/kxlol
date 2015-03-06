@@ -17,6 +17,7 @@
 #include "MagiciteItemCoin.h"
 #include "MagiciteSkillCardFriend.h"
 #include "MagiciteSkillCardFireBall.h"
+#include "MagiciteGamePackView.h"
 
 USING_NS_CC;
 
@@ -127,6 +128,16 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
 
     case cocos2d::EventKeyboard::KeyCode::KEY_ESCAPE:
         MagiciteGamePause::Pause(this);
+        break;
+
+    case cocos2d::EventKeyboard::KeyCode::KEY_P:
+        {
+            auto pack = MagiciteGamePackView::getInstance();
+            if(pack->getParent() == nullptr)
+                this->addChild(pack, 1000);
+            else
+                pack->setVisible(!pack->isVisible());
+        }
         break;
 
     default:
