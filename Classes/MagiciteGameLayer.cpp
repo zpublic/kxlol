@@ -20,6 +20,7 @@
 #include "MagiciteSkillCardFlash.h"
 #include "MagiciteSkillCardSpeedUp.h"
 #include "MagiciteSkillCardSprint.h"
+#include "MagiciteGamePackView.h"
 
 USING_NS_CC;
 
@@ -133,6 +134,15 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_TAB:
         _player->switchBagInvisible();
+        break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_P:
+        {
+            auto pack = MagiciteGamePackView::getInstance();
+            if(pack->getParent() == nullptr)
+                this->addChild(pack, 1000);
+            else
+                pack->setVisible(!pack->isVisible());
+        }
         break;
     default:
         MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);

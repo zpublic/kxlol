@@ -18,7 +18,8 @@ class MagiciteGamePackView : public cocos2d::Layer
 public:
     virtual bool init();
     
-    CREATE_FUNC(MagiciteGamePackView);
+    static MagiciteGamePackView* getInstance();
+    static void release();
 
     // virtual cocos2d::Size tableCellSizeForIndex(cocos2d::extension::TableView *table, ssize_t idx) ;
     virtual cocos2d::extension::TableViewCell* tableCellAtIndex(cocos2d::extension::TableView *table, 
@@ -30,6 +31,7 @@ public:
 
 private:
     cocos2d::extension::TableView* _table;
+    static MagiciteGamePackView* _instance;
 };
 
 #endif // !_MAGICITE_GAME_PACK_VIEW_H
