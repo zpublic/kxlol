@@ -559,6 +559,9 @@
     <ClInclude Include="..\Classes\MagiciteLifeBar.h">
       <Filter>Magicite\GameLogic\Object\Living\life_bar</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameNPC.h">
+      <Filter>Magicite\GameLogic\Object\Living</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

@@ -254,6 +254,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGameHuman.h" />
     <ClInclude Include="..\Classes\MagiciteGameIncubator.h" />
     <ClInclude Include="..\Classes\MagiciteGameMoveAbleLiving.h" />
+    <ClInclude Include="..\Classes\MagiciteGameNPC.h" />
     <ClInclude Include="..\Classes\MagiciteGameObject.h" />
     <ClInclude Include="..\Classes\MagiciteBeginMenu.h" />
     <ClInclude Include="..\Classes\MagiciteGameContactListener.h" />

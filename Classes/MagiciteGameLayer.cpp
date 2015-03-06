@@ -323,6 +323,12 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
     }
 }
 
+void MagiciteGameLayer::create_NPC( TMXObjectGroup* game)
+{
+    ValueVector npcVector = game->getObjects();
+}
+
+
 void MagiciteGameLayer::use_weather(MagiciteWeather* weather)
 {
     auto weatherEffect = weather->getWeatherEffect(Vec2(_background->getBackSize().width, _visibleSize.height));
