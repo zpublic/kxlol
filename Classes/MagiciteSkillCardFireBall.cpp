@@ -30,11 +30,13 @@ bool MagiciteSkillCardFireBall::init(
     MagiciteGamePhyLayer* phyLayer)
 {
 
-    if (!MagiciteForeverSkillCard::initWithFile("img\\Magicite\\Item\\card.png"))
+    if (!MagiciteForeverSkillCard::initWithFile("img\\Magicite\\Item\\fireball.png"))
     {
         return false;
     }
-    _effect = MagiciteEffectFireBall::create(phyLayer);
+
+    setEffect(MagiciteEffectFireBall::create(phyLayer));
+
     _phyLayer = phyLayer;
     return true;
 }

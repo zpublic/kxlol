@@ -18,7 +18,7 @@ public:
     virtual void negative();
         ///> 这儿不需要做啥 交给timer来取消效果
 
-    static MagiciteEffectSpeedUp* create();
+    CREATE_FUNC(MagiciteEffectSpeedUp);
     virtual bool init();
 
 

@@ -17,8 +17,9 @@ public:
 
     virtual void negative();
 
-    static MagiciteEffectSprint* create();
+    CREATE_FUNC(MagiciteEffectSprint);
     virtual bool init();
+
 private:
     float                                               _base_sprint_speed;
     float                                               _step_speed;

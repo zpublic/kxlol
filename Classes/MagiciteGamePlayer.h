@@ -4,13 +4,8 @@
 #include "cocos2d.h"
 #include "MagiciteGameControlAble.h"
 #include "MagiciteGameMoveAbleLiving.h"
-#include "MagiciteGamePhyLayer.h"
 
-class MagiciteEffectSpeedUp;
-class MagiciteEffectJumpHigh;
-class MagiciteEffectSprint;
-class MagiciteGameChicken;
-class MagiciteGameHuman;
+class MagiciteGamePhyLayer;
 class MagiciteItemContainer;
 class MagiciteGameContainerView;
 class MagiciteEffectItem;
@@ -34,7 +29,6 @@ public:
 
     MagiciteGameMoveAbleLiving* getSprite();
 
-    void useSkill(MagiciteEffect* effect);
     void useItem(MagiciteEffectItem* item);
 
     void Move();

@@ -1,9 +1,11 @@
 #ifndef __MAGICITE_EFFECT__
 #define __MAGICITE_EFFECT__
 
+#include "cocos2d.h"
+
 class MagiciteGameObject;
 
-class MagiciteEffect
+class MagiciteEffect : public cocos2d::Ref
 {
 public:
 

@@ -17,6 +17,9 @@
 #include "MagiciteItemCoin.h"
 #include "MagiciteSkillCardFriend.h"
 #include "MagiciteSkillCardFireBall.h"
+#include "MagiciteSkillCardFlash.h"
+#include "MagiciteSkillCardSpeedUp.h"
+#include "MagiciteSkillCardSprint.h"
 
 USING_NS_CC;
 
@@ -239,6 +242,9 @@ void MagiciteGameLayer::create_player(TMXObjectGroup* game)
     _player->getBag()->addItem(MagiciteItemCoin::create());
     _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
     //_player->getBag()->addItem(MagiciteSkillCardFriend::create(MagiciteSkillCardFriend::LivingType::Sheep, _phyLayer));
+    _player->getBag()->addItem(MagiciteSkillCardFlash::create(_phyLayer, 200));
+    _player->getBag()->addItem(MagiciteSkillCardSpeedUp::create());
+    _player->getBag()->addItem(MagiciteSkillCardSprint::create());
 }
 
 void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
