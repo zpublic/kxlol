@@ -121,6 +121,10 @@ bool MagiciteGameLayer::init()
         }
     }
 
+    auto earthquake = Repeat::create(Sequence::create(RotateTo::create(0.1f, 1.5f), RotateTo::create(0.1f, -1.5f), nullptr), 5);
+    auto earthquakeReset = RotateTo::create(0.0f, 0.0f);
+    this->runAction(Sequence::create(earthquake, earthquakeReset, nullptr));
+
     return true;
 }
 
