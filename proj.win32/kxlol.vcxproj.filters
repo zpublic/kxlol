@@ -307,6 +307,21 @@
     <ClCompile Include="..\Classes\MagiciteLifeBar.cpp">
       <Filter>Magicite\GameLogic\Object\Living\life_bar</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteSkillCardFlash.cpp">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteSkillCardSpeedUp.cpp">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteSkillCardSprint.cpp">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteEffectAcid.cpp">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteSkillCardAcid.cpp">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -561,6 +576,21 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameNPC.h">
       <Filter>Magicite\GameLogic\Object\Living</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteSkillCardFlash.h">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteSkillCardSpeedUp.h">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteSkillCardSprint.h">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteEffectAcid.h">
+      <Filter>Magicite\GameLogic\Effect\Create</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteSkillCardAcid.h">
+      <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

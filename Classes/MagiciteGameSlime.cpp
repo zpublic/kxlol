@@ -20,6 +20,8 @@ bool MagiciteGameSlime::init()
     {
         return false;
     }
+    setSpeed(slime_speed);
+
     return true;
 }
 

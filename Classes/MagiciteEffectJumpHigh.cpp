@@ -42,20 +42,6 @@ void MagiciteEffectJumpHigh::negative()
 
 }
 
-MagiciteEffectJumpHigh* MagiciteEffectJumpHigh::create()
-{
-    auto ptr = new MagiciteEffectJumpHigh();
-    if (ptr && ptr->init())
-    {
-        return ptr;
-    }
-    else
-    {
-        CC_SAFE_DELETE(ptr);
-        return nullptr;
-    }
-}
-
 bool MagiciteEffectJumpHigh::init()
 {
     // do something

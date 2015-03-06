@@ -1,15 +1,9 @@
 #include "MagiciteGamePlayer.h"
-#include "MagiciteEffectSpeedUp.h"
-#include "MagiciteEffectJumpHigh.h"
-#include "MagiciteEffectSprint.h"
-#include "MagiciteEffectFireBall.h"
-#include "MagiciteEffectCreateFriend.h"
-#include "MagiciteGaemFactoryMethod.h"
 #include "MagiciteGameChicken.h"
 #include "MagiciteGameHuman.h"
 #include "MagiciteGameBagView.h"
-#include "MagiciteEffectFlash.h"
 #include "MagiciteEffectItem.h"
+#include "MagiciteGamePhyLayer.h"
 
 USING_NS_CC;
 
@@ -66,11 +60,6 @@ bool MagiciteGamePlayer::init(PlayerType type, MagiciteGamePhyLayer* phyLayer)
     _bag->_itemEvent = std::bind(&MagiciteGamePlayer::useBagItem, this, std::placeholders::_1);
 
     return true;
-}
-
-void MagiciteGamePlayer::useSkill(MagiciteEffect* effect)
-{
-    _player->useSkill(effect);
 }
 
 void MagiciteGamePlayer::Move()
@@ -183,25 +172,35 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
     case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
         _move_right = true;
         break;
+    case EventKeyboard::KeyCode::KEY_0:
+        useBagItem(9);
+        break;
     case EventKeyboard::KeyCode::KEY_1:
-        useSkill(MagiciteEffectSpeedUp::create());
+        useBagItem(0);
         break;
     case EventKeyboard::KeyCode::KEY_2:
-        useSkill(MagiciteEffectJumpHigh::create());
+        useBagItem(1);
         break;
     case EventKeyboard::KeyCode::KEY_3:
-        useSkill(MagiciteEffectSprint::create());
+        useBagItem(2);
         break;
-    case EventKeyboard::KeyCode::KEY_C:
-        _player->useSkill(MagiciteEffectCreateFriend::create(_phyLayer, MagiciteEffectCreateFriend::LivingType::Slime));
+    case EventKeyboard::KeyCode::KEY_4:
+        useBagItem(3);
         break;
-    case EventKeyboard::KeyCode::KEY_F:
-        _player->useSkill(MagiciteEffectFireBall::create(_phyLayer));
+    case EventKeyboard::KeyCode::KEY_5:
+        useBagItem(4);
         break;
-    case EventKeyboard::KeyCode::KEY_A:
-        _player->useSkill(MagiciteEffectFlash::create(_phyLayer, 200));
-    case EventKeyboard::KeyCode::KEY_TAB:
-        switchBagInvisible();
+    case EventKeyboard::KeyCode::KEY_6:
+        useBagItem(5);
+        break;
+    case EventKeyboard::KeyCode::KEY_7:
+        useBagItem(6);
+        break;
+    case EventKeyboard::KeyCode::KEY_8:
+        useBagItem(7);
+        break;
+    case EventKeyboard::KeyCode::KEY_9:
+        useBagItem(8);
         break;
     default:
         break;

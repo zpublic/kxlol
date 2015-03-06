@@ -149,6 +149,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
     <ClCompile Include="..\Classes\MagiciteCaptionScene.cpp" />
     <ClCompile Include="..\Classes\MagiciteDialogue.cpp" />
+    <ClCompile Include="..\Classes\MagiciteEffectAcid.cpp" />
     <ClCompile Include="..\Classes\MagiciteEffectCreateFriend.cpp" />
     <ClCompile Include="..\Classes\MagiciteEffectFireBall.cpp" />
     <ClCompile Include="..\Classes\MagiciteEffectFlash.cpp" />
@@ -197,8 +198,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteItemCoin.cpp" />
     <ClCompile Include="..\Classes\MagiciteLifeBar.cpp" />
     <ClCompile Include="..\Classes\MagiciteScene.cpp" />
+    <ClCompile Include="..\Classes\MagiciteSkillCardAcid.cpp" />
     <ClCompile Include="..\Classes\MagiciteSkillCardFireBall.cpp" />
+    <ClCompile Include="..\Classes\MagiciteSkillCardFlash.cpp" />
     <ClCompile Include="..\Classes\MagiciteSkillCardFriend.cpp" />
+    <ClCompile Include="..\Classes\MagiciteSkillCardSpeedUp.cpp" />
+    <ClCompile Include="..\Classes\MagiciteSkillCardSprint.cpp" />
     <ClCompile Include="..\Classes\MagiciteTempItem.cpp" />
     <ClCompile Include="..\Classes\MagiciteTempSkillCard.cpp" />
     <ClCompile Include="..\Classes\MagiciteWeatherEffectSnow.cpp" />
@@ -226,6 +231,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteCaptionScene.h" />
     <ClInclude Include="..\Classes\MagiciteDialogue.h" />
     <ClInclude Include="..\Classes\MagiciteEffect.h" />
+    <ClInclude Include="..\Classes\MagiciteEffectAcid.h" />
     <ClInclude Include="..\Classes\MagiciteEffectBuffer.h" />
     <ClInclude Include="..\Classes\MagiciteEffectCreate.h" />
     <ClInclude Include="..\Classes\MagiciteEffectCreateFriend.h" />
@@ -282,8 +288,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteItemCoin.h" />
     <ClInclude Include="..\Classes\MagiciteLifeBar.h" />
     <ClInclude Include="..\Classes\MagiciteScene.h" />
+    <ClInclude Include="..\Classes\MagiciteSkillCardAcid.h" />
     <ClInclude Include="..\Classes\MagiciteSkillCardFireBall.h" />
+    <ClInclude Include="..\Classes\MagiciteSkillCardFlash.h" />
     <ClInclude Include="..\Classes\MagiciteSkillCardFriend.h" />
+    <ClInclude Include="..\Classes\MagiciteSkillCardSpeedUp.h" />
+    <ClInclude Include="..\Classes\MagiciteSkillCardSprint.h" />
     <ClInclude Include="..\Classes\MagiciteTempItem.h" />
     <ClInclude Include="..\Classes\MagiciteTempSkillCard.h" />
     <ClInclude Include="..\Classes\MagiciteWeather.h" />

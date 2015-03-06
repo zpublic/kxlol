@@ -18,6 +18,7 @@ public:
     virtual void positive(MagiciteGameObject* obj);
 
 protected:
+    void setEffect(MagiciteEffect* effect);
     MagiciteEffect*                         _effect;
 };
 

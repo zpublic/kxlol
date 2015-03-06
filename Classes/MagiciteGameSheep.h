@@ -13,6 +13,7 @@ public:
     {
         sheep_hp = 1,
         sheep_mp = 1,
+        sheep_speed = 5,
     };
 
     //MagiciteGameMoveAbleLiving
