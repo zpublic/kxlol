@@ -20,6 +20,8 @@ bool MagiciteGameChicken::init()
     {
         return false;
     }
+    setSpeed(chicken_speed);
+
     return true;
 }
 

@@ -20,6 +20,8 @@ bool MagiciteGameSheep::init()
     {
         return false;
     }
+    setSpeed(sheep_speed);
+
     return true;
 }
 

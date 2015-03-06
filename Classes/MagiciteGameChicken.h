@@ -13,6 +13,7 @@ public:
     {
         chicken_hp = 1,
         chicken_mp = 1,
+        chicken_speed = 3,
     };
 
     virtual void initAnimation();

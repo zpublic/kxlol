@@ -46,20 +46,6 @@ void MagiciteEffectSprint::negative()
 
 }
 
-MagiciteEffectSprint* MagiciteEffectSprint::create()
-{
-    auto ptr = new MagiciteEffectSprint();
-    if (ptr && ptr->init())
-    {
-        return ptr;
-    }
-    else
-    {
-        CC_SAFE_DELETE(ptr);
-        return nullptr;
-    }
-}
-
 bool MagiciteEffectSprint::init()
 {
     // do something

@@ -15,11 +15,9 @@ public:
     //MagiciteEffectShoot
     virtual void positive(MagiciteGameObject* obj);
 
-    static MagiciteEffectFireBall* create(
-        MagiciteGamePhyLayer* phyLayer);
+    static MagiciteEffectFireBall* create(MagiciteGamePhyLayer* phyLayer);
 
-    virtual bool init(
-        MagiciteGamePhyLayer* phyLayer);
+    virtual bool init(MagiciteGamePhyLayer* phyLayer);
 
 private:
     MagiciteGamePhyLayer*                           _phyLayer;

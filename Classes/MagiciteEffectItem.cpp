@@ -9,7 +9,7 @@ MagiciteEffectItem::MagiciteEffectItem()
 
 MagiciteEffectItem::~MagiciteEffectItem()
 {
-
+    _effect->release();
 }
 
 void MagiciteEffectItem::positive(MagiciteGameObject* obj)
@@ -37,4 +37,10 @@ bool MagiciteEffectItem::initWithFile(const char* filename)
         return false;
     }
     return true;
+}
+
+void MagiciteEffectItem::setEffect(MagiciteEffect* effect)
+{
+    _effect = effect;
+    effect->retain();
 }

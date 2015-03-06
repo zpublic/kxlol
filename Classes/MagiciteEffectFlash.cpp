@@ -67,6 +67,7 @@ MagiciteEffectFlash* MagiciteEffectFlash::create(MagiciteGamePhyLayer* phyLayer,
     auto ptr = new MagiciteEffectFlash();
     if (ptr && ptr->init(phyLayer, length))
     {
+        ptr->autorelease();
         return ptr;
     }
     else
