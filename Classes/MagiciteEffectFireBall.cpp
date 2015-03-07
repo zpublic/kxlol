@@ -1,7 +1,7 @@
 #include "MagiciteEffectFireBall.h"
 #include "MagiciteGamePhyLayer.h"
 #include "MagiciteGameFireball.h"
-#include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGameFactoryMethod.h"
 
 USING_NS_CC;
 
@@ -13,7 +13,7 @@ MagiciteEffectFireBall::MagiciteEffectFireBall()
 void MagiciteEffectFireBall::positive(MagiciteGameObject* obj)
 {
     auto moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);
-    MagiciteGameAmmo* ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::FireBall);
+    MagiciteGameAmmo* ammo = MagiciteGameFactoryMethod::createAmmo(MagiciteGameFactoryMethod::FireBall);
 
     ammo->setPosition(obj->getPosition());
     _phyLayer->createPhyBody(ammo, false);

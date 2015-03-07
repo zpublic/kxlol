@@ -11,7 +11,7 @@ MagiciteEffectCreateFriend::MagiciteEffectCreateFriend()
 void MagiciteEffectCreateFriend::positive(MagiciteGameObject* obj)
 {
     auto moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);
-    MagiciteGameMoveAbleLiving* friends = MagiciteGaemFactoryMethod::createFriend(
+    MagiciteGameMoveAbleLiving* friends = MagiciteGameFactoryMethod::createFriend(
         _type,
         (moveable->getDire() == MagiciteGameMoveAbleLiving::Direction::left ? true : false));
     friends->setPosition(obj->getPosition());

@@ -6,7 +6,7 @@ class MagiciteGameMoveAbleLiving;
 class MagiciteGamePitfall;
 class MagiciteGameAmmo;
 
-namespace MagiciteGaemFactoryMethod
+namespace MagiciteGameFactoryMethod
 {
     enum Pitfall_Type : int
     {

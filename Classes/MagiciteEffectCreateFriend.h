@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "MagiciteEffectCreate.h"
-#include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGameFactoryMethod.h"
 
 class MagiciteGameObject;
 class MagiciteGamePhyLayer;
@@ -12,7 +12,7 @@ class MagiciteEffectCreateFriend : public MagiciteEffectCreate
 {
 public:
 
-    typedef MagiciteGaemFactoryMethod::LivingType LivingType;
+    typedef MagiciteGameFactoryMethod::LivingType LivingType;
 
     MagiciteEffectCreateFriend();
 

@@ -8,7 +8,7 @@
 #include "MagiciteGamePlayer.h"
 #include "MagiciteGameContact.h"
 #include "MagiciteGameControlAble.h"
-#include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGameFactoryMethod.h"
 #include "MagiciteGameIncubator.h"
 #include "MagiciteWeatherSnow.h"
 #include "MagiciteWeatherEffect.h"
@@ -273,7 +273,7 @@ void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "enemy")
         {
-            auto enemy = MagiciteGaemFactoryMethod::createEnemy(MagiciteGaemFactoryMethod::Dirt, true);
+            auto enemy = MagiciteGameFactoryMethod::createEnemy(MagiciteGameFactoryMethod::Dirt, true);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(enemy, false);
             _phyLayer->addChild(enemy);
@@ -295,14 +295,14 @@ void MagiciteGameLayer::create_pitfall(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "pitfall")
         {
-            auto pit = MagiciteGaemFactoryMethod::createPitfall(MagiciteGaemFactoryMethod::Spine_Type);
+            auto pit = MagiciteGameFactoryMethod::createPitfall(MagiciteGameFactoryMethod::Spine_Type);
             pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(pit, true);
             _phyLayer->addChild(pit);
         }
         else if (vm.at("type").asString() == "hole")
         {
-            auto pit = MagiciteGaemFactoryMethod::createPitfall(MagiciteGaemFactoryMethod::Pitfall);
+            auto pit = MagiciteGameFactoryMethod::createPitfall(MagiciteGameFactoryMethod::Pitfall);
             pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             pit->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
             _phyLayer->createPhyBody(pit, true);
@@ -348,7 +348,7 @@ void MagiciteGameLayer::create_NPC( TMXObjectGroup* game)
         auto str = vm.at("type").asString();
         if(str == "NPC")
         {
-            auto npc = MagiciteGaemFactoryMethod::createFriend(MagiciteGaemFactoryMethod::NPC, true);
+            auto npc = MagiciteGameFactoryMethod::createFriend(MagiciteGameFactoryMethod::NPC, true);
             npc->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             npc->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
             _phyLayer->createPhyBody(npc, true);

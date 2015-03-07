@@ -1,7 +1,7 @@
 #include "MagiciteEffectAcid.h"
 #include "MagiciteGameAcid.h"
 #include "MagiciteGamePhyLayer.h"
-#include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGameFactoryMethod.h"
 
 USING_NS_CC;
 
@@ -13,7 +13,7 @@ MagiciteEffectAcid::MagiciteEffectAcid()
 void MagiciteEffectAcid::positive(MagiciteGameObject* obj)
 {
     auto moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);
-    MagiciteGameAmmo* ammo = MagiciteGaemFactoryMethod::createAmmo(MagiciteGaemFactoryMethod::Acid);
+    MagiciteGameAmmo* ammo = MagiciteGameFactoryMethod::createAmmo(MagiciteGameFactoryMethod::Acid);
 
     ammo->setPosition(obj->getPosition());
     _phyLayer->createPhyBody(ammo, false);

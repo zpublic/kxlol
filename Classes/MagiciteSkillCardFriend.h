@@ -3,14 +3,14 @@
 
 #include "cocos2d.h"
 #include "MagiciteForeverSkillCard.h"
-#include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGameFactoryMethod.h"
 
 class MagiciteGamePhyLayer;
 
 class MagiciteSkillCardFriend : public MagiciteForeverSkillCard
 {
 public:
-    typedef MagiciteGaemFactoryMethod::LivingType LivingType;
+    typedef MagiciteGameFactoryMethod::LivingType LivingType;
 
     MagiciteSkillCardFriend();
     ~MagiciteSkillCardFriend();
