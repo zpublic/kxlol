@@ -9,6 +9,8 @@ class MagiciteEffect : public cocos2d::Ref
 {
 public:
 
+    MagiciteEffect() :_coolDown(0){}
+
     enum Type : int
     {
         T_Unkwon,
@@ -18,10 +20,24 @@ public:
     {
 
     }
+
     virtual void negative()
     {
 
     }
+
+    int getCD() const
+    {
+        return this->_coolDown;
+    }
+
+protected:
+    void setCd(int cd)
+    {
+        _coolDown = cd;
+    }
+
+    int                              _coolDown;
 };
 
 #endif //__MAGICITE_EFFECT__

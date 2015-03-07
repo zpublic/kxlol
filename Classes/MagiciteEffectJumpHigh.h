@@ -7,6 +7,9 @@
 class MagiciteEffectJumpHigh : public MagiciteEffectBuffer
 {
 public:
+
+    enum : int { cool_down = 3 };
+
     MagiciteEffectJumpHigh();
 
     virtual void positive(MagiciteGameObject* obj);

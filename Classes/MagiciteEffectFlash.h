@@ -10,6 +10,9 @@ class MagiciteGameMoveAbleLiving;
 class MagiciteEffectFlash : public MagiciteEffectPositive
 {
 public:
+
+    enum : int { cool_down = 3 };
+
     MagiciteEffectFlash();
 
     //MagiciteEffectPositive

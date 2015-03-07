@@ -49,6 +49,7 @@ void MagiciteEffectSprint::negative()
 bool MagiciteEffectSprint::init()
 {
     // do something
+    setCd(cool_down);
 
     return true;
 }

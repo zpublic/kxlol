@@ -9,6 +9,9 @@ class MagiciteGameObject;
 class MagiciteEffectSpeedUp : public MagiciteEffectBuffer
 {
 public:
+
+    enum : int { cool_down = 3 };
+
     MagiciteEffectSpeedUp();
 
     virtual void positive(MagiciteGameObject* obj);

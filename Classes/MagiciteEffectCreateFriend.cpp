@@ -48,5 +48,7 @@ bool MagiciteEffectCreateFriend::init(
     _phyLayer = phyLayer;
     _type = type;
 
+    setCd(cool_down);
+
     return true;
 }

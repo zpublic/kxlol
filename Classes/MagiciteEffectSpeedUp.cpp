@@ -50,6 +50,7 @@ void MagiciteEffectSpeedUp::negative()
 bool MagiciteEffectSpeedUp::init()
 {
     // do something
+    setCd(cool_down);
 
     return true;
 }

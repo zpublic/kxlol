@@ -7,6 +7,9 @@
 class MagiciteEffectSprint :public MagiciteEffectBuffer
 {
 public:
+
+    enum : int { cool_down = 3 };
+
     MagiciteEffectSprint();
 
     static const int sprint_speed_seed = 3;
