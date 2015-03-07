@@ -9,7 +9,7 @@ class MagiciteEffect : public cocos2d::Ref
 {
 public:
 
-    MagiciteEffect() :_coolDown(0){}
+    MagiciteEffect() :_coolDown(0){};
 
     enum Type : int
     {
@@ -26,18 +26,18 @@ public:
 
     }
 
-    int getCD() const
+    long long getCD() const
     {
-        return this->_coolDown;
+        return _coolDown;
     }
 
 protected:
-    void setCd(int cd)
+    void setCd(long long cd)
     {
         _coolDown = cd;
     }
 
-    int                              _coolDown;
+    long long                           _coolDown;
 };
 
 #endif //__MAGICITE_EFFECT__

@@ -33,6 +33,7 @@ bool MagiciteSkillCardFlash::init(MagiciteGamePhyLayer* phyLayer, float length)
     }
 
     setEffect(MagiciteEffectFlash::create(phyLayer, length));
+    setCd(_effect->getCD());
 
     _phyLayer = phyLayer;
     _length = length;

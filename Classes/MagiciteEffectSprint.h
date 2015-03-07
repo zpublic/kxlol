@@ -8,7 +8,7 @@ class MagiciteEffectSprint :public MagiciteEffectBuffer
 {
 public:
 
-    enum : int { cool_down = 3 };
+    enum : long long { cool_down = 3 };
 
     MagiciteEffectSprint();
 

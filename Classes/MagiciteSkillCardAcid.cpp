@@ -34,6 +34,7 @@ bool MagiciteSkillCardAcid::init(MagiciteGamePhyLayer* phyLayer)
     }
 
     setEffect(MagiciteEffectAcid::create(phyLayer));
+    setCd(_effect->getCD());
 
     _phyLayer = phyLayer;
 
