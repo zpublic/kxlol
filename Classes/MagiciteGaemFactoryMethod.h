@@ -21,6 +21,7 @@ namespace MagiciteGaemFactoryMethod
         Slime,
         Sheep,
         Dirt,
+        NPC,
     };
 
     enum AmmoType : int

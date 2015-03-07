@@ -11,6 +11,7 @@
 #include "MagiciteGameFireball.h"
 #include "MagiciteGameAcid.h"
 #include "MagiciteGameDirt.h"
+#include "MagiciteGameNPC.h"
 
 
 USING_NS_CC;
@@ -134,6 +135,16 @@ MagiciteGameMoveAbleLiving* MagiciteGaemFactoryMethod::createFriend(LivingType t
         {
             ptr->_is_friend = true;
             auto slime = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
+            slime->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
+            return ptr;
+        }
+        break;
+    case MagiciteGaemFactoryMethod::NPC:
+        ptr = MagiciteGameNPC::create();
+        if(ptr != nullptr)
+        {
+            ptr->_is_friend = true;
+            auto slime = static_cast<MagiciteGameMoveAbleLiving*>(ptr);
             slime->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
             return ptr;
         }
