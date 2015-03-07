@@ -25,7 +25,7 @@ protected:
     void setCd(long long cd);
 
     MagiciteEffect*                         _effect;
-    long long                               _cool_down;
+    long long                               _cool_down; //milliseconds
     std::chrono::system_clock::time_point   _last_time;
 };
 

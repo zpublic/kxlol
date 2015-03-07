@@ -10,7 +10,7 @@ class MagiciteEffectSpeedUp : public MagiciteEffectBuffer
 {
 public:
 
-    enum : long long { cool_down = 3 };
+    enum : long long { cool_down = 3000 }; //milliseconds
 
     MagiciteEffectSpeedUp();
 

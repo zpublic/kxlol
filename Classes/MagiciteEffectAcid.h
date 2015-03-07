@@ -10,7 +10,7 @@ class MagiciteEffectAcid : public MagiciteEffectShoot
 {
 public:
 
-    enum : long long { cool_down = 3 };
+    enum : long long { cool_down = 1000 }; //milliseconds
 
     MagiciteEffectAcid();
 

@@ -12,7 +12,7 @@ class MagiciteEffectCreateFriend : public MagiciteEffectCreate
 {
 public:
 
-    enum : long long { cool_down = 3 };
+    enum : long long { cool_down = 1500 }; //milliseconds
 
     typedef MagiciteGameFactoryMethod::LivingType LivingType;
 
