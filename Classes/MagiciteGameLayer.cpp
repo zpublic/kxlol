@@ -22,6 +22,7 @@
 #include "MagiciteSkillCardSprint.h"
 #include "MagiciteSkillCardAcid.h"
 #include "MagiciteGamePackView.h"
+#include "MagiciteGameNPC.h"
 
 USING_NS_CC;
 
@@ -353,6 +354,12 @@ void MagiciteGameLayer::create_NPC( TMXObjectGroup* game)
             npc->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
             _phyLayer->createPhyBody(npc, true);
             _phyLayer->addChild(npc);
+            auto strName = vm.at("name").asString();
+            auto npcptr = dynamic_cast<MagiciteGameNPC*>(npc);
+            if(npcptr != nullptr && strName != "")
+            {
+                npcptr->setNpcName(strName);
+            }
         }
     }
 }
