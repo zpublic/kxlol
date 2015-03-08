@@ -230,7 +230,7 @@ void MagiciteGamePlayer::setPetFollow(MagiciteGameObject* pet)
     _player->addChild(pet);
 }
 
-MagiciteGameContainerView* MagiciteGamePlayer::getBag()
+MagiciteGameBagView* MagiciteGamePlayer::getBag()
 {
     return _bag;
 }

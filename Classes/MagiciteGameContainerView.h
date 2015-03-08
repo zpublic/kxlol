@@ -14,8 +14,8 @@ public:
     MagiciteGameContainerView();
     ~MagiciteGameContainerView();
 
-    virtual void addItem(MagiciteItem* item) = 0;
-    virtual void eraseItem(int num) = 0;
+    void addItem(MagiciteItem* item, std::vector<std::pair<int, MagiciteItem*>>::iterator iter);
+    void eraseItem(std::vector<std::pair<int, MagiciteItem*>>::iterator iter);
     virtual MagiciteItem* getItem(int num);
 
     virtual bool init(int max_size);
