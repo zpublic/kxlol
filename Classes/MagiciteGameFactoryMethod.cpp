@@ -1,4 +1,4 @@
-#include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGameFactoryMethod.h"
 #include "MagiciteGamePitfall.h"
 #include "MagiciteGameLiving.h"
 #include "MagiciteGameAmmo.h"
@@ -16,19 +16,19 @@
 
 USING_NS_CC;
 
-MagiciteGameLiving* MagiciteGaemFactoryMethod::createEnemy(LivingType type, bool is_to_left/* = false*/)
+MagiciteGameLiving* MagiciteGameFactoryMethod::createEnemy(LivingType type, bool is_to_left/* = false*/)
 {
     MagiciteGameLiving* ptr = nullptr;
     switch (type)
     {
-    case MagiciteGaemFactoryMethod::Piranha:
+    case MagiciteGameFactoryMethod::Piranha:
         ptr = MagiciteGamePiranha::create();
         if (ptr != nullptr)
         {
             return ptr;
         }
         break;
-    case MagiciteGaemFactoryMethod::Human:
+    case MagiciteGameFactoryMethod::Human:
         ptr = MagiciteGameHuman::create();
         if (ptr != nullptr)
         {
@@ -37,7 +37,7 @@ MagiciteGameLiving* MagiciteGaemFactoryMethod::createEnemy(LivingType type, bool
             return ptr;
         }
         break;
-    case MagiciteGaemFactoryMethod::Chicken:
+    case MagiciteGameFactoryMethod::Chicken:
         ptr = MagiciteGameChicken::create();
         if (ptr != nullptr)
         {
@@ -46,7 +46,7 @@ MagiciteGameLiving* MagiciteGaemFactoryMethod::createEnemy(LivingType type, bool
             return ptr;
         }
         break;
-    case MagiciteGaemFactoryMethod::Slime:
+    case MagiciteGameFactoryMethod::Slime:
         ptr = MagiciteGameSlime::create();
         if (ptr != nullptr)
         {
@@ -55,7 +55,7 @@ MagiciteGameLiving* MagiciteGaemFactoryMethod::createEnemy(LivingType type, bool
             return ptr;
         }
         break;
-    case MagiciteGaemFactoryMethod::Sheep:
+    case MagiciteGameFactoryMethod::Sheep:
         ptr = MagiciteGameSheep::create();
         if (ptr != nullptr)
         {
@@ -64,7 +64,7 @@ MagiciteGameLiving* MagiciteGaemFactoryMethod::createEnemy(LivingType type, bool
             return ptr;
         }
         break;
-    case MagiciteGaemFactoryMethod::Dirt:
+    case MagiciteGameFactoryMethod::Dirt:
         ptr = MagiciteGameDirt::create();
         if (ptr != nullptr)
         {
@@ -79,17 +79,17 @@ MagiciteGameLiving* MagiciteGaemFactoryMethod::createEnemy(LivingType type, bool
     return nullptr;
 }
 
-void MagiciteGaemFactoryMethod::destroyEnemy(MagiciteGameLiving* living)
+void MagiciteGameFactoryMethod::destroyEnemy(MagiciteGameLiving* living)
 {
     living->Dead();
 }
 
-MagiciteGameMoveAbleLiving* MagiciteGaemFactoryMethod::createFriend(LivingType type, bool is_to_left/* = false*/)
+MagiciteGameMoveAbleLiving* MagiciteGameFactoryMethod::createFriend(LivingType type, bool is_to_left/* = false*/)
 {
     MagiciteGameMoveAbleLiving* ptr = nullptr;
     switch (type)
     {
-    case MagiciteGaemFactoryMethod::Human:
+    case MagiciteGameFactoryMethod::Human:
         ptr = MagiciteGameHuman::create();
         if (ptr != nullptr)
         {
@@ -99,7 +99,7 @@ MagiciteGameMoveAbleLiving* MagiciteGaemFactoryMethod::createFriend(LivingType t
             return ptr;
         }
         break;
-    case MagiciteGaemFactoryMethod::Chicken:
+    case MagiciteGameFactoryMethod::Chicken:
         ptr = MagiciteGameChicken::create();
         if (ptr != nullptr)
         {
@@ -109,7 +109,7 @@ MagiciteGameMoveAbleLiving* MagiciteGaemFactoryMethod::createFriend(LivingType t
             return ptr;
         }
         break;
-    case MagiciteGaemFactoryMethod::Slime:
+    case MagiciteGameFactoryMethod::Slime:
         ptr = MagiciteGameSlime::create();
         if (ptr != nullptr)
         {
@@ -119,7 +119,7 @@ MagiciteGameMoveAbleLiving* MagiciteGaemFactoryMethod::createFriend(LivingType t
             return ptr;
         }
         break;
-    case MagiciteGaemFactoryMethod::Sheep:
+    case MagiciteGameFactoryMethod::Sheep:
         ptr = MagiciteGameSheep::create();
         if (ptr != nullptr)
         {
@@ -129,7 +129,7 @@ MagiciteGameMoveAbleLiving* MagiciteGaemFactoryMethod::createFriend(LivingType t
             return ptr;
         }
         break;
-    case MagiciteGaemFactoryMethod::Dirt:
+    case MagiciteGameFactoryMethod::Dirt:
         ptr = MagiciteGameDirt::create();
         if (ptr != nullptr)
         {
@@ -139,7 +139,7 @@ MagiciteGameMoveAbleLiving* MagiciteGaemFactoryMethod::createFriend(LivingType t
             return ptr;
         }
         break;
-    case MagiciteGaemFactoryMethod::NPC:
+    case MagiciteGameFactoryMethod::NPC:
         ptr = MagiciteGameNPC::create();
         if(ptr != nullptr)
         {
@@ -155,24 +155,24 @@ MagiciteGameMoveAbleLiving* MagiciteGaemFactoryMethod::createFriend(LivingType t
     return nullptr;
 }
 
-void MagiciteGaemFactoryMethod::destroyFriend(MagiciteGameMoveAbleLiving* living)
+void MagiciteGameFactoryMethod::destroyFriend(MagiciteGameMoveAbleLiving* living)
 {
     living->Dead();
 }
 
-MagiciteGamePitfall* MagiciteGaemFactoryMethod::createPitfall(Pitfall_Type type, bool is_active /*= true*/)
+MagiciteGamePitfall* MagiciteGameFactoryMethod::createPitfall(Pitfall_Type type, bool is_active /*= true*/)
 {
     MagiciteGamePitfall* ptr = nullptr;
     switch (type)
     {
-    case MagiciteGaemFactoryMethod::Spine_Type:
+    case MagiciteGameFactoryMethod::Spine_Type:
         ptr = MagiciteGameSpinePitfall::create();
         if (ptr != nullptr)
         {
             ptr->setPitFallAvtive(is_active);
         }
         return ptr;
-    case MagiciteGaemFactoryMethod::Pitfall:
+    case MagiciteGameFactoryMethod::Pitfall:
         ptr = MagiciteGamePitfall::create();
         if (ptr != nullptr)
         {
@@ -185,20 +185,20 @@ MagiciteGamePitfall* MagiciteGaemFactoryMethod::createPitfall(Pitfall_Type type,
     return nullptr;
 }
 
-void MagiciteGaemFactoryMethod::destroyPitfall(MagiciteGamePitfall* ptr)
+void MagiciteGameFactoryMethod::destroyPitfall(MagiciteGamePitfall* ptr)
 {
     ptr->Dead();
 }
 
-MagiciteGameAmmo* MagiciteGaemFactoryMethod::createAmmo(AmmoType type)
+MagiciteGameAmmo* MagiciteGameFactoryMethod::createAmmo(AmmoType type)
 {
     MagiciteGameAmmo* ammo = nullptr;
     switch (type)
     {
-    case MagiciteGaemFactoryMethod::FireBall:
+    case MagiciteGameFactoryMethod::FireBall:
         ammo = MagiciteGameFireball::create();
         break;
-    case MagiciteGaemFactoryMethod::Acid:
+    case MagiciteGameFactoryMethod::Acid:
         ammo = MagiciteGameAcid::create();
         break;
     default:

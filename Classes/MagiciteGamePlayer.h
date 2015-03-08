@@ -6,8 +6,7 @@
 #include "MagiciteGameMoveAbleLiving.h"
 
 class MagiciteGamePhyLayer;
-class MagiciteItemContainer;
-class MagiciteGameContainerView;
+class MagiciteGameBagView;
 class MagiciteEffectItem;
 
 class MagiciteGamePlayer : public MagiciteGameControlAble
@@ -63,13 +62,13 @@ public:
     virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
-    MagiciteGameContainerView* getBag();
+    MagiciteGameBagView* getBag();
     void useBagItem(int num);
     void switchBagInvisible();
 
 protected:
     MagiciteGameMoveAbleLiving*             _player;
-    MagiciteGameContainerView*              _bag;
+    MagiciteGameBagView*                    _bag;
     MagiciteGamePhyLayer*                   _phyLayer;
     bool                                    _move_left;
     bool                                    _move_right;

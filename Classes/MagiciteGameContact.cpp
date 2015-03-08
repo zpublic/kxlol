@@ -4,7 +4,7 @@
 #include "MagiciteGamePitfall.h"
 #include "MagiciteGameFireball.h"
 #include "MagiciteGameMoveAbleLiving.h"
-#include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGameFactoryMethod.h"
 
 std::function<void(void)> MagiciteGameContact::_onWin;
 std::function<void(void)> MagiciteGameContact::_onOver;
@@ -184,7 +184,7 @@ void MagiciteGameContact::try_player_contact_with_enemy(MagiciteGameObject* obje
             enemy->attact();
             if (enemy->getHP() <= 0)
             {
-                MagiciteGaemFactoryMethod::destroyEnemy(enemy);
+                MagiciteGameFactoryMethod::destroyEnemy(enemy);
             }
             player->JumpOver();
             player->Jump();
@@ -223,11 +223,11 @@ void MagiciteGameContact::try_friend_contact_with_pitfall(MagiciteGameObject* ob
         living->attact();
         if (living->getHP() <= 0)
         {
-            MagiciteGaemFactoryMethod::destroyFriend(living);
+            MagiciteGameFactoryMethod::destroyFriend(living);
         }
         if (pitfall->PiffallType == MagiciteGamePitfall::Spine)
         {
-            MagiciteGaemFactoryMethod::destroyPitfall(pitfall);
+            MagiciteGameFactoryMethod::destroyPitfall(pitfall);
         }
     }
 }
@@ -241,13 +241,13 @@ void MagiciteGameContact::try_friend_contact_with_enemy(MagiciteGameObject* obje
     living->attact();
     if (living->getHP() <= 0)
     {
-        MagiciteGaemFactoryMethod::destroyFriend(living);
+        MagiciteGameFactoryMethod::destroyFriend(living);
     }
     MagiciteGameContact::change_moveable_direction(enemy);
     enemy->attact();
     if (enemy->getHP() <= 0)
     {
-        MagiciteGaemFactoryMethod::destroyEnemy(enemy);
+        MagiciteGameFactoryMethod::destroyEnemy(enemy);
     }
 }
 
@@ -272,7 +272,7 @@ void MagiciteGameContact::try_ammo_contact_with_enemy(MagiciteGameObject* object
     enemy->attact();
     if (enemy->getHP() <= 0)
     {
-        MagiciteGaemFactoryMethod::destroyEnemy(enemy);
+        MagiciteGameFactoryMethod::destroyEnemy(enemy);
     }
 }
 

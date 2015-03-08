@@ -62,8 +62,7 @@ void MagiciteGameBagView::addItem(MagiciteItem* item)
         });
         if (iter != _list->end())
         {
-            iter->first = item->getItemId();
-            iter->second = item;
+            MagiciteGameContainerView::addItem(item, iter);
             item->setPosition(Vec2(_origin.x + Id2Pos(iter - _list->begin() + 1) + _block_size / 2, _origin.y - _offset + _block_size / 2));
             this->addChild(item);
         }
@@ -76,7 +75,7 @@ void MagiciteGameBagView::eraseItem(int num)
     if (remove_tmp->second != nullptr)
     {
         remove_tmp->second->removeFromParentAndCleanup(true);
-        (_list->begin() + num)->second = nullptr;
+        MagiciteGameContainerView::eraseItem(remove_tmp);
     }
 }
 
@@ -90,6 +89,7 @@ MagiciteGameBagView* MagiciteGameBagView::create(int max_size/* = DEFAULT_MAX_SI
     auto ptr = new MagiciteGameBagView();
     if (ptr && ptr->init(max_size))
     {
+        ptr->autorelease();
         return ptr;
     }
     else

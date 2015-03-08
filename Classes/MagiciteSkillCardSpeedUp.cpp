@@ -19,6 +19,7 @@ bool MagiciteSkillCardSpeedUp::init()
     }
 
     setEffect(MagiciteEffectSpeedUp::create());
+    setCd(_effect->getCD());
 
     return true;
 }

@@ -45,6 +45,7 @@ void MagiciteEffectJumpHigh::negative()
 bool MagiciteEffectJumpHigh::init()
 {
     // do something
+    setCd(cool_down);
 
     return true;
 }

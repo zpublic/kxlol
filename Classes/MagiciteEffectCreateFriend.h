@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "MagiciteEffectCreate.h"
-#include "MagiciteGaemFactoryMethod.h"
+#include "MagiciteGameFactoryMethod.h"
 
 class MagiciteGameObject;
 class MagiciteGamePhyLayer;
@@ -12,7 +12,9 @@ class MagiciteEffectCreateFriend : public MagiciteEffectCreate
 {
 public:
 
-    typedef MagiciteGaemFactoryMethod::LivingType LivingType;
+    enum : long long { cool_down = 1500 }; //milliseconds
+
+    typedef MagiciteGameFactoryMethod::LivingType LivingType;
 
     MagiciteEffectCreateFriend();
 

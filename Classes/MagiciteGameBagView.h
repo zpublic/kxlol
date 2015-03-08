@@ -13,8 +13,8 @@ public:
     MagiciteGameBagView();
     ~MagiciteGameBagView();
 
-    virtual void addItem(MagiciteItem* item);
-    virtual void eraseItem(int num);
+    void addItem(MagiciteItem* item);
+    void eraseItem(int num);
 
     virtual bool init(int max_size);
     static MagiciteGameBagView* create(int max_size = DEFAULT_MAX_SIZE);

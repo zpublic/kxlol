@@ -40,3 +40,15 @@ bool MagiciteGameContainerView::getViewInvisible() const
 {
     return this->isVisible();
 }
+
+void MagiciteGameContainerView::addItem(MagiciteItem* item, std::vector<std::pair<int, MagiciteItem*>>::iterator iter)
+{
+    iter->first = item->getItemId();
+    iter->second = item;
+}
+
+void MagiciteGameContainerView::eraseItem(std::vector<std::pair<int, MagiciteItem*>>::iterator iter)
+{
+    iter->first = 0;
+    iter->second = nullptr;
+}

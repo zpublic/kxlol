@@ -10,6 +10,8 @@ class MagiciteEffectFireBall : public MagiciteEffectShoot
 {
 public:
 
+    enum : long long { cool_down = 1000 }; //milliseconds
+
     MagiciteEffectFireBall();
    
     //MagiciteEffectShoot

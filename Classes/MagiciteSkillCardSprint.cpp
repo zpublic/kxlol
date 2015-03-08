@@ -19,6 +19,7 @@ bool MagiciteSkillCardSprint::init()
     }
 
     setEffect(MagiciteEffectSprint::create());
+    setCd(_effect->getCD());
 
     return true;
 }

@@ -2,7 +2,7 @@
 #include "MagiciteEffect.h"
 
 MagiciteEffectItem::MagiciteEffectItem()
-:MagiciteItem(EffectItem), _effect(nullptr)
+:MagiciteItem(EffectItem), _effect(nullptr), _cool_down(0.0f)
 {
     
 }
@@ -16,7 +16,13 @@ void MagiciteEffectItem::positive(MagiciteGameObject* obj)
 {
     if (_effect != nullptr)
     {
-        _effect->positive(obj);
+        auto nowTime = std::chrono::system_clock::now();
+        std::chrono::system_clock::duration deltaTime = nowTime - _last_time;
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(deltaTime).count() > _cool_down)
+        {
+            _last_time = nowTime;
+            _effect->positive(obj);
+        }
     }
 }
 
@@ -43,4 +49,14 @@ void MagiciteEffectItem::setEffect(MagiciteEffect* effect)
 {
     _effect = effect;
     effect->retain();
+}
+
+void MagiciteEffectItem::setCd(long long cd)
+{
+    _cool_down = cd;
+}
+
+long long MagiciteEffectItem::getCd() const
+{
+    return _cool_down;
 }

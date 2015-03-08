@@ -9,6 +9,9 @@ class MagiciteGamePhyLayer;
 class MagiciteEffectAcid : public MagiciteEffectShoot
 {
 public:
+
+    enum : long long { cool_down = 1000 }; //milliseconds
+
     MagiciteEffectAcid();
 
     virtual void positive(MagiciteGameObject* obj);

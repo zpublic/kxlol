@@ -223,9 +223,6 @@
     <ClCompile Include="..\Classes\MagiciteGameFireball.cpp">
       <Filter>Magicite\GameLogic\Object\Ammo</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGaemFactoryMethod.cpp">
-      <Filter>Magicite\GameLogic\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MagiciteEffectSpeedUp.cpp">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClCompile>
@@ -324,6 +321,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameNPC.cpp">
       <Filter>Magicite\GameLogic\Object\Living</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameFactoryMethod.cpp">
+      <Filter>Magicite\GameLogic\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -481,9 +481,6 @@
     <ClInclude Include="..\Classes\MagiciteGameFireball.h">
       <Filter>Magicite\GameLogic\Object\Ammo</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGaemFactoryMethod.h">
-      <Filter>Magicite\GameLogic\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteEffectSpeedUp.h">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
     </ClInclude>
@@ -594,6 +591,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteSkillCardAcid.h">
       <Filter>Magicite\GameLogic\Item\SkillCrad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameFactoryMethod.h">
+      <Filter>Magicite\GameLogic\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

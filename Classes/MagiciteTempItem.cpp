@@ -1,5 +1,4 @@
 #include "MagiciteTempItem.h"
-#include "MagiciteEffect.h"
 
 MagiciteTempItem::MagiciteTempItem(int life)
 :_life(life)
@@ -16,7 +15,7 @@ void MagiciteTempItem::positive(MagiciteGameObject* obj)
 {
     if (_effect != nullptr)
     {
-        _effect->positive(obj);
+        MagiciteEffectItem::positive(obj);
         --_life;
 
         if (_life <= 0)
