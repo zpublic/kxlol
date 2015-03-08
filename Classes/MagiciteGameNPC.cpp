@@ -2,6 +2,7 @@
 #include "MagiciteLifeBar.h"
 #include "MagiciteDialogue.h"
 #include <ui/CocosGUI.h>
+#include "base/SystemConfig.h"
 
 MagiciteGameNPC::MagiciteGameNPC()
     :MagiciteGameMoveAbleLiving(Human_Type)
@@ -33,22 +34,7 @@ bool MagiciteGameNPC::init()
         cocos2d::Director::getInstance()->getRunningScene()->addChild(MagiciteDialogue::create(1));
     });
 
-#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
-    const char* const fontName = "Microsoft YaHei";
-#endif
-
-#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
-    const char* const fontName = "Droid Sans Fallback";
-#endif
-
-#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
-    const char* const fontName = "Heiti SC";
-#endif
-
-//若您的目标系统不是以上的几种系统，请按照以上格式在下面添加您的目标系统和对应的默认字体名称
-
-//------------------------------------------------------------------------------------------
-    _lblName = cocos2d::Label::create("", fontName, 16);
+    _lblName = cocos2d::Label::createWithSystemFont("", kxlol::SystemConfig::GetSystemFont(), 16);
     this->addChild(_lblName);
     _lblName->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     _lblName->setPosition(this->getContentSize().width / 2, this->getContentSize().height + 10.0f);

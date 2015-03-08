@@ -145,6 +145,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\base\bag.cpp" />
     <ClCompile Include="..\Classes\base\MsgCenter.cpp" />
     <ClCompile Include="..\Classes\base\Player.cpp" />
+    <ClCompile Include="..\Classes\base\SystemConfig.cpp" />
     <ClCompile Include="..\Classes\Component\slot.cpp" />
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
     <ClCompile Include="..\Classes\MagiciteCaptionScene.cpp" />
@@ -227,6 +228,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\base\ItemObject.h" />
     <ClInclude Include="..\Classes\base\MsgCenter.h" />
     <ClInclude Include="..\Classes\base\Player.h" />
+    <ClInclude Include="..\Classes\base\SystemConfig.h" />
     <ClInclude Include="..\Classes\Component\slot.h" />
     <ClInclude Include="..\Classes\GLES-Render.h" />
     <ClInclude Include="..\Classes\MagiciteCaptionScene.h" />
