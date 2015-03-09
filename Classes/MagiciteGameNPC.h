@@ -11,10 +11,15 @@ public:
     virtual void initAnimation();
     virtual bool init();
 
+    virtual void setNpcName(const std::string& strName);
+
     CREATE_FUNC(MagiciteGameNPC);
 protected:
     cocos2d::RepeatForever* createAnimateJump();
     cocos2d::RepeatForever* createAnimateMove();
+
+private:
+    cocos2d::Label* _lblName;
 };
 
 #endif
