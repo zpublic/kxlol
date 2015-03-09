@@ -44,6 +44,11 @@ bool MagiciteGameBagView::init(int max_size)
         auto color = LayerColor::create(Color4B(0xee, 0xee, 0xee, 0x80));
         color->setContentSize(Size(_block_size, _block_size));
         node->addChild(color);
+        char c[10];
+        std::sprintf(c, "%d", i - 1);
+        auto font = Label::createWithSystemFont(c, "Arial", 40);
+        font->setPosition(Vec2(node->getContentSize().width / 2, node->getContentSize().height / 2));
+        node->addChild(font);
         menu->addChild(node);
     }
 
