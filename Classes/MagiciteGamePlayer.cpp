@@ -172,37 +172,8 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
     case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
         _move_right = true;
         break;
-    case EventKeyboard::KeyCode::KEY_0:
-        useBagItem(9);
-        break;
-    case EventKeyboard::KeyCode::KEY_1:
-        useBagItem(0);
-        break;
-    case EventKeyboard::KeyCode::KEY_2:
-        useBagItem(1);
-        break;
-    case EventKeyboard::KeyCode::KEY_3:
-        useBagItem(2);
-        break;
-    case EventKeyboard::KeyCode::KEY_4:
-        useBagItem(3);
-        break;
-    case EventKeyboard::KeyCode::KEY_5:
-        useBagItem(4);
-        break;
-    case EventKeyboard::KeyCode::KEY_6:
-        useBagItem(5);
-        break;
-    case EventKeyboard::KeyCode::KEY_7:
-        useBagItem(6);
-        break;
-    case EventKeyboard::KeyCode::KEY_8:
-        useBagItem(7);
-        break;
-    case EventKeyboard::KeyCode::KEY_9:
-        useBagItem(8);
-        break;
     default:
+        MagiciteGameControlAble::dispatchKeyPress(keyCode, event, static_cast<MagiciteGameControlAble*>(_bag));
         break;
     }
 
@@ -221,6 +192,7 @@ void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* ev
         _player->Stop();
         break;
     default:
+        MagiciteGameControlAble::dispatchKeyRelease(keyCode, event, static_cast<MagiciteGameControlAble*>(_bag));
         break;
     }
 }

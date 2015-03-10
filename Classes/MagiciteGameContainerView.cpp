@@ -52,3 +52,47 @@ void MagiciteGameContainerView::eraseItem(std::vector<std::pair<int, MagiciteIte
     iter->first = 0;
     iter->second = nullptr;
 }
+
+void MagiciteGameContainerView::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
+{
+    switch (keyCode)
+    {
+    case EventKeyboard::KeyCode::KEY_0:
+        _itemEvent(9);
+        break;
+    case EventKeyboard::KeyCode::KEY_1:
+        _itemEvent(0);
+        break;
+    case EventKeyboard::KeyCode::KEY_2:
+        _itemEvent(1);
+        break;
+    case EventKeyboard::KeyCode::KEY_3:
+        _itemEvent(2);
+        break;
+    case EventKeyboard::KeyCode::KEY_4:
+        _itemEvent(3);
+        break;
+    case EventKeyboard::KeyCode::KEY_5:
+        _itemEvent(4);
+        break;
+    case EventKeyboard::KeyCode::KEY_6:
+        _itemEvent(5);
+        break;
+    case EventKeyboard::KeyCode::KEY_7:
+        _itemEvent(6);
+        break;
+    case EventKeyboard::KeyCode::KEY_8:
+        _itemEvent(7);
+        break;
+    case EventKeyboard::KeyCode::KEY_9:
+        _itemEvent(8);
+        break;
+    default:
+        break;
+    }
+}
+
+void MagiciteGameContainerView::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
+{
+
+}
