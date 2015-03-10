@@ -13,6 +13,11 @@ class MagiciteWeather;
 class MagiciteGameLayer : public cocos2d::Layer
 {
 public:
+    enum UITAG
+    {
+        PACK = 100,
+        EQUIP
+    };
     MagiciteGameLayer();
     ~MagiciteGameLayer();
 

@@ -22,6 +22,8 @@
 #include "MagiciteSkillCardSprint.h"
 #include "MagiciteSkillCardAcid.h"
 #include "MagiciteGamePackView.h"
+#include "MagiciteGameNPC.h"
+#include "MagiciteGameEquipment.h"
 
 USING_NS_CC;
 
@@ -143,11 +145,26 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_P:
         {
-            auto pack = MagiciteGamePackView::getInstance();
-            if(pack->getParent() == nullptr)
-                this->addChild(pack, 1000);
+            if(this->getChildByTag(PACK) == nullptr)
+            {
+                auto pack = MagiciteGamePackView::create();
+                this->addChild(pack, 1000, PACK);
+                pack->runAction(Follow::create(this));
+            }
             else
-                pack->setVisible(!pack->isVisible());
+                this->getChildByTag(PACK)->setVisible(!this->getChildByTag(PACK)->isVisible());
+        }
+        break;
+    case cocos2d::EventKeyboard::KeyCode::KEY_E:
+        {
+            if(this->getChildByTag(EQUIP) == nullptr)
+            {
+                auto equip = MagiciteGameEquipment::create();
+                this->addChild(equip, 1000, EQUIP);
+                equip->runAction(Follow::create(this));
+            }
+            else
+                this->getChildByTag(EQUIP)->setVisible(!this->getChildByTag(EQUIP)->isVisible());
         }
         break;
     default:
@@ -353,6 +370,12 @@ void MagiciteGameLayer::create_NPC( TMXObjectGroup* game)
             npc->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
             _phyLayer->createPhyBody(npc, true);
             _phyLayer->addChild(npc);
+            auto strName = vm.at("name").asString();
+            auto npcptr = dynamic_cast<MagiciteGameNPC*>(npc);
+            if(npcptr != nullptr && strName != "")
+            {
+                npcptr->setNpcName(strName);
+            }
         }
     }
 }
