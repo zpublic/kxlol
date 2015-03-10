@@ -328,6 +328,9 @@
     <ClCompile Include="..\Classes\base\SystemConfig.cpp">
       <Filter>src\base</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameEquipment.cpp">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -600,6 +603,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\base\SystemConfig.h">
       <Filter>src\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameEquipment.h">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
