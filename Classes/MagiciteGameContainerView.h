@@ -24,6 +24,7 @@ public:
     bool getViewInvisible() const;
 
     std::function<void(int)>                                _itemEvent;
+    virtual void onItemUse(int id);
 
     //MagiciteGameControlAble
     virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);

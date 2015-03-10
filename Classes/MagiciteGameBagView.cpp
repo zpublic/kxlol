@@ -29,6 +29,12 @@ bool MagiciteGameBagView::init(int max_size)
     this->setContentSize(Size(_size.width, _block_size));
     this->setAnchorPoint(Vec2(0.5f, 0.5f));
 
+    _cd_node = Node::create();
+    _cd_node->setContentSize(Size(_size.width, _block_size));
+    _cd_node->setAnchorPoint(Point::ZERO);
+    _cd_node->setPosition(Point::ZERO);
+    this->addChild(_cd_node, 1);
+
     auto menu = Menu::create();
     menu->setPosition(Point::ZERO);
 
@@ -36,14 +42,16 @@ bool MagiciteGameBagView::init(int max_size)
     {
         auto node = MenuItem::create();
         node->setCallback([this,i](Ref*){
-            _itemEvent(i - 1);
+           this->onItemUse(i - 1);
         });
+
         node->setPosition(Vec2(_origin.x + Id2Pos(i), _origin.y - _offset));
         node->setContentSize(Size(_block_size, _block_size));
         node->setAnchorPoint(Point::ZERO);
         auto color = LayerColor::create(Color4B(0xee, 0xee, 0xee, 0x80));
         color->setContentSize(Size(_block_size, _block_size));
         node->addChild(color);
+
         char c[10];
         std::sprintf(c, "%d", i - 1);
         auto font = Label::createWithSystemFont(c, "Arial", 40);
@@ -102,4 +110,29 @@ MagiciteGameBagView* MagiciteGameBagView::create(int max_size/* = DEFAULT_MAX_SI
         CC_SAFE_DELETE(ptr);
         return nullptr;
     }
+}
+
+void MagiciteGameBagView::onItemUse(int id)
+{
+
+    MagiciteGameContainerView::onItemUse(id);
+
+    auto cd_sprite = Sprite::create("img\\Magicite\\Item\\cd.png");
+    auto pt = ProgressTimer::create(cd_sprite);
+    pt->setReverseProgress(true);
+    pt->setType(kCCProgressTimerTypeRadial);
+    pt->setAnchorPoint(Point::ZERO);
+    pt->setPosition(_origin.x + Id2Pos(id + 1), _origin.y - _offset);
+    pt->setScale(_block_size / cd_sprite->getContentSize().width, _block_size / cd_sprite->getContentSize().width);
+    pt->setOpacity(80);
+    _cd_node->addChild(pt);
+
+    auto progressAction = ProgressFromTo::create(3.0f, 0.0f, 100.0f);
+    auto progressCallback = CallFuncN::create(this, callfuncN_selector(MagiciteGameBagView::progressCallback));
+    pt->runAction(Sequence::create(progressAction, progressCallback, nullptr));
+}
+
+void MagiciteGameBagView::progressCallback(cocos2d::Node* node)
+{
+    node->removeFromParentAndCleanup(true);
 }

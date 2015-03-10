@@ -58,34 +58,34 @@ void MagiciteGameContainerView::onKeyPressed(cocos2d::EventKeyboard::KeyCode key
     switch (keyCode)
     {
     case EventKeyboard::KeyCode::KEY_0:
-        _itemEvent(9);
+        this->onItemUse(9);
         break;
     case EventKeyboard::KeyCode::KEY_1:
-        _itemEvent(0);
+        this->onItemUse(0);
         break;
     case EventKeyboard::KeyCode::KEY_2:
-        _itemEvent(1);
+        this->onItemUse(1);
         break;
     case EventKeyboard::KeyCode::KEY_3:
-        _itemEvent(2);
+        this->onItemUse(2);
         break;
     case EventKeyboard::KeyCode::KEY_4:
-        _itemEvent(3);
+        this->onItemUse(3);
         break;
     case EventKeyboard::KeyCode::KEY_5:
-        _itemEvent(4);
+        this->onItemUse(4);
         break;
     case EventKeyboard::KeyCode::KEY_6:
-        _itemEvent(5);
+        this->onItemUse(5);
         break;
     case EventKeyboard::KeyCode::KEY_7:
-        _itemEvent(6);
+        this->onItemUse(6);
         break;
     case EventKeyboard::KeyCode::KEY_8:
-        _itemEvent(7);
+        this->onItemUse(7);
         break;
     case EventKeyboard::KeyCode::KEY_9:
-        _itemEvent(8);
+        this->onItemUse(8);
         break;
     default:
         break;
@@ -95,4 +95,9 @@ void MagiciteGameContainerView::onKeyPressed(cocos2d::EventKeyboard::KeyCode key
 void MagiciteGameContainerView::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
 
+}
+
+void MagiciteGameContainerView::onItemUse(int id)
+{
+    _itemEvent(id);
 }
