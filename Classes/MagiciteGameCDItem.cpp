@@ -54,7 +54,7 @@ bool MagiciteGameCDItem::init()
     auto cd_sprite = Sprite::create("img\\Magicite\\Item\\cd.png");
     _cdView = ProgressTimer::create(cd_sprite);
     _cdView->setReverseProgress(true);
-    _cdView->setType(kCCProgressTimerTypeRadial);
+    _cdView->setType(ProgressTimer::Type::RADIAL);
     _cdView->setOpacity(80);
     _cdView->setVisible(false);
     this->addChild(_cdView, 1);
@@ -73,15 +73,12 @@ void MagiciteGameCDItem::startCd(float n)
         _cdView->setScale(getContentSize().width / 100, getContentSize().height / 100);
 
         auto progressAction = ProgressFromTo::create(n, 0.0f, 100.0f);
-        auto progressCallback = CallFunc::create(this, callfunc_selector(MagiciteGameCDItem::CDCallBack));
+        auto progressCallback = CallFunc::create([this](){
+            this->setEnabled(true);
+            _cdView->setVisible(false);
+        });
         _cdView->runAction(Sequence::create(progressAction, progressCallback, nullptr));
     }
-}
-
-void MagiciteGameCDItem::CDCallBack(void)
-{
-    this->setEnabled(true);
-    _cdView->setVisible(false);
 }
 
 void MagiciteGameCDItem::setCD(float n)
