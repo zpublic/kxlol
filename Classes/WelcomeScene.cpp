@@ -84,6 +84,7 @@ bool WelcomeScene::init()
 
 void WelcomeScene::onEnter()
 {
+    Layer::onEnter();
     Director::getInstance()->replaceScene(MagiciteBeginMenu::create());
 }
 
