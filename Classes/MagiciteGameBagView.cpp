@@ -44,7 +44,6 @@ bool MagiciteGameBagView::init(int max_size)
     {
         auto node = MagiciteGameCDItem::create();
         node->setCallback([this, i, node](Ref*){
-           node->startCd(node->getCD());
            this->onItemUse(i - 1);
         });
 
@@ -125,7 +124,7 @@ void MagiciteGameBagView::onItemUse(int id)
 {
     if (_itemArray[id]->isEnabled())
     {
-        _itemArray[id]->startCd(_itemArray[id]->getCD());
         MagiciteGameContainerView::onItemUse(id);
+        _itemArray[id]->startCd(_itemArray[id]->getCD());
     }
 }
