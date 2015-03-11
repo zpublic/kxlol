@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 #include "MagiciteGameContainerView.h"
 
+class MagiciteGameCDItem;
+
 class MagiciteGameBagView : public MagiciteGameContainerView
 {
 public:
@@ -23,8 +25,7 @@ public:
 
 protected:
     float Id2Pos(int n);
-    void progressCallback(cocos2d::Node* node);
-
+    std::vector<MagiciteGameCDItem*>                _itemArray;
     cocos2d::Size                                   _size;
     cocos2d::Vec2                                   _origin;
     cocos2d::Node*                                  _cd_node;

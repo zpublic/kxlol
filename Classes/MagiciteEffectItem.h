@@ -2,7 +2,6 @@
 #define __MAGICITE_EFFECT_ITEM__
 
 #include "MagiciteItem.h"
-#include <chrono>
 
 class MagiciteEffect;
 
@@ -18,15 +17,14 @@ public:
 
     virtual void positive(MagiciteGameObject* obj);
 
-    long long getCd() const;
+    float getCd() const;
 
 protected:
     void setEffect(MagiciteEffect* effect);
-    void setCd(long long cd);
+    void setCd(float cd);
 
     MagiciteEffect*                         _effect;
-    long long                               _cool_down; //milliseconds
-    std::chrono::system_clock::time_point   _last_time;
+    float                                   _cool_down; //milliseconds
 };
 
 #endif //__MAGICITE_EFFECT_ITEM__

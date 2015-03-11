@@ -1,5 +1,7 @@
 #include "MagiciteGameBagView.h"
 #include "MagiciteItem.h"
+#include "MagiciteGameCDItem.h"
+#include "MagiciteEffectItem.h"
 
 USING_NS_CC;
 
@@ -40,8 +42,9 @@ bool MagiciteGameBagView::init(int max_size)
 
     for (int i = 1; i <= _max_size; ++i)
     {
-        auto node = MenuItem::create();
-        node->setCallback([this,i](Ref*){
+        auto node = MagiciteGameCDItem::create();
+        node->setCallback([this, i, node](Ref*){
+           node->startCd(node->getCD());
            this->onItemUse(i - 1);
         });
 
@@ -51,9 +54,10 @@ bool MagiciteGameBagView::init(int max_size)
         auto color = LayerColor::create(Color4B(0xee, 0xee, 0xee, 0x80));
         color->setContentSize(Size(_block_size, _block_size));
         node->addChild(color);
+        _itemArray.push_back(node);
 
         char c[10];
-        std::sprintf(c, "%d", i - 1);
+        std::sprintf(c, "%d", i);
         auto font = Label::createWithSystemFont(c, "Arial", 40);
         font->setPosition(Vec2(node->getContentSize().width / 2, node->getContentSize().height / 2));
         node->addChild(font);
@@ -76,8 +80,12 @@ void MagiciteGameBagView::addItem(MagiciteItem* item)
         if (iter != _list->end())
         {
             MagiciteGameContainerView::addItem(item, iter);
-            item->setPosition(Vec2(_origin.x + Id2Pos(iter - _list->begin() + 1) + _block_size / 2, _origin.y - _offset + _block_size / 2));
-            this->addChild(item);
+            _itemArray[iter - _list->begin()]->setItemView(item);
+            if (item->_itemType == MagiciteItem::EffectItem)
+            {
+                _itemArray[iter - _list->begin()]->setCDEnable(true);
+                _itemArray[iter - _list->begin()]->setCD(reinterpret_cast<MagiciteEffectItem*>(item)->getCd() / 1000.0f);
+            }
         }
     }
 }
@@ -89,6 +97,7 @@ void MagiciteGameBagView::eraseItem(int num)
     {
         remove_tmp->second->removeFromParentAndCleanup(true);
         MagiciteGameContainerView::eraseItem(remove_tmp);
+        _itemArray[num]->eraseItemView();
     }
 }
 
@@ -114,25 +123,9 @@ MagiciteGameBagView* MagiciteGameBagView::create(int max_size/* = DEFAULT_MAX_SI
 
 void MagiciteGameBagView::onItemUse(int id)
 {
-
-    MagiciteGameContainerView::onItemUse(id);
-
-    auto cd_sprite = Sprite::create("img\\Magicite\\Item\\cd.png");
-    auto pt = ProgressTimer::create(cd_sprite);
-    pt->setReverseProgress(true);
-    pt->setType(kCCProgressTimerTypeRadial);
-    pt->setAnchorPoint(Point::ZERO);
-    pt->setPosition(_origin.x + Id2Pos(id + 1), _origin.y - _offset);
-    pt->setScale(_block_size / cd_sprite->getContentSize().width, _block_size / cd_sprite->getContentSize().width);
-    pt->setOpacity(80);
-    _cd_node->addChild(pt);
-
-    auto progressAction = ProgressFromTo::create(3.0f, 0.0f, 100.0f);
-    auto progressCallback = CallFuncN::create(this, callfuncN_selector(MagiciteGameBagView::progressCallback));
-    pt->runAction(Sequence::create(progressAction, progressCallback, nullptr));
-}
-
-void MagiciteGameBagView::progressCallback(cocos2d::Node* node)
-{
-    node->removeFromParentAndCleanup(true);
+    if (_itemArray[id]->isEnabled())
+    {
+        _itemArray[id]->startCd(_itemArray[id]->getCD());
+        MagiciteGameContainerView::onItemUse(id);
+    }
 }
