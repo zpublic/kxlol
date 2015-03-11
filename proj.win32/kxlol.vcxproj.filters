@@ -88,6 +88,9 @@
     <Filter Include="Magicite\GameLogic\Object\Living\life_bar">
       <UniqueIdentifier>{d771e647-80a3-471b-b8d6-72f7399afcba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Network">
+      <UniqueIdentifier>{8f336a02-ae13-4e57-adb2-93cf9073a263}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -328,6 +331,8 @@
     <ClCompile Include="..\Classes\base\SystemConfig.cpp">
       <Filter>src\base</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Network\ClientConnection.cpp">
+      <Filter>src\Network</Filter>
     <ClCompile Include="..\Classes\MagiciteGameEquipment.cpp">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClCompile>
@@ -604,6 +609,8 @@
     <ClInclude Include="..\Classes\base\SystemConfig.h">
       <Filter>src\base</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Network\ClientConnection.h">
+      <Filter>src\Network</Filter>
     <ClInclude Include="..\Classes\MagiciteGameEquipment.h">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClInclude>
