@@ -84,7 +84,7 @@ void MagiciteGameBagView::addItem(MagiciteItem* item)
             if (item->_itemType == MagiciteItem::EffectItem)
             {
                 _itemArray[iter - _list->begin()]->setCDEnable(true);
-                _itemArray[iter - _list->begin()]->setCD(reinterpret_cast<MagiciteEffectItem*>(item)->getCd() / 1000.0f);
+                _itemArray[iter - _list->begin()]->setCD(reinterpret_cast<MagiciteEffectItem*>(item)->getCd());
             }
         }
     }

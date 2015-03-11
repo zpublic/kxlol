@@ -82,7 +82,7 @@ bool MagiciteEffectFlash::init(MagiciteGamePhyLayer* phyLayer, float length)
     _phyLayer = phyLayer;
     _length = length;
 
-    setCd(cool_down);
+    setCd(3.0f);
 
     return true;
 }

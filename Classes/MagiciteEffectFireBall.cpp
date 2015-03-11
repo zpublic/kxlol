@@ -41,7 +41,7 @@ bool MagiciteEffectFireBall::init(MagiciteGamePhyLayer* phyLayer)
 {
     _phyLayer = phyLayer;
 
-    setCd(cool_down);
+    setCd(1.0f);
 
     return true;
 }

@@ -8,8 +8,6 @@ class MagiciteEffectSprint :public MagiciteEffectBuffer
 {
 public:
 
-    enum : long long { cool_down = 3000 }; //milliseconds
-
     MagiciteEffectSprint();
 
     static const int sprint_speed_seed = 3;
