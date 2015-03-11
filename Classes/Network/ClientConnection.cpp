@@ -7,6 +7,7 @@
 #endif
 
 #define LOG_DEBUG printf
+
 #if PLATFORM_IS_WINDOWS
 struct WinSockLibLoader {
     WinSockLibLoader() {
