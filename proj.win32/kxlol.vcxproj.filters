@@ -333,7 +333,11 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Network\ClientConnection.cpp">
       <Filter>src\Network</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameEquipment.cpp">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameCDItem.cpp">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClCompile>
   </ItemGroup>
@@ -611,7 +615,11 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Network\ClientConnection.h">
       <Filter>src\Network</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameEquipment.h">
+      <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameCDItem.h">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClInclude>
   </ItemGroup>

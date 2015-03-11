@@ -1,5 +1,7 @@
 #include "MagiciteGameBagView.h"
 #include "MagiciteItem.h"
+#include "MagiciteGameCDItem.h"
+#include "MagiciteEffectItem.h"
 
 USING_NS_CC;
 
@@ -29,23 +31,32 @@ bool MagiciteGameBagView::init(int max_size)
     this->setContentSize(Size(_size.width, _block_size));
     this->setAnchorPoint(Vec2(0.5f, 0.5f));
 
+    _cd_node = Node::create();
+    _cd_node->setContentSize(Size(_size.width, _block_size));
+    _cd_node->setAnchorPoint(Point::ZERO);
+    _cd_node->setPosition(Point::ZERO);
+    this->addChild(_cd_node, 1);
+
     auto menu = Menu::create();
     menu->setPosition(Point::ZERO);
 
     for (int i = 1; i <= _max_size; ++i)
     {
-        auto node = MenuItem::create();
-        node->setCallback([this,i](Ref*){
-            _itemEvent(i - 1);
+        auto node = MagiciteGameCDItem::create();
+        node->setCallback([this, i, node](Ref*){
+           this->onItemUse(i - 1);
         });
+
         node->setPosition(Vec2(_origin.x + Id2Pos(i), _origin.y - _offset));
         node->setContentSize(Size(_block_size, _block_size));
         node->setAnchorPoint(Point::ZERO);
         auto color = LayerColor::create(Color4B(0xee, 0xee, 0xee, 0x80));
         color->setContentSize(Size(_block_size, _block_size));
         node->addChild(color);
+        _itemArray.push_back(node);
+
         char c[10];
-        std::sprintf(c, "%d", i - 1);
+        std::sprintf(c, "%d", i);
         auto font = Label::createWithSystemFont(c, "Arial", 40);
         font->setPosition(Vec2(node->getContentSize().width / 2, node->getContentSize().height / 2));
         node->addChild(font);
@@ -68,8 +79,12 @@ void MagiciteGameBagView::addItem(MagiciteItem* item)
         if (iter != _list->end())
         {
             MagiciteGameContainerView::addItem(item, iter);
-            item->setPosition(Vec2(_origin.x + Id2Pos(iter - _list->begin() + 1) + _block_size / 2, _origin.y - _offset + _block_size / 2));
-            this->addChild(item);
+            _itemArray[iter - _list->begin()]->setItemView(item);
+            if (item->_itemType == MagiciteItem::EffectItem)
+            {
+                _itemArray[iter - _list->begin()]->setCDEnable(true);
+                _itemArray[iter - _list->begin()]->setCD(reinterpret_cast<MagiciteEffectItem*>(item)->getCd());
+            }
         }
     }
 }
@@ -81,6 +96,7 @@ void MagiciteGameBagView::eraseItem(int num)
     {
         remove_tmp->second->removeFromParentAndCleanup(true);
         MagiciteGameContainerView::eraseItem(remove_tmp);
+        _itemArray[num]->eraseItemView();
     }
 }
 
@@ -101,5 +117,14 @@ MagiciteGameBagView* MagiciteGameBagView::create(int max_size/* = DEFAULT_MAX_SI
     {
         CC_SAFE_DELETE(ptr);
         return nullptr;
+    }
+}
+
+void MagiciteGameBagView::onItemUse(int id)
+{
+    if (_itemArray[id]->isEnabled())
+    {
+        MagiciteGameContainerView::onItemUse(id);
+        _itemArray[id]->startCd(_itemArray[id]->getCD());
     }
 }

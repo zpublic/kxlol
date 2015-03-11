@@ -8,7 +8,7 @@
 class MagiciteItemContainer;
 class MagiciteItem;
 
-class MagiciteGameContainerView : public MagiciteGameObject
+class MagiciteGameContainerView : public MagiciteGameObject, public MagiciteGameControlAble
 {
 public:
     MagiciteGameContainerView();
@@ -24,6 +24,11 @@ public:
     bool getViewInvisible() const;
 
     std::function<void(int)>                                _itemEvent;
+    virtual void onItemUse(int id);
+
+    //MagiciteGameControlAble
+    virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
+    virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
 protected:
     MagiciteItemContainer*                                  _container;

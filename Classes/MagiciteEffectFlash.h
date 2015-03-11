@@ -11,8 +11,6 @@ class MagiciteEffectFlash : public MagiciteEffectPositive
 {
 public:
 
-    enum : long long { cool_down = 3000 }; //milliseconds
-
     MagiciteEffectFlash();
 
     //MagiciteEffectPositive
