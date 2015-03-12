@@ -17,5 +17,7 @@ bool MagiciteGameMeteorite::init()
         return false;
     }
 
+    setSpeed(meteorite_speed);
+
     return true;
 }

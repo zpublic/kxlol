@@ -6,6 +6,8 @@
 class MagiciteGameMeteorite : public MagiciteGameMovePitfall
 {
 public:
+    enum : int{ meteorite_speed = 5 };
+
     MagiciteGameMeteorite();
     ~MagiciteGameMeteorite();
 
