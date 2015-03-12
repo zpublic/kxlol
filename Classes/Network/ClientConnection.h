@@ -36,25 +36,25 @@ public:
     bool peekBuf(std::vector<char> *buf);
 
 private:
-    ClientConnection(const ClientConnection &) = delete;
-    ClientConnection(ClientConnection &&) = delete;
-    ClientConnection &operator=(const ClientConnection &) = delete;
-    ClientConnection &operator=(ClientConnection &&) = delete;
+    ClientConnection(const ClientConnection &);
+    ClientConnection(ClientConnection &&);
+    ClientConnection &operator=(const ClientConnection &);
+    ClientConnection &operator=(ClientConnection &&);
 
-    SOCKET                          _socket             = INVALID_SOCKET;
-    std::thread                     *_connectThread     = nullptr;
-    volatile bool                   _isWaiting          = true;
-    volatile bool                   _isConnectSuccess   = false;
+    SOCKET                          _socket;
+    std::thread                     *_connectThread;
+    volatile bool                   _isWaiting;
+    volatile bool                   _isConnectSuccess;
 
-    std::thread                     *_sendThread        = nullptr;
+    std::thread                     *_sendThread;
     std::mutex                      _sendMutex;
     std::deque<std::vector<char> >  _sendQueue;
-    volatile bool                   _sendNeedQuit       = false;
+    volatile bool                   _sendNeedQuit;
 
-    std::thread                     *_recvThread        = nullptr;
+    std::thread                     *_recvThread;
     std::mutex                      _recvMutex;
     std::deque<std::vector<char> >  _recvQueue;
-    volatile bool                   _recvNeedQuit       = false;
+    volatile bool                   _recvNeedQuit;
 
     void _connectToServer(const char *ip, unsigned short port);
     void _recvThreadFunc();
