@@ -24,6 +24,7 @@
 #include "MagiciteGamePackView.h"
 #include "MagiciteGameNPC.h"
 #include "MagiciteGameEquipment.h"
+#include "MagiciteGameMeteorite.h"
 
 USING_NS_CC;
 
@@ -128,6 +129,12 @@ bool MagiciteGameLayer::init()
     auto earthquake = Repeat::create(Sequence::create(RotateTo::create(0.1f, 1.5f), RotateTo::create(0.1f, -1.5f), nullptr), 5);
     auto earthquakeReset = RotateTo::create(0.0f, 0.0f);
     this->runAction(Sequence::create(earthquake, earthquakeReset, nullptr));
+
+    auto stone = MagiciteGameMeteorite::create();
+    stone->setPosition(_origin.x + _visibleSize.width / 2, _origin.y + _visibleSize.height);
+    _phyLayer->createPhyBody(stone, false); 
+    stone->Move(MagiciteGameMoveAble::left);
+    _phyLayer->addChild(stone);
 
     return true;
 }

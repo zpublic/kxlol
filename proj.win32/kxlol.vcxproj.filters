@@ -340,6 +340,12 @@
     <ClCompile Include="..\Classes\MagiciteGameCDItem.cpp">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameMovePitfall.cpp">
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameMeteorite.cpp">
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -621,6 +627,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameCDItem.h">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameMovePitfall.h">
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameMeteorite.h">
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
