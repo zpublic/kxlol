@@ -33,6 +33,7 @@ public:
 	void update(float timeDelta);
 
     void init_contact();
+    void init_map_data(cocos2d::TMXTiledMap*);
 
     void create_end_cube(cocos2d::TMXObjectGroup*);
     void create_player(cocos2d::TMXObjectGroup*);
@@ -40,6 +41,7 @@ public:
     void create_pitfall(cocos2d::TMXObjectGroup*);
     void create_ground(cocos2d::TMXObjectGroup*);
     void create_NPC(cocos2d::TMXObjectGroup*);
+    void create_item(cocos2d::TMXObjectGroup*);
 
     void use_weather(MagiciteWeather* weather);
 
