@@ -55,7 +55,7 @@ bool MagiciteGameCDItem::init()
     _cdView = ProgressTimer::create(cd_sprite);
     _cdView->setReverseProgress(true);
     _cdView->setType(ProgressTimer::Type::RADIAL);
-    _cdView->setOpacity(80);
+    _cdView->setOpacity(180);
     _cdView->setVisible(false);
     this->addChild(_cdView, 1);
 

@@ -172,6 +172,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteGameControlAble.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameDirt.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameFireball.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameFragileGround.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameGround.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameHuman.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameIncubator.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameMeteorite.cpp" />
@@ -267,6 +269,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGameControlAble.h" />
     <ClInclude Include="..\Classes\MagiciteGameDirt.h" />
     <ClInclude Include="..\Classes\MagiciteGameFireball.h" />
+    <ClInclude Include="..\Classes\MagiciteGameFragileGround.h" />
+    <ClInclude Include="..\Classes\MagiciteGameGround.h" />
     <ClInclude Include="..\Classes\MagiciteGameHuman.h" />
     <ClInclude Include="..\Classes\MagiciteGameIncubator.h" />
     <ClInclude Include="..\Classes\MagiciteGameMeteorite.h" />

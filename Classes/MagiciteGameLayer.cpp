@@ -25,6 +25,8 @@
 #include "MagiciteGameNPC.h"
 #include "MagiciteGameEquipment.h"
 #include "MagiciteGameMeteorite.h"
+#include "MagiciteGameGround.h"
+#include "MagiciteGameFragileGround.h"
 
 USING_NS_CC;
 
@@ -114,6 +116,11 @@ bool MagiciteGameLayer::init()
     _phyLayer->createPhyBody(stone, false); 
     stone->Move(MagiciteGameMoveAble::left);
     _phyLayer->addChild(stone);
+
+    auto ground_f = MagiciteGameFragileGround::create();
+    ground_f->setPosition(Vec2(_visibleSize.width / 2, _visibleSize.height / 2));
+    _phyLayer->createPhyBody(ground_f, true);
+    _phyLayer->addChild(ground_f);
 
     return true;
 }
@@ -326,7 +333,7 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
             float w = vm.at("width").asFloat();
             float h = vm.at("height").asFloat();
             float y = vm.at("y").asFloat();
-            auto node = MagiciteGameObject::create();
+            auto node = MagiciteGameGround::create();
             node->setPosition(Vec2(x, y));
             node->setContentSize(Size(w, h));
             node->setAnchorPoint(Point::ZERO);
