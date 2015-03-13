@@ -10,6 +10,9 @@ public:
     ~MagiciteGameGround();
 
     virtual bool init();
+    virtual bool initWithFile(const char* filename);
+
+    virtual void onStep();
 
     CREATE_FUNC(MagiciteGameGround);
 };

@@ -352,6 +352,9 @@
     <ClCompile Include="..\Classes\MagiciteGameGround.cpp">
       <Filter>Magicite\GameLogic\Object\Ground</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameFragileGround.cpp">
+      <Filter>Magicite\GameLogic\Object\Ground</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -641,6 +644,9 @@
       <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameGround.h">
+      <Filter>Magicite\GameLogic\Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameFragileGround.h">
       <Filter>Magicite\GameLogic\Object\Ground</Filter>
     </ClInclude>
   </ItemGroup>

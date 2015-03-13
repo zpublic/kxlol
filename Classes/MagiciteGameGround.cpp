@@ -19,3 +19,18 @@ bool MagiciteGameGround::init()
     }
     return true;
 }
+
+bool MagiciteGameGround::initWithFile(const char* filename)
+{
+    if (!MagiciteGameObject::initWithFile(filename))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+void MagiciteGameGround::onStep()
+{
+
+}

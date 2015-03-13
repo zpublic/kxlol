@@ -26,6 +26,7 @@
 #include "MagiciteGameEquipment.h"
 #include "MagiciteGameMeteorite.h"
 #include "MagiciteGameGround.h"
+#include "MagiciteGameFragileGround.h"
 
 USING_NS_CC;
 
@@ -115,6 +116,11 @@ bool MagiciteGameLayer::init()
     _phyLayer->createPhyBody(stone, false); 
     stone->Move(MagiciteGameMoveAble::left);
     _phyLayer->addChild(stone);
+
+    auto ground_f = MagiciteGameFragileGround::create();
+    ground_f->setPosition(Vec2(_visibleSize.width / 2, _visibleSize.height / 2));
+    _phyLayer->createPhyBody(ground_f, true);
+    _phyLayer->addChild(ground_f);
 
     return true;
 }

@@ -1,5 +1,6 @@
 #include "MagiciteGameContact.h"
 #include "MagiciteGameObject.h"
+#include "MagiciteGameGround.h"
 #include "MagiciteGameLiving.h"
 #include "MagiciteGamePitfall.h"
 #include "MagiciteGameFireball.h"
@@ -148,12 +149,17 @@ void MagiciteGameContact::resiger_contact()
 void MagiciteGameContact::try_living_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
     MagiciteGameMoveAbleLiving* living = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
-    MagiciteGameObject* ground = objectB;
+    MagiciteGameGround* ground = reinterpret_cast<MagiciteGameGround*>(objectB);
+
     if (MagiciteGameContact::is_moveable_on_ground(living, ground))
     {
         if (MagiciteGameContact::is_moveable_above_ground(living, ground))
         {
             living->JumpOver();
+            if (living->_is_contraled)
+            {
+                ground->onStep();
+            }
         }
     }
     else
