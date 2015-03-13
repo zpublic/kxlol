@@ -25,6 +25,7 @@
 #include "MagiciteGameNPC.h"
 #include "MagiciteGameEquipment.h"
 #include "MagiciteGameMeteorite.h"
+#include "MagiciteGameGround.h"
 
 USING_NS_CC;
 
@@ -326,7 +327,7 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
             float w = vm.at("width").asFloat();
             float h = vm.at("height").asFloat();
             float y = vm.at("y").asFloat();
-            auto node = MagiciteGameObject::create();
+            auto node = MagiciteGameGround::create();
             node->setPosition(Vec2(x, y));
             node->setContentSize(Size(w, h));
             node->setAnchorPoint(Point::ZERO);
