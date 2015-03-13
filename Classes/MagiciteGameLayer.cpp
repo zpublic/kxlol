@@ -24,6 +24,7 @@
 #include "MagiciteGamePackView.h"
 #include "MagiciteGameNPC.h"
 #include "MagiciteGameEquipment.h"
+#include "MagiciteGameMeteorite.h"
 
 USING_NS_CC;
 
@@ -85,49 +86,34 @@ bool MagiciteGameLayer::init()
     std::sprintf(tiledPath, "img\\Magicite\\map\\level%d.tmx", MagiciteScene::getLevel() % 5);
     TMXTiledMap* tiled = TMXTiledMap::create(tiledPath);
 
-    TMXObjectGroup* game = tiled->getObjectGroup("game");
-    TMXObjectGroup* ground = tiled->getObjectGroup("physics");
-
     _background = MagiciteGameMap::create(tiled);
     this->addChild(_background);
 
     _phyLayer = MagiciteGamePhyLayer::create(Size(_background->getBackSize().width, _visibleSize.height));
     this->addChild(_phyLayer, 1);
 
-    create_end_cube(game);
-    create_player(game);
+    init_map_data(tiled);
+    init_contact();
 
     auto pet = MagiciteGameIncubator::create();
     pet->setPosition(Vec2(_player->getContentSize().width / -2.0f, _player->getContentSize().height * 1.2f));
     pet->setFloat();
     _player->setPetFollow(pet);
 
-    create_enemy(game);
-    create_pitfall(game);
-    create_ground(ground);
-    create_NPC(game);
-
     use_weather(MagiciteWeatherSnow::create());
 
-    init_contact();
-
-    ValueVector enemyVec = game->getObjects();
-    for (auto it = enemyVec.begin(); it != enemyVec.end(); ++it)
-    {
-        Value obj = *it;
-        ValueMap vm = obj.asValueMap();
-        if (vm.at("type").asString() == "item")
-        {
-            auto item = MagiciteSkillCardFriend::create(MagiciteSkillCardFriend::LivingType::Sheep, _phyLayer);
-            item->setPosition(vm.at("x").asFloat(), vm.at("y").asFloat());
-            _phyLayer->createPhyBody(item, true);
-            _phyLayer->addChild(item);
-        }
-    }
+    //EarthQuake
 
     auto earthquake = Repeat::create(Sequence::create(RotateTo::create(0.1f, 1.5f), RotateTo::create(0.1f, -1.5f), nullptr), 5);
     auto earthquakeReset = RotateTo::create(0.0f, 0.0f);
     this->runAction(Sequence::create(earthquake, earthquakeReset, nullptr));
+
+    //Meteorite
+    auto stone = MagiciteGameMeteorite::create();
+    stone->setPosition(_origin.x + _visibleSize.width / 2, _origin.y + _visibleSize.height);
+    _phyLayer->createPhyBody(stone, false); 
+    stone->Move(MagiciteGameMoveAble::left);
+    _phyLayer->addChild(stone);
 
     return true;
 }
@@ -171,7 +157,6 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
         MagiciteGameControlAble::dispatchKeyPress(keyCode, event, _player);
         break;
     }
-
 }
 
 void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
@@ -223,7 +208,6 @@ void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
     if (MagiciteGameContact::is_in_types(objectTypeA) == false || MagiciteGameContact::is_in_types(objectTypeB) == false) return;
 
     MagiciteGameContact::on_contact[objectTypeA][objectTypeB](objectA, objectB);
-
 }
 
 void MagiciteGameLayer::init_contact()
@@ -272,10 +256,9 @@ void MagiciteGameLayer::create_player(TMXObjectGroup* game)
     bag_view->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
     bag_view->runAction(Follow::create(this));
     this->addChild(bag_view, 999);
-    //_player->getBag()->addItem(MagiciteItemCoin::create());
+
     _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
     _player->getBag()->addItem(MagiciteSkillCardAcid::create(_phyLayer));
-    //_player->getBag()->addItem(MagiciteSkillCardFriend::create(MagiciteSkillCardFriend::LivingType::Sheep, _phyLayer));
     _player->getBag()->addItem(MagiciteSkillCardFlash::create(_phyLayer, 200));
     _player->getBag()->addItem(MagiciteSkillCardSpeedUp::create());
     _player->getBag()->addItem(MagiciteSkillCardSprint::create());
@@ -385,4 +368,36 @@ void MagiciteGameLayer::use_weather(MagiciteWeather* weather)
 {
     auto weatherEffect = weather->getWeatherEffect(Vec2(_background->getBackSize().width, _visibleSize.height));
     weatherEffect->positive(this);
+}
+
+void MagiciteGameLayer::create_item(cocos2d::TMXObjectGroup* game)
+{
+    ValueVector enemyVec = game->getObjects();
+    for (auto it = enemyVec.begin(); it != enemyVec.end(); ++it)
+    {
+        Value obj = *it;
+        ValueMap vm = obj.asValueMap();
+        if (vm.at("type").asString() == "item")
+        {
+            auto item = MagiciteSkillCardFriend::create(MagiciteSkillCardFriend::LivingType::Sheep, _phyLayer);
+            item->setPosition(vm.at("x").asFloat(), vm.at("y").asFloat());
+            _phyLayer->createPhyBody(item, true);
+            _phyLayer->addChild(item);
+        }
+    }
+}
+
+void MagiciteGameLayer::init_map_data(cocos2d::TMXTiledMap* tiledMap)
+{
+    TMXObjectGroup* game = tiledMap->getObjectGroup("game");
+    TMXObjectGroup* ground = tiledMap->getObjectGroup("physics");
+
+    create_end_cube(game);
+    create_player(game);
+
+    create_enemy(game);
+    create_pitfall(game);
+    create_ground(ground);
+    create_NPC(game);
+    create_item(game);
 }

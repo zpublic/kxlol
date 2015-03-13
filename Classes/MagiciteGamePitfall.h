@@ -10,6 +10,7 @@ public:
     enum Type{
         hold,
         Spine,
+        Meteorite,
     }PiffallType;
 
     MagiciteGamePitfall(Type type = hold);
