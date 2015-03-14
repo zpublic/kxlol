@@ -16,6 +16,7 @@ public:
         T_End,
         T_Ammo,
         T_Item,
+        T_Portal,
     }ObjType;
 
     MagiciteGameObject(Type type = T_Unknow);

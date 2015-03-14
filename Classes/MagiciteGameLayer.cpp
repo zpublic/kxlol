@@ -27,6 +27,8 @@
 #include "MagiciteGameMeteorite.h"
 #include "MagiciteGameGround.h"
 #include "MagiciteGameFragileGround.h"
+#include "MagiciteGameDefaultPortalPair.h"
+#include "MagiciteGamePortal.h"
 
 USING_NS_CC;
 
@@ -117,10 +119,23 @@ bool MagiciteGameLayer::init()
     stone->Move(MagiciteGameMoveAble::left);
     _phyLayer->addChild(stone);
 
+    //FragileGround
     auto ground_f = MagiciteGameFragileGround::create();
     ground_f->setPosition(Vec2(_visibleSize.width / 2, _visibleSize.height / 2));
     _phyLayer->createPhyBody(ground_f, true);
     _phyLayer->addChild(ground_f);
+
+    //Portal
+    auto portal = MagiciteGameDefaultPortalPair::create();
+    auto sub_portalA = portal->PortalA();
+    auto sub_portalB = portal->PortalB();
+    sub_portalA->setPosition(Vec2(_visibleSize.width * 0.4, _visibleSize.height * 0.4));
+    sub_portalB->setPosition(Vec2(_visibleSize.width * 0.7, _visibleSize.height * 0.4));
+    _phyLayer->createPhyBody(sub_portalA, true);
+    _phyLayer->createPhyBody(sub_portalB, true);
+
+    _phyLayer->addChild(sub_portalA);
+    _phyLayer->addChild(sub_portalB);
 
     return true;
 }
