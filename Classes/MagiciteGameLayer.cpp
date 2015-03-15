@@ -125,17 +125,17 @@ bool MagiciteGameLayer::init()
     _phyLayer->createPhyBody(ground_f, true);
     _phyLayer->addChild(ground_f);
 
-    //Portal
-    auto portal = MagiciteGameDefaultPortalPair::create();
-    auto sub_portalA = portal->PortalA();
-    auto sub_portalB = portal->PortalB();
-    sub_portalA->setPosition(Vec2(_visibleSize.width * 0.4, _visibleSize.height * 0.4));
-    sub_portalB->setPosition(Vec2(_visibleSize.width * 0.7, _visibleSize.height * 0.4));
-    _phyLayer->createPhyBody(sub_portalA, true);
-    _phyLayer->createPhyBody(sub_portalB, true);
+    ////Portal
+    //auto portal = MagiciteGameDefaultPortalPair::create();
+    //auto sub_portalA = portal->PortalA();
+    //auto sub_portalB = portal->PortalB();
+    //sub_portalA->setPosition(Vec2(_visibleSize.width * 0.4, _visibleSize.height * 0.4));
+    //sub_portalB->setPosition(Vec2(_visibleSize.width * 0.7, _visibleSize.height * 0.4));
+    //_phyLayer->createPhyBody(sub_portalA, true);
+    //_phyLayer->createPhyBody(sub_portalB, true);
 
-    _phyLayer->addChild(sub_portalA);
-    _phyLayer->addChild(sub_portalB);
+    //_phyLayer->addChild(sub_portalA);
+    //_phyLayer->addChild(sub_portalB);
 
     return true;
 }

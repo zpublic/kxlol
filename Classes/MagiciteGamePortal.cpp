@@ -30,3 +30,13 @@ bool MagiciteGamePortal:: initWithFile(const char* filename)
 
     return true;
 }
+
+MagiciteGamePortal* MagiciteGamePortal::getPair()
+{
+    return _pair;
+}
+
+void MagiciteGamePortal::setPair(MagiciteGamePortal* pair)
+{
+    _pair = pair;
+}

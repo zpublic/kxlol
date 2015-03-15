@@ -12,7 +12,12 @@ public:
     virtual bool init();
     virtual bool initWithFile(const char* filename);
 
+    MagiciteGamePortal* getPair();
+    void setPair(MagiciteGamePortal*);
+
     CREATE_FUNC(MagiciteGamePortal);
+protected:
+    MagiciteGamePortal*             _pair;
 };
 
 #endif //__MAGICITE_GAME_PROTAL__

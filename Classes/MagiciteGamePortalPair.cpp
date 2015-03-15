@@ -28,6 +28,9 @@ bool MagiciteGamePortalPair::init()
         return false;
     }
 
+    _portalA->setPair(_portalB);
+    _portalB->setPair(_portalA);
+
     _portalA->retain();
     _portalB->retain();
 
