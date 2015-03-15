@@ -35,15 +35,15 @@ bool MagiciteBeginMenu::init()
     menu->setPosition(cocos2d::Point::ZERO);
     this->addChild(menu);
 
-    ttfFont = cocos2d::Label::createWithTTF("Select Pass", "fonts/Marker Felt.ttf", 32.0f, cocos2d::Size::ZERO,cocos2d::TextHAlignment::RIGHT);
+    /*ttfFont = cocos2d::Label::createWithTTF("Select Pass", "fonts/Marker Felt.ttf", 32.0f, cocos2d::Size::ZERO,cocos2d::TextHAlignment::RIGHT);
     menuItem = cocos2d::MenuItemLabel::create(ttfFont, [&](Ref*){
-        cocos2d::Director::getInstance()->replaceScene(MagiciteGameSelectLevel::create());
+    cocos2d::Director::getInstance()->replaceScene(MagiciteGameSelectLevel::create());
     });
     menuItem->setAnchorPoint(cocos2d::Vec2(1, 0.5));
     menuItem->setPosition(origin.x + visibleSize.width - 40, origin.y + 150);
     menu = cocos2d::Menu::create(menuItem, nullptr);
     menu->setPosition(cocos2d::Point::ZERO);
-    this->addChild(menu);
+    this->addChild(menu);*/
 
     ttfFont = cocos2d::Label::createWithTTF("Piano", "fonts/Marker Felt.ttf", 32.0f, cocos2d::Size::ZERO,cocos2d::TextHAlignment::RIGHT);
     menuItem = cocos2d::MenuItemLabel::create(ttfFont, [&](Ref*){

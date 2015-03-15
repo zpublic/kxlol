@@ -149,7 +149,7 @@ void MagiciteGameLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, co
         MagiciteGamePause::Pause(this);
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_TAB:
-        _player->switchBagInvisible();
+        //_player->switchBagInvisible();
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_P:
         {
@@ -279,11 +279,13 @@ void MagiciteGameLayer::create_player(TMXObjectGroup* game)
     bag_view->runAction(Follow::create(this));
     this->addChild(bag_view, 999);
 
-    _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
-    _player->getBag()->addItem(MagiciteSkillCardAcid::create(_phyLayer));
-    _player->getBag()->addItem(MagiciteSkillCardFlash::create(_phyLayer, 200));
-    _player->getBag()->addItem(MagiciteSkillCardSpeedUp::create());
-    _player->getBag()->addItem(MagiciteSkillCardSprint::create());
+    _player->switchBagInvisible();
+
+    //_player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
+    //_player->getBag()->addItem(MagiciteSkillCardAcid::create(_phyLayer));
+    //_player->getBag()->addItem(MagiciteSkillCardFlash::create(_phyLayer, 200));
+    //_player->getBag()->addItem(MagiciteSkillCardSpeedUp::create());
+    //_player->getBag()->addItem(MagiciteSkillCardSprint::create());
 }
 
 void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
@@ -421,5 +423,5 @@ void MagiciteGameLayer::init_map_data(cocos2d::TMXTiledMap* tiledMap)
     create_pitfall(game);
     create_ground(ground);
     create_NPC(game);
-    create_item(game);
+    //create_item(game);
 }
