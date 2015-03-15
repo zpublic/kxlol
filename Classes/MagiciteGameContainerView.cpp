@@ -57,9 +57,6 @@ void MagiciteGameContainerView::onKeyPressed(cocos2d::EventKeyboard::KeyCode key
 {
     switch (keyCode)
     {
-    case EventKeyboard::KeyCode::KEY_0:
-        this->onItemUse(9);
-        break;
     case EventKeyboard::KeyCode::KEY_1:
         this->onItemUse(0);
         break;
