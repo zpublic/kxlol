@@ -6,6 +6,7 @@
 #include "MagiciteGameFireball.h"
 #include "MagiciteGameMoveAbleLiving.h"
 #include "MagiciteGameFactoryMethod.h"
+#include "MagiciteGamePortal.h"
 
 std::function<void(void)> MagiciteGameContact::_onWin;
 std::function<void(void)> MagiciteGameContact::_onOver;
@@ -81,12 +82,14 @@ void MagiciteGameContact::resiger_contact()
     on_contact[Contact_type::end_type][Contact_type::player_type] = std::bind(try_player_contact_with_end, std::placeholders::_2, std::placeholders::_1);
     on_contact[Contact_type::edge_type][Contact_type::player_type] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
     on_contact[Contact_type::item_type][Contact_type::player_type] = std::bind(try_player_contact_with_item, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Contact_type::protal_type][Contact_type::player_type] = std::bind(try_player_contact_with_protal, std::placeholders::_2, std::placeholders::_1);
     judge_contact[Contact_type::enemy_type][Contact_type::player_type] = true;
     judge_contact[Contact_type::pitfall_type][Contact_type::player_type] = true;
     judge_contact[Contact_type::ground_type][Contact_type::player_type] = true;
     judge_contact[Contact_type::end_type][Contact_type::player_type] = true;
     judge_contact[Contact_type::edge_type][Contact_type::player_type] = true;
     judge_contact[Contact_type::item_type][Contact_type::player_type] = true;
+    judge_contact[Contact_type::protal_type][Contact_type::player_type] = true;
 
 
     on_contact[Contact_type::enemy_type][Contact_type::friend_type] = std::bind(try_friend_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
@@ -144,6 +147,10 @@ void MagiciteGameContact::resiger_contact()
 
     on_contact[Contact_type::player_type][Contact_type::item_type] = std::bind(try_player_contact_with_item, std::placeholders::_1, std::placeholders::_2);
     judge_contact[Contact_type::player_type][Contact_type::item_type] = true;
+
+    on_contact[Contact_type::player_type][Contact_type::protal_type] = std::bind(try_player_contact_with_protal, std::placeholders::_1, std::placeholders::_2);
+    judge_contact[Contact_type::player_type][Contact_type::protal_type] = true;
+
 }
 
 void MagiciteGameContact::try_living_contact_with_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
@@ -304,6 +311,7 @@ void MagiciteGameContact::try_living_contact_with_edge(MagiciteGameObject* objec
 MagiciteGameContact::Contact_type MagiciteGameContact::trivial_contact_type(MagiciteGameObject* object)
 {
     if (object == nullptr) return edge_type;
+    if (object->ObjType == MagiciteGameObject::T_Portal) return Contact_type::protal_type;
     if (object->ObjType == MagiciteGameObject::T_Ammo) return Contact_type::ammo_type;
     if (object->ObjType == MagiciteGameObject::T_Pitfall) return Contact_type::pitfall_type;
     if (object->ObjType == MagiciteGameObject::T_Ground) return Contact_type::ground_type;
@@ -349,7 +357,8 @@ bool MagiciteGameContact::is_in_types(MagiciteGameContact::Contact_type type)
         || type == Contact_type::player_type
         || type == Contact_type::ammo_type
         || type == Contact_type::edge_type
-        || type == Contact_type::item_type)
+        || type == Contact_type::item_type
+        || type == Contact_type::protal_type)
     {
         return true;
     }
@@ -374,4 +383,14 @@ void MagiciteGameContact::try_enemy_contact_with_hole(MagiciteGameObject* object
 void MagiciteGameContact::try_player_contact_with_item(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
 {
     _onPick(reinterpret_cast<MagiciteItem*>(objectB));
+}
+
+void MagiciteGameContact::try_player_contact_with_protal(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    /*auto portal = reinterpret_cast<MagiciteGamePortal*>(objectB);
+    auto player = reinterpret_cast<MagiciteGameMoveAbleLiving*>(objectA);
+
+    auto portal_pos = portal->getPair()->getBody()->GetPosition();
+    player->getBody()->SetTransform(portal_pos, 0);*/
+
 }

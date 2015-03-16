@@ -94,6 +94,9 @@
     <Filter Include="Magicite\GameLogic\Object\Ground">
       <UniqueIdentifier>{df8d0118-4145-415a-afda-d9b63938f3d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Magicite\GameLogic\Portal">
+      <UniqueIdentifier>{cbee59d7-7fbc-4d39-948f-4fe6cad88428}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -354,6 +357,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameFragileGround.cpp">
       <Filter>Magicite\GameLogic\Object\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePortalPair.cpp">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameDefaultPortal.cpp">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePortal.cpp">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameDefaultPortalPair.cpp">
+      <Filter>Magicite\GameLogic\Portal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -648,6 +663,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameFragileGround.h">
       <Filter>Magicite\GameLogic\Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePortal.h">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePortalPair.h">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameDefaultPortal.h">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameDefaultPortalPair.h">
+      <Filter>Magicite\GameLogic\Portal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

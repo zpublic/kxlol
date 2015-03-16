@@ -173,7 +173,7 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
         _move_right = true;
         break;
     default:
-        MagiciteGameControlAble::dispatchKeyPress(keyCode, event, static_cast<MagiciteGameControlAble*>(_bag));
+        //MagiciteGameControlAble::dispatchKeyPress(keyCode, event, static_cast<MagiciteGameControlAble*>(_bag));
         break;
     }
 
