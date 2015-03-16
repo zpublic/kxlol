@@ -29,6 +29,7 @@
 #include "MagiciteGameFragileGround.h"
 #include "MagiciteGameDefaultPortalPair.h"
 #include "MagiciteGamePortal.h"
+#include "MagiciteGameShowLayer.h"
 
 USING_NS_CC;
 
@@ -136,6 +137,10 @@ bool MagiciteGameLayer::init()
 
     //_phyLayer->addChild(sub_portalA);
     //_phyLayer->addChild(sub_portalB);
+
+    auto valueMap = FileUtils::getInstance()->getValueMapFromFile("text/story.plist");
+    auto str = valueMap.find("story_3")->second.asString();
+    showText(str);
 
     return true;
 }
@@ -424,4 +429,11 @@ void MagiciteGameLayer::init_map_data(cocos2d::TMXTiledMap* tiledMap)
     create_ground(ground);
     create_NPC(game);
     //create_item(game);
+}
+
+void MagiciteGameLayer::showText(const std::string& str)
+{
+    auto show = MagiciteGameShowLayer::create(2.0f, str);
+    this->addChild(show, 1);
+    show->start();
 }

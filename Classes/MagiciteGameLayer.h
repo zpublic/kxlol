@@ -45,6 +45,8 @@ public:
 
     void use_weather(MagiciteWeather* weather);
 
+    void showText(const std::string& str);
+
 private:
     MagiciteGamePlayer*                 _player;
     MagiciteGamePhyLayer*               _phyLayer;
