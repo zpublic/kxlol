@@ -91,6 +91,12 @@
     <Filter Include="src\Network">
       <UniqueIdentifier>{8f336a02-ae13-4e57-adb2-93cf9073a263}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Magicite\GameLogic\Object\Ground">
+      <UniqueIdentifier>{df8d0118-4145-415a-afda-d9b63938f3d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Magicite\GameLogic\Portal">
+      <UniqueIdentifier>{cbee59d7-7fbc-4d39-948f-4fe6cad88428}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -339,6 +345,30 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameCDItem.cpp">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameMovePitfall.cpp">
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameMeteorite.cpp">
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameGround.cpp">
+      <Filter>Magicite\GameLogic\Object\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameFragileGround.cpp">
+      <Filter>Magicite\GameLogic\Object\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePortalPair.cpp">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameDefaultPortal.cpp">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePortal.cpp">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameDefaultPortalPair.cpp">
+      <Filter>Magicite\GameLogic\Portal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -621,6 +651,30 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameCDItem.h">
       <Filter>Magicite\GameLogic\Item\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameMovePitfall.h">
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameMeteorite.h">
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameGround.h">
+      <Filter>Magicite\GameLogic\Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameFragileGround.h">
+      <Filter>Magicite\GameLogic\Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePortal.h">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePortalPair.h">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameDefaultPortal.h">
+      <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameDefaultPortalPair.h">
+      <Filter>Magicite\GameLogic\Portal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 
 USING_NS_CC;
 
-MagiciteGameObject::MagiciteGameObject(Type type /* = T_Ground*/)
+MagiciteGameObject::MagiciteGameObject(Type type /* = T_Unknow*/ )
 :ObjType(type)
 {
 

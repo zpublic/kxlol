@@ -59,13 +59,13 @@ protected:
     void tryToStopAnimate();
 protected:
     std::map<State, bool>           _state;
-    bool                            _is_dire_changed;
-    bool                            _is_to_left;
     int                             _jumpHeight;
-    float                           _speed;
-    float                           _base_speed;
     int                             _jump_time;
     int                             _max_jump_time;
+    float                           _speed;
+    float                           _base_speed;
+    bool                            _is_dire_changed;
+    bool                            _is_to_left;
 };
 
 #endif //__MAGICITE_GAME_MOVEABLE__

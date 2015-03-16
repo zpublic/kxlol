@@ -9,15 +9,17 @@ class MagiciteGameObject : public MagiciteGamePhySprite
 public:
     enum Type : int
     {
+        T_Unknow,
         T_Living,
         T_Ground,
         T_Pitfall,
         T_End,
         T_Ammo,
         T_Item,
+        T_Portal,
     }ObjType;
 
-    MagiciteGameObject(Type type = T_Ground);
+    MagiciteGameObject(Type type = T_Unknow);
 
     virtual bool init();
     virtual bool initWithFile(const char* filename);

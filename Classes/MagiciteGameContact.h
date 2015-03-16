@@ -23,6 +23,7 @@ namespace MagiciteGameContact
         ammo_type,
         edge_type,
         item_type,
+        protal_type,
         unknow_type,
     };
 
@@ -57,6 +58,7 @@ namespace MagiciteGameContact
     void try_ammo_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
     void try_living_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_with_item(MagiciteGameObject*, MagiciteGameObject*);
+    void try_player_contact_with_protal(MagiciteGameObject*, MagiciteGameObject*);
 
     extern std::function<void(void)>                       _onWin;
     extern std::function<void(void)>                       _onOver;

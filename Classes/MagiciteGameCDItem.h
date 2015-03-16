@@ -28,8 +28,6 @@ public:
     bool getCdEnable() const;
 
 protected:
-    void CDCallBack(void);
-
     MagiciteItem*                       _itemView;
     cocos2d::ProgressTimer*             _cdView;
     float                               _cd;
