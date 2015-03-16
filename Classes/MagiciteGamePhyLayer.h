@@ -32,7 +32,6 @@ public:
     bool Ray_Cast(MagiciteGameMoveAbleLiving* sprite, float length, b2Fixture*& outFix, float& output);
 
 private:
-    cocos2d::Size                       _visibleSize;
     MagiciteGamePhyWorld*               _world;
     GLESDebugDraw*                      _debugDraw;
 };

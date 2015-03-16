@@ -51,9 +51,6 @@ private:
     MagiciteGamePlayer*                 _player;
     MagiciteGamePhyLayer*               _phyLayer;
     MagiciteGameMap*                    _background;
-    cocos2d::Size                       _visibleSize;
-    cocos2d::Vec2                       _origin;
-
 };
 
 #endif // __MAGICITE_GAME_LAYER_H__

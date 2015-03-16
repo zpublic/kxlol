@@ -18,7 +18,6 @@ bool MagiciteGameMap::init(TMXTiledMap* map)
     {
         return false;
     }
-    _visibleSize = Director::getInstance()->getVisibleSize();
 
     _BackGround = map;
     _BackGround->setAnchorPoint(Point::ZERO);
