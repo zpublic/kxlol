@@ -6,8 +6,8 @@
 class MagiciteGameShowLayer : public cocos2d::Layer
 {
 public:
-    MagiciteGameShowLayer() = default;
-    ~MagiciteGameShowLayer() = default;
+    MagiciteGameShowLayer();
+    ~MagiciteGameShowLayer();
 
     virtual bool init(float TimeDelta, const std::string& str);
 

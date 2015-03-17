@@ -3,6 +3,16 @@
 
 USING_NS_CC;
 
+MagiciteGameShowLayer::MagiciteGameShowLayer()
+{
+        
+}
+
+MagiciteGameShowLayer::~MagiciteGameShowLayer()
+{
+
+}
+
 bool MagiciteGameShowLayer::init(float TimeDelta, const std::string& str)
 {
     if (!Layer::init())
