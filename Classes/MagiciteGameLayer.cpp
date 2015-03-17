@@ -87,8 +87,8 @@ bool MagiciteGameLayer::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto origin = Director::getInstance()->getVisibleOrigin();
 
-    char tiledPath[200];
-    std::sprintf(tiledPath, "img\\Magicite\\map\\level%d.tmx", MagiciteScene::getLevel() % 6);
+    char tiledPath[] = "img\\Magicite\\map\\level5.tmx";
+    //std::sprintf(tiledPath, "img\\Magicite\\map\\level%d.tmx", MagiciteScene::getLevel() % 6);
     TMXTiledMap* tiled = TMXTiledMap::create(tiledPath);
 
     _background = MagiciteGameMap::create(tiled);
@@ -110,22 +110,22 @@ bool MagiciteGameLayer::init()
     //use_weather(MagiciteWeatherSnow::create());
 
     //EarthQuake
-    auto earthquake = Repeat::create(Sequence::create(RotateTo::create(0.1f, 1.5f), RotateTo::create(0.1f, -1.5f), nullptr), 5);
+    /*auto earthquake = Repeat::create(Sequence::create(RotateTo::create(0.1f, 1.5f), RotateTo::create(0.1f, -1.5f), nullptr), 5);
     auto earthquakeReset = RotateTo::create(0.0f, 0.0f);
-    this->runAction(Sequence::create(earthquake, earthquakeReset, nullptr));
+    this->runAction(Sequence::create(earthquake, earthquakeReset, nullptr));*/
 
     //Meteorite
-    auto stone = MagiciteGameMeteorite::create();
+    /*auto stone = MagiciteGameMeteorite::create();
     stone->setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height);
     _phyLayer->createPhyBody(stone, false); 
     stone->Move(MagiciteGameMoveAble::left);
-    _phyLayer->addChild(stone);
+    _phyLayer->addChild(stone);*/
 
     //FragileGround
-    auto ground_f = MagiciteGameFragileGround::create();
+    /*auto ground_f = MagiciteGameFragileGround::create();
     ground_f->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     _phyLayer->createPhyBody(ground_f, true);
-    _phyLayer->addChild(ground_f);
+    _phyLayer->addChild(ground_f);*/
 
     ////Portal
     //auto portal = MagiciteGameDefaultPortalPair::create();
@@ -429,7 +429,7 @@ void MagiciteGameLayer::init_map_data(cocos2d::TMXTiledMap* tiledMap)
     create_player(game);
 
     create_enemy(game);
-    create_pitfall(game);
+    //create_pitfall(game);
     create_ground(ground);
     create_NPC(game);
     //create_item(game);
