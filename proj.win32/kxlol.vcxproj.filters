@@ -373,6 +373,9 @@
     <ClCompile Include="..\Classes\MagiciteGameShowLayer.cpp">
       <Filter>Magicite\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\NetworkTestScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -681,6 +684,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameShowLayer.h">
       <Filter>Magicite\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Network\SocketManager.h">
+      <Filter>src\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NetworkTestScene.h">
+      <Filter>src\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
