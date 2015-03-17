@@ -23,7 +23,6 @@ bool MagiciteGamePhyLayer::initPhysics(Size size)
         return false;
     }
 
-    _visibleSize = Director::getInstance()->getVisibleSize();
     this->schedule(schedule_selector(MagiciteGamePhyLayer::update));
 
     b2Vec2 gravity;

@@ -37,8 +37,6 @@ public:
     virtual bool init();
     virtual bool initWithFile(const char* filename);
 
-    bool                                _is_contraled;
-    bool                                _is_friend;
 protected:
     virtual cocos2d::RepeatForever* createAnimateJump() = 0;
     virtual cocos2d::RepeatForever* createAnimateMove() = 0;
@@ -47,6 +45,10 @@ protected:
 
     void setBodyXSpeed(float x_speed);
     void setBodyYSpeed(float y_speed);
+
+public:
+    bool                                _is_contraled;
+    bool                                _is_friend;
 };
 
 #endif //__MAGICITE_GAME_MOVEABLE_LIVING__

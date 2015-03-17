@@ -29,6 +29,7 @@
 #include "MagiciteGameFragileGround.h"
 #include "MagiciteGameDefaultPortalPair.h"
 #include "MagiciteGamePortal.h"
+#include "MagiciteGameShowLayer.h"
 
 USING_NS_CC;
 
@@ -83,8 +84,8 @@ bool MagiciteGameLayer::init()
 
     this->schedule(schedule_selector(MagiciteGameLayer::update));
 
-    _visibleSize = Director::getInstance()->getVisibleSize();
-    _origin = Director::getInstance()->getVisibleOrigin();
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    auto origin = Director::getInstance()->getVisibleOrigin();
 
     char tiledPath[200];
     std::sprintf(tiledPath, "img\\Magicite\\map\\level%d.tmx", MagiciteScene::getLevel() % 5);
@@ -93,7 +94,7 @@ bool MagiciteGameLayer::init()
     _background = MagiciteGameMap::create(tiled);
     this->addChild(_background);
 
-    _phyLayer = MagiciteGamePhyLayer::create(Size(_background->getBackSize().width, _visibleSize.height));
+    _phyLayer = MagiciteGamePhyLayer::create(Size(_background->getBackSize().width, visibleSize.height));
     this->addChild(_phyLayer, 1);
 
     init_map_data(tiled);
@@ -114,14 +115,14 @@ bool MagiciteGameLayer::init()
 
     //Meteorite
     auto stone = MagiciteGameMeteorite::create();
-    stone->setPosition(_origin.x + _visibleSize.width / 2, _origin.y + _visibleSize.height);
+    stone->setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height);
     _phyLayer->createPhyBody(stone, false); 
     stone->Move(MagiciteGameMoveAble::left);
     _phyLayer->addChild(stone);
 
     //FragileGround
     auto ground_f = MagiciteGameFragileGround::create();
-    ground_f->setPosition(Vec2(_visibleSize.width / 2, _visibleSize.height / 2));
+    ground_f->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     _phyLayer->createPhyBody(ground_f, true);
     _phyLayer->addChild(ground_f);
 
@@ -136,6 +137,10 @@ bool MagiciteGameLayer::init()
 
     //_phyLayer->addChild(sub_portalA);
     //_phyLayer->addChild(sub_portalB);
+
+    auto valueMap = FileUtils::getInstance()->getValueMapFromFile("text/story.plist");
+    auto str = valueMap.find("story_3")->second.asString();
+    showText(str);
 
     return true;
 }
@@ -266,8 +271,10 @@ void MagiciteGameLayer::create_end_cube(TMXObjectGroup* game)
 
 void MagiciteGameLayer::create_player(TMXObjectGroup* game)
 {
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+
     _player = MagiciteGamePlayer::create(MagiciteGamePlayer::Chicken_Type, _phyLayer);
-    this->runAction(Follow::create(_player->getSprite(), Rect(0, 0, _background->getBackSize().width, _visibleSize.height)));
+    this->runAction(Follow::create(_player->getSprite(), Rect(0, 0, _background->getBackSize().width, visibleSize.height)));
     ValueMap playerMap = game->getObject("player");
     Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
     _player->setPosition(playerPos);
@@ -275,7 +282,7 @@ void MagiciteGameLayer::create_player(TMXObjectGroup* game)
     _phyLayer->addChild(_player->getSprite());
 
     auto bag_view = _player->getBag();
-    bag_view->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
+    bag_view->setPosition(visibleSize.width / 2, visibleSize.height / 2);
     bag_view->runAction(Follow::create(this));
     this->addChild(bag_view, 999);
 
@@ -390,7 +397,8 @@ void MagiciteGameLayer::create_NPC( TMXObjectGroup* game)
 
 void MagiciteGameLayer::use_weather(MagiciteWeather* weather)
 {
-    auto weatherEffect = weather->getWeatherEffect(Vec2(_background->getBackSize().width, _visibleSize.height));
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    auto weatherEffect = weather->getWeatherEffect(Vec2(_background->getBackSize().width, visibleSize.height));
     weatherEffect->positive(this);
 }
 
@@ -424,4 +432,11 @@ void MagiciteGameLayer::init_map_data(cocos2d::TMXTiledMap* tiledMap)
     create_ground(ground);
     create_NPC(game);
     //create_item(game);
+}
+
+void MagiciteGameLayer::showText(const std::string& str)
+{
+    auto show = MagiciteGameShowLayer::create(2.0f, str);
+    this->addChild(show, 1);
+    show->start();
 }
