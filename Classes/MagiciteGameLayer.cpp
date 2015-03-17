@@ -125,7 +125,8 @@ bool MagiciteGameLayer::init()
     /*auto ground_f = MagiciteGameFragileGround::create();
     ground_f->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     _phyLayer->createPhyBody(ground_f, true);
-    _phyLayer->addChild(ground_f);*/
+    _phyLayer->addChild(ground_f);
+    ground_f->setUserData(reinterpret_cast<void*>(true));*/
 
     ////Portal
     //auto portal = MagiciteGameDefaultPortalPair::create();
