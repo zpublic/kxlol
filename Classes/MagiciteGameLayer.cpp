@@ -88,7 +88,7 @@ bool MagiciteGameLayer::init()
     auto origin = Director::getInstance()->getVisibleOrigin();
 
     char tiledPath[200];
-    std::sprintf(tiledPath, "img\\Magicite\\map\\level%d.tmx", MagiciteScene::getLevel() % 5);
+    std::sprintf(tiledPath, "img\\Magicite\\map\\level%d.tmx", MagiciteScene::getLevel() % 6);
     TMXTiledMap* tiled = TMXTiledMap::create(tiledPath);
 
     _background = MagiciteGameMap::create(tiled);
@@ -100,15 +100,16 @@ bool MagiciteGameLayer::init()
     init_map_data(tiled);
     init_contact();
 
-    auto pet = MagiciteGameIncubator::create();
+    //Pet
+    /*auto pet = MagiciteGameIncubator::create();
     pet->setPosition(Vec2(_player->getContentSize().width / -2.0f, _player->getContentSize().height * 1.2f));
     pet->setFloat();
-    _player->setPetFollow(pet);
+    _player->setPetFollow(pet);*/
 
-    use_weather(MagiciteWeatherSnow::create());
+    //Weather
+    //use_weather(MagiciteWeatherSnow::create());
 
     //EarthQuake
-
     auto earthquake = Repeat::create(Sequence::create(RotateTo::create(0.1f, 1.5f), RotateTo::create(0.1f, -1.5f), nullptr), 5);
     auto earthquakeReset = RotateTo::create(0.0f, 0.0f);
     this->runAction(Sequence::create(earthquake, earthquakeReset, nullptr));

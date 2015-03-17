@@ -22,7 +22,11 @@ bool MagiciteGameNPC::init()
 {
     if(!MagiciteGameMoveAbleLiving::initWithFile("img\\Magicite\\player\\player_stop.png"))
         return false;
+
+#ifdef _LIFE_BAR_ON
     _life_bar->setVisible(false);
+#endif
+
     auto btnNPC = cocos2d::ui::Button::create("img/_blank.png");
     this->getContentSize();
     btnNPC->setZoomScale(1.0f);
