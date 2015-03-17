@@ -370,6 +370,9 @@
     <ClCompile Include="..\Classes\MagiciteGameDefaultPortalPair.cpp">
       <Filter>Magicite\GameLogic\Portal</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameShowLayer.cpp">
+      <Filter>Magicite\Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -675,6 +678,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameDefaultPortalPair.h">
       <Filter>Magicite\GameLogic\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameShowLayer.h">
+      <Filter>Magicite\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

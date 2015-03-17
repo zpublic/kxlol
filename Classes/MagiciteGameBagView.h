@@ -26,8 +26,6 @@ public:
 protected:
     float Id2Pos(int n);
     std::vector<MagiciteGameCDItem*>                _itemArray;
-    cocos2d::Size                                   _size;
-    cocos2d::Vec2                                   _origin;
     cocos2d::Node*                                  _cd_node;
     int                                             _bag_blank;
     float                                           _block_size;

@@ -23,16 +23,16 @@ bool MagiciteGameBagView::init(int max_size)
         return false;
     }
 
-    _size = Director::getInstance()->getVisibleSize();
-    _origin = Director::getInstance()->getVisibleOrigin();
-    _block_size = _size.width / (_max_size + 3);
-    _offset = _size.height / 2 - _block_size * 0.5f;
+    auto size = Director::getInstance()->getVisibleSize();
+    auto origin = Director::getInstance()->getVisibleOrigin();
+    _block_size = size.width / (_max_size + 3);
+    _offset = size.height / 2 - _block_size * 0.5f;
 
-    this->setContentSize(Size(_size.width, _block_size));
+    this->setContentSize(Size(size.width, _block_size));
     this->setAnchorPoint(Vec2(0.5f, 0.5f));
 
     _cd_node = Node::create();
-    _cd_node->setContentSize(Size(_size.width, _block_size));
+    _cd_node->setContentSize(Size(size.width, _block_size));
     _cd_node->setAnchorPoint(Point::ZERO);
     _cd_node->setPosition(Point::ZERO);
     this->addChild(_cd_node, 1);
@@ -47,7 +47,7 @@ bool MagiciteGameBagView::init(int max_size)
            this->onItemUse(i - 1);
         });
 
-        node->setPosition(Vec2(_origin.x + Id2Pos(i), _origin.y - _offset));
+        node->setPosition(Vec2(origin.x + Id2Pos(i), origin.y - _offset));
         node->setContentSize(Size(_block_size, _block_size));
         node->setAnchorPoint(Point::ZERO);
         auto color = LayerColor::create(Color4B(0xee, 0xee, 0xee, 0x80));

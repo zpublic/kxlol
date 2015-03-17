@@ -20,9 +20,10 @@ bool MagiciteGameLiving::init()
         return false;
     }
 
-    _life_bar = MagiciteLifeBar::create(getHP(),this->getContentSize());
+#ifdef _LIFE_BAR_ON
+    _life_bar = MagiciteLifeBar::create(getHP(), this->getContentSize());
     this->addChild(_life_bar);
-    this->setPosition(Point::ZERO);
+#endif
 
     return true;
 }
@@ -34,9 +35,10 @@ bool MagiciteGameLiving::initWithFile(const char* filename)
         return false;
     }
 
+#ifdef _LIFE_BAR_ON
     _life_bar = MagiciteLifeBar::create(getHP(), this->getContentSize());
     this->addChild(_life_bar);
-    this->setPosition(Point::ZERO);
+#endif
 
     return true;
 }
@@ -64,7 +66,11 @@ int MagiciteGameLiving::getMP() const
 void MagiciteGameLiving::attact(int damage/* = 1*/)
 {
    _health_point -= damage;
+
+#ifdef _LIFE_BAR_ON
    _life_bar->attact(damage);
+#endif
+
 }
 
 void MagiciteGameLiving::useSkill(MagiciteEffect* effect)

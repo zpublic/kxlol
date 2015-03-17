@@ -15,7 +15,6 @@ public:
     static MagiciteGameMap* create(cocos2d::TMXTiledMap *map);
 
 private:
-    cocos2d::Size           _visibleSize;
     cocos2d::TMXTiledMap*   _BackGround;
 };
 
