@@ -6,6 +6,8 @@
 #include "MagiciteGameObject.h"
 #include "MagiciteEffectBuffer.h"
 
+#define _LIFE_BAR_OFF
+
 class MagiciteEffect;
 class MagiciteLifeBar;
 
