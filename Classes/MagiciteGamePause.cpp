@@ -22,7 +22,7 @@ bool MagiciteGamePause::init()
         return false;
     }
     auto layer = Layer::create();
-    this->addChild(layer);
+    this->addChild(layer,1);
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto origin = Director::getInstance()->getVisibleOrigin();
