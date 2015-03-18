@@ -54,7 +54,7 @@ void ClientConnection::connentToServer(const char *ip, unsigned short port) {
     }
 
     _isWaiting = true;
-    _connectThread = new std::thread(std::bind(&ClientConnection::_connectToServer, this, ip, port));
+    _connectThread = new std::thread(std::bind(&ClientConnection::_connectToServer, this, std::placeholders::_1, std::placeholders::_2), ip, port);
 }
 
 void ClientConnection::quit() {
@@ -95,9 +95,17 @@ void ClientConnection::sendBuf(const char *buf, int len) {
     _sendMutex.unlock();
 }
 
+void ClientConnection::sendBuf(std::vector<char> &&buf) {
+    _sendMutex.lock();
+    _sendQueue.push_back(buf);
+    _sendMutex.unlock();
+}
+
 bool ClientConnection::peekBuf(std::vector<char> *buf) {
     assert(buf != nullptr);
-    _recvMutex.lock();
+    if (!_recvMutex.try_lock()) {
+        return false;
+    }
     if (_recvQueue.empty()) {
         _recvMutex.unlock();
         return false;
@@ -106,6 +114,27 @@ bool ClientConnection::peekBuf(std::vector<char> *buf) {
     _recvQueue.pop_front();
     _recvMutex.unlock();
     return true;
+}
+
+bool ClientConnection::peekBuf(std::vector<char> *buf, const std::function<bool (const std::vector<char> &)> &checkFunc) {
+    assert(buf != nullptr);
+    if (!_recvMutex.try_lock()) {
+        return false;
+    }
+    if (_recvQueue.empty()) {
+        _recvMutex.unlock();
+        return false;
+    }
+    for (std::deque<std::vector<char> >::iterator it = _recvQueue.begin(); it != _recvQueue.end(); ++it) {
+        if (checkFunc(*it)) {
+            *buf = std::move(*it);
+            _recvQueue.erase(it);
+            _recvMutex.unlock();
+            return true;
+        }
+    }
+    _recvMutex.unlock();
+    return false;
 }
 
 void ClientConnection::_connectToServer(const char *ip, unsigned short port) {
@@ -136,13 +165,13 @@ void ClientConnection::_recvThreadFunc() {
             LOG_DEBUG("Recv error\n");
             break;
         }
-        size_t len = buf[0];
+        size_t len = (unsigned char)buf[0];
         len <<= 8;
-        len |= buf[1];
+        len |= (unsigned char)buf[1];
         len <<= 8;
-        len |= buf[2];
+        len |= (unsigned char)buf[2];
         len <<= 8;
-        len |= buf[3];
+        len |= (unsigned char)buf[3];
         assert(len <= INT_MAX);
 
         std::vector<char> cache;

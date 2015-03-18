@@ -33,7 +33,9 @@ public:
     bool isWaiting() const { return _isWaiting; }
     bool isConnectSuccess() const { return _isConnectSuccess; }
     void sendBuf(const char *buf, int len);
+    void sendBuf(std::vector<char> &&buf);
     bool peekBuf(std::vector<char> *buf);
+    bool peekBuf(std::vector<char> *buf, const std::function<bool (const std::vector<char> &)> &checkFunc);
 
 private:
     ClientConnection(const ClientConnection &);
