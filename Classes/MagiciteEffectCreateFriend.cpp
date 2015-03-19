@@ -16,9 +16,7 @@ void MagiciteEffectCreateFriend::positive(MagiciteGameObject* obj)
         (moveable->getDire() == MagiciteGameMoveAbleLiving::Direction::left ? true : false));
     friends->setPosition(obj->getPosition());
 
-    _phyLayer->createPhyBody(
-        friends,
-        false);
+    _phyLayer->createPhyBody(friends, false, Magicite::FIXTURE_TYPE_FRIEND);
     _phyLayer->addChild(friends);
     friends->Move(friends->getDire());
 

@@ -16,7 +16,7 @@ void MagiciteEffectAcid::positive(MagiciteGameObject* obj)
     MagiciteGameAmmo* ammo = MagiciteGameFactoryMethod::createAmmo(MagiciteGameFactoryMethod::Acid);
 
     ammo->setPosition(obj->getPosition());
-    _phyLayer->createPhyBody(ammo, false);
+    _phyLayer->createPhyBody(ammo, false, Magicite::FIXTURE_TYPE_AMMO);
     ammo->getBody()->SetLinearVelocity(b2Vec2(0, 10));
     _phyLayer->addChild(ammo);
     ammo->Move(moveable->getDire());

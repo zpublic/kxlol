@@ -43,10 +43,11 @@ bool MagiciteGamePhyLayer::initPhysics(Size size)
 }
 
 void MagiciteGamePhyLayer::createPhyBody(
-    MagiciteGameObject* ptr, 
-    bool is_static)
+    MagiciteGameObject* ptr,
+    bool is_static,
+    Magicite::FIXTURE_TYPE type)
 {
-    _world->createPhyBody(ptr, is_static);
+    _world->createPhyBody(ptr, is_static, type);
 }
 
 void MagiciteGamePhyLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags)
@@ -121,4 +122,9 @@ bool MagiciteGamePhyLayer::Ray_Cast(MagiciteGameMoveAbleLiving* sprite, float le
     output = out.fraction;
     outFix = fixture;
     return flagFoot || flagHead;
+}
+
+b2Body* MagiciteGamePhyLayer::createBody(b2BodyDef* bd)
+{
+    return _world->createBody(bd);
 }

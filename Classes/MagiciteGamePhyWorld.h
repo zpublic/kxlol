@@ -3,6 +3,7 @@
 
 #include "Box2D/Box2D.h"
 #include "cocos2d.h"
+#include "MagiciteGamePhysics.h"
 
 class MagiciteGameObject;
 class MagiciteGameContactListener;
@@ -15,7 +16,8 @@ public:
 
     static const int PTM_RATIO = 32;
 
-    void createPhyBody(MagiciteGameObject* ptr, bool is_static);
+    void createPhyBody(MagiciteGameObject* ptr, bool is_static, Magicite::FIXTURE_TYPE type);
+    b2Body* createBody(b2BodyDef* bd);
     void updateBody(float timeDelta);
 
     bool init(cocos2d::Size size);

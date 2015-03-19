@@ -199,9 +199,6 @@
     <ClCompile Include="..\Classes\MagiciteGamePhySprite.cpp">
       <Filter>Magicite\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGamePiranha.cpp">
-      <Filter>Magicite\GameLogic\Object\Living</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePitfall.cpp">
       <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
     </ClCompile>
@@ -373,6 +370,12 @@
     <ClCompile Include="..\Classes\MagiciteGameShowLayer.cpp">
       <Filter>Magicite\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePiranha.cpp">
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGamePhysics.cpp">
+      <Filter>Magicite\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -477,9 +480,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePhySprite.h">
       <Filter>Magicite\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGamePiranha.h">
-      <Filter>Magicite\GameLogic\Object\Living</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePitfall.h">
       <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
@@ -681,6 +681,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameShowLayer.h">
       <Filter>Magicite\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePiranha.h">
+      <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGamePhysics.h">
+      <Filter>Magicite\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

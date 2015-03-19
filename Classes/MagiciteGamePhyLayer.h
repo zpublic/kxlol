@@ -1,12 +1,13 @@
 #ifndef __MAGICITE_GAME_PHY_LAYER__
 #define __MAGICITE_GAME_PHY_LAYER__
 
-#define MAGICITE_DEBUG_OFF
+#define MAGICITE_DEBUG_ON
 
 #include "cocos2d.h"
 #include "Box2D\Box2D.h"
 #include "GLES-Render.h"
 #include "MagiciteGameMoveAbleLiving.h"
+#include "MagiciteGamePhysics.h"
 
 class MagiciteGameObject;
 class MagiciteGamePhyWorld;
@@ -22,7 +23,9 @@ public:
     bool initPhysics(cocos2d::Size size);
     void createPhyBody(
         MagiciteGameObject* ptr, 
-        bool is_static);
+        bool is_static,
+        Magicite::FIXTURE_TYPE type);
+    b2Body* createBody(b2BodyDef* bd);
 
     virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags);
     void update(float timeDelta);

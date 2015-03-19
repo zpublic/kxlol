@@ -14,8 +14,8 @@ std::function<void(MagiciteItem*)> MagiciteGameContact::_onPick;
 std::function<bool(b2Contact* contact)> MagiciteGameContact::_onJudgeContact;
 std::function<void(b2Contact* contact)> MagiciteGameContact::_onBeginContact;
 
-std::map<MagiciteGameContact::Contact_type, std::map<MagiciteGameContact::Contact_type, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>> MagiciteGameContact::on_contact;
-std::map<MagiciteGameContact::Contact_type, std::map<MagiciteGameContact::Contact_type, bool>> MagiciteGameContact::judge_contact;
+std::map<Magicite::FIXTURE_TYPE, std::map<Magicite::FIXTURE_TYPE, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>> MagiciteGameContact::on_contact;
+std::map<Magicite::FIXTURE_TYPE, std::map<Magicite::FIXTURE_TYPE, bool>> MagiciteGameContact::judge_contact;
 USING_NS_CC;
 
 void MagiciteGameContact::change_moveable_direction(MagiciteGameMoveAbleLiving* moveObj)
@@ -66,90 +66,95 @@ void MagiciteGameContact::try_to_change_living_direction(MagiciteGameLiving* liv
 
 void MagiciteGameContact::resiger_contact()
 {
-    on_contact[Contact_type::enemy_type][Contact_type::ground_type] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::friend_type][Contact_type::ground_type] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::player_type][Contact_type::ground_type] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::ammo_type][Contact_type::ground_type] = std::bind(try_ammo_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
-    judge_contact[Contact_type::enemy_type][Contact_type::ground_type] = true;
-    judge_contact[Contact_type::friend_type][Contact_type::ground_type] = true;
-    judge_contact[Contact_type::player_type][Contact_type::ground_type] = true;
-    judge_contact[Contact_type::ammo_type][Contact_type::ground_type] = true;
+    on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_LAND] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTURE_TYPE_LAND] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_LAND] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_AMMO][Magicite::FIXTURE_TYPE_LAND] = std::bind(try_ammo_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    judge_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_LAND] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTURE_TYPE_LAND] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_LAND] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_AMMO][Magicite::FIXTURE_TYPE_LAND] = true;
 
 
-    on_contact[Contact_type::enemy_type][Contact_type::player_type] = std::bind(try_player_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::pitfall_type][Contact_type::player_type] = std::bind(try_player_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::ground_type][Contact_type::player_type] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::end_type][Contact_type::player_type] = std::bind(try_player_contact_with_end, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::edge_type][Contact_type::player_type] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::item_type][Contact_type::player_type] = std::bind(try_player_contact_with_item, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::protal_type][Contact_type::player_type] = std::bind(try_player_contact_with_protal, std::placeholders::_2, std::placeholders::_1);
-    judge_contact[Contact_type::enemy_type][Contact_type::player_type] = true;
-    judge_contact[Contact_type::pitfall_type][Contact_type::player_type] = true;
-    judge_contact[Contact_type::ground_type][Contact_type::player_type] = true;
-    judge_contact[Contact_type::end_type][Contact_type::player_type] = true;
-    judge_contact[Contact_type::edge_type][Contact_type::player_type] = true;
-    judge_contact[Contact_type::item_type][Contact_type::player_type] = true;
-    judge_contact[Contact_type::protal_type][Contact_type::player_type] = true;
+    on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_player_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_PITFALL][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_player_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_END][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_player_contact_with_end, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTRUE_TYPE_EDGE][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_ITEM][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_player_contact_with_item, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_PORTAL][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_player_contact_with_protal, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_PLATFORM][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    judge_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_PLAYER] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_PITFALL][Magicite::FIXTURE_TYPE_PLAYER] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_PLAYER] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_END][Magicite::FIXTURE_TYPE_PLAYER] = true;
+    judge_contact[Magicite::FIXTRUE_TYPE_EDGE][Magicite::FIXTURE_TYPE_PLAYER] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_ITEM][Magicite::FIXTURE_TYPE_PLAYER] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_PORTAL][Magicite::FIXTURE_TYPE_PLAYER] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_PLATFORM][Magicite::FIXTURE_TYPE_PLAYER] = true;
 
 
-    on_contact[Contact_type::enemy_type][Contact_type::friend_type] = std::bind(try_friend_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::pitfall_type][Contact_type::friend_type] = std::bind(try_friend_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::ground_type][Contact_type::friend_type] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::edge_type][Contact_type::friend_type] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
-    judge_contact[Contact_type::enemy_type][Contact_type::friend_type] = true;
-    judge_contact[Contact_type::pitfall_type][Contact_type::friend_type] = true;
-    judge_contact[Contact_type::ground_type][Contact_type::friend_type] = true;
-    judge_contact[Contact_type::edge_type][Contact_type::friend_type] = true;
+
+    on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_FRIEND] = std::bind(try_friend_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_PITFALL][Magicite::FIXTURE_TYPE_FRIEND] = std::bind(try_friend_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_FRIEND] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTRUE_TYPE_EDGE][Magicite::FIXTURE_TYPE_FRIEND] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
+    judge_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_FRIEND] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_PITFALL][Magicite::FIXTURE_TYPE_FRIEND] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_FRIEND] = true;
+    judge_contact[Magicite::FIXTRUE_TYPE_EDGE][Magicite::FIXTURE_TYPE_FRIEND] = true;
 
 
-    on_contact[Contact_type::friend_type][Contact_type::pitfall_type] = std::bind(try_friend_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::player_type][Contact_type::pitfall_type] = std::bind(try_player_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::enemy_type][Contact_type::pitfall_type] = std::bind(try_enemy_contact_with_hole, std::placeholders::_1, std::placeholders::_2);
-    judge_contact[Contact_type::friend_type][Contact_type::pitfall_type] = true;
-    judge_contact[Contact_type::player_type][Contact_type::pitfall_type] = true;
-    judge_contact[Contact_type::enemy_type][Contact_type::pitfall_type] = true;
+    on_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTURE_TYPE_PITFALL] = std::bind(try_friend_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_PITFALL] = std::bind(try_player_contact_with_pitfall, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_PITFALL] = std::bind(try_enemy_contact_with_hole, std::placeholders::_1, std::placeholders::_2);
+    judge_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTURE_TYPE_PITFALL] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_PITFALL] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_PITFALL] = true;
 
 
-    on_contact[Contact_type::friend_type][Contact_type::enemy_type] = std::bind(try_friend_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::player_type][Contact_type::enemy_type] = std::bind(try_player_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::ground_type][Contact_type::enemy_type] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::enemy_type][Contact_type::enemy_type] = std::bind(try_enemy_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::ammo_type][Contact_type::enemy_type] = std::bind(try_ammo_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::edge_type][Contact_type::enemy_type] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::pitfall_type][Contact_type::enemy_type] = std::bind(try_enemy_contact_with_hole, std::placeholders::_2, std::placeholders::_1);
-    judge_contact[Contact_type::friend_type][Contact_type::enemy_type] = true;
-    judge_contact[Contact_type::player_type][Contact_type::enemy_type] = true;
-    judge_contact[Contact_type::ground_type][Contact_type::enemy_type] = true;
-    judge_contact[Contact_type::enemy_type][Contact_type::enemy_type] = true;
-    judge_contact[Contact_type::ammo_type][Contact_type::enemy_type] = true;
-    judge_contact[Contact_type::edge_type][Contact_type::enemy_type] = true;
-    judge_contact[Contact_type::pitfall_type][Contact_type::enemy_type] = true;
+    on_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_friend_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_player_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_enemy_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_AMMO][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_ammo_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTRUE_TYPE_EDGE][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_PITFALL][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_enemy_contact_with_hole, std::placeholders::_2, std::placeholders::_1);
+    judge_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTURE_TYPE_ENEMY] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_ENEMY] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_ENEMY] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_ENEMY] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_AMMO][Magicite::FIXTURE_TYPE_ENEMY] = true;
+    judge_contact[Magicite::FIXTRUE_TYPE_EDGE][Magicite::FIXTURE_TYPE_ENEMY] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_PITFALL][Magicite::FIXTURE_TYPE_ENEMY] = true;
 
 
-    on_contact[Contact_type::player_type][Contact_type::end_type] = std::bind(try_player_contact_with_end, std::placeholders::_1, std::placeholders::_2);
-    judge_contact[Contact_type::player_type][Contact_type::end_type] = true;
+    on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_END] = std::bind(try_player_contact_with_end, std::placeholders::_1, std::placeholders::_2);
+    judge_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_END] = true;
 
-    on_contact[Contact_type::enemy_type][Contact_type::ammo_type] = std::bind(try_ammo_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::ground_type][Contact_type::ammo_type] = std::bind(try_ammo_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Contact_type::edge_type][Contact_type::ammo_type] = std::bind(try_ammo_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
-    judge_contact[Contact_type::enemy_type][Contact_type::ammo_type] = true;
-    judge_contact[Contact_type::ground_type][Contact_type::ammo_type] = true;
-    judge_contact[Contact_type::edge_type][Contact_type::ammo_type] = true;
+    on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_AMMO] = std::bind(try_ammo_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_AMMO] = std::bind(try_ammo_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTRUE_TYPE_EDGE][Magicite::FIXTURE_TYPE_AMMO] = std::bind(try_ammo_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
+    judge_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_AMMO] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_AMMO] = true;
+    judge_contact[Magicite::FIXTRUE_TYPE_EDGE][Magicite::FIXTURE_TYPE_AMMO] = true;
 
-    on_contact[Contact_type::ammo_type][Contact_type::edge_type] = std::bind(try_ammo_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::player_type][Contact_type::edge_type] = std::bind(try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::friend_type][Contact_type::edge_type] = std::bind(try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Contact_type::enemy_type][Contact_type::edge_type] = std::bind(try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
-    judge_contact[Contact_type::ammo_type][Contact_type::edge_type] = true;
-    judge_contact[Contact_type::player_type][Contact_type::edge_type] = true;
-    judge_contact[Contact_type::friend_type][Contact_type::edge_type] = true;
-    judge_contact[Contact_type::enemy_type][Contact_type::edge_type] = true;
+    on_contact[Magicite::FIXTURE_TYPE_AMMO][Magicite::FIXTRUE_TYPE_EDGE] = std::bind(try_ammo_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTRUE_TYPE_EDGE] = std::bind(try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTRUE_TYPE_EDGE] = std::bind(try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTRUE_TYPE_EDGE] = std::bind(try_living_contact_with_edge, std::placeholders::_1, std::placeholders::_2);
+    judge_contact[Magicite::FIXTURE_TYPE_AMMO][Magicite::FIXTRUE_TYPE_EDGE] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTRUE_TYPE_EDGE] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTRUE_TYPE_EDGE] = true;
+    judge_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTRUE_TYPE_EDGE] = true;
 
-    on_contact[Contact_type::player_type][Contact_type::item_type] = std::bind(try_player_contact_with_item, std::placeholders::_1, std::placeholders::_2);
-    judge_contact[Contact_type::player_type][Contact_type::item_type] = true;
+    on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_ITEM] = std::bind(try_player_contact_with_item, std::placeholders::_1, std::placeholders::_2);
+    judge_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_ITEM] = true;
 
-    on_contact[Contact_type::player_type][Contact_type::protal_type] = std::bind(try_player_contact_with_protal, std::placeholders::_1, std::placeholders::_2);
-    judge_contact[Contact_type::player_type][Contact_type::protal_type] = true;
+    on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_PORTAL] = std::bind(try_player_contact_with_protal, std::placeholders::_1, std::placeholders::_2);
+    judge_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_PORTAL] = true;
+
+    on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_PLATFORM] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
 
 }
 
@@ -306,63 +311,6 @@ void MagiciteGameContact::try_living_contact_with_edge(MagiciteGameObject* objec
     {
         MagiciteGameContact::try_to_change_living_direction(moveLiving);
     }
-}
-
-MagiciteGameContact::Contact_type MagiciteGameContact::trivial_contact_type(MagiciteGameObject* object)
-{
-    if (object == nullptr) return edge_type;
-    if (object->ObjType == MagiciteGameObject::T_Portal) return Contact_type::protal_type;
-    if (object->ObjType == MagiciteGameObject::T_Ammo) return Contact_type::ammo_type;
-    if (object->ObjType == MagiciteGameObject::T_Pitfall) return Contact_type::pitfall_type;
-    if (object->ObjType == MagiciteGameObject::T_Ground) return Contact_type::ground_type;
-    if (object->ObjType == MagiciteGameObject::T_End) return Contact_type::end_type;
-    if (object->ObjType == MagiciteGameObject::T_Item) return Contact_type::item_type;
-    if (object->ObjType == MagiciteGameObject::T_Living)
-    {
-        auto living = reinterpret_cast<MagiciteGameLiving*>(object);
-        if (living->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
-        {
-            auto moveable = reinterpret_cast<MagiciteGameMoveAbleLiving*>(living);
-            if (moveable->_is_contraled)
-            {
-                return Contact_type::player_type;
-            }
-            else
-            {
-                if (moveable->_is_friend)
-                {
-                    return Contact_type::friend_type;
-                }
-                else
-                {
-                    return Contact_type::enemy_type;
-                }
-            }
-        }
-        else
-        {
-            return Contact_type::enemy_type;
-        }
-    }
-    return Contact_type::unknow_type;
-}
-
-bool MagiciteGameContact::is_in_types(MagiciteGameContact::Contact_type type)
-{
-    if (type == Contact_type::end_type 
-        || type == Contact_type::enemy_type 
-        || type == Contact_type::friend_type
-        || type == Contact_type::ground_type 
-        || type == Contact_type::pitfall_type 
-        || type == Contact_type::player_type
-        || type == Contact_type::ammo_type
-        || type == Contact_type::edge_type
-        || type == Contact_type::item_type
-        || type == Contact_type::protal_type)
-    {
-        return true;
-    }
-    return false;
 }
 
 void MagiciteGameContact::onWin()
