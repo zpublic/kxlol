@@ -48,7 +48,6 @@ public:
         _Helper *helper = _Helper::create([this, protocal, callback](_Helper *thiz) {
             std::vector<char> buf;
             if (_cc.peekBuf(&buf, [protocal](const std::vector<char> &buf) {
-                if (buf.size() >= 4) CCLOG("%d %d", SocketManager::readProtocal(&buf[0]), protocal);
                 return buf.size() >= 4 && SocketManager::readProtocal(&buf[0]) == protocal;
             })) {
                 thiz->shutdown();
@@ -74,8 +73,8 @@ public:
     }
 
     template <class _RECV, class _SEND>
-    void sendAndRegisterRecvCallback(int protocal, const _SEND &data, const std::function<void(_RECV &&)> &callback) {
-        sendAndRegisterRecvCallback<_RECV, _SEND, const std::function<void(_RECV &&)> &>(protocal, data, callback);
+    void sendAndRegisterRecvCallback(int protocal, const _SEND &data, const std::function<void (_RECV &&)> &callback) {
+        sendAndRegisterRecvCallback<_RECV, _SEND, const std::function<void (_RECV &&)> &>(protocal, data, callback);
     }
 
 private:
