@@ -10,6 +10,7 @@ public:
     enum Type{
         hold,
         Spine,
+        Prianha,
         Meteorite,
     }PiffallType;
 

@@ -10,12 +10,12 @@ namespace MagiciteGameFactoryMethod
 {
     enum Pitfall_Type : int
     {
+        Piranha,
         Pitfall,
         Spine_Type,
     };
     enum LivingType
     {
-        Piranha,
         Human,
         Chicken,
         Slime,
