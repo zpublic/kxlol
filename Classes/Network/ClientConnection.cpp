@@ -229,9 +229,7 @@ void ClientConnection::_sendThreadFunc() {
                 len += 4;
 
                 while (!_sendQueue.empty()) {
-                    std::vector<char> append(std::move(_sendQueue.front()));
-                    _sendQueue.pop_front();
-
+                    std::vector<char> &append = _sendQueue.front();
                     size_t len1 = append.size();
                     assert(len1 <= INT_MAX);
                     if (len + 4 + len1 > 1024) {
@@ -244,6 +242,7 @@ void ClientConnection::_sendThreadFunc() {
                     packet[len + 3] = (len1      ) & 0xFF;
                     memcpy(&packet[len + 4], &append[0], len1);
                     len += (4 + len1);
+                    _sendQueue.pop_front();
                 }
 
                 _sendMutex.unlock();
