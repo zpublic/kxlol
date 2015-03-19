@@ -66,9 +66,9 @@ void MagiciteGameContact::try_to_change_living_direction(MagiciteGameLiving* liv
 
 void MagiciteGameContact::resiger_contact()
 {
-    on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_LAND] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTURE_TYPE_LAND] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_LAND] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_LAND] = std::bind(try_player_contact_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTURE_TYPE_LAND] = std::bind(try_player_contact_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_LAND] = std::bind(try_player_contact_ground, std::placeholders::_1, std::placeholders::_2);
     on_contact[Magicite::FIXTURE_TYPE_AMMO][Magicite::FIXTURE_TYPE_LAND] = std::bind(try_ammo_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
     judge_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_LAND] = true;
     judge_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTURE_TYPE_LAND] = true;
@@ -78,7 +78,7 @@ void MagiciteGameContact::resiger_contact()
 
     on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_player_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
     on_contact[Magicite::FIXTURE_TYPE_PITFALL][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_player_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_player_contact_ground, std::placeholders::_2, std::placeholders::_1);
     on_contact[Magicite::FIXTURE_TYPE_END][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_player_contact_with_end, std::placeholders::_2, std::placeholders::_1);
     on_contact[Magicite::FIXTRUE_TYPE_EDGE][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
     on_contact[Magicite::FIXTURE_TYPE_ITEM][Magicite::FIXTURE_TYPE_PLAYER] = std::bind(try_player_contact_with_item, std::placeholders::_2, std::placeholders::_1);
@@ -94,10 +94,9 @@ void MagiciteGameContact::resiger_contact()
     judge_contact[Magicite::FIXTURE_TYPE_PLATFORM][Magicite::FIXTURE_TYPE_PLAYER] = true;
 
 
-
     on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_FRIEND] = std::bind(try_friend_contact_with_enemy, std::placeholders::_2, std::placeholders::_1);
     on_contact[Magicite::FIXTURE_TYPE_PITFALL][Magicite::FIXTURE_TYPE_FRIEND] = std::bind(try_friend_contact_with_pitfall, std::placeholders::_2, std::placeholders::_1);
-    on_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_FRIEND] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_FRIEND] = std::bind(try_player_contact_ground, std::placeholders::_2, std::placeholders::_1);
     on_contact[Magicite::FIXTRUE_TYPE_EDGE][Magicite::FIXTURE_TYPE_FRIEND] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
     judge_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_FRIEND] = true;
     judge_contact[Magicite::FIXTURE_TYPE_PITFALL][Magicite::FIXTURE_TYPE_FRIEND] = true;
@@ -115,7 +114,7 @@ void MagiciteGameContact::resiger_contact()
 
     on_contact[Magicite::FIXTURE_TYPE_FRIEND][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_friend_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
     on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_player_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
-    on_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_living_contact_with_ground, std::placeholders::_2, std::placeholders::_1);
+    on_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_player_contact_ground, std::placeholders::_2, std::placeholders::_1);
     on_contact[Magicite::FIXTURE_TYPE_ENEMY][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_enemy_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
     on_contact[Magicite::FIXTURE_TYPE_AMMO][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_ammo_contact_with_enemy, std::placeholders::_1, std::placeholders::_2);
     on_contact[Magicite::FIXTRUE_TYPE_EDGE][Magicite::FIXTURE_TYPE_ENEMY] = std::bind(try_living_contact_with_edge, std::placeholders::_2, std::placeholders::_1);
@@ -155,6 +154,11 @@ void MagiciteGameContact::resiger_contact()
     judge_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_PORTAL] = true;
 
     on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_PLATFORM] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    on_contact[Magicite::FIXTURE_TYPE_JUMP_POINT][Magicite::FIXTURE_TYPE_PLATFORM] = std::bind(try_player_contact_ground, std::placeholders::_1, std::placeholders::_2);
+    judge_contact[Magicite::FIXTURE_TYPE_JUMP_POINT][Magicite::FIXTURE_TYPE_PLATFORM] = true;
+
+    on_contact[Magicite::FIXTURE_TYPE_PLATFORM][Magicite::FIXTURE_TYPE_JUMP_POINT] = std::bind(try_player_contact_ground, std::placeholders::_2, std::placeholders::_1);
+    judge_contact[Magicite::FIXTURE_TYPE_PLATFORM][Magicite::FIXTURE_TYPE_JUMP_POINT] = true;
 
 }
 
@@ -341,4 +345,10 @@ void MagiciteGameContact::try_player_contact_with_protal(MagiciteGameObject* obj
     auto portal_pos = portal->getPair()->getBody()->GetPosition();
     player->getBody()->SetTransform(portal_pos, 0);*/
 
+}
+
+void MagiciteGameContact::try_player_contact_ground(MagiciteGameObject* objectA, MagiciteGameObject* objectB)
+{
+    auto player = static_cast<MagiciteGameMoveAbleLiving*>(objectA);
+    player->JumpOver();
 }

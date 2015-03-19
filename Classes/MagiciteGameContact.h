@@ -46,7 +46,7 @@ namespace MagiciteGameContact
     void try_living_contact_with_edge(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_with_item(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_with_protal(MagiciteGameObject*, MagiciteGameObject*);
-
+    void try_player_contact_ground(MagiciteGameObject*, MagiciteGameObject*);
 
     extern std::function<void(void)>                       _onWin;
     extern std::function<void(void)>                       _onOver;

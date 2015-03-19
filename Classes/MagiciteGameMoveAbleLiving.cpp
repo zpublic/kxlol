@@ -96,7 +96,7 @@ void MagiciteGameMoveAbleLiving::Jump()
 
 void MagiciteGameMoveAbleLiving::JumpOver()
 {
-    if (getState(State::S_Jump) && abs(getBody()->GetLinearVelocity().y) < 0.000005)
+    if (getState(State::S_Jump))
     {
         this->stopAnimation(AnimationTag::Jump_Tag);
         if (getState(State::S_Move))

@@ -17,6 +17,7 @@ namespace Magicite
         FIXTURE_TYPE_AMMO,
         FIXTURE_TYPE_PITFALL,
         FIXTURE_TYPE_PORTAL,
+        FIXTURE_TYPE_JUMP_POINT,
     };
 
 };

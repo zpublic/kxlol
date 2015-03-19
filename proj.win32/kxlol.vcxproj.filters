@@ -376,6 +376,9 @@
     <ClCompile Include="..\Classes\MagiciteGamePhysics.cpp">
       <Filter>Magicite\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\PhysicsLoader.cpp">
+      <Filter>Magicite\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -686,6 +689,9 @@
       <Filter>Magicite\GameLogic\Object\Pitfall</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePhysics.h">
+      <Filter>Magicite\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PhysicsLoader.h">
       <Filter>Magicite\Physics</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="32" tileheight="32" nextobjectid="25">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="32" tileheight="32" nextobjectid="27">
  <tileset firstgid="1" name="森林" tilewidth="32" tileheight="32">
   <image source="森林.png" width="1146" height="640"/>
  </tileset>
@@ -18,11 +18,12 @@
   <object id="16" type="cube" x="256" y="362" width="28" height="59"/>
   <object id="17" type="cube" x="285" y="371" width="64" height="51"/>
   <object id="19" type="cube" x="353" y="381" width="61" height="41"/>
-  <object id="23" type="hole" x="0.363636" y="633.273" width="1119.45" height="6.72727"/>
  </objectgroup>
  <objectgroup name="game">
   <object id="20" name="finish" x="1025" y="349" width="31" height="47"/>
   <object id="21" name="player" x="99" y="320" width="28" height="30"/>
   <object id="24" type="pitfall" x="874" y="392" width="27" height="30"/>
+  <object id="26" type="enemy" x="680" y="317" width="33" height="35"/>
+  <object id="23" type="hole" x="0" y="633.273" width="1119.45" height="10"/>
  </objectgroup>
 </map>

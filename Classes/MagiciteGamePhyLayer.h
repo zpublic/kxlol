@@ -1,7 +1,7 @@
 #ifndef __MAGICITE_GAME_PHY_LAYER__
 #define __MAGICITE_GAME_PHY_LAYER__
 
-#define MAGICITE_DEBUG_ON
+#define MAGICITE_DEBUG_OFF
 
 #include "cocos2d.h"
 #include "Box2D\Box2D.h"

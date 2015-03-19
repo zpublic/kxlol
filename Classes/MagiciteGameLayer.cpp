@@ -31,6 +31,7 @@
 #include "MagiciteGamePortal.h"
 #include "MagiciteGameShowLayer.h"
 #include "MagiciteGamePhysics.h"
+#include "PhysicsLoader.h"
 
 
 USING_NS_CC;
@@ -325,14 +326,14 @@ void MagiciteGameLayer::create_pitfall(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "pitfall")
         {
-            auto pit = MagiciteGameFactoryMethod::createPitfall(MagiciteGameFactoryMethod::Spine_Type);
+            auto pit = MagiciteGameFactoryMethod::createPitfall(MagiciteGameFactoryMethod::Piranha);
             pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(pit, true, Magicite::FIXTURE_TYPE_PITFALL);
             _phyLayer->addChild(pit);
         }
         else if (vm.at("type").asString() == "hole")
         {
-            auto pit = MagiciteGameFactoryMethod::createPitfall(MagiciteGameFactoryMethod::Piranha);
+            auto pit = MagiciteGameFactoryMethod::createPitfall(MagiciteGameFactoryMethod::Pitfall);
             pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             pit->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
             _phyLayer->createPhyBody(pit, true, Magicite::FIXTURE_TYPE_PITFALL);
@@ -350,7 +351,7 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
     {
         Value obj = *it;
         ValueMap vm = obj.asValueMap();
-        if (vm.at("type").asString() == "cube" /*add*/ || vm.at("type").asString() == "platform"/*~*/)
+        if ( vm.at("type").asString() == "platform"/*~*/)
         {
             float x = vm.at("x").asFloat();
             float w = vm.at("width").asFloat();
@@ -365,6 +366,18 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
             ///*add*/node->setUserData(reinterpret_cast<void*>(vm.at("type").asString() == "platform"));/*~*/
         }
     }
+    //
+    b2BodyDef  body_def;
+    body_def.type = b2_staticBody;
+
+
+    auto body = _phyLayer->createBody(&body_def);
+
+    PhysicsLoader loader;
+    loader.addShapesWithFile("point.plist");
+    loader.addFixturesToBody(body, "level5");
+
+
 }
 
 void MagiciteGameLayer::create_NPC( TMXObjectGroup* game)
@@ -427,7 +440,7 @@ void MagiciteGameLayer::init_map_data(cocos2d::TMXTiledMap* tiledMap)
     create_player(game);
 
     create_enemy(game);
-    //create_pitfall(game);
+    create_pitfall(game);
     create_ground(ground);
     create_NPC(game);
     //create_item(game);
