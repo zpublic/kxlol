@@ -228,6 +228,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MainOperatePanel.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\MainTabBtnLayer.cpp" />
+    <ClCompile Include="..\Classes\NetworkTestScene.cpp" />
     <ClCompile Include="..\Classes\Network\ClientConnection.cpp" />
     <ClCompile Include="..\Classes\PhysicsLoader.cpp" />
     <ClCompile Include="..\Classes\WelcomeScene.cpp" />
@@ -335,8 +336,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MainOperatePanel.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\MainTabBtnLayer.h" />
+    <ClInclude Include="..\Classes\NetworkTestScene.h" />
     <ClInclude Include="..\Classes\Network\ClientConnection.h" />
     <ClInclude Include="..\Classes\PhysicsLoader.h" />
+    <ClInclude Include="..\Classes\Network\SocketManager.h" />
     <ClInclude Include="..\Classes\WelcomeScene.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

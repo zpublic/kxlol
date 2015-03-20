@@ -54,7 +54,7 @@ void ClientConnection::connentToServer(const char *ip, unsigned short port) {
     }
 
     _isWaiting = true;
-    _connectThread = new std::thread(std::bind(&ClientConnection::_connectToServer, this, ip, port));
+    _connectThread = new std::thread(std::bind(&ClientConnection::_connectToServer, this, std::placeholders::_1, std::placeholders::_2), ip, port);
 }
 
 void ClientConnection::quit() {
@@ -95,9 +95,17 @@ void ClientConnection::sendBuf(const char *buf, int len) {
     _sendMutex.unlock();
 }
 
+void ClientConnection::sendBuf(std::vector<char> &&buf) {
+    _sendMutex.lock();
+    _sendQueue.push_back(buf);
+    _sendMutex.unlock();
+}
+
 bool ClientConnection::peekBuf(std::vector<char> *buf) {
     assert(buf != nullptr);
-    _recvMutex.lock();
+    if (!_recvMutex.try_lock()) {
+        return false;
+    }
     if (_recvQueue.empty()) {
         _recvMutex.unlock();
         return false;
@@ -106,6 +114,27 @@ bool ClientConnection::peekBuf(std::vector<char> *buf) {
     _recvQueue.pop_front();
     _recvMutex.unlock();
     return true;
+}
+
+bool ClientConnection::peekBuf(std::vector<char> *buf, const std::function<bool (const std::vector<char> &)> &checkFunc) {
+    assert(buf != nullptr);
+    if (!_recvMutex.try_lock()) {
+        return false;
+    }
+    if (_recvQueue.empty()) {
+        _recvMutex.unlock();
+        return false;
+    }
+    for (std::deque<std::vector<char> >::iterator it = _recvQueue.begin(); it != _recvQueue.end(); ++it) {
+        if (checkFunc(*it)) {
+            *buf = std::move(*it);
+            _recvQueue.erase(it);
+            _recvMutex.unlock();
+            return true;
+        }
+    }
+    _recvMutex.unlock();
+    return false;
 }
 
 void ClientConnection::_connectToServer(const char *ip, unsigned short port) {
@@ -136,13 +165,13 @@ void ClientConnection::_recvThreadFunc() {
             LOG_DEBUG("Recv error\n");
             break;
         }
-        size_t len = buf[0];
+        size_t len = (unsigned char)buf[0];
         len <<= 8;
-        len |= buf[1];
+        len |= (unsigned char)buf[1];
         len <<= 8;
-        len |= buf[2];
+        len |= (unsigned char)buf[2];
         len <<= 8;
-        len |= buf[3];
+        len |= (unsigned char)buf[3];
         assert(len <= INT_MAX);
 
         std::vector<char> cache;
@@ -161,31 +190,67 @@ void ClientConnection::_recvThreadFunc() {
 }
 
 void ClientConnection::_sendThreadFunc() {
-    char buf[4];
     while (!_sendNeedQuit) {
         _sendMutex.lock();
         if (_sendQueue.empty()) {
             _sendMutex.unlock();
         }
         else {
-            std::vector<char> packet(std::move(_sendQueue.front()));
-            _sendQueue.pop_front();
-            _sendMutex.unlock();
+            if (_sendQueue.size() == 1) {
+                std::vector<char> packet(std::move(_sendQueue.front()));
+                _sendQueue.pop_front();
+                _sendMutex.unlock();
+                
+                size_t len = packet.size();
+                assert(len <= INT_MAX);
+                packet.resize(len + 4);
+                memmove(&packet[4], &packet[0], len);
+                packet[0] = (len >> 24) & 0xFF;
+                packet[1] = (len >> 16) & 0xFF;
+                packet[2] = (len >> 8) & 0xFF;
+                packet[3] = len & 0xFF;
+                len += 4;
+                if (::send(_socket, &packet[0], len, 0) != len) {
+                    LOG_DEBUG("Send error\n");
+                    break;
+                }
+            } else {
+                std::vector<char> packet(std::move(_sendQueue.front()));
+                _sendQueue.pop_front();
 
-            size_t len = packet.size();
-            assert(len <= INT_MAX);
+                size_t len = packet.size();
+                assert(len <= INT_MAX);
+                packet.resize(len + 4);
+                memmove(&packet[4], &packet[0], len);
+                packet[0] = (len >> 24) & 0xFF;
+                packet[1] = (len >> 16) & 0xFF;
+                packet[2] = (len >>  8) & 0xFF;
+                packet[3] = (len      ) & 0xFF;
+                len += 4;
 
-            buf[0] = (len >> 24) & 0xFF;
-            buf[1] = (len >> 16) & 0xFF;
-            buf[2] = (len >> 8) & 0xFF;
-            buf[3] = len & 0xFF;
-            if (::send(_socket, buf, 4, 0) != 4) {
-                LOG_DEBUG("Send error\n");
-                break;
-            }
-            if (::send(_socket, &packet[0], len, 0) != len) {
-                LOG_DEBUG("Send error\n");
-                break;
+                while (!_sendQueue.empty()) {
+                    std::vector<char> &append = _sendQueue.front();
+                    size_t len1 = append.size();
+                    assert(len1 <= INT_MAX);
+                    if (len + 4 + len1 > 1024) {
+                        break;
+                    }
+                    packet.resize(len + len1 + 4);
+                    packet[len + 0] = (len1 >> 24) & 0xFF;
+                    packet[len + 1] = (len1 >> 16) & 0xFF;
+                    packet[len + 2] = (len1 >>  8) & 0xFF;
+                    packet[len + 3] = (len1      ) & 0xFF;
+                    memcpy(&packet[len + 4], &append[0], len1);
+                    len += (4 + len1);
+                    _sendQueue.pop_front();
+                }
+
+                _sendMutex.unlock();
+
+                if (::send(_socket, &packet[0], len, 0) != len) {
+                    LOG_DEBUG("Send error\n");
+                    break;
+                }
             }
         }
     }

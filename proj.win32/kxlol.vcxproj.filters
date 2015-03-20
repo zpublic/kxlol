@@ -378,6 +378,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\PhysicsLoader.cpp">
       <Filter>Magicite\Physics</Filter>
+	</ClCompile>
+    <ClCompile Include="..\Classes\NetworkTestScene.cpp">
+      <Filter>src\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -693,6 +696,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\PhysicsLoader.h">
       <Filter>Magicite\Physics</Filter>
+	</ClInclude>
+    <ClInclude Include="..\Classes\Network\SocketManager.h">
+      <Filter>src\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NetworkTestScene.h">
+      <Filter>src\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

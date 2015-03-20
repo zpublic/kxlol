@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 #include "WelcomeScene.h"
-#include "Network/ClientConnection.h"
+#include "NetworkTestScene.h"
 
 USING_NS_CC;
 
@@ -45,31 +45,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // run
     director->runWithScene(scene);
-
-    static ClientConnection cs;
-    cs.connentToServer("192.168.199.140", 8899);
-    Scheduler *scheduler = director->getScheduler();
-    scheduler->schedule([scheduler](float) {
-        if (cs.isWaiting()) {
-            return;
-        }
-        if (cs.isConnectSuccess()) {
-            CCLOG("Connect Success");
-            scheduler->schedule([](float) {
-                const char *str = "Hello World!";
-                cs.sendBuf(str, strlen(str));
-                CCLOG("send: %s", str);
-            }, &cs, 1.0F, CC_REPEAT_FOREVER, 0.0F, false, "NETWORK_SEND");
-
-            scheduler->schedule([](float) {
-                std::vector<char> buf;
-                if (cs.peekBuf(&buf)) {
-                    CCLOG("recv: %.*s", (int)buf.size(), &buf[0]);
-                }
-            }, &cs, 0.0F, CC_REPEAT_FOREVER, 0.0F, false, "NETWORK_RECV");
-        }
-        scheduler->unschedule("CONNECTION_TEST", &cs);
-    }, &cs, 0.0F, CC_REPEAT_FOREVER, 0.0F, false, "CONNECTION_TEST");
+    //director->runWithScene(NetworkTestScene::create());
 
     return true;
 }
