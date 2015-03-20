@@ -21,13 +21,6 @@ MagiciteGameLiving* MagiciteGameFactoryMethod::createEnemy(LivingType type, bool
     MagiciteGameLiving* ptr = nullptr;
     switch (type)
     {
-    case MagiciteGameFactoryMethod::Piranha:
-        ptr = MagiciteGamePiranha::create();
-        if (ptr != nullptr)
-        {
-            return ptr;
-        }
-        break;
     case MagiciteGameFactoryMethod::Human:
         ptr = MagiciteGameHuman::create();
         if (ptr != nullptr)
@@ -179,6 +172,14 @@ MagiciteGamePitfall* MagiciteGameFactoryMethod::createPitfall(Pitfall_Type type,
             ptr->setPitFallAvtive(is_active);
         }
         return ptr;
+    case MagiciteGameFactoryMethod::Piranha:
+        ptr = MagiciteGamePiranha::create();
+        if (ptr != nullptr)
+        {
+            ptr->setPitFallAvtive(true);
+        }
+        return ptr;
+        break;
     default:
         break;
     }

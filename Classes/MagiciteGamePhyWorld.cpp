@@ -1,6 +1,7 @@
 #include "MagiciteGamePhyWorld.h"
 #include "MagiciteGameObject.h"
 #include "MagiciteGameContactListener.h"
+#include "MagiciteGamePhysics.h"
 
 USING_NS_CC;
 
@@ -34,13 +35,20 @@ bool MagiciteGamePhyWorld::init(Size size)
 
     b2EdgeShape groundBox;
     groundBox.Set(b2Vec2(0, 0), b2Vec2(boxSize.width / PTM_RATIO, 0));
-    body->CreateFixture(&groundBox, 0);
+    auto fix = body->CreateFixture(&groundBox, 0);
+    fix->SetUserData(reinterpret_cast<void*>(Magicite::FIXTRUE_TYPE_EDGE));
     groundBox.Set(b2Vec2(0, boxSize.height / PTM_RATIO), b2Vec2(boxSize.width / PTM_RATIO, boxSize.height / PTM_RATIO));
-    body->CreateFixture(&groundBox, 0);
+    fix = body->CreateFixture(&groundBox, 0);
+    fix->SetUserData(reinterpret_cast<void*>(Magicite::FIXTRUE_TYPE_EDGE));
+
     groundBox.Set(b2Vec2(0, boxSize.height / PTM_RATIO), b2Vec2(0, 0));
-    body->CreateFixture(&groundBox, 0);
+    fix = body->CreateFixture(&groundBox, 0);
+    fix->SetUserData(reinterpret_cast<void*>(Magicite::FIXTRUE_TYPE_EDGE));
+
     groundBox.Set(b2Vec2(boxSize.width / PTM_RATIO, boxSize.height / PTM_RATIO), b2Vec2(boxSize.width / PTM_RATIO, 0));
-    body->CreateFixture(&groundBox, 0);
+    fix = body->CreateFixture(&groundBox, 0);
+    fix->SetUserData(reinterpret_cast<void*>(Magicite::FIXTRUE_TYPE_EDGE));
+
 
     _contactListener = MagiciteGameContactListener::create();
     this->SetContactListener(_contactListener);
@@ -48,7 +56,7 @@ bool MagiciteGamePhyWorld::init(Size size)
     return true;
 }
 
-void MagiciteGamePhyWorld::createPhyBody(MagiciteGameObject* ptr, bool is_static)
+void MagiciteGamePhyWorld::createPhyBody(MagiciteGameObject* ptr, bool is_static, Magicite::FIXTURE_TYPE type)
 {
     b2BodyDef bodyDef;
     bodyDef.type = is_static ? b2_staticBody : b2_dynamicBody;
@@ -57,12 +65,29 @@ void MagiciteGamePhyWorld::createPhyBody(MagiciteGameObject* ptr, bool is_static
         (ptr->getPositionY() + ptr->getContentSize().height / 2) / PTM_RATIO);
     bodyDef.userData = ptr;
     b2Body* body = this->CreateBody(&bodyDef);
+    body->SetFixedRotation(true);
     b2PolygonShape dynamicBox;
     dynamicBox.SetAsBox(ptr->getContentSize().width / 2 / PTM_RATIO, ptr->getContentSize().height / 2 / PTM_RATIO);
     b2FixtureDef fixtureDef;
     fixtureDef.friction = 0.0f;
     fixtureDef.shape = &dynamicBox;
-    body->CreateFixture(&fixtureDef);
+    auto bodyfix = body->CreateFixture(&fixtureDef);
+    bodyfix->SetUserData(reinterpret_cast<void*>(type));
+
+    if (type == Magicite::FIXTURE_TYPE_PLAYER || type == Magicite::FIXTURE_TYPE_ENEMY || type == Magicite::FIXTURE_TYPE_FRIEND)
+    {
+        b2PolygonShape polygonShape;
+        polygonShape.SetAsBox(0.3f, 0.3f, b2Vec2(0.03f, ptr->getContentSize().height / 2.0f / -PTM_RATIO), 0);
+
+        b2FixtureDef myFixtureDef;
+        myFixtureDef.shape = &polygonShape;
+        myFixtureDef.density = 1;
+        myFixtureDef.isSensor = true;
+
+        body->CreateFixture(&myFixtureDef);
+        b2Fixture* footSensorFixture = body->CreateFixture(&myFixtureDef);
+        footSensorFixture->SetUserData(reinterpret_cast<void*>(Magicite::FIXTURE_TYPE_JUMP_POINT));
+    }
     ptr->setBody(body);
 }
 
@@ -85,7 +110,7 @@ void MagiciteGamePhyWorld::updateBody(float timeDelta)
             else
             {
                 sprite->setPosition(Vec2(it->GetPosition().x * PTM_RATIO, it->GetPosition().y * PTM_RATIO));
-                sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(it->GetAngle()));
+                sprite->setRotation(0.0f);
             }
         }
     }
@@ -105,4 +130,9 @@ MagiciteGamePhyWorld* MagiciteGamePhyWorld::create(b2Vec2 gravity, Size size)
         return ptr;
     }
     return nullptr;
+}
+
+b2Body* MagiciteGamePhyWorld::createBody(b2BodyDef* bd)
+{
+    return this->CreateBody(bd);
 }

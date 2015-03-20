@@ -2,9 +2,9 @@
 #define __MAGICITE_GAME_PIRANHA__
 
 #include "cocos2d.h"
-#include "MagiciteGameLiving.h"
+#include "MagiciteGamePitfall.h"
 
-class MagiciteGamePiranha : public MagiciteGameLiving
+class MagiciteGamePiranha : public MagiciteGamePitfall
 {
 public:
     MagiciteGamePiranha();

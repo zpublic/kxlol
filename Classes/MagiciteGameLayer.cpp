@@ -30,6 +30,9 @@
 #include "MagiciteGameDefaultPortalPair.h"
 #include "MagiciteGamePortal.h"
 #include "MagiciteGameShowLayer.h"
+#include "MagiciteGamePhysics.h"
+#include "PhysicsLoader.h"
+
 
 USING_NS_CC;
 
@@ -87,8 +90,8 @@ bool MagiciteGameLayer::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto origin = Director::getInstance()->getVisibleOrigin();
 
-    char tiledPath[200];
-    std::sprintf(tiledPath, "img\\Magicite\\map\\level%d.tmx", MagiciteScene::getLevel() % 6);
+    char tiledPath[] = "img\\Magicite\\map\\level5.tmx";
+    //std::sprintf(tiledPath, "img\\Magicite\\map\\level%d.tmx", MagiciteScene::getLevel() % 6);
     TMXTiledMap* tiled = TMXTiledMap::create(tiledPath);
 
     _background = MagiciteGameMap::create(tiled);
@@ -110,22 +113,22 @@ bool MagiciteGameLayer::init()
     //use_weather(MagiciteWeatherSnow::create());
 
     //EarthQuake
-    auto earthquake = Repeat::create(Sequence::create(RotateTo::create(0.1f, 1.5f), RotateTo::create(0.1f, -1.5f), nullptr), 5);
+    /*auto earthquake = Repeat::create(Sequence::create(RotateTo::create(0.1f, 1.5f), RotateTo::create(0.1f, -1.5f), nullptr), 5);
     auto earthquakeReset = RotateTo::create(0.0f, 0.0f);
-    this->runAction(Sequence::create(earthquake, earthquakeReset, nullptr));
+    this->runAction(Sequence::create(earthquake, earthquakeReset, nullptr));*/
 
     //Meteorite
-    auto stone = MagiciteGameMeteorite::create();
+    /*auto stone = MagiciteGameMeteorite::create();
     stone->setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height);
     _phyLayer->createPhyBody(stone, false); 
     stone->Move(MagiciteGameMoveAble::left);
-    _phyLayer->addChild(stone);
+    _phyLayer->addChild(stone);*/
 
     //FragileGround
-    auto ground_f = MagiciteGameFragileGround::create();
+    /*auto ground_f = MagiciteGameFragileGround::create();
     ground_f->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-    _phyLayer->createPhyBody(ground_f, true);
-    _phyLayer->addChild(ground_f);
+    _phyLayer->createPhyBody(ground_f, true, Magicite::FIXTURE_TYPE_PLATFORM);
+    _phyLayer->addChild(ground_f);*/
 
     ////Portal
     //auto portal = MagiciteGameDefaultPortalPair::create();
@@ -199,43 +202,42 @@ void MagiciteGameLayer::update(float timeDelta)
 
 bool MagiciteGameLayer::onOnJudgeContact(b2Contact* contact)
 {
-    b2Body* bodyA = contact->GetFixtureA()->GetBody();
-    b2Body* bodyB = contact->GetFixtureB()->GetBody();
-    auto objectA = reinterpret_cast<MagiciteGameObject*>(bodyA->GetUserData());
-    auto objectB = reinterpret_cast<MagiciteGameObject*>(bodyB->GetUserData());
-    MagiciteGameContact::Contact_type objectTypeA = MagiciteGameContact::Contact_type::unknow_type;
-    MagiciteGameContact::Contact_type objectTypeB = MagiciteGameContact::Contact_type::unknow_type;
-
-    objectTypeA = MagiciteGameContact::trivial_contact_type(objectA);
-    objectTypeB = MagiciteGameContact::trivial_contact_type(objectB);
-
+    auto fixA = contact->GetFixtureA();
+    auto fixB = contact->GetFixtureB();
+    auto typeA = static_cast<Magicite::FIXTURE_TYPE>(reinterpret_cast<int>(fixA->GetUserData()));
+    auto typeB = static_cast<Magicite::FIXTURE_TYPE>(reinterpret_cast<int>(fixB->GetUserData()));
+    
     /*add*/
-    if (objectTypeA == MagiciteGameContact::Contact_type::player_type &&
-        objectTypeB == MagiciteGameContact::Contact_type::ground_type &&
-        objectB->getUserData() != nullptr) {
-        if (solve_one_side_platform(bodyA, bodyB)) {
-            return false;
+    if ((typeA == Magicite::FIXTURE_TYPE_PLAYER &&
+        typeB == Magicite::FIXTURE_TYPE_PLATFORM)
+        ||
+        (typeB == Magicite::FIXTURE_TYPE_PLAYER &&
+        typeA == Magicite::FIXTURE_TYPE_PLATFORM)
+        ) {
+            if (solve_one_side_platform(reinterpret_cast<b2Body*>(fixA->GetBody()), reinterpret_cast<b2Body*>(fixB->GetBody()))) 
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
-    }
     /*~*/
 
-    return MagiciteGameContact::judge_contact[objectTypeA][objectTypeB];
+    return MagiciteGameContact::judge_contact[typeA][typeB];
 }
 
 void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
 {
-    b2Body* bodyA = contact->GetFixtureA()->GetBody();
-    b2Body* bodyB = contact->GetFixtureB()->GetBody();
-    auto objectA = reinterpret_cast<MagiciteGameObject*>(bodyA->GetUserData());
-    auto objectB = reinterpret_cast<MagiciteGameObject*>(bodyB->GetUserData());
-    MagiciteGameContact::Contact_type objectTypeA = MagiciteGameContact::Contact_type::unknow_type;
-    MagiciteGameContact::Contact_type objectTypeB = MagiciteGameContact::Contact_type::unknow_type;
+    auto fixA = contact->GetFixtureA();
+    auto fixB = contact->GetFixtureB();
+    auto typeA = static_cast<Magicite::FIXTURE_TYPE>(reinterpret_cast<int>(fixA->GetUserData()));
+    auto typeB = static_cast<Magicite::FIXTURE_TYPE>(reinterpret_cast<int>(fixB->GetUserData()));
 
-    objectTypeA = MagiciteGameContact::trivial_contact_type(objectA);
-    objectTypeB = MagiciteGameContact::trivial_contact_type(objectB);
-    if (MagiciteGameContact::is_in_types(objectTypeA) == false || MagiciteGameContact::is_in_types(objectTypeB) == false) return;
-
-    MagiciteGameContact::on_contact[objectTypeA][objectTypeB](objectA, objectB);
+    MagiciteGameContact::on_contact[typeA][typeB](
+        reinterpret_cast<MagiciteGameObject*>(fixA->GetBody()->GetUserData()), 
+        reinterpret_cast<MagiciteGameObject*>(fixB->GetBody()->GetUserData()));
 }
 
 void MagiciteGameLayer::init_contact()
@@ -266,7 +268,7 @@ void MagiciteGameLayer::create_end_cube(TMXObjectGroup* game)
     auto endCube = MagiciteGameObject::create(MagiciteGameObject::Type::T_End);
     endCube->setContentSize(endSize);
     endCube->setPosition(endPos);
-    _phyLayer->createPhyBody(endCube, true);
+    _phyLayer->createPhyBody(endCube, true, Magicite::FIXTURE_TYPE_END);
     _phyLayer->addChild(endCube);
 }
 
@@ -279,7 +281,7 @@ void MagiciteGameLayer::create_player(TMXObjectGroup* game)
     ValueMap playerMap = game->getObject("player");
     Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
     _player->setPosition(playerPos);
-    _phyLayer->createPhyBody(_player->getSprite(), false);
+    _phyLayer->createPhyBody(_player->getSprite(), false, Magicite::FIXTURE_TYPE_PLAYER);
     _phyLayer->addChild(_player->getSprite());
 
     auto bag_view = _player->getBag();
@@ -289,11 +291,8 @@ void MagiciteGameLayer::create_player(TMXObjectGroup* game)
 
     _player->switchBagInvisible();
 
-    //_player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
-    //_player->getBag()->addItem(MagiciteSkillCardAcid::create(_phyLayer));
-    //_player->getBag()->addItem(MagiciteSkillCardFlash::create(_phyLayer, 200));
-    //_player->getBag()->addItem(MagiciteSkillCardSpeedUp::create());
-    //_player->getBag()->addItem(MagiciteSkillCardSprint::create());
+    _player->getBag()->addItem(MagiciteSkillCardFireBall::create(_phyLayer));
+    _player->getBag()->addItem(MagiciteSkillCardAcid::create(_phyLayer));
 }
 
 void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
@@ -307,7 +306,7 @@ void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
         {
             auto enemy = MagiciteGameFactoryMethod::createEnemy(MagiciteGameFactoryMethod::Dirt, true);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
-            _phyLayer->createPhyBody(enemy, false);
+            _phyLayer->createPhyBody(enemy, false, Magicite::FIXTURE_TYPE_ENEMY);
             _phyLayer->addChild(enemy);
             if (enemy->LivingMoveType == MagiciteGameLiving::MoveAbleLiving)
             {
@@ -327,9 +326,9 @@ void MagiciteGameLayer::create_pitfall(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "pitfall")
         {
-            auto pit = MagiciteGameFactoryMethod::createPitfall(MagiciteGameFactoryMethod::Spine_Type);
+            auto pit = MagiciteGameFactoryMethod::createPitfall(MagiciteGameFactoryMethod::Piranha);
             pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
-            _phyLayer->createPhyBody(pit, true);
+            _phyLayer->createPhyBody(pit, true, Magicite::FIXTURE_TYPE_PITFALL);
             _phyLayer->addChild(pit);
         }
         else if (vm.at("type").asString() == "hole")
@@ -337,7 +336,7 @@ void MagiciteGameLayer::create_pitfall(TMXObjectGroup* game)
             auto pit = MagiciteGameFactoryMethod::createPitfall(MagiciteGameFactoryMethod::Pitfall);
             pit->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             pit->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
-            _phyLayer->createPhyBody(pit, true);
+            _phyLayer->createPhyBody(pit, true, Magicite::FIXTURE_TYPE_PITFALL);
             _phyLayer->addChild(pit);
         }
     }
@@ -352,7 +351,7 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
     {
         Value obj = *it;
         ValueMap vm = obj.asValueMap();
-        if (vm.at("type").asString() == "cube" /*add*/ || vm.at("type").asString() == "platform"/*~*/)
+        if ( vm.at("type").asString() == "platform"/*~*/)
         {
             float x = vm.at("x").asFloat();
             float w = vm.at("width").asFloat();
@@ -362,11 +361,23 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
             node->setPosition(Vec2(x, y));
             node->setContentSize(Size(w, h));
             node->setAnchorPoint(Point::ZERO);
-            _phyLayer->createPhyBody(node, true);
+            _phyLayer->createPhyBody(node, true, vm.at("type").asString() == "cube" ? Magicite::FIXTURE_TYPE_LAND: Magicite::FIXTURE_TYPE_PLATFORM);
             _phyLayer->addChild(node);
-            /*add*/node->setUserData(reinterpret_cast<void*>(vm.at("type").asString() == "platform"));/*~*/
+            ///*add*/node->setUserData(reinterpret_cast<void*>(vm.at("type").asString() == "platform"));/*~*/
         }
     }
+    //
+    b2BodyDef  body_def;
+    body_def.type = b2_staticBody;
+
+
+    auto body = _phyLayer->createBody(&body_def);
+
+    PhysicsLoader loader;
+    loader.addShapesWithFile("point.plist");
+    loader.addFixturesToBody(body, "level5");
+
+
 }
 
 void MagiciteGameLayer::create_NPC( TMXObjectGroup* game)
@@ -383,7 +394,7 @@ void MagiciteGameLayer::create_NPC( TMXObjectGroup* game)
             auto npc = MagiciteGameFactoryMethod::createFriend(MagiciteGameFactoryMethod::NPC, true);
             npc->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             npc->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
-            _phyLayer->createPhyBody(npc, true);
+            _phyLayer->createPhyBody(npc, true, Magicite::FIXTURE_TYPE_FRIEND);
             _phyLayer->addChild(npc);
             auto strName = vm.at("name").asString();
             auto npcptr = dynamic_cast<MagiciteGameNPC*>(npc);
@@ -414,7 +425,7 @@ void MagiciteGameLayer::create_item(cocos2d::TMXObjectGroup* game)
         {
             auto item = MagiciteSkillCardFriend::create(MagiciteSkillCardFriend::LivingType::Sheep, _phyLayer);
             item->setPosition(vm.at("x").asFloat(), vm.at("y").asFloat());
-            _phyLayer->createPhyBody(item, true);
+            _phyLayer->createPhyBody(item, true, Magicite::FIXTURE_TYPE_ITEM);
             _phyLayer->addChild(item);
         }
     }

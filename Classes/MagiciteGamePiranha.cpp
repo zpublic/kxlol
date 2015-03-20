@@ -3,14 +3,14 @@
 USING_NS_CC;
 
 MagiciteGamePiranha::MagiciteGamePiranha()
-:MagiciteGameLiving(NormalLiving,Piranha)
+:MagiciteGamePitfall(Prianha)
 {
 
 }
 
 bool MagiciteGamePiranha::init()
 {
-    if (!MagiciteGameLiving::initWithFile("CloseSelected"))
+    if (!MagiciteGamePitfall::initWithFile("img\\Magicite\\pitfall\\Piranha.png"))
     {
         return false;
     }

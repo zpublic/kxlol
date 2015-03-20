@@ -1,0 +1,25 @@
+#ifndef __MAGICITE_GAME_PHYSICS__
+#define __MAGICITE_GAME_PHYSICS__
+
+namespace Magicite
+{
+    enum FIXTURE_TYPE : int
+    {
+        FIXTURE_TYPE_NONE,
+        FIXTURE_TYPE_PLATFORM,
+        FIXTURE_TYPE_LAND,
+        FIXTURE_TYPE_PLAYER,
+        FIXTURE_TYPE_END,
+        FIXTURE_TYPE_ENEMY,
+        FIXTURE_TYPE_FRIEND,
+        FIXTRUE_TYPE_EDGE,
+        FIXTURE_TYPE_ITEM,
+        FIXTURE_TYPE_AMMO,
+        FIXTURE_TYPE_PITFALL,
+        FIXTURE_TYPE_PORTAL,
+        FIXTURE_TYPE_JUMP_POINT,
+    };
+
+};
+
+#endif //__MAGICITE_GAME_PHYSICS__

@@ -16,7 +16,7 @@ void MagiciteEffectFireBall::positive(MagiciteGameObject* obj)
     MagiciteGameAmmo* ammo = MagiciteGameFactoryMethod::createAmmo(MagiciteGameFactoryMethod::FireBall);
 
     ammo->setPosition(obj->getPosition());
-    _phyLayer->createPhyBody(ammo, false);
+    _phyLayer->createPhyBody(ammo, false, Magicite::FIXTURE_TYPE_AMMO);
     ammo->getBody()->SetGravityScale(0.0f);
     _phyLayer->addChild(ammo);
     ammo->Move(moveable->getDire());
