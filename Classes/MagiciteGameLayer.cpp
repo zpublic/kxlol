@@ -200,7 +200,7 @@ void MagiciteGameLayer::update(float timeDelta)
     _player->Move();
 }
 
-bool MagiciteGameLayer::onOnJudgeContact(b2Contact* contact)
+MagiciteGameContact::ContactType MagiciteGameLayer::onOnJudgeContact(b2Contact* contact)
 {
     auto fixA = contact->GetFixtureA();
     auto fixB = contact->GetFixtureB();
@@ -216,11 +216,11 @@ bool MagiciteGameLayer::onOnJudgeContact(b2Contact* contact)
         ) {
             if (solve_one_side_platform(reinterpret_cast<b2Body*>(fixA->GetBody()), reinterpret_cast<b2Body*>(fixB->GetBody()))) 
             {
-                return false;
+                return MagiciteGameContact::Cancle;
             }
             else
             {
-                return true;
+                return MagiciteGameContact::Calcture;
             }
         }
     /*~*/

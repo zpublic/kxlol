@@ -10,6 +10,11 @@ class MagiciteGamePlayer;
 class MagiciteGameControlAble;
 class MagiciteWeather;
 
+namespace  MagiciteGameContact
+{
+    enum ContactType : int;
+}
+
 class MagiciteGameLayer : public cocos2d::Layer
 {
 public:
@@ -26,7 +31,7 @@ public:
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     void onOnBeginContact(b2Contact* contact);
-    bool onOnJudgeContact(b2Contact* contact);
+    MagiciteGameContact::ContactType onOnJudgeContact(b2Contact* contact);
 
     CREATE_FUNC(MagiciteGameLayer);
 

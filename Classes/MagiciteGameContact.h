@@ -14,22 +14,21 @@ class MagiciteItem;
 namespace MagiciteGameContact
 {
 
-    bool is_moveable_on_ground(MagiciteGameMoveAbleLiving* moveObj, MagiciteGameObject* ground);
-    /*判断moveObj在ground的正上方或正下方*/
-
-    bool is_moveable_above_ground(MagiciteGameMoveAbleLiving* moveObj, MagiciteGameObject* ground);
-    /*判断moveObj在ground的正上方*/
-
     void change_moveable_direction(MagiciteGameMoveAbleLiving* moveObj);
     /*改变生物移动方向*/
 
     void try_to_change_living_direction(MagiciteGameLiving* living);
     /*尝试改变生物移动方向*/
 
-    //bool is_in_types(Contact_type);
-    /*判断是否属于Contact_type*/
+    enum ContactType : int
+    {
+        Cancle = 0,
+        Contact,
+        Calcture,
+        Calture_Cancle,
+    };
 
-    extern std::map < Magicite::FIXTURE_TYPE, std::map<Magicite::FIXTURE_TYPE, bool>>                                                           judge_contact;
+    extern std::map < Magicite::FIXTURE_TYPE, std::map<Magicite::FIXTURE_TYPE, ContactType>>                                                           judge_contact;
     extern std::map<Magicite::FIXTURE_TYPE, std::map<Magicite::FIXTURE_TYPE, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>>    on_contact;
 
     void try_living_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
@@ -51,7 +50,7 @@ namespace MagiciteGameContact
     extern std::function<void(void)>                       _onWin;
     extern std::function<void(void)>                       _onOver;
     extern std::function<void(MagiciteItem*)>              _onPick;
-    extern std::function<bool(b2Contact* contact)>         _onJudgeContact;
+    extern std::function<ContactType(b2Contact* contact)>         _onJudgeContact;
     extern std::function<void(b2Contact* contact)>         _onBeginContact;
 
     void onWin();
