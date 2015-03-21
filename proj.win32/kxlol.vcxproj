@@ -334,6 +334,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\MainTabBtnLayer.h" />
     <ClInclude Include="..\Classes\NetworkTestScene.h" />
+    <ClInclude Include="..\Classes\Network\CircularIOBuffer.h" />
     <ClInclude Include="..\Classes\Network\ClientConnection.h" />
     <ClInclude Include="..\Classes\Network\SocketManager.h" />
     <ClInclude Include="..\Classes\WelcomeScene.h" />
