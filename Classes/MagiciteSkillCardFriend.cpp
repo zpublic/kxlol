@@ -37,7 +37,7 @@ bool MagiciteSkillCardFriend::init(
         return false;
     }
 
-    setEffect(MagiciteEffectCreateFriend::create(phyLayer, type));
+    setEffect(MagiciteEffectCreateFriend::create(type));
     setCd(_effect->getCD());
 
     _type = type;

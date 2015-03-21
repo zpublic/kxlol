@@ -32,7 +32,7 @@ bool MagiciteSkillCardFireBall::init(MagiciteGamePhyLayer* phyLayer)
         return false;
     }
 
-    setEffect(MagiciteEffectFireBall::create(phyLayer));
+    setEffect(MagiciteEffectFireBall::create());
     setCd(_effect->getCD());
 
     _phyLayer = phyLayer;

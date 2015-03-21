@@ -6,7 +6,6 @@
 #include "MagiciteGameFactoryMethod.h"
 
 class MagiciteGameObject;
-class MagiciteGamePhyLayer;
 
 class MagiciteEffectCreateFriend : public MagiciteEffectCreate
 {
@@ -19,16 +18,12 @@ public:
     //MagiciteEffectCreate
     virtual void positive(MagiciteGameObject* obj);
 
-    static MagiciteEffectCreateFriend* create(
-        MagiciteGamePhyLayer* phyLayer,
-        LivingType type);
+    static MagiciteEffectCreateFriend* create(LivingType type);
 
     virtual bool init(
-        MagiciteGamePhyLayer* phyLayer,
         LivingType type);
 
 private:
-    MagiciteGamePhyLayer*                       _phyLayer;
     LivingType                                  _type;
 };
 
