@@ -15,11 +15,9 @@
 typedef int SOCKET;
 #endif
 
-#include <functional>
 #include <thread>
-#include <mutex>
-#include <deque>
 #include <vector>
+#include "CircularIOBuffer.h"
 
 class ClientConnection final {
 
@@ -32,10 +30,8 @@ public:
 
     bool isWaiting() const { return _isWaiting; }
     bool isConnectSuccess() const { return _isConnectSuccess; }
-    void sendBuf(const char *buf, int len);
-    void sendBuf(std::vector<char> &&buf);
+    bool sendBuf(const char *buf, int len);
     bool peekBuf(std::vector<char> *buf);
-    bool peekBuf(std::vector<char> *buf, const std::function<bool (const std::vector<char> &)> &checkFunc);
 
 private:
     ClientConnection(const ClientConnection &);
@@ -49,18 +45,14 @@ private:
     volatile bool                   _isConnectSuccess;
 
     std::thread                     *_sendThread;
-    std::mutex                      _sendMutex;
-    std::deque<std::vector<char> >  _sendQueue;
     volatile bool                   _sendNeedQuit;
+    SocketSendBuffer<1024>          _sendBuf;
 
     std::thread                     *_recvThread;
-    std::mutex                      _recvMutex;
-    std::deque<std::vector<char> >  _recvQueue;
     volatile bool                   _recvNeedQuit;
+    SocketRecvBuffer<1024>          _recvBuf;
 
     void _connectToServer(const char *ip, unsigned short port);
-    void _recvThreadFunc();
-    void _sendThreadFunc();
 };
 
 #endif

@@ -7,6 +7,7 @@
 #include "cocos2d.h"
 
 #define KEY_SOCKET_CONNECTION_TEST "KEY_SOCKET_CONNECTION_TEST"
+#define KEY_SOCKET_PEEK "KEY_SOCKET_PEEK"
 
 //#define SOCKET_MANAGER_DEBUG
 
@@ -21,7 +22,18 @@ public:
                 return;
             }
             scheduler->unschedule(KEY_SOCKET_CONNECTION_TEST, this);
-            callback(this, _cc.isConnectSuccess());
+            if (!_cc.isConnectSuccess()) {
+                callback(this, false);
+            }
+            callback(this, true);
+            scheduler->schedule([this](float) {
+                std::vector<char> buf;
+                if (!_cc.peekBuf(&buf) || buf.size() < 4) {
+                    return;
+                }
+                int protocal = SocketManager::readProtocal(&buf[0]);
+                _packets.insert(std::make_pair(protocal, std::move(buf)));
+            }, this, 0.0F, CC_REPEAT_FOREVER, 0.0F, false, KEY_SOCKET_PEEK);
         }, this, 0.0F, CC_REPEAT_FOREVER, 0.0F, false, KEY_SOCKET_CONNECTION_TEST);
     }
 
@@ -34,7 +46,6 @@ public:
         _cc.sendBuf(std::move(buf));
     }
 
-public:
     template <class _RECV, class _SEND, class _FUNC>
     void sendAndRegisterRecvCallback(int protocal, const _SEND &data, _FUNC &&callback) {
         msgpack::sbuffer sbuf;
@@ -43,18 +54,19 @@ public:
         std::vector<char> buf(4 + sbuf.size());
         writeProtocal(&buf[0], protocal);
         memcpy(&buf[4], sbuf.data(), sbuf.size());
-        _cc.sendBuf(std::move(buf));
+        _cc.sendBuf(&buf[0], buf.size());
 
         _Helper *helper = _Helper::create([this, protocal, callback](_Helper *thiz) {
-            std::vector<char> buf;
-            if (_cc.peekBuf(&buf, [protocal](const std::vector<char> &buf) {
-                return buf.size() >= 4 && SocketManager::readProtocal(&buf[0]) == protocal;
-            })) {
+            std::unordered_map<int, std::vector<char> >::iterator it = _packets.find(protocal);
+            if (it != _packets.end()) {
+                std::vector<char> buf(std::move(it->second));
+                _packets.erase(it);
+
                 thiz->shutdown();
                 thiz->autorelease();
 #ifdef SOCKET_MANAGER_DEBUG
                 --_helperCnt;
-                CCLOG("54 _helperCnt = %u", _helperCnt);
+                CCLOG("%d _helperCnt = %u", __LINE__, _helperCnt);
 #endif
                 msgpack::unpacked msg;
                 msgpack::unpack(&msg, &buf[4], buf.size() - 4);
@@ -79,6 +91,7 @@ public:
 
 private:
     ClientConnection _cc;
+    std::unordered_map<int, std::vector<char> > _packets;
 
     static void writeProtocal(char *buf, int protocal) {
         buf[0] = (protocal >> 24) & 0xFF;
