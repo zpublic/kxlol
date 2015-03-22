@@ -160,6 +160,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteEffectSprint.cpp" />
     <ClCompile Include="..\Classes\MagiciteForeverItem.cpp" />
     <ClCompile Include="..\Classes\MagiciteForeverSkillCard.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameAutoMoveAble.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameCDItem.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameDefaultPortal.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameDefaultPortalPair.cpp" />
@@ -179,7 +180,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteGameHuman.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameIncubator.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameMeteorite.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameMoveAbleGround.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameMoveAbleLiving.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameMoveAbleManager.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameMovePitfall.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameNPC.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameObject.cpp" />
@@ -265,6 +268,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteEffectValueChange.h" />
     <ClInclude Include="..\Classes\MagiciteForeverItem.h" />
     <ClInclude Include="..\Classes\MagiciteForeverSkillCard.h" />
+    <ClInclude Include="..\Classes\MagiciteGameAutoMoveAble.h" />
     <ClInclude Include="..\Classes\MagiciteGameCDItem.h" />
     <ClInclude Include="..\Classes\MagiciteGameDefaultPortal.h" />
     <ClInclude Include="..\Classes\MagiciteGameDefaultPortalPair.h" />
@@ -284,7 +288,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteGameHuman.h" />
     <ClInclude Include="..\Classes\MagiciteGameIncubator.h" />
     <ClInclude Include="..\Classes\MagiciteGameMeteorite.h" />
+    <ClInclude Include="..\Classes\MagiciteGameMoveAbleGround.h" />
     <ClInclude Include="..\Classes\MagiciteGameMoveAbleLiving.h" />
+    <ClInclude Include="..\Classes\MagiciteGameMoveAbleManager.h" />
     <ClInclude Include="..\Classes\MagiciteGameMovePitfall.h" />
     <ClInclude Include="..\Classes\MagiciteGameNPC.h" />
     <ClInclude Include="..\Classes\MagiciteGameObject.h" />

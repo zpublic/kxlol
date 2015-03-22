@@ -32,6 +32,8 @@
 #include "MagiciteGameShowLayer.h"
 #include "MagiciteGamePhysics.h"
 #include "PhysicsLoader.h"
+#include "MagiciteGameMoveAbleGround.h"
+#include "MagiciteGameMoveAbleManager.h"
 
 
 USING_NS_CC;
@@ -78,7 +80,7 @@ MagiciteGameLayer::MagiciteGameLayer()
 
 MagiciteGameLayer::~MagiciteGameLayer()
 {
-
+    CC_SAFE_DELETE(_moveableManager);
 }
 
 bool MagiciteGameLayer::init()
@@ -92,6 +94,8 @@ bool MagiciteGameLayer::init()
     listener->onKeyPressed = CC_CALLBACK_2(MagiciteGameLayer::onKeyPressed, this);
     listener->onKeyReleased = CC_CALLBACK_2(MagiciteGameLayer::onKeyReleased, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+    _moveableManager = new MagiciteGameMoveAbleManager();
 
     this->schedule(schedule_selector(MagiciteGameLayer::update));
 
@@ -154,6 +158,15 @@ bool MagiciteGameLayer::init()
     auto str = valueMap.find("story_3")->second.asString();
     showText(str);
 
+    auto mg = MagiciteGameMoveAbleGround::create();
+    mg->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    mg->_pointA = Vec2(visibleSize.width * 0.4f, visibleSize.height / 2);
+    mg->_pointB = Vec2(visibleSize.width * 0.6f, visibleSize.height / 2);
+    _phyLayer->createPhyBody(mg, false, Magicite::FIXTURE_TYPE_LAND);
+    _phyLayer->addChild(mg);
+    mg->getBody()->SetGravityScale(0.0f);
+    _moveableManager->addMoveAble(static_cast<MagiciteGameAutoMoveAble*>(mg));
+
     return true;
 }
 
@@ -206,6 +219,7 @@ void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, c
 void MagiciteGameLayer::update(float timeDelta)
 {
     _player->Move();
+    _moveableManager->UpdateMoveAble();
 }
 
 MagiciteGameContact::ContactType MagiciteGameLayer::onOnJudgeContact(b2Contact* contact)

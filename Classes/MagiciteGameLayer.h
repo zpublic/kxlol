@@ -9,6 +9,7 @@ class MagiciteGamePhyLayer;
 class MagiciteGamePlayer;
 class MagiciteGameControlAble;
 class MagiciteWeather;
+class MagiciteGameMoveAbleManager;
 
 namespace  MagiciteGameContact
 {
@@ -53,6 +54,7 @@ public:
     void showText(const std::string& str);
 
 private:
+    MagiciteGameMoveAbleManager*        _moveableManager;
     MagiciteGamePlayer*                 _player;
     MagiciteGamePhyLayer*               _phyLayer;
     MagiciteGameMap*                    _background;
