@@ -13,16 +13,6 @@ public:
     virtual bool init();
     virtual bool initWithFile(const char* filename);
 
-    //MagiciteGameMoveAble
-    virtual void Move(Direction dire);
-    virtual void Stop();
-    virtual void Jump();
-    virtual void JumpOver();
-
-    virtual void initAnimation();
-    virtual void startAnimation(AnimationTag);
-    virtual void stopAnimation(AnimationTag);
-
 protected:
     void setBodyXSpeed(float x_speed);
     void setBodyYSpeed(float y_speed);

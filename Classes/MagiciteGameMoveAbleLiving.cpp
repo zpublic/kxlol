@@ -59,53 +59,22 @@ void MagiciteGameMoveAbleLiving::Move(Direction dire)
             this->setFlippedX(_is_to_left);
         }
     }
-    setBodyXSpeed(_speed * dire);
-    if (getState(State::S_Jump) == false)
-    {
-        this->startAnimation(AnimationTag::Move_Tag);
-    }
-    if (getState(State::S_Move) == false)
-    setState(State::S_Move, true);
+    MagiciteGameMoveAble::Move(dire);
 }
 
 void MagiciteGameMoveAbleLiving::Stop()
 {
-    if (getState(State::S_Move))
-    {
-        setState(State::S_Move, false);
-        setBodyXSpeed(0);
-        this->stopAnimation(AnimationTag::Move_Tag);
-    }
+    MagiciteGameMoveAble::Stop();
 }
 
 void MagiciteGameMoveAbleLiving::Jump()
 {
-    if (_jump_time < _max_jump_time)
-    {
-        setBodyYSpeed(_jumpHeight);
-        ++_jump_time;
-        if (getState(State::S_Move))
-        {
-            this->stopAnimation(AnimationTag::Move_Tag);
-        }
-        this->stopAnimation(AnimationTag::Jump_Tag);
-        this->startAnimation(AnimationTag::Jump_Tag);
-        setState(State::S_Jump, true);
-    }
+    MagiciteGameMoveAble::Jump();
 }
 
 void MagiciteGameMoveAbleLiving::JumpOver()
 {
-    if (getState(State::S_Jump))
-    {
-        this->stopAnimation(AnimationTag::Jump_Tag);
-        if (getState(State::S_Move))
-        {
-            this->startAnimation(MagiciteGameMoveAble::Move_Tag);
-        }
-        setState(State::S_Jump, false);
-        _jump_time = 0;
-    }
+    MagiciteGameMoveAble::JumpOver();
 }
 
 void MagiciteGameMoveAbleLiving::setBodyXSpeed(float x_speed)
@@ -162,7 +131,10 @@ RepeatForever* MagiciteGameMoveAbleLiving::getMoveAnimate()
 void MagiciteGameMoveAbleLiving::createAnimate()
 {
     _jumpAnimate = this->createAnimateJump();
-    _jumpAnimate->retain();
     _moveAnimate = this->createAnimateMove();
-    _moveAnimate->retain();
+    if (_jumpAnimate != nullptr && _moveAnimate != nullptr)
+    {
+        _jumpAnimate->retain();
+        _moveAnimate->retain();
+    }
 }

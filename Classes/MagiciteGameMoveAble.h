@@ -23,10 +23,10 @@ public:
         DEFAULT_JUMP_TIME = 3,
     };
 
-    virtual void Move(Direction dire) = 0;
-    virtual void Stop() = 0;
-    virtual void Jump() = 0;
-    virtual void JumpOver() = 0;
+    virtual void Move(Direction dire);
+    virtual void Stop();
+    virtual void Jump();
+    virtual void JumpOver();
 
     void setJumpHeight(int offset);
     int getJumpHeight() const;
@@ -51,12 +51,16 @@ public:
         Move_Tag = MagiciteGameTagManager::Move_Tag,
         Jump_Tag = MagiciteGameTagManager::Jump_Tag,
     };
-    virtual void initAnimation() = 0;
-    virtual void startAnimation(AnimationTag) = 0;
-    virtual void stopAnimation(AnimationTag) = 0;
+    virtual void initAnimation();
+    virtual void startAnimation(AnimationTag);
+    virtual void stopAnimation(AnimationTag);
 
 protected:
     void tryToStopAnimate();
+
+    virtual void setBodyXSpeed(float x_speed) = 0;
+    virtual void setBodyYSpeed(float y_speed) = 0;
+
 protected:
     std::map<State, bool>           _state;
     int                             _jumpHeight;
@@ -66,6 +70,7 @@ protected:
     float                           _base_speed;
     bool                            _is_dire_changed;
     bool                            _is_to_left;
+    bool                            _has_animate;
 };
 
 #endif //__MAGICITE_GAME_MOVEABLE__
