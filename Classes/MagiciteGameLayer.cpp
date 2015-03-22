@@ -43,7 +43,15 @@ static bool solve_one_side_platform(b2Body* player, b2Body* platform)
 
     CCASSERT(player->GetFixtureList()->GetShape()->m_type == b2Shape::e_polygon, "bad shape");
     CCASSERT(platform->GetFixtureList()->GetShape()->m_type == b2Shape::e_polygon, "bad shape");
-    auto player_shape = reinterpret_cast<b2PolygonShape*>(player->GetFixtureList()->GetShape());
+    b2PolygonShape* player_shape = nullptr;
+    for (auto iter = player->GetFixtureList(); iter; iter = iter->GetNext())
+    {
+        if (static_cast<Magicite::FIXTURE_TYPE>(reinterpret_cast<int>(iter->GetUserData())) == Magicite::FIXTURE_TYPE_PLAYER)
+        {
+            player_shape = reinterpret_cast<b2PolygonShape*>(iter->GetShape());
+        }
+    }
+        
     auto player_min_y = player_shape->m_vertices[0].y;
     for (auto i = 1; i < player_shape->m_count; i++) {
         if (player_shape->m_vertices[i].y < player_min_y) {

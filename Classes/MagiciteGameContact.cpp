@@ -130,7 +130,7 @@ void MagiciteGameContact::resiger_contact()
     judge_contact[Magicite::FIXTURE_TYPE_JUMP_POINT][Magicite::FIXTURE_TYPE_LAND] = MagiciteGameContact::Calture_Cancle;
 
     on_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_JUMP_POINT] = std::bind(try_player_contact_ground, std::placeholders::_2, std::placeholders::_1);
-    judge_contact[Magicite::FIXTURE_TYPE_PLATFORM][Magicite::FIXTURE_TYPE_JUMP_POINT] = MagiciteGameContact::Calture_Cancle;
+    judge_contact[Magicite::FIXTURE_TYPE_LAND][Magicite::FIXTURE_TYPE_JUMP_POINT] = MagiciteGameContact::Calture_Cancle;
 
     on_contact[Magicite::FIXTURE_TYPE_JUMP_POINT][Magicite::FIXTURE_TYPE_PLATFORM] = std::bind(try_player_contact_ground, std::placeholders::_1, std::placeholders::_2);
     judge_contact[Magicite::FIXTURE_TYPE_JUMP_POINT][Magicite::FIXTURE_TYPE_PLATFORM] = MagiciteGameContact::Calture_Cancle;
@@ -138,6 +138,8 @@ void MagiciteGameContact::resiger_contact()
     on_contact[Magicite::FIXTURE_TYPE_PLATFORM][Magicite::FIXTURE_TYPE_JUMP_POINT] = std::bind(try_player_contact_ground, std::placeholders::_2, std::placeholders::_1);
     judge_contact[Magicite::FIXTURE_TYPE_PLATFORM][Magicite::FIXTURE_TYPE_JUMP_POINT] = MagiciteGameContact::Calture_Cancle;
 
+    on_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_PLATFORM] = std::bind(try_living_contact_with_ground, std::placeholders::_1, std::placeholders::_2);
+    judge_contact[Magicite::FIXTURE_TYPE_PLAYER][Magicite::FIXTURE_TYPE_PLATFORM] = MagiciteGameContact::Calcture;
 
 }
 
