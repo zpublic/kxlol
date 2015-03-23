@@ -3,9 +3,9 @@
 
 #include "cocos2d.h"
 #include "MagiciteGameObject.h"
-#include "MagiciteGameMoveAble.h"
+#include "MagiciteGameAnimateMoveAble.h"
 
-class MagiciteGameAmmo : public MagiciteGameObject, public MagiciteGameMoveAble
+class MagiciteGameAmmo : public MagiciteGameObject, public MagiciteGameAnimateMoveAble
 {
 public:
     MagiciteGameAmmo();

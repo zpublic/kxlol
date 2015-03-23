@@ -59,22 +59,22 @@ void MagiciteGameMoveAbleLiving::Move(Direction dire)
             this->setFlippedX(_is_to_left);
         }
     }
-    MagiciteGameMoveAble::Move(dire);
+    MagiciteGameAnimateMoveAble::Move(dire);
 }
 
 void MagiciteGameMoveAbleLiving::Stop()
 {
-    MagiciteGameMoveAble::Stop();
+    MagiciteGameAnimateMoveAble::Stop();
 }
 
 void MagiciteGameMoveAbleLiving::Jump()
 {
-    MagiciteGameMoveAble::Jump();
+    MagiciteGameAnimateMoveAble::Jump();
 }
 
 void MagiciteGameMoveAbleLiving::JumpOver()
 {
-    MagiciteGameMoveAble::JumpOver();
+    MagiciteGameAnimateMoveAble::JumpOver();
 }
 
 void MagiciteGameMoveAbleLiving::setBodyXSpeed(float x_speed)
@@ -91,13 +91,13 @@ void MagiciteGameMoveAbleLiving::startAnimation(AnimationTag tag)
 {
     switch (tag)
     {
-    case MagiciteGameMoveAble::Move_Tag:
+    case Move_Tag:
         if (getState(State::S_Move) == false || getState(State::S_Jump))
         {
             this->runAction(getMoveAnimate());
         }
         break;
-    case MagiciteGameMoveAble::Jump_Tag:
+    case Jump_Tag:
         if (getState(State::S_Jump) == false)
         {
             this->runAction(getJumpAnimate());

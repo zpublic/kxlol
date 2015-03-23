@@ -160,6 +160,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagiciteEffectSprint.cpp" />
     <ClCompile Include="..\Classes\MagiciteForeverItem.cpp" />
     <ClCompile Include="..\Classes\MagiciteForeverSkillCard.cpp" />
+    <ClCompile Include="..\Classes\MagiciteGameAnimateMoveAble.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameAutoMoveAble.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameCDItem.cpp" />
     <ClCompile Include="..\Classes\MagiciteGameDefaultPortal.cpp" />
@@ -268,6 +269,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagiciteEffectValueChange.h" />
     <ClInclude Include="..\Classes\MagiciteForeverItem.h" />
     <ClInclude Include="..\Classes\MagiciteForeverSkillCard.h" />
+    <ClInclude Include="..\Classes\MagiciteGameAnimateMoveAble.h" />
     <ClInclude Include="..\Classes\MagiciteGameAutoMoveAble.h" />
     <ClInclude Include="..\Classes\MagiciteGameCDItem.h" />
     <ClInclude Include="..\Classes\MagiciteGameDefaultPortal.h" />

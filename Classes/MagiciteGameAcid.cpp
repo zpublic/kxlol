@@ -40,7 +40,7 @@ void MagiciteGameAcid::startAnimation(AnimationTag tag)
 {
     switch (tag)
     {
-    case MagiciteGameMoveAble::Move_Tag:
+    case Move_Tag:
         this->runAction(createMoveAnimation());
 
         break;
@@ -56,7 +56,7 @@ void MagiciteGameAcid::stopAnimation(AnimationTag tag)
     {
         switch (tag)
         {
-        case MagiciteGameMoveAble::Move_Tag:
+        case Move_Tag:
             this->stopActionByTag(Move_Tag);
             this->setState(S_Animate, false);
             break;
