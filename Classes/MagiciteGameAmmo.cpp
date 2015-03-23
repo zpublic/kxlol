@@ -27,3 +27,13 @@ bool MagiciteGameAmmo::initWithFile(const char* filename)
     this->initParticle();
     return true;
 }
+
+void MagiciteGameAmmo::setBodyXSpeed(float x_speed)
+{
+    getBody()->SetLinearVelocity(b2Vec2(x_speed, getBody()->GetLinearVelocity().y));
+}
+
+void MagiciteGameAmmo::setBodyYSpeed(float y_speed)
+{
+    getBody()->SetLinearVelocity(b2Vec2(getBody()->GetLinearVelocity().x, y_speed));
+}

@@ -9,6 +9,12 @@ class MagiciteGamePhyLayer;
 class MagiciteGamePlayer;
 class MagiciteGameControlAble;
 class MagiciteWeather;
+class MagiciteGameMoveAbleManager;
+
+namespace  MagiciteGameContact
+{
+    enum ContactType : int;
+}
 
 class MagiciteGameLayer : public cocos2d::Layer
 {
@@ -26,7 +32,7 @@ public:
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     void onOnBeginContact(b2Contact* contact);
-    bool onOnJudgeContact(b2Contact* contact);
+    MagiciteGameContact::ContactType onOnJudgeContact(b2Contact* contact);
 
     CREATE_FUNC(MagiciteGameLayer);
 
@@ -48,6 +54,7 @@ public:
     void showText(const std::string& str);
 
 private:
+    MagiciteGameMoveAbleManager*        _moveableManager;
     MagiciteGamePlayer*                 _player;
     MagiciteGamePhyLayer*               _phyLayer;
     MagiciteGameMap*                    _background;

@@ -82,7 +82,6 @@ void MagiciteGamePhyWorld::createPhyBody(MagiciteGameObject* ptr, bool is_static
         b2FixtureDef myFixtureDef;
         myFixtureDef.shape = &polygonShape;
         myFixtureDef.density = 1;
-        myFixtureDef.isSensor = true;
 
         body->CreateFixture(&myFixtureDef);
         b2Fixture* footSensorFixture = body->CreateFixture(&myFixtureDef);

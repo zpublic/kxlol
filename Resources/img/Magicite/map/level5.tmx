@@ -8,22 +8,12 @@
    H4sIAAAAAAAACxXVg7IYBgAAwRfbtm3btm3btm3btm3bTpu0sW13O3P7DRcoICAgMEEISjCCE4KQhCI0YQhLOMITgYhEIjJRiEo0ohODmMQiNnGISzzik4CEJCIxSUhKMpKTgpSkIjVpSEs60pOBjGQiM1nISjayk4Oc5CI3echLPvJTgIIUojBFKEoxilOCkpSiNGUoSznKU4GKVKIyVahKNapTg5rUojZ1qEs96tOAhjSiMU1oSjOa04KWtKI1bWhLO9rTgY50ojNd6Eo3utODnvSiN33oSz/6M4CBDGIwQxjKMIYzgpGMYjRjGMs4xjOBiUxiMlOYyjSmM4OZzGI2c5jLPOazgIUsYjFLWMoylrOClaxiNWtYyzrWs4GNbGIzW9jKNrazg53sYjd72Ms+9nOAgxziMEc4yjGOc4KTnOI0ZzjLOc5zgYtc4jJXuMo1rnODm9ziNn/xN3e4yz/8yz3u84CHPOIxT3jKM57zgpe84jVveMs73vOBj3ziM1/4yje+84Of/OI3fwgIJAIThKAEIzghCEkoQhOGsIQjPBGISCQiE4WoRCM6MYhJLGITh7jEIz4JSEgiEpOEpCQjOSlISSpSk4a0pCM9GchIJjKThaxkIzs5yEkucpOHvOQjPwUoSCEKU4SiFKM4JShJKUpThrKUozwVqEglKlOFqlSjOjWoSS1qU4e61KM+DWhIIxrThKY0ozktaEkrWtOGtrSjPR3oSCc604WudKM7PehJL3rTh770oz8DGMggBjOEoQxjOCMYyShGM4axjGM8E5jIJCYzhalMYzozmMksZjOHucxjPgtYyCIWs4SlLGM5K1jJKlazhrWsYz0b2MgmNrOFrWxjOzvYyS52s4e97GM/BzjIIQ5zhKMc4zgnOMkpTnOGs5zjPBe4yCUuc4WrXOM6N7jJLW7zF39zh7v8w7/c4z4PeMgjHvOEpzzjOS94ySte84a3vOM9H/jIJz7zha984zs/+MkvfvOH/8cfiMAEISjBCE4IQhKK0IQhLOEITwQiEonIRCEq0YhODGISi9jEIS7xiE8CEpKIxCQhKclITgpSkorUpCEt6UhPBjKSicxkISvZyE4OcpKL3OQhL/nITwEKUojCFKEoxShOCUpSitKUoSzlKE8FKlKJylShKtWoTg1qUova1KEu9ahPAxrSiMY0oSnNaE4LWtKK1rShLe1oTwc60onOdKEr3ehOD3rSi970oS/96M8ABjKIwQxhKMMYzghGMorRjGEs4xjPBCYyiclMYSrTmM4MZjKL2cxhLvOYzwIWsojFLGEpy1jOClayitWsYS3rWM8GNrKJzWxhK9vYzg52sovd7GEv/wG31JAs8AoAAA==
   </data>
  </layer>
- <objectgroup name="physics">
-  <object id="10" type="cube" x="479" y="408" width="123" height="25"/>
-  <object id="11" type="cube" x="672" y="359" width="147" height="124"/>
-  <object id="12" type="cube" x="903" y="397" width="165" height="125"/>
-  <object id="13" type="cube" x="874" y="422" width="27" height="33"/>
-  <object id="14" type="cube" x="78" y="351" width="144" height="117"/>
-  <object id="15" type="cube" x="224" y="356" width="30" height="65"/>
-  <object id="16" type="cube" x="256" y="362" width="28" height="59"/>
-  <object id="17" type="cube" x="285" y="371" width="64" height="51"/>
-  <object id="19" type="cube" x="353" y="381" width="61" height="41"/>
- </objectgroup>
+ <objectgroup name="physics"/>
  <objectgroup name="game">
   <object id="20" name="finish" x="1025" y="349" width="31" height="47"/>
-  <object id="21" name="player" x="99" y="320" width="28" height="30"/>
+  <object id="21" name="player" x="493" y="372" width="28" height="30"/>
   <object id="24" type="pitfall" x="874" y="392" width="27" height="30"/>
-  <object id="26" type="enemy" x="680" y="317" width="33" height="35"/>
+  <object id="26" type="enemy" x="95" y="313" width="33" height="35"/>
   <object id="23" type="hole" x="0" y="633.273" width="1119.45" height="10"/>
  </objectgroup>
 </map>

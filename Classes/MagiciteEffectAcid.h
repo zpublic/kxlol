@@ -4,8 +4,6 @@
 #include "cocos2d.h"
 #include "MagiciteEffectShoot.h"
 
-class MagiciteGamePhyLayer;
-
 class MagiciteEffectAcid : public MagiciteEffectShoot
 {
 public:
@@ -14,12 +12,10 @@ public:
 
     virtual void positive(MagiciteGameObject* obj);
 
-    static MagiciteEffectAcid* create(MagiciteGamePhyLayer* phyLayer);
+    CREATE_FUNC(MagiciteEffectAcid);
 
-    virtual bool init(MagiciteGamePhyLayer* phyLayer);
+    virtual bool init();
 
-private:
-    MagiciteGamePhyLayer*                           _phyLayer;
 };
 
 #endif //__MAGICITE_EFFECT_ACID__

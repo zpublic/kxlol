@@ -378,9 +378,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\PhysicsLoader.cpp">
       <Filter>Magicite\Physics</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Classes\NetworkTestScene.cpp">
       <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameMoveAbleGround.cpp">
+      <Filter>Magicite\GameLogic\Object\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameMoveAbleManager.cpp">
+      <Filter>Magicite\GameLogic\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameAutoMoveAble.cpp">
+      <Filter>Magicite\GameLogic\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -696,7 +705,7 @@
     </ClInclude>
     <ClInclude Include="..\Classes\PhysicsLoader.h">
       <Filter>Magicite\Physics</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Classes\Network\SocketManager.h">
       <Filter>src\Network</Filter>
     </ClInclude>
@@ -705,6 +714,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Network\CircularIOBuffer.h">
       <Filter>src\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameMoveAbleGround.h">
+      <Filter>Magicite\GameLogic\Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameMoveAbleManager.h">
+      <Filter>Magicite\GameLogic\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameAutoMoveAble.h">
+      <Filter>Magicite\GameLogic\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

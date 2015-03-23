@@ -43,8 +43,8 @@ protected:
     cocos2d::RepeatForever*             _jumpAnimate;
     cocos2d::RepeatForever*             _moveAnimate;
 
-    void setBodyXSpeed(float x_speed);
-    void setBodyYSpeed(float y_speed);
+    virtual void setBodyXSpeed(float x_speed);
+    virtual void setBodyYSpeed(float y_speed);
 
 public:
     bool                                _is_contraled;

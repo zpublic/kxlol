@@ -1,5 +1,6 @@
 #include "MagiciteEffectCreateFriend.h"
-#include "MagiciteGamePhyLayer.h"
+#include "MagiciteGamePhyWorld.h"
+#include "MagiciteGameMoveAbleLiving.h"
 
 USING_NS_CC;
 
@@ -11,23 +12,24 @@ MagiciteEffectCreateFriend::MagiciteEffectCreateFriend()
 void MagiciteEffectCreateFriend::positive(MagiciteGameObject* obj)
 {
     auto moveable = static_cast<MagiciteGameMoveAbleLiving*>(obj);
+    auto layer = moveable->getParent();
+    auto world = reinterpret_cast<MagiciteGamePhyWorld*>(obj->getBody()->GetWorld());
+
     MagiciteGameMoveAbleLiving* friends = MagiciteGameFactoryMethod::createFriend(
         _type,
         (moveable->getDire() == MagiciteGameMoveAbleLiving::Direction::left ? true : false));
     friends->setPosition(obj->getPosition());
 
-    _phyLayer->createPhyBody(friends, false, Magicite::FIXTURE_TYPE_FRIEND);
-    _phyLayer->addChild(friends);
+    world->createPhyBody(friends, false, Magicite::FIXTURE_TYPE_FRIEND);
+    layer->addChild(friends);
     friends->Move(friends->getDire());
 
 }
 
-MagiciteEffectCreateFriend* MagiciteEffectCreateFriend::create(   
-    MagiciteGamePhyLayer* phyLayer,
-    LivingType type)
+MagiciteEffectCreateFriend* MagiciteEffectCreateFriend::create(LivingType type)
 {
     auto ptr = new MagiciteEffectCreateFriend();
-    if (ptr && ptr->init(phyLayer, type))
+    if (ptr && ptr->init(type))
     {
         ptr->autorelease();
         return ptr;
@@ -40,10 +42,8 @@ MagiciteEffectCreateFriend* MagiciteEffectCreateFriend::create(
 }
 
 bool MagiciteEffectCreateFriend::init(
-    MagiciteGamePhyLayer* phyLayer,
     LivingType type)
 {
-    _phyLayer = phyLayer;
     _type = type;
 
     setCd(1.5f);

@@ -11,40 +11,6 @@ MagiciteGameMovePitfall::~MagiciteGameMovePitfall()
     
 }
 
-void MagiciteGameMovePitfall::Move(Direction dire)
-{
-    setBodyXSpeed(_speed * dire);
-    setState(State::S_Move, true);
-}
-
-void MagiciteGameMovePitfall::Stop()
-{
-
-}
-void MagiciteGameMovePitfall::Jump()
-{
-
-}
-void MagiciteGameMovePitfall::JumpOver()
-{
-
-}
-
-void MagiciteGameMovePitfall::initAnimation()
-{
-
-}
-
-void MagiciteGameMovePitfall::startAnimation(AnimationTag)
-{
-
-}
-
-void MagiciteGameMovePitfall::stopAnimation(AnimationTag)
-{
-
-}
-
 bool MagiciteGameMovePitfall::init()
 {
     if (!MagiciteGamePitfall::init())

@@ -14,6 +14,9 @@ public:
     virtual bool initWithFile(const char* filename);
     virtual void initParticle() = 0;
 
+protected:
+    virtual void setBodyXSpeed(float x_speed);
+    virtual void setBodyYSpeed(float y_speed);
 };
 
 #endif //__MAGICITE_GAME_AMMO__

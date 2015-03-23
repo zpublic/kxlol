@@ -32,6 +32,8 @@
 #include "MagiciteGameShowLayer.h"
 #include "MagiciteGamePhysics.h"
 #include "PhysicsLoader.h"
+#include "MagiciteGameMoveAbleGround.h"
+#include "MagiciteGameMoveAbleManager.h"
 
 
 USING_NS_CC;
@@ -43,7 +45,15 @@ static bool solve_one_side_platform(b2Body* player, b2Body* platform)
 
     CCASSERT(player->GetFixtureList()->GetShape()->m_type == b2Shape::e_polygon, "bad shape");
     CCASSERT(platform->GetFixtureList()->GetShape()->m_type == b2Shape::e_polygon, "bad shape");
-    auto player_shape = reinterpret_cast<b2PolygonShape*>(player->GetFixtureList()->GetShape());
+    b2PolygonShape* player_shape = nullptr;
+    for (auto iter = player->GetFixtureList(); iter; iter = iter->GetNext())
+    {
+        if (static_cast<Magicite::FIXTURE_TYPE>(reinterpret_cast<int>(iter->GetUserData())) == Magicite::FIXTURE_TYPE_PLAYER)
+        {
+            player_shape = reinterpret_cast<b2PolygonShape*>(iter->GetShape());
+        }
+    }
+        
     auto player_min_y = player_shape->m_vertices[0].y;
     for (auto i = 1; i < player_shape->m_count; i++) {
         if (player_shape->m_vertices[i].y < player_min_y) {
@@ -70,7 +80,7 @@ MagiciteGameLayer::MagiciteGameLayer()
 
 MagiciteGameLayer::~MagiciteGameLayer()
 {
-
+    CC_SAFE_DELETE(_moveableManager);
 }
 
 bool MagiciteGameLayer::init()
@@ -84,6 +94,8 @@ bool MagiciteGameLayer::init()
     listener->onKeyPressed = CC_CALLBACK_2(MagiciteGameLayer::onKeyPressed, this);
     listener->onKeyReleased = CC_CALLBACK_2(MagiciteGameLayer::onKeyReleased, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+    _moveableManager = new MagiciteGameMoveAbleManager();
 
     this->schedule(schedule_selector(MagiciteGameLayer::update));
 
@@ -146,6 +158,15 @@ bool MagiciteGameLayer::init()
     auto str = valueMap.find("story_3")->second.asString();
     showText(str);
 
+    auto mg = MagiciteGameMoveAbleGround::create();
+    mg->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    mg->_pointA = Vec2(visibleSize.width * 0.4f, visibleSize.height / 2);
+    mg->_pointB = Vec2(visibleSize.width * 0.6f, visibleSize.height / 2);
+    _phyLayer->createPhyBody(mg, false, Magicite::FIXTURE_TYPE_LAND);
+    _phyLayer->addChild(mg);
+    mg->getBody()->SetGravityScale(0.0f);
+    _moveableManager->addMoveAble(static_cast<MagiciteGameAutoMoveAble*>(mg));
+
     return true;
 }
 
@@ -198,9 +219,10 @@ void MagiciteGameLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, c
 void MagiciteGameLayer::update(float timeDelta)
 {
     _player->Move();
+    _moveableManager->UpdateMoveAble();
 }
 
-bool MagiciteGameLayer::onOnJudgeContact(b2Contact* contact)
+MagiciteGameContact::ContactType MagiciteGameLayer::onOnJudgeContact(b2Contact* contact)
 {
     auto fixA = contact->GetFixtureA();
     auto fixB = contact->GetFixtureB();
@@ -216,11 +238,11 @@ bool MagiciteGameLayer::onOnJudgeContact(b2Contact* contact)
         ) {
             if (solve_one_side_platform(reinterpret_cast<b2Body*>(fixA->GetBody()), reinterpret_cast<b2Body*>(fixB->GetBody()))) 
             {
-                return false;
+                return MagiciteGameContact::Cancle;
             }
             else
             {
-                return true;
+                return MagiciteGameContact::Calcture;
             }
         }
     /*~*/

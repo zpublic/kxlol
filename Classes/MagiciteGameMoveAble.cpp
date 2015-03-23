@@ -12,6 +12,7 @@ MagiciteGameMoveAble::MagiciteGameMoveAble()
     _jump_time = 0;
     _is_to_left = false;
     _is_dire_changed = false;
+    _has_animate = false;
 }
 
 void MagiciteGameMoveAble::setJumpHeight(int offset)
@@ -75,4 +76,90 @@ void MagiciteGameMoveAble::setBaseSpeed(float value)
 float MagiciteGameMoveAble::getBaseSpeed() const
 {
     return _base_speed;
+}
+
+void MagiciteGameMoveAble::Move(Direction dire)
+{
+    setBodyXSpeed(_speed * dire);
+    if (_has_animate)
+    {
+        if (getState(State::S_Jump) == false)
+        {
+            this->startAnimation(AnimationTag::Move_Tag);
+        }
+    }
+    if (getState(State::S_Move) == false)
+        setState(State::S_Move, true);
+}
+
+void MagiciteGameMoveAble::Stop()
+{
+    if (getState(State::S_Move))
+    {
+        setState(State::S_Move, false);
+        setBodyXSpeed(0);
+        if (_has_animate)
+            this->stopAnimation(AnimationTag::Move_Tag);
+    }
+}
+
+void MagiciteGameMoveAble::Jump()
+{
+    if (_jump_time < _max_jump_time)
+    {
+        setBodyYSpeed(_jumpHeight);
+        ++_jump_time;
+        if (_has_animate)
+        {
+            if (getState(State::S_Move))
+            {
+                this->stopAnimation(AnimationTag::Move_Tag);
+            }
+            this->stopAnimation(AnimationTag::Jump_Tag);
+            this->startAnimation(AnimationTag::Jump_Tag);
+        }
+        setState(State::S_Jump, true);
+    }
+}
+
+void MagiciteGameMoveAble::JumpOver()
+{
+    if (getState(State::S_Jump))
+    {
+        if (_has_animate)
+        {
+            this->stopAnimation(AnimationTag::Jump_Tag);
+            if (getState(State::S_Move))
+            {
+                this->startAnimation(MagiciteGameMoveAble::Move_Tag);
+            }
+        }
+        setState(State::S_Jump, false);
+        _jump_time = 0;
+    }
+}
+
+void MagiciteGameMoveAble::initAnimation()
+{
+    _has_animate = true;
+}
+
+void MagiciteGameMoveAble::setBodyXSpeed(float x_speed)
+{
+
+}
+
+void MagiciteGameMoveAble::setBodyYSpeed(float y_speed)
+{
+
+}
+
+void MagiciteGameMoveAble::startAnimation(AnimationTag)
+{
+
+}
+
+void MagiciteGameMoveAble::stopAnimation(AnimationTag)
+{
+
 }
