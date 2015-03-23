@@ -8,8 +8,8 @@ template <int _N> class CircularIOBuffer {
 
 protected:
     char _buf[_N];
-    int _head = 0;
-    int _tail = 0;
+    int _head;
+    int _tail;
 
 public:
     static const int capacity = _N - 1;
