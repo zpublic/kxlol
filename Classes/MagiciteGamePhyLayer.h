@@ -18,8 +18,6 @@ public:
     MagiciteGamePhyLayer();
     ~MagiciteGamePhyLayer();
 
-    static const int PTM_RATIO = 32;
-
     bool initPhysics(cocos2d::Size size);
     void createPhyBody(
         MagiciteGameObject* ptr, 

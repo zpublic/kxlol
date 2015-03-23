@@ -490,8 +490,8 @@ void MagiciteGameLayer::create_moveground()
     prismaticJointDef.collideConnected = false;
     prismaticJointDef.localAxisA.Set(1.0f, 0.0f);
     prismaticJointDef.enableLimit = true;
-    prismaticJointDef.lowerTranslation = -fix->getContentSize().width / 32;
-    prismaticJointDef.upperTranslation = fix->getContentSize().width / 32;
+    prismaticJointDef.lowerTranslation = -fix->getContentSize().width / PTM_RATIO;
+    prismaticJointDef.upperTranslation = fix->getContentSize().width / PTM_RATIO;
     _phyLayer->createJoint(&prismaticJointDef);
 
     _moveableManager->addMoveAble(static_cast<MagiciteGameAutoMoveAble*>(mg));
