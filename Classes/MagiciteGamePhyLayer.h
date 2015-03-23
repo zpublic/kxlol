@@ -26,6 +26,7 @@ public:
         bool is_static,
         Magicite::FIXTURE_TYPE type);
     b2Body* createBody(b2BodyDef* bd);
+    b2Joint* createJoint(const b2JointDef* def);
 
     virtual void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags);
     void update(float timeDelta);

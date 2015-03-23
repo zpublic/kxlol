@@ -128,3 +128,8 @@ b2Body* MagiciteGamePhyLayer::createBody(b2BodyDef* bd)
 {
     return _world->createBody(bd);
 }
+
+b2Joint* MagiciteGamePhyLayer::createJoint(const b2JointDef* def)
+{
+    return _world->CreateJoint(def);
+}

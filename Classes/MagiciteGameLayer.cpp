@@ -158,15 +158,6 @@ bool MagiciteGameLayer::init()
     auto str = valueMap.find("story_3")->second.asString();
     showText(str);
 
-    auto mg = MagiciteGameMoveAbleGround::create();
-    mg->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-    mg->_pointA = Vec2(visibleSize.width * 0.4f, visibleSize.height / 2);
-    mg->_pointB = Vec2(visibleSize.width * 0.6f, visibleSize.height / 2);
-    _phyLayer->createPhyBody(mg, false, Magicite::FIXTURE_TYPE_LAND);
-    _phyLayer->addChild(mg);
-    mg->getBody()->SetGravityScale(0.0f);
-    _moveableManager->addMoveAble(static_cast<MagiciteGameAutoMoveAble*>(mg));
-
     return true;
 }
 
@@ -465,6 +456,7 @@ void MagiciteGameLayer::init_map_data(cocos2d::TMXTiledMap* tiledMap)
     create_pitfall(game);
     create_ground(ground);
     create_NPC(game);
+    create_moveground();
     //create_item(game);
 }
 
@@ -473,4 +465,34 @@ void MagiciteGameLayer::showText(const std::string& str)
     auto show = MagiciteGameShowLayer::create(2.0f, str);
     this->addChild(show, 1);
     show->start();
+}
+
+void MagiciteGameLayer::create_moveground()
+{
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+
+    auto mg = MagiciteGameMoveAbleGround::create();
+    mg->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+    mg->_pointA = Vec2(visibleSize.width * 0.4f, visibleSize.height / 2);
+    mg->_pointB = Vec2(visibleSize.width * 0.6f, visibleSize.height / 2);
+    _phyLayer->createPhyBody(mg, false, Magicite::FIXTURE_TYPE_LAND);
+    _phyLayer->addChild(mg);
+
+    auto fix = MagiciteGameObject::create();
+    fix->setContentSize(Size(mg->_pointB.x - mg->_pointA.x + 2, mg->_pointB.y - mg->_pointA.y + 2));
+    fix->setPosition(mg->_pointA);
+    _phyLayer->createPhyBody(fix, true, Magicite::FIXTURE_TYPE_NONE);
+    _phyLayer->addChild(fix);
+
+    b2PrismaticJointDef prismaticJointDef;
+    prismaticJointDef.bodyA = fix->getBody();
+    prismaticJointDef.bodyB = mg->getBody();
+    prismaticJointDef.collideConnected = false;
+    prismaticJointDef.localAxisA.Set(1.0f, 0.0f);
+    prismaticJointDef.enableLimit = true;
+    prismaticJointDef.lowerTranslation = -fix->getContentSize().width / 32;
+    prismaticJointDef.upperTranslation = fix->getContentSize().width / 32;
+    _phyLayer->createJoint(&prismaticJointDef);
+
+    _moveableManager->addMoveAble(static_cast<MagiciteGameAutoMoveAble*>(mg));
 }

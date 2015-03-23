@@ -48,6 +48,7 @@ public:
     void create_ground(cocos2d::TMXObjectGroup*);
     void create_NPC(cocos2d::TMXObjectGroup*);
     void create_item(cocos2d::TMXObjectGroup*);
+    void create_moveground();
 
     void use_weather(MagiciteWeather* weather);
 
