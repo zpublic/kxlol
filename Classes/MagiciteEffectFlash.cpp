@@ -12,7 +12,6 @@ MagiciteEffectFlash::MagiciteEffectFlash()
 
 void MagiciteEffectFlash::positive(MagiciteGameObject* obj)
 {
-    int PTM_RATIO = MagiciteGamePhyLayer::PTM_RATIO;
     auto _player = static_cast<MagiciteGameMoveAbleLiving*>(obj);
 
     b2Fixture* fixture = nullptr;

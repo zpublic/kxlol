@@ -22,4 +22,6 @@ namespace Magicite
 
 };
 
+enum : int{ PTM_RATIO = 32 };
+
 #endif //__MAGICITE_GAME_PHYSICS__

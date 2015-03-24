@@ -1,5 +1,5 @@
-#ifndef __MAGICITE__EFFECT_VALUE_CHANGE__
-#define __MAGICITE__EFFECT_VALUE_CHANGE__
+#ifndef __MAGICITE_EFFECT_VALUE_CHANGE__
+#define __MAGICITE_EFFECT_VALUE_CHANGE__
 
 #include "MagiciteEffect.h"
 
@@ -18,4 +18,4 @@ public:
 
 };
 
-#endif //__MAGICITE__EFFECT_VALUE_CHANGE__
+#endif //__MAGICITE_EFFECT_VALUE_CHANGE__

@@ -46,18 +46,7 @@ public:
     void setState(State state, bool x);
     bool getState(State state) const;
 
-    enum AnimationTag : int
-    {
-        Move_Tag = MagiciteGameTagManager::Move_Tag,
-        Jump_Tag = MagiciteGameTagManager::Jump_Tag,
-    };
-    virtual void initAnimation();
-    virtual void startAnimation(AnimationTag);
-    virtual void stopAnimation(AnimationTag);
-
 protected:
-    void tryToStopAnimate();
-
     virtual void setBodyXSpeed(float x_speed) = 0;
     virtual void setBodyYSpeed(float y_speed) = 0;
 
@@ -70,7 +59,6 @@ protected:
     float                           _base_speed;
     bool                            _is_dire_changed;
     bool                            _is_to_left;
-    bool                            _has_animate;
 };
 
 #endif //__MAGICITE_GAME_MOVEABLE__

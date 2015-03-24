@@ -3,9 +3,9 @@
 
 #include "cocos2d.h"
 #include "MagiciteGameLiving.h"
-#include "MagiciteGameMoveAble.h"
+#include "MagiciteGameAnimateMoveAble.h"
 
-class MagiciteGameMoveAbleLiving : public MagiciteGameLiving, public MagiciteGameMoveAble
+class MagiciteGameMoveAbleLiving : public MagiciteGameLiving, public MagiciteGameAnimateMoveAble
 {
 public:
     enum MoveLivingType : int

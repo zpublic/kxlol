@@ -391,6 +391,9 @@
     <ClCompile Include="..\Classes\MagiciteGameAutoMoveAble.cpp">
       <Filter>Magicite\GameLogic\Object</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameAnimateMoveAble.cpp">
+      <Filter>Magicite\GameLogic\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -722,6 +725,9 @@
       <Filter>Magicite\GameLogic\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameAutoMoveAble.h">
+      <Filter>Magicite\GameLogic\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameAnimateMoveAble.h">
       <Filter>Magicite\GameLogic\Object</Filter>
     </ClInclude>
   </ItemGroup>

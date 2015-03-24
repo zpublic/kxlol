@@ -14,8 +14,6 @@ public:
     MagiciteGamePhyWorld(b2Vec2 gravity);
     ~MagiciteGamePhyWorld();
 
-    static const int PTM_RATIO = 32;
-
     void createPhyBody(MagiciteGameObject* ptr, bool is_static, Magicite::FIXTURE_TYPE type);
     b2Body* createBody(b2BodyDef* bd);
     void updateBody(float timeDelta);
