@@ -34,7 +34,7 @@
 #include "PhysicsLoader.h"
 #include "MagiciteGameMoveAbleGround.h"
 #include "MagiciteGameMoveAbleManager.h"
-
+#include "MagiciteGameChicken.h"
 
 USING_NS_CC;
 
@@ -288,15 +288,15 @@ void MagiciteGameLayer::create_end_cube(TMXObjectGroup* game)
 void MagiciteGameLayer::create_player(TMXObjectGroup* game)
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
-
-    _player = MagiciteGamePlayer::create(MagiciteGamePlayer::Chicken_Type, _phyLayer);
-    this->runAction(Follow::create(_player->getSprite(), Rect(0, 0, _background->getBackSize().width, visibleSize.height)));
+    auto living = MagiciteGameChicken::create();
+    this->runAction(Follow::create(living, Rect(0, 0, _background->getBackSize().width, visibleSize.height)));
     ValueMap playerMap = game->getObject("player");
     Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
-    _player->setPosition(playerPos);
-    _phyLayer->createPhyBody(_player->getSprite(), false, Magicite::FIXTURE_TYPE_PLAYER);
-    _phyLayer->addChild(_player->getSprite());
+    living->setPosition(playerPos);
+    _phyLayer->createPhyBody(living, false, Magicite::FIXTURE_TYPE_PLAYER);
+    _phyLayer->addChild(living);
 
+    _player = MagiciteGamePlayer::create(living);
     auto bag_view = _player->getBag();
     bag_view->setPosition(visibleSize.width / 2, visibleSize.height / 2);
     bag_view->runAction(Follow::create(this));

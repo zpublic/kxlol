@@ -1,9 +1,8 @@
 #include "MagiciteGamePlayer.h"
-#include "MagiciteGameChicken.h"
-#include "MagiciteGameHuman.h"
 #include "MagiciteGameBagView.h"
 #include "MagiciteEffectItem.h"
-#include "MagiciteGamePhyLayer.h"
+#include "MagiciteGamePet.h"
+#include "MagiciteGameMoveAbleLiving.h"
 
 USING_NS_CC;
 
@@ -18,59 +17,15 @@ MagiciteGamePlayer::~MagiciteGamePlayer()
     CC_SAFE_DELETE(_bag);
 }
 
-MagiciteGamePlayer* MagiciteGamePlayer::create(PlayerType type, MagiciteGamePhyLayer* phyLayer)
-{
-    auto ptr = new MagiciteGamePlayer();
-    if (ptr && ptr->init(type, phyLayer))
-    {
-        return ptr;
-    }
-    else
-    {
-        return nullptr;
-    }
-}
-
-MagiciteGameMoveAbleLiving* MagiciteGamePlayer::getSprite()
-{
-    return _player;
-}
-
-bool MagiciteGamePlayer::init(PlayerType type, MagiciteGamePhyLayer* phyLayer)
-{
-    switch (type)
-    {
-    case MagiciteGamePlayer::Chicken_Type:
-        _player = MagiciteGameChicken::create();
-            break;
-    case MagiciteGamePlayer::Human_Type:
-        _player = MagiciteGameHuman::create();
-        break;
-    default:
-        break;
-    }
-
-    if (_player == nullptr)
-    {
-        return false;
-    }
-    _player->_is_contraled = true;
-    _phyLayer = phyLayer;
-    _bag = MagiciteGameBagView::create(9);
-    _bag->_itemEvent = std::bind(&MagiciteGamePlayer::useBagItem, this, std::placeholders::_1);
-
-    return true;
-}
-
 void MagiciteGamePlayer::Move()
 {
     if (_move_left && !_move_right)
     {
-        _player->Move(MagiciteGamePlayer::Direction::left);
+        _player->Move(MagiciteGameMoveAbleLiving::Direction::left);
     }
     else if (!_move_left && _move_right)
     {
-        _player->Move(MagiciteGamePlayer::Direction::right);
+        _player->Move(MagiciteGameMoveAbleLiving::Direction::right);
     }
 }
 
@@ -86,76 +41,6 @@ void MagiciteGamePlayer::Jump()
 void MagiciteGamePlayer::JumpOver()
 {
     _player->JumpOver();
-}
-
-void MagiciteGamePlayer::startAnimation(MagiciteGameMoveAbleLiving::AnimationTag tag)
-{
-    _player->startAnimation(tag);
-}
-
-void MagiciteGamePlayer::stopAnimation(MagiciteGameMoveAbleLiving::AnimationTag tag)
-{
-    _player->startAnimation(tag);
-}
-
-void MagiciteGamePlayer::setJumpHeight(int offset)
-{
-    _player->setJumpHeight(offset);
-}
-
-int MagiciteGamePlayer::getJumpHeight() const
-{
-    return _player->getJumpHeight();
-}
-
-void MagiciteGamePlayer::setSpeed(float value)
-{
-    _player->setSpeed(value);
-}
-
-float MagiciteGamePlayer::getSpeed() const
-{
-    return _player->getSpeed();
-}
-
-void MagiciteGamePlayer::setState(MagiciteGameMoveAbleLiving::State state, bool x)
-{
-    _player->setState(state, x);
-}
-
-bool MagiciteGamePlayer::getState(MagiciteGameMoveAbleLiving::State state) const
-{
-    return _player->getState(state);
-}
-
-void MagiciteGamePlayer::setPosition(Vec2 pos)
-{
-    _player->setPosition(pos);
-}
-
-Vec2 MagiciteGamePlayer::getPosition() const
-{
-    return _player->getPosition();
-}
-
-Size MagiciteGamePlayer::getContentSize() const
-{
-    return _player->getContentSize();
-}
-
-void MagiciteGamePlayer::setContentSize(Size size)
-{
-    _player->setContentSize(size);
-}
-
-MagiciteGameMoveAbleLiving::Direction MagiciteGamePlayer::getDire() const
-{
-    return _player->getDire();
-}
-
-void MagiciteGamePlayer::setDire(MagiciteGameMoveAbleLiving::Direction dire)
-{
-    _player->setDire(dire);
 }
 
 void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
@@ -197,7 +82,7 @@ void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* ev
     }
 }
 
-void MagiciteGamePlayer::setPetFollow(MagiciteGameObject* pet)
+void MagiciteGamePlayer::setPetFollow(MagiciteGamePet* pet)
 {
     _player->addChild(pet);
 }
@@ -227,4 +112,33 @@ void MagiciteGamePlayer::useBagItem(int n)
 void MagiciteGamePlayer::switchBagInvisible()
 {
     _bag->setViewInvisible(!_bag->getViewInvisible());
+}
+
+MagiciteGamePlayer* MagiciteGamePlayer::create(MagiciteGameMoveAbleLiving* living)
+{
+    auto player = new MagiciteGamePlayer();
+    if (player && player->init(living))
+    {
+        return player;
+    }
+    else
+    {
+        CC_SAFE_DELETE(player);
+        return nullptr;
+    }
+}
+
+bool MagiciteGamePlayer::init(MagiciteGameMoveAbleLiving* living)
+{
+    if (living == nullptr)
+    {
+        return false;
+    }
+
+    _player = living;
+    _player->_is_contraled = true;
+    _bag = MagiciteGameBagView::create(9);
+    _bag->_itemEvent = std::bind(&MagiciteGamePlayer::useBagItem, this, std::placeholders::_1);
+
+    return true;
 }
