@@ -3,11 +3,11 @@
 
 #include "cocos2d.h"
 #include "MagiciteGameControlAble.h"
-#include "MagiciteGameMoveAbleLiving.h"
 
-class MagiciteGamePhyLayer;
 class MagiciteGameBagView;
 class MagiciteEffectItem;
+class MagiciteGameMoveAbleLiving;
+class MagiciteGamePet;
 
 class MagiciteGamePlayer : public MagiciteGameControlAble
 {
@@ -20,13 +20,10 @@ public:
         Chicken_Type,
         Human_Type,
     };
-    typedef  MagiciteGameMoveAbleLiving::Direction      Direction;
 
-    static MagiciteGamePlayer* create(PlayerType type, MagiciteGamePhyLayer* phyLayer);
+    static MagiciteGamePlayer* create(MagiciteGameMoveAbleLiving* living);
 
-    bool init(PlayerType type, MagiciteGamePhyLayer* phyLayer);
-
-    MagiciteGameMoveAbleLiving* getSprite();
+    bool init(MagiciteGameMoveAbleLiving* living);
 
     void useItem(MagiciteEffectItem* item);
 
@@ -35,28 +32,7 @@ public:
     void Jump();
     void JumpOver();
 
-    void startAnimation(MagiciteGameMoveAbleLiving::AnimationTag);
-    void stopAnimation(MagiciteGameMoveAbleLiving::AnimationTag);
-
-    void setJumpHeight(int offset);
-    int getJumpHeight() const;
-
-    void setSpeed(float value);
-    float getSpeed() const;
-
-    void setState(MagiciteGameMoveAbleLiving::State state, bool x);
-    bool getState(MagiciteGameMoveAbleLiving::State state) const;
-
-    MagiciteGameMoveAbleLiving::Direction getDire() const;
-    void setDire(MagiciteGameMoveAbleLiving::Direction dire);
-
-    void setPosition(cocos2d::Vec2 pos);
-    cocos2d::Vec2 getPosition() const;
-
-    cocos2d::Size getContentSize() const;
-    void setContentSize(cocos2d::Size size);
-
-    void setPetFollow(MagiciteGameObject*);
+    void setPetFollow(MagiciteGamePet*);
 
     //MagiciteContralAble
     virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
@@ -69,7 +45,6 @@ public:
 protected:
     MagiciteGameMoveAbleLiving*             _player;
     MagiciteGameBagView*                    _bag;
-    MagiciteGamePhyLayer*                   _phyLayer;
     bool                                    _move_left;
     bool                                    _move_right;
 };

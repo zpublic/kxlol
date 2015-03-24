@@ -97,6 +97,9 @@
     <Filter Include="Magicite\GameLogic\Portal">
       <UniqueIdentifier>{cbee59d7-7fbc-4d39-948f-4fe6cad88428}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Magicite\GameLogic\Object\impl">
+      <UniqueIdentifier>{dcf64610-7dfc-4edd-81a7-9d5ec659c98a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -190,9 +193,6 @@
     <ClCompile Include="..\Classes\MagiciteGameObject.cpp">
       <Filter>Magicite\GameLogic\Object</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameMoveAble.cpp">
-      <Filter>Magicite\GameLogic\Object</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePlayer.cpp">
       <Filter>Magicite\GameLogic\Object</Filter>
     </ClCompile>
@@ -213,9 +213,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGamePhyWorld.cpp">
       <Filter>Magicite\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameControlAble.cpp">
-      <Filter>Magicite\GameLogic\Object</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameSlime.cpp">
       <Filter>Magicite\GameLogic\Object\Living</Filter>
@@ -388,11 +385,17 @@
     <ClCompile Include="..\Classes\MagiciteGameMoveAbleManager.cpp">
       <Filter>Magicite\GameLogic\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagiciteGameAutoMoveAble.cpp">
-      <Filter>Magicite\GameLogic\Object</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MagiciteGameAnimateMoveAble.cpp">
-      <Filter>Magicite\GameLogic\Object</Filter>
+      <Filter>Magicite\GameLogic\Object\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameAutoMoveAble.cpp">
+      <Filter>Magicite\GameLogic\Object\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameControlAble.cpp">
+      <Filter>Magicite\GameLogic\Object\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagiciteGameMoveAble.cpp">
+      <Filter>Magicite\GameLogic\Object\impl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -490,9 +493,6 @@
     <ClInclude Include="..\Classes\MagiciteGameObject.h">
       <Filter>Magicite\GameLogic\Object</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameMoveAble.h">
-      <Filter>Magicite\GameLogic\Object</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGamePlayer.h">
       <Filter>Magicite\GameLogic\Object</Filter>
     </ClInclude>
@@ -531,9 +531,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteEffectPositive.h">
       <Filter>Magicite\GameLogic\Effect\Value</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameControlAble.h">
-      <Filter>Magicite\GameLogic\Object</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameSlime.h">
       <Filter>Magicite\GameLogic\Object\Living</Filter>
@@ -724,11 +721,17 @@
     <ClInclude Include="..\Classes\MagiciteGameMoveAbleManager.h">
       <Filter>Magicite\GameLogic\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagiciteGameAutoMoveAble.h">
-      <Filter>Magicite\GameLogic\Object</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MagiciteGameAnimateMoveAble.h">
-      <Filter>Magicite\GameLogic\Object</Filter>
+      <Filter>Magicite\GameLogic\Object\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameAutoMoveAble.h">
+      <Filter>Magicite\GameLogic\Object\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameControlAble.h">
+      <Filter>Magicite\GameLogic\Object\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagiciteGameMoveAble.h">
+      <Filter>Magicite\GameLogic\Object\impl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

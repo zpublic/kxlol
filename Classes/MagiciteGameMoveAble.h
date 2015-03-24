@@ -2,7 +2,6 @@
 #define __MAGICITE_GAME_MOVEABLE__
 
 #include <map>
-#include "MagiciteGameTagManager.h"
 
 class MagiciteGameMoveAble
 {
