@@ -12,183 +12,57 @@
 #include "MagiciteGameAcid.h"
 #include "MagiciteGameDirt.h"
 #include "MagiciteGameNPC.h"
-
+#include "MagiciteGameGround.h"
+#include "MagiciteGameFragileGround.h"
+#include "MagiciteGameMoveAbleGround.h"
+#include "MagiciteGameMeteorite.h"
 
 USING_NS_CC;
 
-MagiciteGameLiving* MagiciteGameFactoryMethod::createEnemy(LivingType type, bool is_to_left/* = false*/)
+MagiciteGameMoveAbleLiving* MagiciteGameFactoryMethod::createEnemy(LivingType type)
 {
-    MagiciteGameLiving* ptr = nullptr;
-    switch (type)
+    auto ptr = reinterpret_cast<MagiciteGameMoveAbleLiving*>(createLiving(type));
+    return ptr;
+}
+
+MagiciteGameMoveAbleLiving* MagiciteGameFactoryMethod::createFriend(LivingType type)
+{
+    auto ptr = reinterpret_cast<MagiciteGameMoveAbleLiving*>(createLiving(type));
+    if (ptr)
     {
-    case MagiciteGameFactoryMethod::Human:
-        ptr = MagiciteGameHuman::create();
-        if (ptr != nullptr)
-        {
-            auto human = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
-            human->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
-            return ptr;
-        }
-        break;
-    case MagiciteGameFactoryMethod::Chicken:
-        ptr = MagiciteGameChicken::create();
-        if (ptr != nullptr)
-        {
-            auto chicken = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
-            chicken->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
-            return ptr;
-        }
-        break;
-    case MagiciteGameFactoryMethod::Slime:
-        ptr = MagiciteGameSlime::create();
-        if (ptr != nullptr)
-        {
-            auto slime = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
-            slime->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
-            return ptr;
-        }
-        break;
-    case MagiciteGameFactoryMethod::Sheep:
-        ptr = MagiciteGameSheep::create();
-        if (ptr != nullptr)
-        {
-            auto Sheep = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
-            Sheep->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
-            return ptr;
-        }
-        break;
-    case MagiciteGameFactoryMethod::Dirt:
-        ptr = MagiciteGameDirt::create();
-        if (ptr != nullptr)
-        {
-            auto Dirt = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
-            Dirt->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
-            return ptr;
-        }
-        break;
-    default:
-        break;
+        auto enemy = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
+        enemy->_is_friend = true;
+        return enemy;
     }
     return nullptr;
 }
 
-void MagiciteGameFactoryMethod::destroyEnemy(MagiciteGameLiving* living)
-{
-    living->Dead();
-}
-
-MagiciteGameMoveAbleLiving* MagiciteGameFactoryMethod::createFriend(LivingType type, bool is_to_left/* = false*/)
-{
-    MagiciteGameMoveAbleLiving* ptr = nullptr;
-    switch (type)
-    {
-    case MagiciteGameFactoryMethod::Human:
-        ptr = MagiciteGameHuman::create();
-        if (ptr != nullptr)
-        {
-            ptr->_is_friend = true;
-            auto human = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
-            human->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
-            return ptr;
-        }
-        break;
-    case MagiciteGameFactoryMethod::Chicken:
-        ptr = MagiciteGameChicken::create();
-        if (ptr != nullptr)
-        {
-            ptr->_is_friend = true;
-            auto human = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
-            human->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
-            return ptr;
-        }
-        break;
-    case MagiciteGameFactoryMethod::Slime:
-        ptr = MagiciteGameSlime::create();
-        if (ptr != nullptr)
-        {
-            ptr->_is_friend = true;
-            auto slime = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
-            slime->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
-            return ptr;
-        }
-        break;
-    case MagiciteGameFactoryMethod::Sheep:
-        ptr = MagiciteGameSheep::create();
-        if (ptr != nullptr)
-        {
-            ptr->_is_friend = true;
-            auto slime = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
-            slime->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
-            return ptr;
-        }
-        break;
-    case MagiciteGameFactoryMethod::Dirt:
-        ptr = MagiciteGameDirt::create();
-        if (ptr != nullptr)
-        {
-            ptr->_is_friend = true;
-            auto slime = reinterpret_cast<MagiciteGameMoveAbleLiving*>(ptr);
-            slime->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
-            return ptr;
-        }
-        break;
-    case MagiciteGameFactoryMethod::NPC:
-        ptr = MagiciteGameNPC::create();
-        if(ptr != nullptr)
-        {
-            ptr->_is_friend = true;
-            auto slime = static_cast<MagiciteGameMoveAbleLiving*>(ptr);
-            slime->setDire(is_to_left ? MagiciteGameMoveAbleLiving::Direction::left : MagiciteGameMoveAbleLiving::Direction::right);
-            return ptr;
-        }
-        break;
-    default:
-        break;
-    }
-    return nullptr;
-}
-
-void MagiciteGameFactoryMethod::destroyFriend(MagiciteGameMoveAbleLiving* living)
-{
-    living->Dead();
-}
-
-MagiciteGamePitfall* MagiciteGameFactoryMethod::createPitfall(Pitfall_Type type, bool is_active /*= true*/)
+MagiciteGamePitfall* MagiciteGameFactoryMethod::createPitfall(Pitfall_Type type)
 {
     MagiciteGamePitfall* ptr = nullptr;
     switch (type)
     {
-    case MagiciteGameFactoryMethod::Spine_Type:
-        ptr = MagiciteGameSpinePitfall::create();
-        if (ptr != nullptr)
-        {
-            ptr->setPitFallAvtive(is_active);
-        }
-        return ptr;
-    case MagiciteGameFactoryMethod::Pitfall:
-        ptr = MagiciteGamePitfall::create();
-        if (ptr != nullptr)
-        {
-            ptr->setPitFallAvtive(is_active);
-        }
-        return ptr;
     case MagiciteGameFactoryMethod::Piranha:
         ptr = MagiciteGamePiranha::create();
-        if (ptr != nullptr)
-        {
-            ptr->setPitFallAvtive(true);
-        }
-        return ptr;
         break;
+    case MagiciteGameFactoryMethod::Pitfall:
+        ptr = MagiciteGamePitfall::create();
+        break;
+    case MagiciteGameFactoryMethod::Spine_Type:
+        ptr = MagiciteGameSpinePitfall::create();
+        break;
+    case MagiciteGameFactoryMethod::Meteorite:
+        break;
+        ptr = MagiciteGameMeteorite::create();
     default:
         break;
     }
-    return nullptr;
-}
-
-void MagiciteGameFactoryMethod::destroyPitfall(MagiciteGamePitfall* ptr)
-{
-    ptr->Dead();
+    
+    if (ptr)
+    {
+        ptr->setPitFallAvtive(true);
+    }
+    return ptr;
 }
 
 MagiciteGameAmmo* MagiciteGameFactoryMethod::createAmmo(AmmoType type)
@@ -202,9 +76,79 @@ MagiciteGameAmmo* MagiciteGameFactoryMethod::createAmmo(AmmoType type)
     case MagiciteGameFactoryMethod::Acid:
         ammo = MagiciteGameAcid::create();
         break;
+
     default:
         break;
     }
 
     return ammo;
+}
+
+MagiciteGameLiving* MagiciteGameFactoryMethod::createLiving(LivingType type)
+{
+    MagiciteGameLiving* ptr = nullptr;
+    switch (type)
+    {
+    case MagiciteGameFactoryMethod::Human:
+        ptr = MagiciteGameHuman::create();
+        break;
+    case MagiciteGameFactoryMethod::Chicken:
+        ptr = MagiciteGameChicken::create();
+        break;
+    case MagiciteGameFactoryMethod::Slime:
+        ptr = MagiciteGameSlime::create();
+        break;
+    case MagiciteGameFactoryMethod::Sheep:
+        ptr = MagiciteGameSheep::create();
+        break;
+    case MagiciteGameFactoryMethod::Dirt:
+        ptr = MagiciteGameDirt::create();
+        break;
+    case MagiciteGameFactoryMethod::NPC:
+        ptr = MagiciteGameNPC::create();
+        break;
+    default:
+        break;
+    }
+    return ptr;
+}
+
+MagiciteGameGround* MagiciteGameFactoryMethod::createGround(GroundType type)
+{
+    MagiciteGameGround* ground = nullptr;
+    switch (type)
+    {
+    case MagiciteGameFactoryMethod::Ground:
+        ground = MagiciteGameGround::create();
+        break;
+    case MagiciteGameFactoryMethod::FragileGround:
+        ground = MagiciteGameFragileGround::create();
+        break;
+    case MagiciteGameFactoryMethod::MoveAbleGround:
+        ground = MagiciteGameMoveAbleGround::create();
+        break;
+    default:
+        break;
+    }
+    return ground;
+}
+
+void MagiciteGameFactoryMethod::destroyEnemy(MagiciteGameLiving* living)
+{
+    destroyLiving(living);
+}
+
+void MagiciteGameFactoryMethod::destroyFriend(MagiciteGameLiving* living)
+{
+    destroyLiving(living);
+}
+
+void MagiciteGameFactoryMethod::destroyLiving(MagiciteGameLiving* living)
+{
+    living->Dead();
+}
+
+void MagiciteGameFactoryMethod::destroyPitfall(MagiciteGamePitfall* pitfall)
+{
+    pitfall->Dead();
 }
