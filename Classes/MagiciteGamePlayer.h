@@ -47,6 +47,7 @@ protected:
     MagiciteGameBagView*                    _bag;
     bool                                    _move_left;
     bool                                    _move_right;
+    bool                                    _move_down;
 };
 
 #endif //__MAGICITE_GAME_PLAYER__

@@ -7,7 +7,7 @@
 USING_NS_CC;
 
 MagiciteGamePlayer::MagiciteGamePlayer()
-:_player(nullptr), _move_left(false), _move_right(false)
+:_player(nullptr), _move_left(false), _move_right(false), _move_down(false)
 {
 
 }
@@ -19,6 +19,7 @@ MagiciteGamePlayer::~MagiciteGamePlayer()
 
 void MagiciteGamePlayer::Move()
 {
+    CCASSERT(_player != nullptr, "player is null");
     if (_move_left && !_move_right)
     {
         _player->Move(MagiciteGameMoveAbleLiving::Direction::left);
@@ -31,15 +32,25 @@ void MagiciteGamePlayer::Move()
 
 void MagiciteGamePlayer::Stop()
 {
+    CCASSERT(_player != nullptr, "player is null");
     _player->Stop();
 }
 
 void MagiciteGamePlayer::Jump()
 {
-    _player->Jump();
+    CCASSERT(_player != nullptr, "player is null");
+    if (_move_down)
+    {
+        //do something
+    }
+    else
+    {
+        _player->Jump();
+    }
 }
 void MagiciteGamePlayer::JumpOver()
 {
+    CCASSERT(_player != nullptr, "player is null");
     _player->JumpOver();
 }
 
@@ -49,7 +60,10 @@ void MagiciteGamePlayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* eve
     {
     case EventKeyboard::KeyCode::KEY_UP_ARROW:
     case EventKeyboard::KeyCode::KEY_SPACE:
-        _player->Jump();
+        this->Jump();
+        break;
+    case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+        _move_down = true;
         break;
     case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
         _move_left = true;
@@ -68,22 +82,26 @@ void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* ev
 {
     switch (keyCode)
     {
+    case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+        _move_down = false;
+        break;
     case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
         _move_left = false;
-        _player->Stop();
+        this->Stop();
         break;
     case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
         _move_right = false;
-        _player->Stop();
+        this->Stop();
         break;
     default:
-        MagiciteGameControlAble::dispatchKeyRelease(keyCode, event, static_cast<MagiciteGameControlAble*>(_bag));
+        //MagiciteGameControlAble::dispatchKeyRelease(keyCode, event, static_cast<MagiciteGameControlAble*>(_bag));
         break;
     }
 }
 
 void MagiciteGamePlayer::setPetFollow(MagiciteGamePet* pet)
 {
+    CCASSERT(_player != nullptr, "player is null");
     _player->addChild(pet);
 }
 
