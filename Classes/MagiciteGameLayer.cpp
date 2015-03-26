@@ -24,17 +24,12 @@
 #include "MagiciteGamePackView.h"
 #include "MagiciteGameNPC.h"
 #include "MagiciteGameEquipment.h"
-#include "MagiciteGameMeteorite.h"
-#include "MagiciteGameGround.h"
-#include "MagiciteGameFragileGround.h"
-#include "MagiciteGameDefaultPortalPair.h"
 #include "MagiciteGamePortal.h"
 #include "MagiciteGameShowLayer.h"
 #include "MagiciteGamePhysics.h"
 #include "PhysicsLoader.h"
 #include "MagiciteGameMoveAbleGround.h"
 #include "MagiciteGameMoveAbleManager.h"
-#include "MagiciteGameChicken.h"
 
 USING_NS_CC;
 
@@ -130,9 +125,10 @@ bool MagiciteGameLayer::init()
     this->runAction(Sequence::create(earthquake, earthquakeReset, nullptr));*/
 
     //Meteorite
-    /*auto stone = MagiciteGameMeteorite::create();
+    /*auto stone = reinterpret_cast<MagiciteGameMoveAbleGround*>(
+        MagiciteGameFactoryMethod::createPitfall(MagiciteGameFactoryMethod::Meteorite));
     stone->setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height);
-    _phyLayer->createPhyBody(stone, false); 
+    _phyLayer->createPhyBody(stone, false, Magicite::FIXTURE_TYPE_PITFALL);
     stone->Move(MagiciteGameMoveAble::left);
     _phyLayer->addChild(stone);*/
 
@@ -288,7 +284,10 @@ void MagiciteGameLayer::create_end_cube(TMXObjectGroup* game)
 void MagiciteGameLayer::create_player(TMXObjectGroup* game)
 {
     auto visibleSize = Director::getInstance()->getVisibleSize();
-    auto living = MagiciteGameChicken::create();
+    auto living = reinterpret_cast<MagiciteGameMoveAbleLiving*>(
+        MagiciteGameFactoryMethod::createLiving(MagiciteGameFactoryMethod::Chicken));
+    living->setDire(MagiciteGameMoveAbleLiving::right);
+
     this->runAction(Follow::create(living, Rect(0, 0, _background->getBackSize().width, visibleSize.height)));
     ValueMap playerMap = game->getObject("player");
     Vec2 playerPos = Vec2(playerMap.at("x").asFloat(), playerMap.at("y").asFloat());
@@ -317,7 +316,8 @@ void MagiciteGameLayer::create_enemy(TMXObjectGroup* game)
         ValueMap vm = obj.asValueMap();
         if (vm.at("type").asString() == "enemy")
         {
-            auto enemy = MagiciteGameFactoryMethod::createEnemy(MagiciteGameFactoryMethod::Dirt, true);
+            auto enemy = MagiciteGameFactoryMethod::createEnemy(MagiciteGameFactoryMethod::Dirt);
+            enemy->setDire(MagiciteGameMoveAbleLiving::left);
             enemy->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             _phyLayer->createPhyBody(enemy, false, Magicite::FIXTURE_TYPE_ENEMY);
             _phyLayer->addChild(enemy);
@@ -382,14 +382,11 @@ void MagiciteGameLayer::create_ground(TMXObjectGroup* ground)
     //
     b2BodyDef  body_def;
     body_def.type = b2_staticBody;
-
-
     auto body = _phyLayer->createBody(&body_def);
 
     PhysicsLoader loader;
     loader.addShapesWithFile("point.plist");
     loader.addFixturesToBody(body, "level5");
-
 
 }
 
@@ -404,7 +401,7 @@ void MagiciteGameLayer::create_NPC( TMXObjectGroup* game)
         auto str = vm.at("type").asString();
         if(str == "NPC")
         {
-            auto npc = MagiciteGameFactoryMethod::createFriend(MagiciteGameFactoryMethod::NPC, true);
+            auto npc = MagiciteGameFactoryMethod::createFriend(MagiciteGameFactoryMethod::NPC);
             npc->setPosition(Vec2(vm.at("x").asFloat(), vm.at("y").asFloat()));
             npc->setContentSize(Size(vm.at("width").asFloat(), vm.at("height").asFloat()));
             _phyLayer->createPhyBody(npc, true, Magicite::FIXTURE_TYPE_FRIEND);

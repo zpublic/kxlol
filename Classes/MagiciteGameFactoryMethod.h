@@ -5,6 +5,7 @@ class MagiciteGameLiving;
 class MagiciteGameMoveAbleLiving;
 class MagiciteGamePitfall;
 class MagiciteGameAmmo;
+class MagiciteGameGround;
 
 namespace MagiciteGameFactoryMethod
 {
@@ -13,6 +14,7 @@ namespace MagiciteGameFactoryMethod
         Piranha,
         Pitfall,
         Spine_Type,
+        Meteorite,
     };
     enum LivingType
     {
@@ -30,16 +32,24 @@ namespace MagiciteGameFactoryMethod
         Acid,
     };
 
-    MagiciteGameMoveAbleLiving* createFriend(LivingType type, bool is_to_left = false);
-    void destroyFriend(MagiciteGameMoveAbleLiving* living);
+    enum GroundType : int
+    {
+        Ground,
+        FragileGround,
+        MoveAbleGround,
+    };
 
-    MagiciteGameLiving* createEnemy(LivingType type, bool is_to_left = false);
-    void destroyEnemy(MagiciteGameLiving* living);
-
-    MagiciteGamePitfall* createPitfall(Pitfall_Type type, bool is_active = true);
-    void destroyPitfall(MagiciteGamePitfall* ptr);
-
+    MagiciteGameLiving* createLiving(LivingType type);
+    MagiciteGameMoveAbleLiving* createFriend(LivingType type);
+    MagiciteGameMoveAbleLiving* createEnemy(LivingType type);
+    MagiciteGamePitfall* createPitfall(Pitfall_Type type);
     MagiciteGameAmmo* createAmmo(AmmoType type);
+    MagiciteGameGround* createGround(GroundType type);
+        
+    void destroyEnemy(MagiciteGameLiving* living);
+    void destroyFriend(MagiciteGameLiving* living);
+    void destroyLiving(MagiciteGameLiving* living);
+    void destroyPitfall(MagiciteGamePitfall* pitfall);
 
 };
 
