@@ -28,8 +28,11 @@ namespace MagiciteGameContact
         Calture_Cancle,
     };
 
-    extern std::map < Magicite::FIXTURE_TYPE, std::map<Magicite::FIXTURE_TYPE, ContactType>>                                                           judge_contact;
+    extern std::map<Magicite::FIXTURE_TYPE, std::map<Magicite::FIXTURE_TYPE, ContactType>>                                                      judge_contact;
+    extern std::map<Magicite::FIXTURE_TYPE, std::map<Magicite::FIXTURE_TYPE, bool>>                                                             judge_contact_end;
     extern std::map<Magicite::FIXTURE_TYPE, std::map<Magicite::FIXTURE_TYPE, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>>    on_contact;
+    extern std::map<Magicite::FIXTURE_TYPE, std::map<Magicite::FIXTURE_TYPE, std::function<void(MagiciteGameObject*, MagiciteGameObject*)>>>    on_contact_end;
+
 
     void try_living_contact_with_ground(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_with_enemy(MagiciteGameObject*, MagiciteGameObject*);
@@ -46,12 +49,17 @@ namespace MagiciteGameContact
     void try_player_contact_with_item(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_with_protal(MagiciteGameObject*, MagiciteGameObject*);
     void try_player_contact_ground(MagiciteGameObject*, MagiciteGameObject*);
+    void try_jump_point_contact_ground(MagiciteGameObject*, MagiciteGameObject*);
+    void try_player_leave_ground(MagiciteGameObject*, MagiciteGameObject*);
+
+    bool solve_one_side_platform(b2Body* player, b2Body* platform);
 
     extern std::function<void(void)>                       _onWin;
     extern std::function<void(void)>                       _onOver;
     extern std::function<void(MagiciteItem*)>              _onPick;
-    extern std::function<ContactType(b2Contact* contact)>         _onJudgeContact;
-    extern std::function<void(b2Contact* contact)>         _onBeginContact;
+    extern std::function<ContactType(b2Contact* contact)>           _onJudgeContact;
+    extern std::function<void(b2Contact* contact)>                  _onBeginContact;
+    extern std::function<void(b2Contact* contace)>                  _onEndContact;
 
     void onWin();
     void onOver();
