@@ -198,7 +198,7 @@ MagiciteGameContact::ContactType MagiciteGameLayer::onOnJudgeContact(b2Contact* 
     return MagiciteGameContact::judge_contact[typeA][typeB];
 }
 
-void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
+void MagiciteGameLayer::onBeginContact(b2Contact* contact)
 {
     auto fixA = contact->GetFixtureA();
     auto fixB = contact->GetFixtureB();
@@ -225,7 +225,7 @@ void MagiciteGameLayer::init_contact()
         _player->getBag()->addItem(item_clone);
     };
     MagiciteGameContact::_onJudgeContact = std::bind(&MagiciteGameLayer::onOnJudgeContact, this, std::placeholders::_1);
-    MagiciteGameContact::_onBeginContact = std::bind(&MagiciteGameLayer::onOnBeginContact, this, std::placeholders::_1);
+    MagiciteGameContact::_onBeginContact = std::bind(&MagiciteGameLayer::onBeginContact,   this, std::placeholders::_1);
     MagiciteGameContact::_onEndContact   = std::bind(&MagiciteGameLayer::onEndContact,     this, std::placeholders::_1);
 
     MagiciteGameContact::resiger_contact();
