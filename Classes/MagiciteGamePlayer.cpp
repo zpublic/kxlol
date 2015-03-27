@@ -2,6 +2,8 @@
 #include "MagiciteGameBagView.h"
 #include "MagiciteEffectItem.h"
 #include "MagiciteGamePet.h"
+#include "MagiciteGameContact.h"
+#include "MagiciteGamePhysics.h"
 #include "MagiciteGameMoveAbleLiving.h"
 
 USING_NS_CC;
@@ -42,6 +44,7 @@ void MagiciteGamePlayer::Jump()
     if (_move_down)
     {
         //do something
+        Through();
     }
     else
     {
@@ -82,6 +85,10 @@ void MagiciteGamePlayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* ev
 {
     switch (keyCode)
     {
+    case EventKeyboard::KeyCode::KEY_UP_ARROW:
+    case EventKeyboard::KeyCode::KEY_SPACE:
+        ThroughOver();
+        break;
     case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
         _move_down = false;
         break;
@@ -159,4 +166,22 @@ bool MagiciteGamePlayer::init(MagiciteGameMoveAbleLiving* living)
     _bag->_itemEvent = std::bind(&MagiciteGamePlayer::useBagItem, this, std::placeholders::_1);
 
     return true;
+}
+
+void MagiciteGamePlayer::Through()
+{
+    using namespace Magicite;
+    MagiciteGameContact::judge_contact[FIXTURE_TYPE_PLAYER][FIXTURE_TYPE_PLATFORM] = MagiciteGameContact::Cancle;
+    MagiciteGameContact::judge_contact[FIXTURE_TYPE_PLATFORM][FIXTURE_TYPE_PLAYER] = MagiciteGameContact::Cancle;
+    _player->getBody()->SetAwake(true);
+}
+
+void MagiciteGamePlayer::ThroughOver()
+{
+    using namespace Magicite;
+    if (MagiciteGameContact::judge_contact[FIXTURE_TYPE_PLAYER][FIXTURE_TYPE_PLATFORM] == MagiciteGameContact::Cancle)
+    {
+        MagiciteGameContact::judge_contact[FIXTURE_TYPE_PLAYER][FIXTURE_TYPE_PLATFORM] = MagiciteGameContact::Calcture;
+        MagiciteGameContact::judge_contact[FIXTURE_TYPE_PLATFORM][FIXTURE_TYPE_PLAYER] = MagiciteGameContact::Calcture;
+    }
 }

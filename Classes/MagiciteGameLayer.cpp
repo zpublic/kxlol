@@ -227,10 +227,6 @@ MagiciteGameContact::ContactType MagiciteGameLayer::onOnJudgeContact(b2Contact* 
             {
                 return MagiciteGameContact::Cancle;
             }
-            else
-            {
-                return MagiciteGameContact::Calcture;
-            }
         }
     /*~*/
 

@@ -31,6 +31,8 @@ public:
     void Stop();
     void Jump();
     void JumpOver();
+    void Through();
+    void ThroughOver();
 
     void setPetFollow(MagiciteGamePet*);
 
