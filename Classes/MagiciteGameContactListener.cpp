@@ -35,7 +35,7 @@ void MagiciteGameContactListener::PostSolve(b2Contact* contact, const b2ContactI
 
 void MagiciteGameContactListener::EndContact(b2Contact* contact)
 {
-
+    MagiciteGameContact::_onEndContact(contact);
 }
 
 MagiciteGameContactListener* MagiciteGameContactListener::create()

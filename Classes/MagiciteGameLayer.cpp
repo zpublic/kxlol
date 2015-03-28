@@ -33,41 +33,6 @@
 
 USING_NS_CC;
 
-/*add*/
-static bool solve_one_side_platform(b2Body* player, b2Body* platform)
-{
-    const auto one_sided_redundance = 2.0f * b2_linearSlop;
-
-    CCASSERT(player->GetFixtureList()->GetShape()->m_type == b2Shape::e_polygon, "bad shape");
-    CCASSERT(platform->GetFixtureList()->GetShape()->m_type == b2Shape::e_polygon, "bad shape");
-    b2PolygonShape* player_shape = nullptr;
-    for (auto iter = player->GetFixtureList(); iter; iter = iter->GetNext())
-    {
-        if (static_cast<Magicite::FIXTURE_TYPE>(reinterpret_cast<int>(iter->GetUserData())) == Magicite::FIXTURE_TYPE_PLAYER)
-        {
-            player_shape = reinterpret_cast<b2PolygonShape*>(iter->GetShape());
-        }
-    }
-        
-    auto player_min_y = player_shape->m_vertices[0].y;
-    for (auto i = 1; i < player_shape->m_count; i++) {
-        if (player_shape->m_vertices[i].y < player_min_y) {
-            player_min_y = player_shape->m_vertices[i].y;
-        }
-    }
-    player_min_y += player->GetPosition().y;
-    auto platform_shape = reinterpret_cast<b2PolygonShape*>(platform->GetFixtureList()->GetShape());
-    auto platform_max_y = platform_shape->m_vertices[0].y;
-    for (auto i = 1; i < platform_shape->m_count; i++) {
-        if (platform_shape->m_vertices[i].y > platform_max_y) {
-            platform_max_y = platform_shape->m_vertices[i].y;
-        }
-    }
-    platform_max_y += platform->GetPosition().y;
-    return player_min_y + one_sided_redundance <= platform_max_y;
-}
-/*~*/
-
 MagiciteGameLayer::MagiciteGameLayer()
 {
 
@@ -223,7 +188,7 @@ MagiciteGameContact::ContactType MagiciteGameLayer::onOnJudgeContact(b2Contact* 
         (typeB == Magicite::FIXTURE_TYPE_PLAYER &&
         typeA == Magicite::FIXTURE_TYPE_PLATFORM)
         ) {
-            if (solve_one_side_platform(reinterpret_cast<b2Body*>(fixA->GetBody()), reinterpret_cast<b2Body*>(fixB->GetBody()))) 
+        if (MagiciteGameContact::solve_one_side_platform(reinterpret_cast<b2Body*>(fixA->GetBody()), reinterpret_cast<b2Body*>(fixB->GetBody())))
             {
                 return MagiciteGameContact::Cancle;
             }
@@ -233,7 +198,7 @@ MagiciteGameContact::ContactType MagiciteGameLayer::onOnJudgeContact(b2Contact* 
     return MagiciteGameContact::judge_contact[typeA][typeB];
 }
 
-void MagiciteGameLayer::onOnBeginContact(b2Contact* contact)
+void MagiciteGameLayer::onBeginContact(b2Contact* contact)
 {
     auto fixA = contact->GetFixtureA();
     auto fixB = contact->GetFixtureB();
@@ -260,7 +225,8 @@ void MagiciteGameLayer::init_contact()
         _player->getBag()->addItem(item_clone);
     };
     MagiciteGameContact::_onJudgeContact = std::bind(&MagiciteGameLayer::onOnJudgeContact, this, std::placeholders::_1);
-    MagiciteGameContact::_onBeginContact = std::bind(&MagiciteGameLayer::onOnBeginContact, this, std::placeholders::_1);;
+    MagiciteGameContact::_onBeginContact = std::bind(&MagiciteGameLayer::onBeginContact,   this, std::placeholders::_1);
+    MagiciteGameContact::_onEndContact   = std::bind(&MagiciteGameLayer::onEndContact,     this, std::placeholders::_1);
 
     MagiciteGameContact::resiger_contact();
 }
@@ -488,4 +454,17 @@ void MagiciteGameLayer::create_moveground()
     _phyLayer->createJoint(&prismaticJointDef);
 
     _moveableManager->addMoveAble(static_cast<MagiciteGameAutoMoveAble*>(mg));
+}
+
+void MagiciteGameLayer::onEndContact(b2Contact* contact)
+{
+    auto fixA = contact->GetFixtureA();
+    auto fixB = contact->GetFixtureB();
+    auto typeA = static_cast<Magicite::FIXTURE_TYPE>(reinterpret_cast<int>(fixA->GetUserData()));
+    auto typeB = static_cast<Magicite::FIXTURE_TYPE>(reinterpret_cast<int>(fixB->GetUserData()));
+    if (MagiciteGameContact::judge_contact_end[typeA][typeB] == true)
+    {
+        MagiciteGameContact::on_contact_end[typeA][typeB](reinterpret_cast<MagiciteGameObject*>(fixA->GetBody()->GetUserData()),
+            reinterpret_cast<MagiciteGameObject*>(fixB->GetBody()->GetUserData()));
+    }
 }

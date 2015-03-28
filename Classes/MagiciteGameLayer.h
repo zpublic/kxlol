@@ -31,8 +31,9 @@ public:
 
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	virtual void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
-    void onOnBeginContact(b2Contact* contact);
+    void onBeginContact(b2Contact* contact);
     MagiciteGameContact::ContactType onOnJudgeContact(b2Contact* contact);
+    void onEndContact(b2Contact* contact);
 
     CREATE_FUNC(MagiciteGameLayer);
 
